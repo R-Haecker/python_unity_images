@@ -12,7 +12,7 @@ import logging
 
 class Client_Communicator_to_Unity:
 
-    def __init__(self,use_unity_build = True, relative_unity_build_path = "/build/image.x86_64", log_level = logging.WARNING):
+    def __init__(self,use_unity_build = True, relative_unity_build_path = "/build/image.x86_64", log_level = logging.info):
         
         # Create logger
         log_path = "log/python_client.log"
@@ -42,33 +42,38 @@ class Client_Communicator_to_Unity:
                 pass
 
         print('')
-        self.logger.info('starting python client...\n')
+        self.logger.info("starting python client...\n")
 
         self.jsonConfig_path = "tcp_config.json"
         self.use_unity_build = use_unity_build
-        self.unity_build_path = relative_unity_build_path
+        self.file_directory = os.path.dirname(os.path.realpath("client.py"))
+        self.unity_build_path = self.file_directory + relative_unity_build_path
         
         self.port = 50000
         self.host = "127.0.0.1"
         self.connected = False
         self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.socket.settimeout(0.1)
+                
 
         if use_unity_build == True:
-            windowname = os.getcwd() + self.unity_build_path
+            windowname = self.unity_build_path
             ### For execution with BUILD
             # Start unity build
             try:
-                print("PYTHON CLIENT: starting Unity: ")
-                print("PYTHON CLIENT: starting Unity: path:", os.getcwd() + self.unity_build_path)
-                this_file_directory = os.path.dirname(os.path.realpath("client.py"))
-                subprocess.Popen([this_file_directory + self.unity_build_path])#, "-headless"]) 
-                #os.system(self.unity_build_path)# + " -batchmode")
-                print("PYTHON CLIENT: now waiting...")
-                #seconds = 4
-                #for i in range(seconds):
-                #    print(seconds-i)
-                #    time.sleep(1)        
+                self.logger.info("starting Unity: \n")
+                self.logger.info("starting: " + self.unity_build_path)
+                p = subprocess.Popen([self.unity_build_path])#, "-headless"]) 
+                self.logger.info("now waiting...")
+                #TODO implement logging until the end 
+                #check if the process or window is runing and then continue
+                
+                #while not p.Exists:
+                #    time.sleep(0.1)
+                seconds = 4
+                for i in range(seconds):
+                    print(seconds-i)
+                    time.sleep(1)        
             #except FileNotFoundError as e:    
             except IOError as e:    
                 print('PYTHON CLIENT: Unity build can not be found; build has been moved, init. Unity_Communicator with relative.unity_build_path')
