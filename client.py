@@ -7,17 +7,49 @@ from PIL import Image
 import numpy as np
 import time
 import subprocess
+import logging
 
 
 class Client_Communicator_to_Unity:
 
-    def __init__(self,use_unity_build = False, relative_unity_build_path = "/build/image.x86_64"):
+    def __init__(self,use_unity_build = True, relative_unity_build_path = "/build/image.x86_64", log_level = logging.WARNING):
+        
+        # Create logger
+        log_path = "log/python_client.log"
+        self.logger = logging.getLogger('python_client_log')
+        self.logger.setLevel(logging.DEBUG)
+        # Create console handler
+        self.ch = logging.StreamHandler()
+        self.ch.setLevel(log_level)
+        # Create file handler
+        self.fh = logging.FileHandler(log_path)
+        self.fh.setLevel(logging.DEBUG)
+        # Add formatter
+        self.formatter_fh = logging.Formatter('%(asctime)s - %(levelname)s : %(message)s')
+        self.fh.setFormatter(self.formatter_fh)
+        self.formatter_ch = logging.Formatter('%(levelname)s : %(message)s')
+        self.ch.setFormatter(self.formatter_ch)
+        # Add fh and ch to logger
+        self.logger.addHandler(self.fh)
+        self.logger.addHandler(self.ch)
+
+        #Clear log at startup if it is longer than 1000 lines
+        with open(log_path, 'r') as f:
+            log_length = len(f.readlines())
+
+        if log_length > 1000:
+            with open(log_path, 'w'):
+                pass
+
+        print('')
+        self.logger.info('starting python client...\n')
+
         self.jsonConfig_path = "tcp_config.json"
         self.use_unity_build = use_unity_build
         self.unity_build_path = relative_unity_build_path
         
         self.port = 50000
-        self.host = "127.0.0.1"#"compvisgpu04.iwr.uni-heidelberg.de"
+        self.host = "127.0.0.1"
         self.connected = False
         self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.socket.settimeout(0.1)
@@ -29,7 +61,8 @@ class Client_Communicator_to_Unity:
             try:
                 print("PYTHON CLIENT: starting Unity: ")
                 print("PYTHON CLIENT: starting Unity: path:", os.getcwd() + self.unity_build_path)
-                subprocess.Popen([os.getcwd() + self.unity_build_path])#, "-headless"]) 
+                this_file_directory = os.path.dirname(os.path.realpath("client.py"))
+                subprocess.Popen([this_file_directory + self.unity_build_path])#, "-headless"]) 
                 #os.system(self.unity_build_path)# + " -batchmode")
                 print("PYTHON CLIENT: now waiting...")
                 #seconds = 4
@@ -40,17 +73,6 @@ class Client_Communicator_to_Unity:
             except IOError as e:    
                 print('PYTHON CLIENT: Unity build can not be found; build has been moved, init. Unity_Communicator with relative.unity_build_path')
                 raise e
-            '''
-            t = 0
-            while t < 30:
-                window = self.read_wlist(windowname)
-                time.sleep(0.1)
-                if window != None:
-                    subprocess.Popen(["xdotool", "windowminimize", window])
-                    break
-                time.sleep(1)
-                t += 1    
-            '''
             seconds = 3
             for i in range(seconds):
                 print(seconds-i)
@@ -59,13 +81,6 @@ class Client_Communicator_to_Unity:
             print("PYTHON CLIENT: use with unity editor")
             ### For execution with unity engine
         self.connect_to_server()
-
-    def read_wlist(self, w_name):
-        try:
-            l = subprocess.check_output(["wmctrl", "-l"]).decode("utf-8").splitlines()
-            return [w.split()[0] for w in l if w_name in w][0]
-        except (IndexError, subprocess.CalledProcessError):
-            return None
 
     def __enter__(self):
         return self
