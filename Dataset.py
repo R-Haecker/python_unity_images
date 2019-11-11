@@ -292,7 +292,7 @@ class DataSetCrane(DatasetMixin):
         newDict = []
         parameters["CameraRadius"] = 15
         if(theta_pos==None):
-            for i in range(amount_of_pics-1):
+            for i in range(amount_of_pics):
                 New_Theta = []                
                 for j in range(parameters["totalSegments"]-1):
                     New_Theta.append(new_theta[i])
@@ -303,7 +303,7 @@ class DataSetCrane(DatasetMixin):
     
         else:    
             assert type(theta_pos) == int , "Dataset in change_articulation_theta: wrong input theta_pos has to be an integer or None; integer chooses position of manipulated theta, if None all theta are going to change the same."
-            assert theta_pos < parameters["totalSegments"] , "Dataset in change_articulation_theta: wrong input theta_pos has to be the same or smaller than the amount of segments."
+            assert theta_pos < parameters["totalSegments"] , "Dataset in change_articulation_theta: wrong input theta_pos has to be smaller than the amount of segments."
             New_Theta = []
             if parameters["same_theta"]==True:
                 for i in range(parameters["totalSegments"]):
@@ -312,7 +312,7 @@ class DataSetCrane(DatasetMixin):
                 print("INFO: changing only one theta while same_theta is true")
             else:
                 New_Theta = parameters["theta"]
-            for i in range(amount_of_pics-1):
+            for i in range(amount_of_pics):
                 print("i: " + str(i) + " new_theta: " + str(new_theta) + " theta_pos: " + str(theta_pos) + " New_Theta: " + str(New_Theta) )
                 New_Theta[theta_pos] = new_theta[i]
                 parameters["theta"] = New_Theta          
@@ -394,7 +394,6 @@ class DataSetCrane(DatasetMixin):
         """sends end request to Unity, closes TCP connection. Called when used in with statement"""
         self.uc.exit()
         print("Exit socket connection to unity.")
-    
 
 def writeConfig(same_scale=None, scale=[0.5,4], totalSegments=[2,12], phi=[0,360], enable_many_arms=[1,2],same_theta=None, theta=None, same_material=None, r=[0,1], g=[0,1], b=[0,1], a=[0.5,1], metallic=[0,1], smoothness=[0,1],
     totalPointLights=[1,5], PointLightsRadius=[5,20], PointLightsPhi=[0,360], PointLightsTheta=[0,90], PointLightsIntensity=[7,17], PointLightsRange=[5,25], samePointLightColor=None, PointLightsColor_r=[0,1], PointLightsColor_g=[0,1], PointLightsColor_b=[0,1], PointLightsColor_a=[0.5,1],
@@ -507,9 +506,10 @@ print(len(dicts))
 
 data = DataSetCrane(use_unity_build=True)
 parameter = data.get_random_parameters()
+#print(parameter)
 #dict1 = data[0]
 #dict2 = data[2]
-dicts = data.change_articulation_theta(parameter, start_value = 5,end_value = 180,amount_of_pics = 4, theta_pos=1 )#parameter["totalSegments"]-2)
+dicts = data.change_articulation_theta(parameter, start_value = 0,end_value = 25,amount_of_pics = 10)#, theta_pos=2 )#parameter["totalSegments"]-2)
 data.exit()
 data.plot_Images_inSubplots(dicts)
 #data.plot_2Images_inSubplots(dict1,dict2)
