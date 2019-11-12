@@ -1,0 +1,156 @@
+2019-11-12 16:11:29,726 - DEBUG: __init__(): starting python client.
+2019-11-12 16:11:29,727 - INFO: Starting Unity...
+2019-11-12 16:11:29,727 - DEBUG: __init__(): starting: /home/haecker/Documents/src/git/python_unity_images/build/image.x86_64
+2019-11-12 16:11:29,730 - INFO: Waiting 4 seconds.
+2019-11-12 16:11:29,730 - DEBUG: __init__(): 4
+2019-11-12 16:11:30,730 - DEBUG: __init__(): 3
+2019-11-12 16:11:31,732 - DEBUG: __init__(): 2
+2019-11-12 16:11:32,733 - DEBUG: __init__(): 1 
+
+2019-11-12 16:11:33,734 - INFO: Client now connecting to server.
+2019-11-12 16:11:33,735 - DEBUG: connect_to_server(): Client now connecting to server.
+2019-11-12 16:11:33,736 - INFO: Config data for TCP socket found.
+2019-11-12 16:11:33,736 - DEBUG: connect_to_server(): config data for TCP socket: host: 127.0.0.1; port: 50050
+2019-11-12 16:11:33,736 - INFO: Socket connected.
+2019-11-12 16:11:33,737 - DEBUG: connect_to_server(): Socket connected. Saving TCP config to self.relative_path_TCPsocket_config.
+
+2019-11-12 16:11:33,742 - DEBUG: send_to_unity(): json_string with change_req. sent.
+
+2019-11-12 16:11:33,742 - DEBUG: reciveImage(): json_string sent.
+
+2019-11-12 16:11:33,742 - DEBUG: _receiveDataAsBytes(): entered.
+2019-11-12 16:11:33,843 - DEBUG: _receiveDataAsBytes(): timeout -> exit _receiveData()
+2019-11-12 16:11:33,843 - DEBUG: _receiveDataAsBytes(): data_complete: type: <class 'bytearray'>, data_complete len: 1, data_complete [:10]: bytearray(b'\x00')
+2019-11-12 16:11:33,843 - DEBUG: reciveImage(): trying to recive data
+2019-11-12 16:11:33,843 - DEBUG: _receiveDataAsBytes(): entered.
+2019-11-12 16:11:33,974 - DEBUG: _receiveDataAsBytes(): timeout -> exit _receiveData()
+2019-11-12 16:11:33,975 - DEBUG: _receiveDataAsBytes(): data_complete: type: <class 'bytearray'>, data_complete len: 73477, data_complete [:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2019-11-12 16:11:33,975 - DEBUG: reciveImage(): trying to recive data
+2019-11-12 16:11:33,975 - INFO: Data from Unity recived.
+2019-11-12 16:11:33,975 - DEBUG: reciveImage(): End_tag detected, unity_resp_bytes[0:30]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00\x00\x00\rIHDR\x00\x00\x02\x08\x00\x00\x02\x08\x08\x02\x00\x00\x00')
+2019-11-12 16:11:33,975 - DEBUG: reciveImage(): img_bytes type: <class 'bytearray'>, img_bytes len: 73468, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
+2019-11-12 16:11:33,989 - DEBUG: reciveImage(): pilImg: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
+
+2019-11-12 16:11:34,004 - DEBUG: send_to_unity(): json_string with change_req. sent.
+
+2019-11-12 16:11:34,004 - DEBUG: reciveImage(): json_string sent.
+
+2019-11-12 16:11:34,004 - DEBUG: _receiveDataAsBytes(): entered.
+2019-11-12 16:11:34,204 - DEBUG: _receiveDataAsBytes(): timeout -> exit _receiveData()
+2019-11-12 16:11:34,204 - DEBUG: _receiveDataAsBytes(): data_complete: type: <class 'bytearray'>, data_complete len: 74138, data_complete [:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2019-11-12 16:11:34,204 - DEBUG: reciveImage(): trying to recive data
+2019-11-12 16:11:34,205 - INFO: Data from Unity recived.
+2019-11-12 16:11:34,205 - DEBUG: reciveImage(): End_tag detected, unity_resp_bytes[0:30]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00\x00\x00\rIHDR\x00\x00\x02\x08\x00\x00\x02\x08\x08\x02\x00\x00\x00')
+2019-11-12 16:11:34,206 - DEBUG: reciveImage(): img_bytes type: <class 'bytearray'>, img_bytes len: 74129, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
+2019-11-12 16:11:34,207 - DEBUG: reciveImage(): pilImg: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
+
+2019-11-12 16:11:34,242 - DEBUG: send_to_unity(): json_string with change_req. sent.
+
+2019-11-12 16:11:34,242 - DEBUG: reciveImage(): json_string sent.
+
+2019-11-12 16:11:34,242 - DEBUG: _receiveDataAsBytes(): entered.
+2019-11-12 16:11:34,435 - DEBUG: _receiveDataAsBytes(): timeout -> exit _receiveData()
+2019-11-12 16:11:34,435 - DEBUG: _receiveDataAsBytes(): data_complete: type: <class 'bytearray'>, data_complete len: 74779, data_complete [:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2019-11-12 16:11:34,436 - DEBUG: reciveImage(): trying to recive data
+2019-11-12 16:11:34,436 - INFO: Data from Unity recived.
+2019-11-12 16:11:34,436 - DEBUG: reciveImage(): End_tag detected, unity_resp_bytes[0:30]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00\x00\x00\rIHDR\x00\x00\x02\x08\x00\x00\x02\x08\x08\x02\x00\x00\x00')
+2019-11-12 16:11:34,436 - DEBUG: reciveImage(): img_bytes type: <class 'bytearray'>, img_bytes len: 74770, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
+2019-11-12 16:11:34,436 - DEBUG: reciveImage(): pilImg: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
+
+2019-11-12 16:11:34,460 - DEBUG: send_to_unity(): json_string with change_req. sent.
+
+2019-11-12 16:11:34,460 - DEBUG: reciveImage(): json_string sent.
+
+2019-11-12 16:11:34,460 - DEBUG: _receiveDataAsBytes(): entered.
+2019-11-12 16:11:34,623 - DEBUG: _receiveDataAsBytes(): timeout -> exit _receiveData()
+2019-11-12 16:11:34,624 - DEBUG: _receiveDataAsBytes(): data_complete: type: <class 'bytearray'>, data_complete len: 75285, data_complete [:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2019-11-12 16:11:34,624 - DEBUG: reciveImage(): trying to recive data
+2019-11-12 16:11:34,624 - INFO: Data from Unity recived.
+2019-11-12 16:11:34,624 - DEBUG: reciveImage(): End_tag detected, unity_resp_bytes[0:30]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00\x00\x00\rIHDR\x00\x00\x02\x08\x00\x00\x02\x08\x08\x02\x00\x00\x00')
+2019-11-12 16:11:34,624 - DEBUG: reciveImage(): img_bytes type: <class 'bytearray'>, img_bytes len: 75276, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
+2019-11-12 16:11:34,624 - DEBUG: reciveImage(): pilImg: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
+
+2019-11-12 16:11:34,638 - DEBUG: send_to_unity(): json_string with change_req. sent.
+
+2019-11-12 16:11:34,638 - DEBUG: reciveImage(): json_string sent.
+
+2019-11-12 16:11:34,638 - DEBUG: _receiveDataAsBytes(): entered.
+2019-11-12 16:11:34,818 - DEBUG: _receiveDataAsBytes(): timeout -> exit _receiveData()
+2019-11-12 16:11:34,818 - DEBUG: _receiveDataAsBytes(): data_complete: type: <class 'bytearray'>, data_complete len: 75560, data_complete [:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2019-11-12 16:11:34,818 - DEBUG: reciveImage(): trying to recive data
+2019-11-12 16:11:34,818 - INFO: Data from Unity recived.
+2019-11-12 16:11:34,819 - DEBUG: reciveImage(): End_tag detected, unity_resp_bytes[0:30]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00\x00\x00\rIHDR\x00\x00\x02\x08\x00\x00\x02\x08\x08\x02\x00\x00\x00')
+2019-11-12 16:11:34,819 - DEBUG: reciveImage(): img_bytes type: <class 'bytearray'>, img_bytes len: 75551, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
+2019-11-12 16:11:34,819 - DEBUG: reciveImage(): pilImg: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
+
+2019-11-12 16:11:34,845 - DEBUG: send_to_unity(): json_string with change_req. sent.
+
+2019-11-12 16:11:34,846 - DEBUG: reciveImage(): json_string sent.
+
+2019-11-12 16:11:34,846 - DEBUG: _receiveDataAsBytes(): entered.
+2019-11-12 16:11:35,020 - DEBUG: _receiveDataAsBytes(): timeout -> exit _receiveData()
+2019-11-12 16:11:35,020 - DEBUG: _receiveDataAsBytes(): data_complete: type: <class 'bytearray'>, data_complete len: 75185, data_complete [:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2019-11-12 16:11:35,020 - DEBUG: reciveImage(): trying to recive data
+2019-11-12 16:11:35,020 - INFO: Data from Unity recived.
+2019-11-12 16:11:35,021 - DEBUG: reciveImage(): End_tag detected, unity_resp_bytes[0:30]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00\x00\x00\rIHDR\x00\x00\x02\x08\x00\x00\x02\x08\x08\x02\x00\x00\x00')
+2019-11-12 16:11:35,021 - DEBUG: reciveImage(): img_bytes type: <class 'bytearray'>, img_bytes len: 75176, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
+2019-11-12 16:11:35,021 - DEBUG: reciveImage(): pilImg: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
+
+2019-11-12 16:11:35,045 - DEBUG: send_to_unity(): json_string with change_req. sent.
+
+2019-11-12 16:11:35,046 - DEBUG: reciveImage(): json_string sent.
+
+2019-11-12 16:11:35,046 - DEBUG: _receiveDataAsBytes(): entered.
+2019-11-12 16:11:35,202 - DEBUG: _receiveDataAsBytes(): timeout -> exit _receiveData()
+2019-11-12 16:11:35,202 - DEBUG: _receiveDataAsBytes(): data_complete: type: <class 'bytearray'>, data_complete len: 75164, data_complete [:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2019-11-12 16:11:35,202 - DEBUG: reciveImage(): trying to recive data
+2019-11-12 16:11:35,202 - INFO: Data from Unity recived.
+2019-11-12 16:11:35,202 - DEBUG: reciveImage(): End_tag detected, unity_resp_bytes[0:30]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00\x00\x00\rIHDR\x00\x00\x02\x08\x00\x00\x02\x08\x08\x02\x00\x00\x00')
+2019-11-12 16:11:35,203 - DEBUG: reciveImage(): img_bytes type: <class 'bytearray'>, img_bytes len: 75155, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
+2019-11-12 16:11:35,203 - DEBUG: reciveImage(): pilImg: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
+
+2019-11-12 16:11:35,224 - DEBUG: send_to_unity(): json_string with change_req. sent.
+
+2019-11-12 16:11:35,225 - DEBUG: reciveImage(): json_string sent.
+
+2019-11-12 16:11:35,225 - DEBUG: _receiveDataAsBytes(): entered.
+2019-11-12 16:11:35,389 - DEBUG: _receiveDataAsBytes(): timeout -> exit _receiveData()
+2019-11-12 16:11:35,390 - DEBUG: _receiveDataAsBytes(): data_complete: type: <class 'bytearray'>, data_complete len: 75052, data_complete [:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2019-11-12 16:11:35,390 - DEBUG: reciveImage(): trying to recive data
+2019-11-12 16:11:35,391 - INFO: Data from Unity recived.
+2019-11-12 16:11:35,391 - DEBUG: reciveImage(): End_tag detected, unity_resp_bytes[0:30]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00\x00\x00\rIHDR\x00\x00\x02\x08\x00\x00\x02\x08\x08\x02\x00\x00\x00')
+2019-11-12 16:11:35,391 - DEBUG: reciveImage(): img_bytes type: <class 'bytearray'>, img_bytes len: 75043, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
+2019-11-12 16:11:35,392 - DEBUG: reciveImage(): pilImg: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
+
+2019-11-12 16:11:35,421 - DEBUG: send_to_unity(): json_string with change_req. sent.
+
+2019-11-12 16:11:35,421 - DEBUG: reciveImage(): json_string sent.
+
+2019-11-12 16:11:35,421 - DEBUG: _receiveDataAsBytes(): entered.
+2019-11-12 16:11:35,583 - DEBUG: _receiveDataAsBytes(): timeout -> exit _receiveData()
+2019-11-12 16:11:35,583 - DEBUG: _receiveDataAsBytes(): data_complete: type: <class 'bytearray'>, data_complete len: 75191, data_complete [:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2019-11-12 16:11:35,583 - DEBUG: reciveImage(): trying to recive data
+2019-11-12 16:11:35,583 - INFO: Data from Unity recived.
+2019-11-12 16:11:35,584 - DEBUG: reciveImage(): End_tag detected, unity_resp_bytes[0:30]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00\x00\x00\rIHDR\x00\x00\x02\x08\x00\x00\x02\x08\x08\x02\x00\x00\x00')
+2019-11-12 16:11:35,584 - DEBUG: reciveImage(): img_bytes type: <class 'bytearray'>, img_bytes len: 75182, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
+2019-11-12 16:11:35,584 - DEBUG: reciveImage(): pilImg: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
+
+2019-11-12 16:11:35,599 - DEBUG: send_to_unity(): json_string with change_req. sent.
+
+2019-11-12 16:11:35,600 - DEBUG: reciveImage(): json_string sent.
+
+2019-11-12 16:11:35,600 - DEBUG: _receiveDataAsBytes(): entered.
+2019-11-12 16:11:35,769 - DEBUG: _receiveDataAsBytes(): timeout -> exit _receiveData()
+2019-11-12 16:11:35,769 - DEBUG: _receiveDataAsBytes(): data_complete: type: <class 'bytearray'>, data_complete len: 75077, data_complete [:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2019-11-12 16:11:35,769 - DEBUG: reciveImage(): trying to recive data
+2019-11-12 16:11:35,769 - INFO: Data from Unity recived.
+2019-11-12 16:11:35,770 - DEBUG: reciveImage(): End_tag detected, unity_resp_bytes[0:30]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00\x00\x00\rIHDR\x00\x00\x02\x08\x00\x00\x02\x08\x08\x02\x00\x00\x00')
+2019-11-12 16:11:35,770 - DEBUG: reciveImage(): img_bytes type: <class 'bytearray'>, img_bytes len: 75068, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
+2019-11-12 16:11:35,770 - DEBUG: reciveImage(): pilImg: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
+
+2019-11-12 16:11:35,783 - DEBUG: In send_to_unity(): exit request sent.
+
+2019-11-12 16:11:35,783 - INFO: Exit-message is sent. Unity build and socket now closing.
+
+2019-11-12 16:11:35,783 - DEBUG: exit(): Exit-message is sent. Unity build and socket now closing.
+
