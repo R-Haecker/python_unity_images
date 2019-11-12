@@ -7,12 +7,13 @@ from PIL import Image
 import numpy as np
 import time
 import subprocess
+from inspect import currentframe
 import logging
 
 
 class Client_Communicator_to_Unity:
 
-    def __init__(self,use_unity_build = True, relative_unity_build_path = "/build/image.x86_64", log_level = logging.info):
+    def __init__(self,use_unity_build = True, relative_unity_build_path = "/build/image.x86_64", log_level = logging.INFO):
         
         # Create logger
         log_path = "log/python_client.log"
@@ -25,7 +26,7 @@ class Client_Communicator_to_Unity:
         self.fh = logging.FileHandler(log_path)
         self.fh.setLevel(logging.DEBUG)
         # Add formatter
-        self.formatter_fh = logging.Formatter('%(asctime)s - %(levelname)s : %(message)s')
+        self.formatter_fh = logging.Formatter('%(asctime)s - %(levelname)s: %(message)s')
         self.fh.setFormatter(self.formatter_fh)
         self.formatter_ch = logging.Formatter('%(levelname)s : %(message)s')
         self.ch.setFormatter(self.formatter_ch)
@@ -33,18 +34,13 @@ class Client_Communicator_to_Unity:
         self.logger.addHandler(self.fh)
         self.logger.addHandler(self.ch)
 
-        #Clear log at startup if it is longer than 1000 lines
-        with open(log_path, 'r') as f:
-            log_length = len(f.readlines())
+        #Clear log at startup
+        with open(log_path, 'w'):
+            pass
 
-        if log_length > 1000:
-            with open(log_path, 'w'):
-                pass
+        self.logger.debug("__init__(): starting python client.")
 
-        print('')
-        self.logger.info("starting python client...\n")
-
-        self.jsonConfig_path = "tcp_config.json"
+        self.relative_path_TCPsocket_config = "tcp_config.json"
         self.use_unity_build = use_unity_build
         self.file_directory = os.path.dirname(os.path.realpath("client.py"))
         self.unity_build_path = self.file_directory + relative_unity_build_path
@@ -57,33 +53,29 @@ class Client_Communicator_to_Unity:
                 
 
         if use_unity_build == True:
-            windowname = self.unity_build_path
             ### For execution with BUILD
             # Start unity build
             try:
-                self.logger.info("starting Unity: \n")
-                self.logger.info("starting: " + self.unity_build_path)
-                p = subprocess.Popen([self.unity_build_path])#, "-headless"]) 
-                self.logger.info("now waiting...")
-                #TODO implement logging until the end 
-                #check if the process or window is runing and then continue
-                
-                #while not p.Exists:
-                #    time.sleep(0.1)
+                self.logger.info("Starting Unity...")
+                self.logger.debug("__init__(): starting: " + self.unity_build_path)
+                #TODO maybe if you want: do not let subprocess.popen print found path 
+                subprocess.Popen([self.unity_build_path])
                 seconds = 4
+                self.logger.info("Waiting " + str(seconds) + " seconds.")
                 for i in range(seconds):
-                    print(seconds-i)
-                    time.sleep(1)        
+                    if seconds-i ==1:
+                        self.logger.debug("__init__(): 1 \n")
+                    else:
+                        self.logger.debug("__init__(): " + str(seconds-i))
+                    time.sleep(1) 
+                               
             #except FileNotFoundError as e:    
             except IOError as e:    
-                print('PYTHON CLIENT: Unity build can not be found; build has been moved, init. Unity_Communicator with relative.unity_build_path')
+                self.logger.fatal(e)
+                self.logger.fatal('__init__(): Unity build can not be found; build has been moved. Check: python client: Client_Communicator_to_Unity in init(...,relative_unity_build_path,...')
                 raise e
-            seconds = 3
-            for i in range(seconds):
-                print(seconds-i)
-                time.sleep(1)                    
         else:
-            print("PYTHON CLIENT: use with unity editor")
+            self.logger.info("Use with unity editor, editor should now be running.\n")
             ### For execution with unity engine
         self.connect_to_server()
 
@@ -99,117 +91,117 @@ class Client_Communicator_to_Unity:
         """sends end request to Unity, closes TCP connection. Called when used in with statement"""
         if(self.use_unity_build):
             self.send_to_unity("True",change_request=None)
+            self.logger.info("Exit-message is sent. Unity build and socket now closing.\n")
+            self.logger.debug("exit(): Exit-message is sent. Unity build and socket now closing.\n")
         else:
             self.send_to_unity("False",change_request=None)
+            self.logger.info("Exit-message is sent. Unity editor can now exit play mode and socket is now closing.\n")
+            self.logger.debug("exit(): Exit-message is sent. Unity editor can now exit play mode and socket is now closing.\n")
         self.socket.close()
     
     def connect_to_server(self):
-        print("PYTHON CLIENT: client now connecting to server")  
-    
+        self.logger.info("Client now connecting to server.")  
+        self.logger.debug("connect_to_server(): Client now connecting to server.")  
         try:
-            with open(self.jsonConfig_path, 'r') as f:
+            with open(self.relative_path_TCPsocket_config, 'r') as f:
                 config = json.load(f)
                 f.close()
                 self.host = config["host"]
                 self.port = config["port"]
-            print("PYTHON CLIENT: config_data found") 
-        #except FileNotFoundError as e:
+            self.logger.info("Config data for TCP socket found.")
+            self.logger.debug("connect_to_server(): config data for TCP socket: host: " + self.host + "; port: " + str(self.port)) 
         except IOError as e:
-            print('PYTHON CLIENT: tcpconfig.json can not be found. Now using default host and port.')
-            print('PYTHON CLIENT: tcpconfig.json should be found in Json_data Folder')
-            raise e
-        server_address = (self.host, self.port)
+            self.logger.error("connect_to_server(): tcpconfig.json can not be found. Now using default: host: " + self.host + "; port: " + str(self.port))
+            self.logger.error("connect_to_server(): Check: python client: Client_Communicator_to_Unity in init(): self.relative_path_TCPsocket_config; tcpconfig.json should be found in the same folder as client.py")
+            pass
         # Connect the socket to the port where the server is listening
-        print('PYTHON CLIENT: connecting to %s port %s' % server_address)        
         while 1:
             try:
                 self.socket.connect((self.host, self.port))
-                print("Connected. Checking if socket is connected to unity.")
+                self.logger.info("Socket connected.")
+                self.logger.debug("connect_to_server(): Socket connected. Saving TCP config to self.relative_path_TCPsocket_config.\n")
                 #if bytearray([99, 19, 99, 19, 99, 19, 99, 19, 99, 19, 99, 19, 99]) == self._receiveDataAsBytes():
                 break
             except socket.error as e:
-                #print("PYTHON CLIENT: socket can not connect")
-                #print("PYTHON CLIENT: " + str(e))
-                #print("PYTHON CLIENT: Make sure that the tcp_server from unity is already running.")
+                self.logger.debug("connect_to_server(): socket can not connect: " + str(e))
+                self.logger.debug("connect_to_server(): Make sure that the tcp_server from unity is already running.")
                 # If port is in use, try next port
                 if self.port >= 50050:
                     self.port = 49990
                 else:
                     self.port += 1
-                #print('PYTHON CLIENT: STATUS : try next port: %s' %self.port)
+                self.logger.debug("connect_to_server(): try next port: %s" %self.port)
             except socket.timeout:
-                #print("PYTHON CLIENT: Timeout: socket can not connect")
-                #print("PYTHON CLIENT: Make sure that the tcp_server from unity is already running.")
+                self.logger.debug("connect_to_server(): Socket.Timeout: socket can not connect")
+                self.logger.debug("connect_to_server(): Make sure that the tcp_server from unity is already running. You could modify the TCPsocket_config.")
                 # If port is in use, try next port
                 if self.port >= 50050:
                     self.port = 49990
                 else:
                     self.port += 0
-                #print('PYTHON CLIENT: STATUS : try next port: %s' %self.port)
-        config["host"]=self.host
-        config["port"]=self.port
+                self.logger.debug("connect_to_server(): try next port: %s" %self.port)
+        new_config = {} 
+        new_config["host"] = self.host
+        new_config["port"] = self.port
         self.connected = True
-        with open(self.jsonConfig_path, 'w') as f:
-            json.dump(config, f)
+        with open(self.relative_path_TCPsocket_config, 'w') as f:
+            json.dump(new_config, f)
             f.close()
     
     def send_to_unity(self, json_string, change_request):    
         # Send data
         if change_request:
-            print("PYTHON CLIENT: Client.py in send_to_unity: json_string with change_req. sent.")
+            self.logger.debug("send_to_unity(): json_string with change_req. sent.\n")
             self.socket.sendall((json_string+"change."+"eod.").encode())
         elif change_request==False:        
-            print("PYTHON CLIENT: Client.py in send_to_unity: json_string without change_req. sent.")
+            self.logger.debug("In send_to_unity(): json_string without change_req. sent.\n")
             self.socket.sendall((json_string+"eod.").encode())
         else:
-            print("PYTHON CLIENT: Client.py in send_to_unity: json_string with exit request sent.")
+            self.logger.debug("In send_to_unity(): exit request sent.\n")
             self.socket.sendall((json_string+"END.eod.").encode())
             
     def _receiveDataAsBytes(self):
         """receives data at the classes socket. ends by timeout, returns string object"""
+        self.logger.debug("_receiveDataAsBytes(): entered.")
+        
         data_complete = bytearray([0])
-        print('PYTHON CLIENT: _receiveDataAsBytes(): entered')
-
         while 1:
             try:
                 data = self.socket.recv(1024)
             except socket.timeout:
-                print('PYTHON CLIENT: _receiveDataAsBytes(): timeout -> exit _receiveData()')
-                #print(data[10:])
+                self.logger.debug("_receiveDataAsBytes(): timeout -> exit _receiveData()")
+                self.logger.debug("_receiveDataAsBytes(): data_complete: type: %s, data_complete len: %s, data_complete [:10]: %s" %(type(data_complete),len(data_complete),data_complete[:10]))
                 break
-
+            #TODO better format data_complete
             data_complete = data_complete + data
             if not data:
-                print('PYTHON CLIENT: _receiveDataAsBytes(): no data anymore. receive ends.')
-                print("PYTHON CLIENT: data_complete type:",type(data_complete), "data_complete len:",len(data_complete),"data_complete [10:]:",data_complete[10:])
+                self.logger.debug("_receiveDataAsBytes(): no data anymore exit member function.")
+                self.logger.debug("_receiveDataAsBytes(): data_complete: type: %s, data_complete len: %s, data_complete [:10]: %s" %(type(data_complete),len(data_complete),data_complete[:10]))
                 break
-
         return data_complete
 
     def reciveImage(self, json_string, change_request=True):
         while(self.connected==False):
-            print("PYTHON CLIENT: Client in reciveImage: socket is still not connected. Waiting...")
+            self.logger.critical("reciveImage(): socket is still not connected. Waiting...\n")
             time.sleep(1)
         self.send_to_unity(json_string, change_request)
+        self.logger.debug("reciveImage(): json_string sent.\n")
         
         unity_resp_bytes = bytes()
-        print("PYTHON CLIENT: in reciveImage()")
         while True:
             unity_resp_bytes = self._receiveDataAsBytes()
-            print("PYTHON CLIENT: trying to recive data")
+            self.logger.debug("reciveImage(): trying to recive data")
             if unity_resp_bytes[-8:] == bytearray([125, 99,255,255,255,255,255,255]):
-                    print('PYTHON CLIENT: reciveImage(): end tag from Unity detected, end receive')
-                    print(unity_resp_bytes[0:30])
+                    self.logger.info("Data from Unity recived.")
+                    self.logger.debug("reciveImage(): End_tag detected, unity_resp_bytes[0:30]: " + str(unity_resp_bytes[0:30]))
                     break
         
-        img_bytes = unity_resp_bytes[1:-8] #[9:-8]
-        print("PYTHON CLIENT: img_bytes type:",type(img_bytes), "img_bytes len:",len(img_bytes),"img_bytes [10:]:",img_bytes[:10])
+        img_bytes = unity_resp_bytes[1:-8]
+        self.logger.debug("reciveImage(): img_bytes type: %s, img_bytes len: %s, img_bytes[:10]: %s" %(type(img_bytes),len(img_bytes),img_bytes[:10]))
         iobytes = io.BytesIO(img_bytes)
         pilImg = Image.open(iobytes)
-        print("PYTHON CLIENT: pilImg1:",pilImg)
+        self.logger.debug("reciveImage(): pilImg: type: %s \n" %type(pilImg))
         img = np.array(pilImg)
-        #print('closing socket')
-        #self.socket.close()
         return img
     
     def writeJsonCrane(self, totalSegments=3, same_scale = True, scale=2, same_theta = True, theta=40, phi=0, totalArms_Segment=None,
@@ -218,6 +210,7 @@ class Client_Communicator_to_Unity:
     totalPointLights=1, same_PointLightsColor = True, PointLightsColor_r = 1, PointLightsColor_g = 1, PointLightsColor_b = 1, PointLightsColor_a = 1, PointLightsRadius=[7], PointLightsTheta=[20], PointLightsPhi=[0], PointLightsIntensity=[1], PointLightsRange=[10], 
     totalSpotLights=1, same_SpotLightsColor = True, SpotLightsColor_r = 1, SpotLightsColor_g = 1, SpotLightsColor_b = 1, SpotLightsColor_a = 1, SpotLightsRadius=[10], SpotLightsTheta=[0], SpotLightsPhi=[0], SpotLightsIntensity=[1], SpotLightsRange=[10], SpotAngle=[30]):
         newScale = []
+        #TODO have better logging in this function for assert errors are currently not logged.
         if(same_scale):
             if(isinstance(scale, list)):    
                     for i in range(0,totalSegments):
@@ -290,9 +283,11 @@ class Client_Communicator_to_Unity:
             data['totalArmsSegment']=totalArms_Segment
 
         if(CameraVerticalOffset==None):
-            print('PYTHON CLIENT: INFO: CameraVerticalOffset is None, the origin of the spherical coordinates of the camera will be vertically offset depending on the crane height.') 
+            self.logger.info("CameraVerticalOffset is None, the origin of the spherical coordinates of the camera will be vertically offset depending on the crane height.\n") 
+            self.logger.debug("writeJsonCrane(): CameraVerticalOffset is None, the origin of the spherical coordinates of the camera will be vertically offset depending on the crane height.\n") 
         if(CameraVerticalOffset!=0):
-            print('PYTHON CLIENT: INFO: CameraVerticalOffset is not zero anymore, the origin of the spherical coordinates of the camera is now vertically offset') 
+            self.logger.info("CameraVerticalOffset is not zero anymore, the origin of the spherical coordinates of the camera is now vertically offset.\n") 
+            self.logger.debug("writeJsonCrane(): CameraVerticalOffset is not zero anymore, the origin of the spherical coordinates of the camera is now vertically offset.\n") 
         data['camera'] = {"radius":CameraRadius,"theta_deg":CameraTheta,"phi_deg":CameraPhi,"y_offset":CameraVerticalOffset,'resolution_width':CameraRes_width,'resolution_height':CameraRes_height,"FOV":Camera_FieldofView}
         #if CameraRadius is 0 then a fitting Radius is calculated in Unity
         #set up color of PointLights
