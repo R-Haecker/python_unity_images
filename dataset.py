@@ -8,9 +8,16 @@ import tkinter
 import json
 import math
 import logging
+import time
 
 class DataSetCrane(DatasetMixin):
-    def __init__(self, config = None, use_unity_build = True, combine_logs = True, log_level = logging.INFO):
+    def __init__(self, config = None, use_unity_build = True, combine_logs = True, debug_log = False):
+        # Set up log level
+        if debug_log:
+            log_level = logging.DEBUG
+        else:
+            log_level = logging.INFO
+
         self.uc = client.Client_Communicator_to_Unity(use_unity_build=use_unity_build, log_level = log_level, relative_unity_build_path = "/build/image.x86_64")
         
         # Create logger
@@ -157,7 +164,8 @@ class DataSetCrane(DatasetMixin):
     def create_random_parameters(self ,Seed=None):
         dictionary={}
         np.random.seed(Seed)
-        dictionary["seed"] = np.random.get_state()
+        # not needed right now
+        #dictionary["seed"] = np.random.get_state()
         TotalSegments = np.random.randint(self.config["totalSegments"][0],self.config["totalSegments"][1])
 
         DirectionalLightTheta = np.random.uniform(self.config["DirectionalLightTheta"][0], self.config["DirectionalLightTheta"][1])
@@ -382,11 +390,19 @@ class DataSetCrane(DatasetMixin):
             dictionary["same_SpotLightsColor"] = Same_SLcolor
             dictionary["SpotLightsRange"] = SpotLightRange
             dictionary["SpotAngle"] = SpotLightsAngle
-            
+        # not random set variables
+        dictionary["CameraRes_width"] = 520 
+        dictionary["CameraRes_height"] = 520 
+        dictionary["Camera_FieldofView"] = 80
+        dictionary["CameraRadius"] = 13 
+        dictionary["CameraTheta"] = 90
+        dictionary["CameraPhi"] = 0 
+        dictionary["CameraVerticalOffset"] = 0 
+
         return dictionary
         
     def get_json_string_from_parameters(self, dictionary):
-        return self.uc.writeJsonCrane(totalSegments=dictionary["totalSegments"], same_scale=dictionary["same_scale"], scale=dictionary["scale"], same_theta=dictionary["same_theta"], theta=dictionary["theta"], phi=dictionary["phi"], totalArms_Segment=dictionary["totalArms_Segment"], same_material=dictionary["same_material"], metallic=dictionary["metallic"], smoothness=dictionary["smoothness"], r=dictionary["r"], g=dictionary["g"], b=dictionary["b"], a=dictionary["a"], CameraRes_width=520, CameraRes_height=520, Camera_FieldofView=80, CameraRadius=13, CameraTheta=90, CameraPhi=0, CameraVerticalOffset=0, 
+        return self.uc.writeJsonCrane(totalSegments=dictionary["totalSegments"], same_scale=dictionary["same_scale"], scale=dictionary["scale"], same_theta=dictionary["same_theta"], theta=dictionary["theta"], phi=dictionary["phi"], totalArms_Segment=dictionary["totalArms_Segment"], same_material=dictionary["same_material"], metallic=dictionary["metallic"], smoothness=dictionary["smoothness"], r=dictionary["r"], g=dictionary["g"], b=dictionary["b"], a=dictionary["a"], CameraRes_width=dictionary["CameraRes_width"], CameraRes_height=dictionary["CameraRes_height"], Camera_FieldofView=dictionary["Camera_FieldofView"], CameraRadius=dictionary["CameraRadius"], CameraTheta=dictionary["CameraTheta"], CameraPhi=dictionary["CameraPhi"], CameraVerticalOffset=dictionary["CameraVerticalOffset"], 
             totalPointLights=dictionary["totalPointLights"], same_PointLightsColor=dictionary["same_PointLightsColor"], PointLightsColor_r=dictionary["PointLightsColor_r"], PointLightsColor_g=dictionary["PointLightsColor_g"], PointLightsColor_b=dictionary["PointLightsColor_b"], PointLightsColor_a=dictionary["PointLightsColor_a"], PointLightsRadius=dictionary["PointLightsRadius"], PointLightsTheta=dictionary["PointLightsTheta"], PointLightsPhi=dictionary["PointLightsPhi"], PointLightsIntensity=dictionary["PointLightsIntensity"], PointLightsRange=dictionary["PointLightsRange"], 
             totalSpotLights=dictionary["totalSpotLights"], same_SpotLightsColor=dictionary["same_SpotLightsColor"], SpotLightsColor_r=dictionary["SpotLightsColor_r"], SpotLightsColor_g=dictionary["SpotLightsColor_g"], SpotLightsColor_b=dictionary["SpotLightsColor_b"], SpotLightsColor_a=dictionary["SpotLightsColor_a"], SpotLightsRadius=dictionary["SpotLightsRadius"], SpotLightsTheta=dictionary["SpotLightsTheta"], SpotLightsPhi=dictionary["SpotLightsPhi"], SpotLightsIntensity=dictionary["SpotLightsIntensity"], SpotLightsRange=dictionary["SpotLightsRange"],SpotAngle=dictionary["SpotAngle"],
             DirectionalLightTheta=dictionary["DirectionalLightTheta"], DirectionalLightIntensity=dictionary["DirectionalLightIntensity"])
@@ -427,8 +443,10 @@ class DataSetCrane(DatasetMixin):
         jsondata1["totalSegments"]=jsondata2["totalSegments"]
         return jsondata1
 
+    """
     #get 3 images with two of them different random parameters and one with articulation of img1 and apperence of img2 
     def getPlot_of_3Images_withCombination_of_twoParameters(self):
+        #TODO shoukld not use data here 
         dict1 = self.get_example(1)
         
         dict2 = self.get_example(2)
@@ -456,12 +474,17 @@ class DataSetCrane(DatasetMixin):
         pic3.imshow(dict3["image"])
         pic3.axis("off")
         fig.savefig("figures/disentangle/fig_"+str(np.round(jsondata3["phi"]*1000))+".png")
+    """
     
     def get_random_CameraAngle(self,jsondata):
         #use gaussian distribution for theta around 90 degrees
         jsondata["camera"]["theta_deg"] = np.random.randint(self.config["theta"][0],self.config["theta"][1],float)
         jsondata["camera"]["phi_deg"] = np.random.randint(self.config["phi"][0],self.config["phi"][1],float)
         return jsondata
+    def change_apperence_camera_phi(self,parameters):
+        parameters["CameraPhi"] += 20 
+        return parameters
+
     #fix theta position
     def change_articulation_theta(self, parameters, start_value, end_value, amount_of_pics, theta_pos = None):
         new_theta = np.linspace(start_value, end_value, amount_of_pics)
@@ -515,7 +538,7 @@ class DataSetCrane(DatasetMixin):
         number = int(len(dicts))
         if(number%2==0):
             if(number==2):
-                fig, ax = plt.subplots(1,number))
+                fig, ax = plt.subplots(1,number)
 
                 for i in range(number):    
                     ax[i].imshow(dicts[i]["image"])
@@ -548,21 +571,120 @@ class DataSetCrane(DatasetMixin):
 
     def plot_combined_Images(self,dicts):
         numb = len(dicts)
-        if (numb%2):
-            while numb > 5:
-                numb_y += 1
-                numb -= 5
-            
+        numb_y = 0
+        numb_x = 5
+        while numb > numb_x:
+            numb_y += 1
+            numb -= 5
+        numb_y += 1
+        self.logger.debug("numb_y: " + str(numb_y))
+        self.logger.debug("dicts[0]['image'].shape[0]: " + str(dicts[0]["image"].shape[0]))
+        self.logger.debug("(5*dicts[0][image].shape[1]: " + str((5*dicts[0]["image"].shape[1])))
+        self.logger.debug("dicts[0][image].shape[2]: " + str(dicts[0]["image"].shape[2]))
+        h_stacked = np.ones((numb_y, dicts[0]["image"].shape[0], (5*dicts[0]["image"].shape[1]), dicts[0]["image"].shape[2]), dtype=int)
+        self.logger.debug("h_stacked.shape: " + str(h_stacked.shape))
+        for i in range(numb_y):
+            img_hstack = np.ones((numb_x, dicts[0]["image"].shape[0], dicts[0]["image"].shape[1], dicts[0]["image"].shape[2]), dtype=int)
+            if i == numb_y-1:
+                for j in range(numb):
+                    img_hstack[j] = dicts[i*numb_x+j]["image"]
+            else:    
+                for j in range(numb_x):
+                    img_hstack[j] = dicts[i*numb_x+j]["image"]
+            h_stacked[i] = np.hstack((img_hstack))
 
-    def get_example(self,idx=None):
+        final_img = np.vstack((h_stacked))
+        self.logger.debug("final_img.shape: " + str(final_img.shape))
+        matplotlib.use('TkAgg')
+        plt.imshow(final_img)
+        for i in range(1,numb_y):
+            plt.axhline(y = dicts[0]["image"].shape[1]*i, color="k")
+        for i in range(1,numb_x):
+            plt.axvline(x = dicts[0]["image"].shape[0]*i, color="k")
+        plt.axis('off')
+        plt.show()
+
+    def increment_index(self):
+        index = self.load_index()
+        self.logger.debug("index: " + str(index))
+        index = index + 1
+        self.logger.debug("index: " + str(index))
+        try:
+            with open("data/index.txt","w") as f:
+                f.write(str(index))
+                f.close()
+        except FileNotFoundError as e:
+                self.logger.debug("Indexfile not found.")
+                raise e
+        return index
+        
+    def load_index(self):
+        try:
+            with open("data/index.txt","r") as f:
+                index = f.read()
+                f.close()
+        except FileNotFoundError as e:
+            self.logger.debug("Indexfile not found.")
+            raise e
+        return int(index)
+
+    def reset_index(self, set_index = 0):
+        with open("data/index.txt","w") as f:
+            f.write(str(set_index))
+            f.close()
+
+    def load_parameters(self,index = [-1], amount = 1):
+        if index[0]==-1:
+            index = np.random.randint(0,self.load_index(),amount)
+        else:
+            assert len(index)==amount, "Specified Index has to be len(Index):" + str(len(index)) + " equal to amount:" + str(amount)
+        parameter_list = []
+        for i in range(amount):
+            while 1:
+                try:
+                    f = open("data/parameters/parameters_index_" + str(index[i]) + ".json")
+                    parameter_list.append(json.load(f))
+                    f.close()
+                    break
+                except FileNotFoundError:
+                    self.logger.debug("File with index" + str(index[i]) + "does not exist.")
+                    index[i] +=1
+        if amount==1:
+            return parameter_list[0]
+        else:
+            return parameter_list
+    
+    def save(self, dictionary, save_para = True, save_image = False):
+        if save_image:
+            if "image" in dictionary:
+                if "index" in dictionary:
+                    Image.fromarray(dictionary["image"]).save("data/images/image_index_" + str(dictionary["index"]) + '.png')
+                else:
+                    fake_index = np.random.randint(0,1000)
+                    Image.fromarray(dictionary["image"]).save("data/images/image_no_index_" + str(fake_index) + '.png')
+            else:
+                self.logger.error("Image could not be saved. No image data not found in dictionary.")
+        if save_para:
+            if "parameters" in dictionary: 
+                if "index" in dictionary:
+                    with open("data/parameters/parameters_index_" + str(dictionary["index"]) + '.json', 'w') as f:
+                        json.dump(dictionary["parameters"],f)
+                        f.close()
+                else:
+                    fake_index = np.random.randint(0,1000)
+                    with open("data/parameters/parameters_index_" + str(fake_index) + '.json', 'w') as f:
+                        json.dump(dictionary["parameters"],f)
+                        f.close()
+            else:
+                self.logger.error("Image parameters could not be saved. No parameters found in dictionary.")
+
+    def get_example(self,index = None, save_para = True, save_image = False):
         random_parameters = self.create_random_parameters()
-        #with open('Parameter/random_parameters'+str(idx) + '.json', 'w') as f:
-        #    f.write(para_string)
         jsonstring = self.get_json_string_from_parameters(random_parameters)
         img = self.uc.reciveImage(jsonstring)
-        if idx==None:
-            idx=np.random.randint(0,200)
-        newDict = {"label":idx,"parameters":random_parameters, "jsondata":jsonstring,"image":img}
+        index = self.increment_index()
+        newDict = {"index":index,"parameters":random_parameters, "jsondata":jsonstring,"image":img}
+        self.save(newDict,save_para = save_para, save_image = save_image)
         return newDict
         
     def get_crane(self,jsonstring):
@@ -590,16 +712,32 @@ for i in range(1):
 print(len(dicts))
 '''
 
-data = DataSetCrane(use_unity_build=False)
+data = DataSetCrane(use_unity_build=True,debug_log=True)
+#data.reset_index()
+#for i in range(15):
+#    data.get_example(save_image=True)
+
+#TODO check combine images for different size input than 10 and check if with non quadratic image ratios
+#TODO check old functions and make a lot change articulation functs and apperence
+
 dicts = []
-for i in range(2):
-    dicts.append(data.get_example())
-#dicts = data.change_articulation_theta(parameter, start_value = 0,end_value = 25,amount_of_pics = 20)#, theta_pos=2 )#parameter["totalSegments"]-2)
+parameters = data.load_parameters(index=[9])
+for i in range(10):
+    parameters = data.change_apperence_camera_phi(parameters)
+    jsonstring = data.get_json_string_from_parameters(parameters)
+    #jsonstring = data.get_json_string_from_parameters(parameters_list[i])
+    img = (data.uc.reciveImage(jsonstring))
+    dicts.append({"image":img})
+#    data.get_example(save_image=True)
 data.exit()
+data.plot_combined_Images(dicts)
+#dicts = []
+#for i in range(10):
+#    dicts.append(data.get_example(save_all=True))
+#dicts = data.change_articulation_theta(parameter, start_value = 0,end_value = 25,amount_of_pics = 20)#, theta_pos=2 )#parameter["totalSegments"]-2)
+#data.exit()
 #data.plot_Images_inSubplots(dicts)
 #data.plot_2Images_inSubplots(dict1,dict2)
-img1 = dicts[0]["image"]
-img2 = dicts[1]["image"]
-
-plt.imshow(img)
-plt.show()
+#data.plot_combined_Images(dicts)
+#plt.imshow(img)
+#plt.show()
