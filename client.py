@@ -17,7 +17,7 @@ class Client_Communicator_to_Unity:
         
         # Create logger
         self.log_path = "log/python_client.log"
-        self.logger = logging.getLogger("python_client_log")
+        self.logger = logging.getLogger("python_dataset_and_client_log")
         self.logger.setLevel(logging.DEBUG)
         # Create console handler
         self.ch = logging.StreamHandler()
@@ -26,7 +26,7 @@ class Client_Communicator_to_Unity:
         self.fh = logging.FileHandler(self.log_path)
         self.fh.setLevel(logging.DEBUG)
         # Add formatter
-        self.formatter_fh = logging.Formatter('%(asctime)s - line: %(lineno)d -%(levelname)s: %(message)s')
+        self.formatter_fh = logging.Formatter('%(asctime)s; %(filename)s - line: %(lineno)d -%(levelname)s: %(message)s')
         self.fh.setFormatter(self.formatter_fh)
         # Different formatter for different log_level
         if log_level==logging.DEBUG:
@@ -61,17 +61,29 @@ class Client_Communicator_to_Unity:
             try:
                 self.logger.info("Starting Unity...")
                 self.logger.debug("Starting: " + self.unity_build_path)
+                
+                with open(self.file_directory + relative_unity_build_path[:-7] + "_Data/started.txt","w") as f:
+                    f.write("0")
+                    f.close()
+                
                 #TODO maybe if you want: do not let subprocess.popen print found path 
                 subprocess.Popen([self.unity_build_path])
+                
                 # Wait until Unity is fully set up
-                seconds = 4
-                self.logger.info("Waiting " + str(seconds) + " seconds.")
-                for i in range(seconds):
-                    if seconds-i ==1:
-                        self.logger.debug("1 \n")
-                    else:
-                        self.logger.debug((seconds-i))
-                    time.sleep(1)     
+                self.logger.info("Waiting for unity...")
+                zero_or_one = 0
+                for i in range(1000):
+                    try:
+                        with open(self.file_directory + relative_unity_build_path[:-7] + "_Data/started.txt","r") as f:
+                            zero_or_one = f.read()
+                            f.close()
+                    except FileNotFoundError as e:
+                        self.logger.debug("started.txt not found.")
+                        raise e
+                    if zero_or_one == "1":
+                        break
+                    time.sleep(0.5)
+                         
             except IOError as e:    
                 self.logger.fatal(e)
                 self.logger.fatal("Unity build can not be found; build has been moved. Check: python client: Client_Communicator_to_Unity in init(...,relative_unity_build_path,...)")
@@ -120,6 +132,8 @@ class Client_Communicator_to_Unity:
             except socket.error as e:
                 self.logger.debug("Socket can not connect. Make sure that the tcp_server from unity is already running.")
                 self.logger.debug(e)
+                #sleep for 0.5 secounds
+                time.sleep(0.25)
                 # If port is in use or not working, try next port
                 if self.port >= 50050:
                     self.port = 49990

@@ -21,8 +21,10 @@ class DataSetCrane(DatasetMixin):
         self.uc = client.Client_Communicator_to_Unity(use_unity_build=use_unity_build, log_level = log_level, relative_unity_build_path = "/build/image.x86_64")
         
         # Create logger
+        self.logger = self.uc.logger 
+        '''
         self.log_path = "log/dataset.log"
-        self.logger = logging.getLogger('dataset_log')
+        logging.getLogger('dataset_log')
         self.logger.setLevel(logging.DEBUG)
         # Create the same console handler as the client
         self.ch = self.uc.ch
@@ -38,7 +40,7 @@ class DataSetCrane(DatasetMixin):
         # Clear log at startup
         with open(self.log_path, 'w'):
             pass
-        
+        '''
         self.logger.debug("Create config.")
         # Create dataset config for random parameter creation
         if config==None:    
@@ -391,8 +393,8 @@ class DataSetCrane(DatasetMixin):
             dictionary["SpotLightsRange"] = SpotLightRange
             dictionary["SpotAngle"] = SpotLightsAngle
         # not random set variables
-        dictionary["CameraRes_width"] = 520 
-        dictionary["CameraRes_height"] = 520 
+        dictionary["CameraRes_width"] = 640 
+        dictionary["CameraRes_height"] = 480 
         dictionary["Camera_FieldofView"] = 80
         dictionary["CameraRadius"] = 13 
         dictionary["CameraTheta"] = 90
@@ -569,10 +571,10 @@ class DataSetCrane(DatasetMixin):
                         ax[i].axis("off")
         plt.show()
 
-    def plot_combined_Images(self,dicts):
+    def plot_combined_Images(self, dicts, images_in_one_row= 5):
         numb = len(dicts)
         numb_y = 0
-        numb_x = 5
+        numb_x = images_in_one_row
         while numb > numb_x:
             numb_y += 1
             numb -= 5
@@ -598,9 +600,15 @@ class DataSetCrane(DatasetMixin):
         matplotlib.use('TkAgg')
         plt.imshow(final_img)
         for i in range(1,numb_y):
-            plt.axhline(y = dicts[0]["image"].shape[1]*i, color="k")
+            plt.axhline(y = dicts[0]["image"].shape[0]*i, color="k")
         for i in range(1,numb_x):
-            plt.axvline(x = dicts[0]["image"].shape[0]*i, color="k")
+            plt.axvline(x = dicts[0]["image"].shape[1]*i, color="k")
+        for i in range(1,len(dicts)):
+            j = 0
+            if "index" in dicts[i]:
+                if i%numb_x==0:
+                    j += 1
+                plt.text(dicts[0]["image"].shape[1]*(i%numb_x) - dicts[0]["image"].shape[1]/10, dicts[0]["image"].shape[0]*(numb_y - j) - dicts[0]["image"].shape[0]/10, "idx: " + str(dicts[i]["index"]) )
         plt.axis('off')
         plt.show()
 
@@ -714,23 +722,28 @@ print(len(dicts))
 
 data = DataSetCrane(use_unity_build=True,debug_log=True)
 #data.reset_index()
-#for i in range(15):
-#    data.get_example(save_image=True)
+dicts = []
+for i in range(15):
+    dicts.append(data.get_example())
+#data.exit()
+data.plot_combined_Images(dicts)
+
 
 #TODO check combine images for different size input than 10 and check if with non quadratic image ratios
 #TODO check old functions and make a lot change articulation functs and apperence
 
-dicts = []
-parameters = data.load_parameters(index=[9])
-for i in range(10):
-    parameters = data.change_apperence_camera_phi(parameters)
-    jsonstring = data.get_json_string_from_parameters(parameters)
+#dicts = []
+#parameters = data.load_parameters(index=[9])
+#for i in range(10):
+    #parameters = data.change_apperence_camera_phi(parameters)
+    #parameters = data.create_random_parameters()
+    #jsonstring = data.get_json_string_from_parameters(parameters)
     #jsonstring = data.get_json_string_from_parameters(parameters_list[i])
-    img = (data.uc.reciveImage(jsonstring))
-    dicts.append({"image":img})
+    #img = (data.uc.reciveImage(jsonstring))
+    #dicts.append({"image":img})
 #    data.get_example(save_image=True)
-data.exit()
-data.plot_combined_Images(dicts)
+#data.exit()
+#data.plot_combined_Images(dicts)
 #dicts = []
 #for i in range(10):
 #    dicts.append(data.get_example(save_all=True))
