@@ -69,17 +69,17 @@ class Client_Communicator_to_Unity:
                 #TODO maybe if you want: do not let subprocess.popen print found path 
                 subprocess.Popen([self.unity_build_path])
                 
-                # Wait until Unity is fully set up
+                # Wait until Unity is fully set up. unity writes a one in startet.txt if it is ready 
                 self.logger.info("Waiting for unity...")
                 zero_or_one = 0
-                for i in range(1000):
+                max_waiting = 20*2
+                for i in range(max_waiting):
                     try:
                         with open(self.file_directory + relative_unity_build_path[:-7] + "_Data/started.txt","r") as f:
                             zero_or_one = f.read()
                             f.close()
                     except FileNotFoundError as e:
                         self.logger.debug("started.txt not found.")
-                        raise e
                     if zero_or_one == "1":
                         break
                     time.sleep(0.5)

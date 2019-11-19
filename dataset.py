@@ -17,30 +17,12 @@ class DataSetCrane(DatasetMixin):
             log_level = logging.DEBUG
         else:
             log_level = logging.INFO
-
+        # Set up a client and start unity 
         self.uc = client.Client_Communicator_to_Unity(use_unity_build=use_unity_build, log_level = log_level, relative_unity_build_path = "/build/image.x86_64")
         
-        # Create logger
+        # Use already existing logger from pthon for dataset as well
         self.logger = self.uc.logger 
-        '''
-        self.log_path = "log/dataset.log"
-        logging.getLogger('dataset_log')
-        self.logger.setLevel(logging.DEBUG)
-        # Create the same console handler as the client
-        self.ch = self.uc.ch
-        # Create a file handler 
-        self.fh = logging.FileHandler(self.log_path)
-        self.fh.setLevel(logging.DEBUG)
-        # Use the same format as the client
-        self.fh.setFormatter(self.uc.formatter_fh)
-        self.ch.setFormatter(self.uc.formatter_ch)
-        # Add the fh and the ch to the logger
-        self.logger.addHandler(self.fh)
-        self.logger.addHandler(self.ch)        
-        # Clear log at startup
-        with open(self.log_path, 'w'):
-            pass
-        '''
+        
         self.logger.debug("Create config.")
         # Create dataset config for random parameter creation
         if config==None:    
@@ -163,8 +145,19 @@ class DataSetCrane(DatasetMixin):
             
         return config
         
-    def create_random_parameters(self ,Seed=None):
+    def create_random_parameters(self ,Seed=None, CameraRes_width= 520, CameraRes_height=520, CameraRadius = 13, CameraTheta = 90, CameraPhi = 0, CameraVerticalOffset = 0):
+        ### Creates random input parameter depending on your config, the camera parameters are not random
         dictionary={}
+
+        # not random set variables
+        dictionary["CameraRes_width"] = 720 
+        dictionary["CameraRes_height"] = 480 
+        dictionary["Camera_FieldofView"] = 80
+        dictionary["CameraRadius"] = 13 
+        dictionary["CameraTheta"] = 90
+        dictionary["CameraPhi"] = 0 
+        dictionary["CameraVerticalOffset"] = 0 
+
         np.random.seed(Seed)
         # not needed right now
         #dictionary["seed"] = np.random.get_state()
@@ -392,18 +385,10 @@ class DataSetCrane(DatasetMixin):
             dictionary["same_SpotLightsColor"] = Same_SLcolor
             dictionary["SpotLightsRange"] = SpotLightRange
             dictionary["SpotAngle"] = SpotLightsAngle
-        # not random set variables
-        dictionary["CameraRes_width"] = 640 
-        dictionary["CameraRes_height"] = 480 
-        dictionary["Camera_FieldofView"] = 80
-        dictionary["CameraRadius"] = 13 
-        dictionary["CameraTheta"] = 90
-        dictionary["CameraPhi"] = 0 
-        dictionary["CameraVerticalOffset"] = 0 
-
+        
         return dictionary
         
-    def get_json_string_from_parameters(self, dictionary):
+    def create_json_string_from_parameters(self, dictionary):
         return self.uc.writeJsonCrane(totalSegments=dictionary["totalSegments"], same_scale=dictionary["same_scale"], scale=dictionary["scale"], same_theta=dictionary["same_theta"], theta=dictionary["theta"], phi=dictionary["phi"], totalArms_Segment=dictionary["totalArms_Segment"], same_material=dictionary["same_material"], metallic=dictionary["metallic"], smoothness=dictionary["smoothness"], r=dictionary["r"], g=dictionary["g"], b=dictionary["b"], a=dictionary["a"], CameraRes_width=dictionary["CameraRes_width"], CameraRes_height=dictionary["CameraRes_height"], Camera_FieldofView=dictionary["Camera_FieldofView"], CameraRadius=dictionary["CameraRadius"], CameraTheta=dictionary["CameraTheta"], CameraPhi=dictionary["CameraPhi"], CameraVerticalOffset=dictionary["CameraVerticalOffset"], 
             totalPointLights=dictionary["totalPointLights"], same_PointLightsColor=dictionary["same_PointLightsColor"], PointLightsColor_r=dictionary["PointLightsColor_r"], PointLightsColor_g=dictionary["PointLightsColor_g"], PointLightsColor_b=dictionary["PointLightsColor_b"], PointLightsColor_a=dictionary["PointLightsColor_a"], PointLightsRadius=dictionary["PointLightsRadius"], PointLightsTheta=dictionary["PointLightsTheta"], PointLightsPhi=dictionary["PointLightsPhi"], PointLightsIntensity=dictionary["PointLightsIntensity"], PointLightsRange=dictionary["PointLightsRange"], 
             totalSpotLights=dictionary["totalSpotLights"], same_SpotLightsColor=dictionary["same_SpotLightsColor"], SpotLightsColor_r=dictionary["SpotLightsColor_r"], SpotLightsColor_g=dictionary["SpotLightsColor_g"], SpotLightsColor_b=dictionary["SpotLightsColor_b"], SpotLightsColor_a=dictionary["SpotLightsColor_a"], SpotLightsRadius=dictionary["SpotLightsRadius"], SpotLightsTheta=dictionary["SpotLightsTheta"], SpotLightsPhi=dictionary["SpotLightsPhi"], SpotLightsIntensity=dictionary["SpotLightsIntensity"], SpotLightsRange=dictionary["SpotLightsRange"],SpotAngle=dictionary["SpotAngle"],
@@ -487,18 +472,16 @@ class DataSetCrane(DatasetMixin):
         parameters["CameraPhi"] += 20 
         return parameters
 
-    #fix theta position
     def change_articulation_theta(self, parameters, start_value, end_value, amount_of_pics, theta_pos = None):
         new_theta = np.linspace(start_value, end_value, amount_of_pics)
         newDict = []
-        parameters["CameraRadius"] = 15
         if(theta_pos==None):
             for i in range(amount_of_pics):
                 New_Theta = []                
                 for j in range(parameters["totalSegments"]-1):
                     New_Theta.append(new_theta[i])
                 parameters["theta"] = New_Theta
-                json_string = self.get_json_string_from_parameters(parameters)
+                json_string = self.create_json_string_from_parameters(parameters)
                 img = self.uc.reciveImage(json_string)
                 newDict.append({"parameters":parameters, "jsondata":json_string,"image":img})
     
@@ -510,7 +493,7 @@ class DataSetCrane(DatasetMixin):
                 for i in range(parameters["totalSegments"]):
                     New_Theta.append(parameters["theta"][0]) 
                     parameters["same_theta"]==False
-                print("INFO: changing only one theta while same_theta is true")
+                self.logger.info("Changing only one theta while same_theta is true")
             else:
                 New_Theta = parameters["theta"]
             for i in range(amount_of_pics):
@@ -518,12 +501,12 @@ class DataSetCrane(DatasetMixin):
                 New_Theta[theta_pos] = new_theta[i]
                 parameters["theta"] = New_Theta          
     
-                json_string = self.get_json_string_from_parameters(parameters)
+                json_string = self.create_json_string_from_parameters(parameters)
                 img = self.uc.reciveImage(json_string)
                 newDict.append({"parameters":parameters, "jsondata":json_string,"image":img})
         return newDict
 
-    def plot_2Images_inSubplots(self,dict1,dict2):
+    def plot_two_images_inSubplots(self,dict1,dict2, save = False):
         matplotlib.use('TkAgg')
         fig, (pic1, pic2) = plt.subplots(1,2)
         
@@ -532,59 +515,28 @@ class DataSetCrane(DatasetMixin):
         
         pic2.imshow(dict2["image"])
         pic2.axis("off")
-        #plt.savefig("figures/differentAngle/fig_"+str(np.round(dict1["jsondata"]["phi"]*100))+".png")
+        if save:
+            plt.savefig("data/figures/subplots/fig_idx1_"+str(dict1["index"])+"_idx2_"+str(dict2["index"])+".png")
         plt.show()
 
-    def plot_Images_inSubplots(self,dicts):
-        matplotlib.use('TkAgg')
-        number = int(len(dicts))
-        if(number%2==0):
-            if(number==2):
-                fig, ax = plt.subplots(1,number)
-
-                for i in range(number):    
-                    ax[i].imshow(dicts[i]["image"])
-                    ax[i].axis("off")
-            else:
-                fig, ax = plt.subplots(2,math.ceil(number/2))  
-                for j in range(2):
-                    for i in range(math.ceil(number/2)):
-                        if(i+j*int(number/2)<int(number)):
-                            ax[j,i].imshow(dicts[i+j*int(number/2)]["image"])
-                            ax[j,i].axis("off")
-        else:
-            if(number>5):    
-                fig, ax = plt.subplots(3,math.ceil(number/3))
-                for j in range(3):
-                    for i in range(math.ceil(number/3)):
-                        if(i+j*int(number/2)<int(number)):
-                            ax[j,i].imshow(dicts[i+j*int(number/3)]["image"])
-                            ax[j,i].axis("off")
-            else:
-                if(number==1):
-                    plt.imshow(dicts[0]["image"])
-                    plt.axis("off")
-                else:
-                    fig, ax = plt.subplots(1,int(number))
-                    for i in range(number):    
-                        ax[i].imshow(dicts[i]["image"])
-                        ax[i].axis("off")
-        plt.show()
-
-    def plot_combined_Images(self, dicts, images_in_one_row= 5):
+    def plot_images(self, dicts, images_in_one_row = 4, save_fig = True, show_index = True):
+        ### Plot and show all images contained in the list of dictionaries and label them with their corresponding index. 
+        # How many images are there
         numb = len(dicts)
         numb_y = 0
         numb_x = images_in_one_row
+        # numb_y and numb_x determine the size of the grid of images
         while numb > numb_x:
             numb_y += 1
-            numb -= 5
+            numb -= images_in_one_row
         numb_y += 1
         self.logger.debug("numb_y: " + str(numb_y))
         self.logger.debug("dicts[0]['image'].shape[0]: " + str(dicts[0]["image"].shape[0]))
-        self.logger.debug("(5*dicts[0][image].shape[1]: " + str((5*dicts[0]["image"].shape[1])))
+        self.logger.debug("(images_in_one_row*dicts[0][image].shape[1]: " + str((images_in_one_row*dicts[0]["image"].shape[1])))
         self.logger.debug("dicts[0][image].shape[2]: " + str(dicts[0]["image"].shape[2]))
-        h_stacked = np.ones((numb_y, dicts[0]["image"].shape[0], (5*dicts[0]["image"].shape[1]), dicts[0]["image"].shape[2]), dtype=int)
+        h_stacked = np.ones((numb_y, dicts[0]["image"].shape[0], (images_in_one_row*dicts[0]["image"].shape[1]), dicts[0]["image"].shape[2]), dtype=int)
         self.logger.debug("h_stacked.shape: " + str(h_stacked.shape))
+        # Stack all images in one row together with np.hstack() for all numb_y
         for i in range(numb_y):
             img_hstack = np.ones((numb_x, dicts[0]["image"].shape[0], dicts[0]["image"].shape[1], dicts[0]["image"].shape[2]), dtype=int)
             if i == numb_y-1:
@@ -594,25 +546,34 @@ class DataSetCrane(DatasetMixin):
                 for j in range(numb_x):
                     img_hstack[j] = dicts[i*numb_x+j]["image"]
             h_stacked[i] = np.hstack((img_hstack))
-
+        # Stack all rows vertically together
         final_img = np.vstack((h_stacked))
         self.logger.debug("final_img.shape: " + str(final_img.shape))
         matplotlib.use('TkAgg')
         plt.imshow(final_img)
+        # Plot lines between images to better see the borders of the images
         for i in range(1,numb_y):
             plt.axhline(y = dicts[0]["image"].shape[0]*i, color="k")
         for i in range(1,numb_x):
             plt.axvline(x = dicts[0]["image"].shape[1]*i, color="k")
-        for i in range(1,len(dicts)):
+        # Plot the index of the images onto the images
+        if show_index:
             j = 0
-            if "index" in dicts[i]:
-                if i%numb_x==0:
-                    j += 1
-                plt.text(dicts[0]["image"].shape[1]*(i%numb_x) - dicts[0]["image"].shape[1]/10, dicts[0]["image"].shape[0]*(numb_y - j) - dicts[0]["image"].shape[0]/10, "idx: " + str(dicts[i]["index"]) )
+            for i in range(0,len(dicts)):
+                if "index" in dicts[i]:
+                    if i%numb_x==0:
+                        j += 1
+                    plt.text(dicts[0]["image"].shape[1]*((i%numb_x) + 0.05), dicts[0]["image"].shape[0]*(j - 0.05), "idx: " + str(dicts[i]["index"]) )
+                else:
+                    self.logger.error("dicts[" + str(i) + "] has no index.")
         plt.axis('off')
+        # Save figure if wanted.
+        if save_fig:
+            plt.savefig("data/figures/fig_from_index_" + str(dicts[0]["index"]) + "_to_index_" + str(dicts[len(dicts)]["index"]) + ".png")
         plt.show()
 
     def increment_index(self):
+        ### Load, increment and return the externaly saved index.
         index = self.load_index()
         self.logger.debug("index: " + str(index))
         index = index + 1
@@ -622,31 +583,36 @@ class DataSetCrane(DatasetMixin):
                 f.write(str(index))
                 f.close()
         except FileNotFoundError as e:
-                self.logger.debug("Indexfile not found.")
+                self.logger.error("Indexfile not found.")
                 raise e
         return index
         
     def load_index(self):
+        ### Load and return the externaly saved index.
         try:
             with open("data/index.txt","r") as f:
                 index = f.read()
                 f.close()
         except FileNotFoundError as e:
-            self.logger.debug("Indexfile not found.")
+            self.logger.error("Indexfile not found.")
             raise e
         return int(index)
 
     def reset_index(self, set_index = 0):
+        ### Reset the externaly saved index to set_index
+        # Use this function if your data folder takes up too much space 
         with open("data/index.txt","w") as f:
             f.write(str(set_index))
             f.close()
 
     def load_parameters(self,index = [-1], amount = 1):
+        ### Load and return a given aoumt of parameters. If index is not specified the index will be chooden randomly.  
         if index[0]==-1:
             index = np.random.randint(0,self.load_index(),amount)
         else:
             assert len(index)==amount, "Specified Index has to be len(Index):" + str(len(index)) + " equal to amount:" + str(amount)
         parameter_list = []
+        # Load the amount of parameters and append them to the parameter_list
         for i in range(amount):
             while 1:
                 try:
@@ -657,54 +623,77 @@ class DataSetCrane(DatasetMixin):
                 except FileNotFoundError:
                     self.logger.debug("File with index" + str(index[i]) + "does not exist.")
                     index[i] +=1
+        # If the amount is 1 then return the parameters directly 
         if amount==1:
             return parameter_list[0]
+        # otherwise return the list of the parameters
         else:
             return parameter_list
     
     def save(self, dictionary, save_para = True, save_image = False):
-        if save_image:
-            if "image" in dictionary:
-                if "index" in dictionary:
-                    Image.fromarray(dictionary["image"]).save("data/images/image_index_" + str(dictionary["index"]) + '.png')
-                else:
-                    fake_index = np.random.randint(0,1000)
-                    Image.fromarray(dictionary["image"]).save("data/images/image_no_index_" + str(fake_index) + '.png')
-            else:
-                self.logger.error("Image could not be saved. No image data not found in dictionary.")
+        ### Save parameter data or an image of a dictionary in the data/parameters folder or the data/images folder.
+        # Save parameters.
         if save_para:
-            if "parameters" in dictionary: 
+            # Check if the parameters and the index is in the dictionary.
+            if "parameters" in dictionary:
                 if "index" in dictionary:
                     with open("data/parameters/parameters_index_" + str(dictionary["index"]) + '.json', 'w') as f:
                         json.dump(dictionary["parameters"],f)
                         f.close()
                 else:
+                    # Change the name of the json file if there is no index given.
                     fake_index = np.random.randint(0,1000)
-                    with open("data/parameters/parameters_index_" + str(fake_index) + '.json', 'w') as f:
+                    with open("data/parameters/parameters_NO_index_" + str(fake_index) + '.json', 'w') as f:
                         json.dump(dictionary["parameters"],f)
                         f.close()
             else:
                 self.logger.error("Image parameters could not be saved. No parameters found in dictionary.")
+        # Save the image as png.
+        if save_image:
+            # Check if the image and the index is in the dictionary.
+            if "image" in dictionary:
+                if "index" in dictionary:
+                    Image.fromarray(dictionary["image"]).save("data/images/image_index_" + str(dictionary["index"]) + '.png')
+                else:
+                    # Change the name of the image if there is no index given.
+                    fake_index = np.random.randint(0,1000)
+                    Image.fromarray(dictionary["image"]).save("data/images/image_NO_index_" + str(fake_index) + '.png')
+            else:
+                self.logger.error("Image could not be saved. No image data not found in dictionary.")
 
-    def get_example(self,index = None, save_para = True, save_image = False):
-        random_parameters = self.create_random_parameters()
-        jsonstring = self.get_json_string_from_parameters(random_parameters)
-        img = self.uc.reciveImage(jsonstring)
+    def parameters_to_finished_data(self, parameters, save_para = True, save_image = False):
+        ### Return dictionary with all relevant data. Input parameters and get an corresponding image. 
+        # Recive an image depending on your parameters.
+        img = self.uc.reciveImage(self.create_json_string_from_parameters(parameters))
+        # Load and increment the extern saved index.
         index = self.increment_index()
-        newDict = {"index":index,"parameters":random_parameters, "jsondata":jsonstring,"image":img}
+        # Put data in an dictionary.
+        newDict = {"index":index,"parameters":parameters,"image":img}
+        # Save parameters for later recreating and manipulating the image.
         self.save(newDict,save_para = save_para, save_image = save_image)
         return newDict
         
-    def get_crane(self,jsonstring):
+
+    def create_example(self,index = None, save_para = True, save_image = False):
+        ### Returns a dictionary with all relevant data and the image. Create an exampel image from random parameters.
+        # Create random parameters depending o your config.  
+        random_parameters = self.create_random_parameters()
+        # Format the parameters to a jsonstring that can be sent and interpreted by Unity.
+        jsonstring = self.create_json_string_from_parameters(random_parameters)
+        # Recive an image from the jsonstring.
         img = self.uc.reciveImage(jsonstring)
-        jsondata = json.loads(jsonstring)
-        newDict = {"jsondata":jsondata,"image":img}
+        # Load and increment the extern saved index.
+        index = self.increment_index()
+        # Put all data in an dictionary.
+        newDict = {"index":index,"parameters":random_parameters,"image":img}
+        # Save parameters for later recreating and manipulating the image.
+        self.save(newDict,save_para = save_para, save_image = save_image)
         return newDict
     
     def exit(self):
-        ### sends end request to Unity, closes TCP connection. Called when used in with statement"""
+        ### Close TCP connection. Send end request to Unity and with that quit the application.  
         self.uc.exit()
-        print("Exit socket connection to unity.")
+        self.logger.debug("Exit socket connection to unity.")
 
 
         
@@ -720,15 +709,15 @@ for i in range(1):
 print(len(dicts))
 '''
 
-data = DataSetCrane(use_unity_build=True,debug_log=True)
+data = DataSetCrane(use_unity_build = True,debug_log=True)
 #data.reset_index()
 dicts = []
 for i in range(15):
     dicts.append(data.get_example())
-#data.exit()
+data.exit()
 data.plot_combined_Images(dicts)
 
-
+#TODO get logfile from unity into log file folder
 #TODO check combine images for different size input than 10 and check if with non quadratic image ratios
 #TODO check old functions and make a lot change articulation functs and apperence
 
