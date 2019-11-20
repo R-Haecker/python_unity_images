@@ -497,7 +497,7 @@ class DataSetCrane(DatasetMixin):
             else:
                 New_Theta = parameters["theta"]
             for i in range(amount_of_pics):
-                print("i: " + str(i) + " new_theta: " + str(new_theta) + " theta_pos: " + str(theta_pos) + " New_Theta: " + str(New_Theta) )
+                self.logger.debug("i: " + str(i) + " new_theta: " + str(new_theta) + " theta_pos: " + str(theta_pos) + " New_Theta: " + str(New_Theta) )
                 New_Theta[theta_pos] = new_theta[i]
                 parameters["theta"] = New_Theta          
     
@@ -569,7 +569,7 @@ class DataSetCrane(DatasetMixin):
         plt.axis('off')
         # Save figure if wanted.
         if save_fig:
-            plt.savefig("data/figures/fig_from_index_" + str(dicts[0]["index"]) + "_to_index_" + str(dicts[len(dicts)]["index"]) + ".png")
+            plt.savefig("data/figures/fig_from_index_" + str(dicts[0]["index"]) + "_to_index_" + str(dicts[len(dicts)-1]["index"]) + ".png")
         plt.show()
 
     def increment_index(self):
@@ -674,7 +674,7 @@ class DataSetCrane(DatasetMixin):
         return newDict
         
 
-    def create_example(self,index = None, save_para = True, save_image = False):
+    def get_example(self,index = None, save_para = True, save_image = False):
         ### Returns a dictionary with all relevant data and the image. Create an exampel image from random parameters.
         # Create random parameters depending o your config.  
         random_parameters = self.create_random_parameters()
@@ -710,12 +710,12 @@ print(len(dicts))
 '''
 
 data = DataSetCrane(use_unity_build = True,debug_log=True)
-#data.reset_index()
+data.reset_index()
 dicts = []
 for i in range(15):
     dicts.append(data.get_example())
 data.exit()
-data.plot_combined_Images(dicts)
+data.plot_images(dicts)
 
 #TODO get logfile from unity into log file folder
 #TODO check combine images for different size input than 10 and check if with non quadratic image ratios

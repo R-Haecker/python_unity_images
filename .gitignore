@@ -3,7 +3,7 @@ data/parameters/
 data/images/
 data/index/
 test_for_plotting_images.ipynb/
-log/
+log
 .ipynb_checkpoints/
 __pycach__/
 debug_test.py/
