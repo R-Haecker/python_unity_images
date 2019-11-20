@@ -17,7 +17,7 @@ class Client_Communicator_to_Unity:
         
         # Create logger
         self.log_path = "log/python_client.log"
-        self.logger = logging.getLogger("python_dataset_and_client_log")
+        self.logger = logging.getLogger("python_client_log")
         self.logger.setLevel(logging.DEBUG)
         # Create console handler
         self.ch = logging.StreamHandler()
@@ -37,7 +37,6 @@ class Client_Communicator_to_Unity:
         # Add fh and ch to logger
         self.logger.addHandler(self.fh)
         self.logger.addHandler(self.ch)
-
         # Clear log at startup
         with open(self.log_path, 'w'):
             pass
@@ -58,44 +57,38 @@ class Client_Communicator_to_Unity:
                 
         if use_unity_build == True:
         # For execution with BUILD: start Unity build
+            self.logger.info("Starting Unity...")
+            self.logger.debug("path to unity: " + self.unity_build_path)
+            # Befor strarting unity set value in stated.txt to zero
+            with open(self.file_directory + relative_unity_build_path[:-7] + "_Data/started.txt","w") as f:
+                f.write("0")
+                f.close()
             try:
-                self.logger.info("Starting Unity...")
-                self.logger.debug("Starting: " + self.unity_build_path)
-                
-                with open(self.file_directory + relative_unity_build_path[:-7] + "_Data/started.txt","w") as f:
-                    f.write("0")
-                    f.close()
-                
-                #TODO maybe if you want: do not let subprocess.popen print found path 
+                # Start Unity
                 subprocess.Popen([self.unity_build_path])
-                
-                # Wait until Unity is fully set up. unity writes a one in startet.txt if it is ready 
-                self.logger.info("Waiting for unity...")
-                zero_or_one = 0
-                max_waiting = 20*2
-                for i in range(max_waiting):
-                    try:
-                        with open(self.file_directory + relative_unity_build_path[:-7] + "_Data/started.txt","r") as f:
-                            zero_or_one = f.read()
-                            f.close()
-                    except FileNotFoundError as e:
-                        self.logger.debug("started.txt not found.")
-                    if zero_or_one == "1":
-                        break
-                    time.sleep(0.5)
-                         
             except IOError as e:    
                 self.logger.fatal(e)
                 self.logger.fatal("Unity build can not be found; build has been moved. Check: python client: Client_Communicator_to_Unity in init(...,relative_unity_build_path,...)")
                 raise e
+            # Wait until Unity is fully set up. unity writes a one in startet.txt if it is ready 
+            self.logger.info("Waiting for unity...")
+            zero_or_one = 0
+            max_waiting = 100*2
+            for i in range(max_waiting):
+                try:
+                    with open(self.file_directory + relative_unity_build_path[:-7] + "_Data/started.txt","r") as f:
+                        zero_or_one = f.read()
+                        f.close()
+                except FileNotFoundError as e:
+                    self.logger.debug("started.txt not found.")
+                if zero_or_one == "1":
+                    break
+                time.sleep(0.5)
         else:
         # For execution with unity engine
             self.logger.info("Use with unity editor, editor should now be running.\n")
         # Connect to Unity server 
         self.connect_to_server()
-
-    def __enter__(self):
-        return self
     
     def exit(self):
         ### Send end request to Unity, close TCP connection and application
@@ -227,7 +220,6 @@ class Client_Communicator_to_Unity:
     totalSpotLights=1, same_SpotLightsColor = True, SpotLightsColor_r = 1, SpotLightsColor_g = 1, SpotLightsColor_b = 1, SpotLightsColor_a = 1, SpotLightsRadius=[10], SpotLightsTheta=[0], SpotLightsPhi=[0], SpotLightsIntensity=[1], SpotLightsRange=[10], SpotAngle=[30],
     DirectionalLightTheta = 30, DirectionalLightIntensity = 0.8):
         ### Returns json data according to input parameter which can be interpreted by the Unity server
-        #TODO have better logging in this function for assert errors are currently not logged.
         
         # Create a Dictionary with all the given information which can be read by the Unity script
         data = {}
@@ -319,7 +311,7 @@ class Client_Communicator_to_Unity:
         else:
             # Use the given information
             assert type(totalArms_Segment)==list, "totalArmsSegment not a list" 
-            assert len(totalArms_Segment)== totalSegments-1, "len(totalArmsSegment): " +  len(totalArms_Segment) + " has to be equal to totalSegments-1: " + str(totalSegments-1) 
+            assert len(totalArms_Segment)== totalSegments-1, "len(totalArmsSegment): " +  str(len(totalArms_Segment)) + " has to be equal to totalSegments-1: " + str(totalSegments-1) 
         # Add the information to the dictionary
         data['totalArmsSegment']=totalArms_Segment
         # Add the vertical offset of the coordinates of the camera  
@@ -419,37 +411,3 @@ class Client_Communicator_to_Unity:
         # Format the dictionary with all the data to a string and return it
         json_string = json.dumps(data)        
         return json_string
-
-        
-
-'''
-comm = Client_Communicator_to_Unity(use_unity_build=True)
-jsonString = comm.writeJsonCrane(totalSegments = 3, totalArms_Segment=[1,1], phi = 90,scale= [2], theta= 20,
-same_material= True, metallic=[0.5], smoothness=[0.5], r=[1],g=[0.3],b=[0],a=[1], 
-CameraRadius=10, CameraTheta = 90, CameraPhi = 0, CameraRes_width=256, CameraRes_height=256, Camera_FieldofView=60,#CameraVerticalOffset=0,
-totalPointLights = 1, PointLightsRadius=[25], PointLightsRange=[50], PointLightsIntensity=[25], PointLightsColor_r=0, SpotLightsColor_b=1.0, SpotLightsColor_g=1.0, SpotLightsColor_r=1.0, SpotLightsRadius = [30,17,28], SpotLightsTheta = [50,-90,140], SpotLightsPhi=[0,90,0], SpotLightsIntensity=[100,50,90],SpotLightsRange=[20,15,20],
-totalSpotLights=3, SpotAngle=[90,50,60],same_theta=True)
-print("PYTHON CLIENT: befor recive Image")
-imge = comm.reciveImage(jsonString)
-print("PYTHON CLIENT: after reciveImage; imge:")
-print(type(imge), imge)
-imgPIL = Image.fromarray(imge)
-imgPIL.save("img1.png","PNG")
-print("PYTHON CLIENT: imPIL: ")
-print(imgPIL)
-imgPIL.show()
-comm.exit()
-jsonString2 = comm.writeJsonCrane(totalSegments = 4, totalArms_Segment=[1,2,1], phi = 45,scale= [2], theta= 20,
-same_material= True, metallic=[0.5], smoothness=[0.5], r=[1],g=[0.1],b=[0],a=[1], 
-CameraRadius=10, CameraTheta = 90, CameraPhi = 0, CameraRes_width=720, CameraRes_height=480, Camera_FieldofView=60,#CameraVerticalOffset=0,
-totalPointLights = 1, PointLightsRadius=[25], PointLightsRange=[50], PointLightsIntensity=[25], PointLightsColor_r=0, SpotLightsColor_b=1.0, SpotLightsColor_g=1.0, SpotLightsColor_r=1.0, SpotLightsRadius = [30,17,28], SpotLightsTheta = [50,-90,140], SpotLightsPhi=[0,90,0], SpotLightsIntensity=[100,50,90],SpotLightsRange=[20,15,20],
-totalSpotLights=3, SpotAngle=[90,50,60],same_theta=True)
-print("befor recive Image2")
-imge2 = comm.reciveImage(jsonString2)
-print("closing Socket")
-comm.socket.close()
-print("after reciveImage; imge2:")
-print(type(imge2))
-imgPIL2 = Image.fromarray(imge2)
-imgPIL2.show()
-'''
