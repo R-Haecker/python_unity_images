@@ -19,7 +19,7 @@ class DataSetCrane(DatasetMixin):
         else:
             log_level = logging.INFO
         # Set up a client and start unity 
-        self.uc = client.Client_Communicator_to_Unity(use_unity_build=use_unity_build, log_level = log_level, relative_unity_build_path = "/build/image.x86_64")
+        self.uc = client.Client_Communicator_to_Unity(use_unity_build=use_unity_build, log_level = log_level)
         
         # Use already existing logger from pthon for dataset as well
         self.log_path = "log/python_dataset_and_client.log"
@@ -47,8 +47,9 @@ class DataSetCrane(DatasetMixin):
             self.config = config
         self.logger.debug("Dataset initialised.\n")        
 
-    def writeConfig(self,same_scale=None, scale=[0.5,4], totalSegments=[2,12], phi=[0,360], enable_many_arms=[1,3],same_theta=None, theta=None, same_material=None, r=[0,1], g=[0,1], b=[0,1], a=[0.5,1], metallic=[0,1], smoothness=[0,1],
-    totalPointLights=None, PointLightsRadius=[5,20], PointLightsPhi=[0,360], PointLightsTheta=[0,90], PointLightsIntensity=[7,17], PointLightsRange=[5,25], samePointLightColor=None, PointLightsColor_r=[0,1], PointLightsColor_g=[0,1], PointLightsColor_b=[0,1], PointLightsColor_a=[0.5,1],
+    def writeConfig(self,same_scale=None, scale=[0.5,4], totalSegments=[2,12], phi=[0,360], enable_many_arms=[1,3],same_theta=None, theta=None, 
+    same_material=None, r=[0,1], g=[0,1], b=[0,1], a=[0.5,1], metallic=[0,1], smoothness=[0,1], CameraRadius = 10.0, CameraTheta = [30,100], CameraPhi = [0,360], CameraVerticalOffset = None,
+    totalPointLights=[5,12], PointLightsRadius=[5,20], PointLightsPhi=[0,360], PointLightsTheta=[0,90], PointLightsIntensity=[7,17], PointLightsRange=[5,25], samePointLightColor=None, PointLightsColor_r=[0,1], PointLightsColor_g=[0,1], PointLightsColor_b=[0,1], PointLightsColor_a=[0.5,1],
     totalSpotLights=None, SpotLightsRadius=[5,20], SpotLightsPhi=[0,360], SpotLightsTheta=[0,90], SpotLightsIntensity=[5,15], SpotLightsRange=[5,25], SpotLightsAngle=[5,120], sameSpotLightColor=None, SpotLightsColor_r=[0,1], SpotLightsColor_g=[0,1], SpotLightsColor_b=[0,1], SpotLightsColor_a=[0.5,1],
     DirectionalLightTheta = [0,90], DirectionalLightIntensity = [0.1,1.8]):
         ### Retruns a config as dictionary which determines the interval for all random parameters created in the function create_random_parameters  
@@ -77,7 +78,23 @@ class DataSetCrane(DatasetMixin):
             assert enable_many_arms[0] > 0, "enable_many_arms has to be 1 or greater to even create one Arm."
             assert enable_many_arms[1] > 0, "enable_many_arms has to be 1 or greater to even create one Arm."
         config["enable_many_arms"] = enable_many_arms
-
+        
+        # Create intervals or fixed values for camera position
+        if type(CameraRadius)== list:
+            assert len(CameraRadius) == 2, "CameraRadius has to be a list len()==2 or a float for a fixed value."
+        config["CameraRadius"] = CameraRadius 
+        if type(CameraTheta)== list:
+            assert len(CameraTheta) == 2, "CameraTheta has to be a list len()==2 or a float for a fixed value."
+        config["CameraTheta"] = CameraTheta 
+        if type(CameraPhi)== list:
+            assert len(CameraPhi) == 2, "CameraPhi has to be a list len()==2 or a float for a fixed value."
+        config["CameraPhi"] = CameraPhi 
+        if CameraVerticalOffset==None:
+            config["CameraVerticalOffset"] = 0    
+        else:
+            if type(CameraVerticalOffset)== list:
+                assert len(CameraVerticalOffset) == 2, "CameraVerticalOffset has to be a list len()==2 or a float for a fixed value."
+            config["CameraVerticalOffset"] = CameraVerticalOffset 
         
         # Create intervals for Material properties 
         if same_material!=None:
@@ -168,24 +185,39 @@ class DataSetCrane(DatasetMixin):
             
         return config
         
-    def create_random_parameters(self , CameraRes_width= 520, CameraRes_height=520, CameraRadius = 13, CameraTheta = 90, CameraPhi = 0, CameraVerticalOffset = 0, Camera_FieldofView = 80):
+    def create_random_parameters(self , CameraRes_width= 520, CameraRes_height=520,):
         ### Creates random input parameter depending on your config, the camera parameters are not random
         dictionary={}
 
         # not random set variables for the Camera
         dictionary["CameraRes_width"] = CameraRes_width 
         dictionary["CameraRes_height"] = CameraRes_height 
-        dictionary["Camera_FieldofView"] = Camera_FieldofView
-        # Camera position
-        dictionary["CameraRadius"] = CameraRadius 
-        dictionary["CameraTheta"] = CameraTheta
-        dictionary["CameraPhi"] = CameraPhi 
-        dictionary["CameraVerticalOffset"] = CameraVerticalOffset 
+        dictionary["Camera_FieldofView"] = 80
+        
         # If needed you could save the seed
         #np.random.seed(Seed)
         #dictionary["seed"] = np.random.get_state()
 
         # Create all parameters randomly 
+        
+        # Camera position
+        if type(self.config["CameraRadius"]) == float:
+            dictionary["CameraRadius"] = self.config["CameraRadius"]
+        else:
+            dictionary["CameraRadius"] = np.random.uniform(self.config["CameraRadius"][0],self.config["CameraRadius"][1])
+        if type(self.config["CameraTheta"]) == float:
+            dictionary["CameraTheta"] = self.config["CameraTheta"]
+        else:
+            dictionary["CameraTheta"] = np.random.uniform(self.config["CameraTheta"][0],self.config["CameraTheta"][1])
+        if type(self.config["CameraPhi"]) == float:
+            dictionary["CameraPhi"] = self.config["CameraPhi"] 
+        else:
+            dictionary["CameraPhi"] = np.random.uniform(self.config["CameraPhi"][0],self.config["CameraPhi"][1])
+        if type(self.config["CameraVerticalOffset"]) == float or type(self.config["CameraVerticalOffset"]) == int:
+            dictionary["CameraVerticalOffset"] = self.config["CameraVerticalOffset"] 
+        else:
+            dictionary["CameraVerticalOffset"] = np.random.uniform(self.config["CameraVerticalOffset"][0],self.config["CameraVerticalOffset"][1])
+        
         # Create how many Cubiods are in one branch.
         TotalSegments = np.random.randint(self.config["totalSegments"][0],self.config["totalSegments"][1])
         # Create the angle and the intensity of the directional light
@@ -252,7 +284,7 @@ class DataSetCrane(DatasetMixin):
         S_B=[]
         S_A=[]
         # Amount of Spotlights
-        if self.config["totalPointLights"] == None:
+        if self.config["totalSpotLights"] == None:
             TotalSpotLights = 0
         else:        
             TotalSpotLights = np.random.randint(self.config["totalSpotLights"][0],self.config["totalSpotLights"][1])
@@ -689,7 +721,7 @@ class DataSetCrane(DatasetMixin):
         index = index + 1
         self.logger.debug("index: " + str(index))
         try:
-            with open("data/index.txt","w") as f:
+            with open("data/python/index.txt","w") as f:
                 f.write(str(index))
                 f.close()
         except FileNotFoundError as e:
@@ -700,7 +732,7 @@ class DataSetCrane(DatasetMixin):
     def load_index(self):
         ### Load and return the externaly saved index.
         try:
-            with open("data/index.txt","r") as f:
+            with open("data/python/index.txt","r") as f:
                 index = f.read()
                 f.close()
         except FileNotFoundError as e:
@@ -721,11 +753,12 @@ class DataSetCrane(DatasetMixin):
         self.logger.debug("Exit socket connection to unity.")
 
 
-data = DataSetCrane(use_unity_build = True,debug_log=True)
-data.reset_index()
+data = DataSetCrane(use_unity_build = True,debug_log=False)
 
 dicts = []
-
+for i in range(1):
+    dicts.append(data[0])
+'''
 for i in range(5):
     para = data.create_random_parameters()
     para1 = data.create_random_parameters()
@@ -734,10 +767,8 @@ for i in range(5):
     dicts.append(data.parameters_to_finished_data(para))
     dicts.append(data.parameters_to_finished_data(para1))
     dicts.append(data.parameters_to_finished_data(para2))
+'''
 data.exit()
 
-data.plot_images(dicts, images_in_one_row=3)
-
-#TODO get logfile from unity into log file folder
-#TODO check old functions and make a lot change articulation functs and apperence
+data.plot_images(dicts, images_in_one_row=5)
 

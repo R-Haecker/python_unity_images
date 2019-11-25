@@ -13,7 +13,7 @@ import logging
 
 class Client_Communicator_to_Unity:
 
-    def __init__(self,use_unity_build = True, relative_unity_build_path = "/build/image.x86_64", log_level = logging.INFO):
+    def __init__(self,use_unity_build = True, log_level = logging.INFO):
         
         # Create logger
         self.log_path = "log/python_client.log"
@@ -43,9 +43,17 @@ class Client_Communicator_to_Unity:
 
         self.logger.debug("Starting python client.")
         # Set up Data Paths
-        self.relative_path_TCPsocket_config = "tcp_config.json"
+        self.relative_path_TCPsocket_config = "data/python/client_tcp_config.json"
         self.use_unity_build = use_unity_build
         self.file_directory = os.path.dirname(os.path.realpath("client.py"))
+
+        # Determine OS for the right build to start
+        osdata = os.uname()
+        if osdata[0] == "Linux":
+            relative_unity_build_path = "/build_linux/unity_server_rendering_images.x86_64"
+        if osdata[0] == "Windows":
+            relative_unity_build_path = "/build_windows/unity_server_rendering_images.exe"
+        
         self.unity_build_path = self.file_directory + relative_unity_build_path
         # Set up Default properties 
         self.port = 50000
@@ -60,12 +68,12 @@ class Client_Communicator_to_Unity:
             self.logger.info("Starting Unity...")
             self.logger.debug("path to unity: " + self.unity_build_path)
             # Befor strarting unity set value in stated.txt to zero
-            with open(self.file_directory + relative_unity_build_path[:-7] + "_Data/started.txt","w") as f:
+            with open(self.file_directory + "/data/unity/started.txt","w") as f:
                 f.write("0")
                 f.close()
             try:
-                # Start Unity
-                subprocess.Popen([self.unity_build_path])
+                # Start Unity and set log path of unity
+                subprocess.Popen(self.unity_build_path + " -logFile ./log/unity.log" , shell=True)
             except IOError as e:    
                 self.logger.fatal(e)
                 self.logger.fatal("Unity build can not be found; build has been moved. Check: python client: Client_Communicator_to_Unity in init(...,relative_unity_build_path,...)")
@@ -76,7 +84,7 @@ class Client_Communicator_to_Unity:
             max_waiting = 100*2
             for i in range(max_waiting):
                 try:
-                    with open(self.file_directory + relative_unity_build_path[:-7] + "_Data/started.txt","r") as f:
+                    with open(self.file_directory + "/data/unity/started.txt","r") as f:
                         zero_or_one = f.read()
                         f.close()
                 except FileNotFoundError as e:
@@ -93,11 +101,10 @@ class Client_Communicator_to_Unity:
     def exit(self):
         ### Send end request to Unity, close TCP connection and application
         if(self.use_unity_build):
-            self.send_to_unity("True",change_request=None)
             self.logger.info("Exit-message is sent. Unity build and socket now closing.\n")
         else:
-            self.send_to_unity("False",change_request=None)
             self.logger.info("Exit-message is sent. Unity editor can now exit play mode and socket is now closing.\n")
+        self.send_to_unity("",exit=True)
         self.socket.close()
     
     def connect_to_server(self):
@@ -125,8 +132,8 @@ class Client_Communicator_to_Unity:
             except socket.error as e:
                 self.logger.debug("Socket can not connect. Make sure that the tcp_server from unity is already running.")
                 self.logger.debug(e)
-                #sleep for 0.5 secounds
-                time.sleep(0.25)
+                #sleep for 0.05 secounds
+                time.sleep(0.05)
                 # If port is in use or not working, try next port
                 if self.port >= 50050:
                     self.port = 49990
@@ -152,17 +159,14 @@ class Client_Communicator_to_Unity:
             json.dump(new_config, f)
             f.close()
     
-    def send_to_unity(self, json_string, change_request):    
+    def send_to_unity(self, json_string, exit = False):    
         ### Send Data to Unity server
-        if change_request:
-            self.logger.debug("Json string with change request sent.\n")
-            self.socket.sendall((json_string+"change."+"eod.").encode())
-        elif change_request==False:        
-            self.logger.debug("Json string without change request sent.\n")
-            self.socket.sendall((json_string+"eod.").encode())
-        else:
+        if exit:
             self.logger.debug("Exit request sent.\n")
             self.socket.sendall((json_string+"END.eod.").encode())
+        else:
+            self.logger.debug("Json string sent.\n")
+            self.socket.sendall((json_string + "eod.").encode())
             
     def _receiveDataAsBytes(self):
         ### Receive image data from Unity trough socket. Ends by timeout, returns bytearray
@@ -183,14 +187,14 @@ class Client_Communicator_to_Unity:
                 break
         return data_complete
 
-    def reciveImage(self, json_string, change_request=True):
+    def reciveImage(self, json_string):
         ### Send json_string to Unity server and returns image in PngImageFile-array 
         while(self.connected==False):
             # Socket must be connnected at this point
             self.logger.critical("Socket is still not connected. Waiting...\n")
             time.sleep(1)
         # Send unity the json_string with the formatted information to create the image 
-        self.send_to_unity(json_string, change_request)
+        self.send_to_unity(json_string)
         self.logger.debug("Json string sent.\n")
         
         unity_resp_bytes = bytes()
