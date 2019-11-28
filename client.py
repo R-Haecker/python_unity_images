@@ -98,15 +98,6 @@ class Client_Communicator_to_Unity:
         # Connect to Unity server 
         self.connect_to_server()
     
-    def exit(self):
-        ### Send end request to Unity, close TCP connection and application
-        if(self.use_unity_build):
-            self.logger.info("Exit-message is sent. Unity build and socket now closing.\n")
-        else:
-            self.logger.info("Exit-message is sent. Unity editor can now exit play mode and socket is now closing.\n")
-        self.send_to_unity("",exit=True)
-        self.socket.close()
-    
     def connect_to_server(self):
         ### Establish socket connection to Unity server
         self.logger.info("Client now connecting to server.")  
@@ -159,6 +150,15 @@ class Client_Communicator_to_Unity:
             json.dump(new_config, f)
             f.close()
     
+    def exit(self):
+        ### Send end request to Unity, close TCP connection and application
+        if(self.use_unity_build):
+            self.logger.info("Exit-message is sent. Unity build and socket now closing.\n")
+        else:
+            self.logger.info("Exit-message is sent. Unity editor can now exit play mode and socket is now closing.\n")
+        self.send_to_unity("",exit=True)
+        self.socket.close()
+    
     def send_to_unity(self, json_string, exit = False):    
         ### Send Data to Unity server
         if exit:
@@ -168,7 +168,7 @@ class Client_Communicator_to_Unity:
             self.logger.debug("Json string sent.\n")
             self.socket.sendall((json_string + "eod.").encode())
             
-    def _receiveDataAsBytes(self):
+    def receive_data_as_bytes(self):
         ### Receive image data from Unity trough socket. Ends by timeout, returns bytearray
         data_complete = bytearray([0])
         while 1:
@@ -179,7 +179,6 @@ class Client_Communicator_to_Unity:
                 self.logger.debug("Timeout -> exit _receiveData()")
                 self.logger.debug("data_complete: type: %s, data_complete len: %s, data_complete [:10]: %s" %(type(data_complete),len(data_complete),data_complete[:10]))
                 break
-            #TODO better format data_complete
             data_complete = data_complete + data
             if not data:
                 self.logger.debug("No data anymore exit member function.")
@@ -187,7 +186,7 @@ class Client_Communicator_to_Unity:
                 break
         return data_complete
 
-    def reciveImage(self, json_string):
+    def recive_image(self, json_string):
         ### Send json_string to Unity server and returns image in PngImageFile-array 
         while(self.connected==False):
             # Socket must be connnected at this point
@@ -200,7 +199,7 @@ class Client_Communicator_to_Unity:
         unity_resp_bytes = bytes()
         while True:
             # Recive data from Unity until the whole image is transferred
-            unity_resp_bytes = self._receiveDataAsBytes()
+            unity_resp_bytes = self.receive_data_as_bytes()
             self.logger.debug("Trying to recive data.")
             if unity_resp_bytes[-8:] == bytearray([125, 99,255,255,255,255,255,255]):
                 # Check if the data contains the whole image by looking for the end tag
@@ -319,9 +318,6 @@ class Client_Communicator_to_Unity:
         # Add the information to the dictionary
         data['totalArmsSegment']=totalArms_Segment
         # Add the vertical offset of the coordinates of the camera  
-        #TODO not sure if this is still true 
-        if(CameraVerticalOffset==None):
-            self.logger.info("CameraVerticalOffset is None, the origin of the spherical coordinates of the camera will be vertically offset depending on the crane height.\n") 
         if(CameraVerticalOffset!=0):
             self.logger.info("CameraVerticalOffset is not zero anymore, the origin of the spherical coordinates of the camera is now vertically offset.\n") 
         # Add all the information for the Camera into the dictonary

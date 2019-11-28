@@ -534,7 +534,7 @@ class DataSetCrane(DatasetMixin):
         # Format the parameters to a jsonstring that can be sent and interpreted by Unity.
         jsonstring = self.create_json_string_from_parameters(parameters)
         # Recive an image depending on your parameters.
-        img = self.uc.reciveImage(jsonstring)
+        img = self.uc.recive_image(jsonstring)
         # Load and increment the extern saved index.
         index = self.increment_index()
         # Put data in an dictionary.
