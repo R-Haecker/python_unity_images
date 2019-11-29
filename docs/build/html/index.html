@@ -1,0 +1,174 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="y">
+  <head>
+    <meta charset="utf-8" />
+    <title>Welcome to Python-Unity Images documentation! &#8212; Python-Unity Images 0.1 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="welcome-to-python-unity-images-documentation">
+<h1>Welcome to Python-Unity Images documentation!<a class="headerlink" href="#welcome-to-python-unity-images-documentation" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+</div>
+<dl class="class">
+<dt id="client.client_communicator_to_unity">
+<em class="property">class </em><code class="sig-prename descclassname">client.</code><code class="sig-name descname">client_communicator_to_unity</code><span class="sig-paren">(</span><em class="sig-param">use_unity_build=True</em>, <em class="sig-param">log_level=20</em><span class="sig-paren">)</span><a class="headerlink" href="#client.client_communicator_to_unity" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="client.client_communicator_to_unity.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param">use_unity_build=True</em>, <em class="sig-param">log_level=20</em><span class="sig-paren">)</span><a class="headerlink" href="#client.client_communicator_to_unity.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a socket and a logger for the console and saves a log file at: <code class="docutils literal notranslate"><span class="pre">log/python_client.log</span></code>.
+Starts Unity if <code class="docutils literal notranslate"><span class="pre">use_unity_build</span> <span class="pre">==</span> <span class="pre">True</span></code> and waits until unity is fully started to then call the function <code class="docutils literal notranslate"><span class="pre">connect_to_server()</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>use_unity_build</strong> (<em>bool</em><em>, </em><em>optional</em>) -- <p>defaults to <code class="docutils literal notranslate"><span class="pre">True</span></code>,</p>
+<p>If this is set true the unity build will start. Otherwise you should already set the unity editor to play.,</p>
+</p></li>
+<li><p><strong>log_level</strong> (<em>int</em>, optional) -- <p>defaults to <code class="docutils literal notranslate"><span class="pre">logging.INFO</span></code>,</p>
+<p>This variable sets the logging level of the console handler for the class which means how much information is displayed to your console.
+For debugging set it to: logging.DEBUG</p>
+</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><strong>e</strong> -- [description]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="client.client_communicator_to_unity.connect_to_server">
+<code class="sig-name descname">connect_to_server</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#client.client_communicator_to_unity.connect_to_server" title="Permalink to this definition">¶</a></dt>
+<dd><p>Establish socket connection to Unity server</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="client.client_communicator_to_unity.exit">
+<code class="sig-name descname">exit</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#client.client_communicator_to_unity.exit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Send end request to Unity, close TCP connection and application</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="client.client_communicator_to_unity.receive_data_as_bytes">
+<code class="sig-name descname">receive_data_as_bytes</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#client.client_communicator_to_unity.receive_data_as_bytes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Receive image data from Unity trough socket. Ends by timeout, returns bytearray</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="client.client_communicator_to_unity.recive_image">
+<code class="sig-name descname">recive_image</code><span class="sig-paren">(</span><em class="sig-param">json_string</em><span class="sig-paren">)</span><a class="headerlink" href="#client.client_communicator_to_unity.recive_image" title="Permalink to this definition">¶</a></dt>
+<dd><p>Send json_string to Unity server and returns image in PngImageFile-array</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="client.client_communicator_to_unity.send_to_unity">
+<code class="sig-name descname">send_to_unity</code><span class="sig-paren">(</span><em class="sig-param">json_string</em>, <em class="sig-param">exit=False</em><span class="sig-paren">)</span><a class="headerlink" href="#client.client_communicator_to_unity.send_to_unity" title="Permalink to this definition">¶</a></dt>
+<dd><p>Send Data to Unity server</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="client.client_communicator_to_unity.write_json_crane">
+<code class="sig-name descname">write_json_crane</code><span class="sig-paren">(</span><em class="sig-param">totalSegments=3, same_scale=True, scale=2, same_theta=True, theta=40, phi=0, totalArms_Segment=None, same_material=True, metallic=0.5, smoothness=0.5, r=1, g=1, b=1, a=1, CameraRes_width=256, CameraRes_height=256, Camera_FieldofView=60, CameraRadius=None, CameraTheta=90, CameraPhi=0, CameraVerticalOffset=0, totalPointLights=1, same_PointLightsColor=True, PointLightsColor_r=1, PointLightsColor_g=1, PointLightsColor_b=1, PointLightsColor_a=1, PointLightsRadius=[7], PointLightsTheta=[20], PointLightsPhi=[0], PointLightsIntensity=[1], PointLightsRange=[10], totalSpotLights=1, same_SpotLightsColor=True, SpotLightsColor_r=1, SpotLightsColor_g=1, SpotLightsColor_b=1, SpotLightsColor_a=1, SpotLightsRadius=[10], SpotLightsTheta=[0], SpotLightsPhi=[0], SpotLightsIntensity=[1], SpotLightsRange=[10], SpotAngle=[30], DirectionalLightTheta=30, DirectionalLightIntensity=0.8</em><span class="sig-paren">)</span><a class="headerlink" href="#client.client_communicator_to_unity.write_json_crane" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns json data according to input parameter which can be interpreted by the Unity server</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="indices-and-tables">
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
+<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
+</ul>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="#">Python-Unity Images</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="#">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, Richard Häcker.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.2.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/index.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

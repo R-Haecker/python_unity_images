@@ -10,11 +10,21 @@ import subprocess
 from inspect import currentframe
 import logging
 
-
-class Client_Communicator_to_Unity:
+class client_communicator_to_unity:
 
     def __init__(self,use_unity_build = True, log_level = logging.INFO):
+        """Creates a socket and a logger for the console and saves a log file at: ``log/python_client.log``.
+        Starts Unity if ``use_unity_build == True`` and waits until unity is fully started to then call the function ``connect_to_server()``.
         
+        :param use_unity_build: defaults to ``True``, \n
+                                If this is set true the unity build will start. Otherwise you should already set the unity editor to play., 
+        :type use_unity_build: bool, optional
+        :param log_level: defaults to ``logging.INFO``, \n 
+                            This variable sets the logging level of the console handler for the class which means how much information is displayed to your console. 
+                            For debugging set it to: logging.DEBUG
+        :type log_level: *int*, optional
+        :raises e: [description]
+        """     
         # Create logger
         self.log_path = "log/python_client.log"
         self.logger = logging.getLogger("python_client_log")
@@ -76,7 +86,7 @@ class Client_Communicator_to_Unity:
                 subprocess.Popen(self.unity_build_path + " -logFile ./log/unity.log" , shell=True)
             except IOError as e:    
                 self.logger.fatal(e)
-                self.logger.fatal("Unity build can not be found; build has been moved. Check: python client: Client_Communicator_to_Unity in init(...,relative_unity_build_path,...)")
+                self.logger.fatal("Unity build can not be found; build has been moved. Check: python client: client_communicator_to_unity in init(...,relative_unity_build_path,...)")
                 raise e
             # Wait until Unity is fully set up. unity writes a one in startet.txt if it is ready 
             self.logger.info("Waiting for unity...")
@@ -99,7 +109,8 @@ class Client_Communicator_to_Unity:
         self.connect_to_server()
     
     def connect_to_server(self):
-        ### Establish socket connection to Unity server
+        '''Establish socket connection to Unity server'''
+
         self.logger.info("Client now connecting to server.")  
         try:
             # Load TCP config: ip and port 
@@ -111,7 +122,7 @@ class Client_Communicator_to_Unity:
             self.logger.debug("Config data for TCP socket: host: " + self.host + "; port: " + str(self.port)) 
         except IOError as e:
             self.logger.error("tcpconfig.json can not be found. Now using default: host: " + self.host + "; port: " + str(self.port))
-            self.logger.error("Check: python client: Client_Communicator_to_Unity in init(): self.relative_path_TCPsocket_config; tcpconfig.json should be found in the same folder as client.py")
+            self.logger.error("Check: python client: client_communicator_to_unity in init(): self.relative_path_TCPsocket_config; tcpconfig.json should be found in the same folder as client.py")
             pass
         while 1:
             # Connect the socket to the listening server
@@ -151,7 +162,8 @@ class Client_Communicator_to_Unity:
             f.close()
     
     def exit(self):
-        ### Send end request to Unity, close TCP connection and application
+        '''Send end request to Unity, close TCP connection and application'''
+
         if(self.use_unity_build):
             self.logger.info("Exit-message is sent. Unity build and socket now closing.\n")
         else:
@@ -160,7 +172,8 @@ class Client_Communicator_to_Unity:
         self.socket.close()
     
     def send_to_unity(self, json_string, exit = False):    
-        ### Send Data to Unity server
+        '''Send Data to Unity server'''
+        
         if exit:
             self.logger.debug("Exit request sent.\n")
             self.socket.sendall((json_string+"END.eod.").encode())
@@ -169,7 +182,8 @@ class Client_Communicator_to_Unity:
             self.socket.sendall((json_string + "eod.").encode())
             
     def receive_data_as_bytes(self):
-        ### Receive image data from Unity trough socket. Ends by timeout, returns bytearray
+        '''Receive image data from Unity trough socket. Ends by timeout, returns bytearray'''
+
         data_complete = bytearray([0])
         while 1:
             # Recive data from socket connection
@@ -187,7 +201,8 @@ class Client_Communicator_to_Unity:
         return data_complete
 
     def recive_image(self, json_string):
-        ### Send json_string to Unity server and returns image in PngImageFile-array 
+        '''Send json_string to Unity server and returns image in PngImageFile-array '''
+
         while(self.connected==False):
             # Socket must be connnected at this point
             self.logger.critical("Socket is still not connected. Waiting...\n")
@@ -216,13 +231,13 @@ class Client_Communicator_to_Unity:
         self.logger.debug("Returning img: type: %s \n" %type(img))
         return img
     
-    def writeJsonCrane(self, totalSegments=3, same_scale = True, scale=2, same_theta = True, theta=40, phi=0, totalArms_Segment=None,
+    def write_json_crane(self, totalSegments=3, same_scale = True, scale=2, same_theta = True, theta=40, phi=0, totalArms_Segment=None,
     same_material = True, metallic=0.5, smoothness=0.5, r=1,g=1,b=1,a = 1,
     CameraRes_width = 256, CameraRes_height = 256, Camera_FieldofView = 60, CameraRadius = None, CameraTheta = 90, CameraPhi=0, CameraVerticalOffset = 0,
     totalPointLights=1, same_PointLightsColor = True, PointLightsColor_r = 1, PointLightsColor_g = 1, PointLightsColor_b = 1, PointLightsColor_a = 1, PointLightsRadius=[7], PointLightsTheta=[20], PointLightsPhi=[0], PointLightsIntensity=[1], PointLightsRange=[10], 
     totalSpotLights=1, same_SpotLightsColor = True, SpotLightsColor_r = 1, SpotLightsColor_g = 1, SpotLightsColor_b = 1, SpotLightsColor_a = 1, SpotLightsRadius=[10], SpotLightsTheta=[0], SpotLightsPhi=[0], SpotLightsIntensity=[1], SpotLightsRange=[10], SpotAngle=[30],
     DirectionalLightTheta = 30, DirectionalLightIntensity = 0.8):
-        ### Returns json data according to input parameter which can be interpreted by the Unity server
+        '''Returns json data according to input parameter which can be interpreted by the Unity server'''
         
         # Create a Dictionary with all the given information which can be read by the Unity script
         data = {}
