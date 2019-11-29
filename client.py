@@ -14,16 +14,16 @@ class client_communicator_to_unity:
 
     def __init__(self,use_unity_build = True, log_level = logging.INFO):
         """Creates a socket and a logger for the console and saves a log file at: ``log/python_client.log``.
-        Starts Unity if ``use_unity_build == True`` and waits until unity is fully started to then call the function ``connect_to_server()``.
+        Starts Unity if ``use_unity_build == True`` and waits until Unity is fully started to then call the function ``connect_to_server()``.
         
         :param use_unity_build: defaults to ``True``, \n
-                                If this is set true the unity build will start. Otherwise you should already set the unity editor to play., 
+                                If this is set true the Unity build will start. Otherwise you should already set the Unity editor to play., 
         :type use_unity_build: bool, optional
         :param log_level: defaults to ``logging.INFO``, \n 
                             This variable sets the logging level of the console handler for the class which means how much information is displayed to your console. 
                             For debugging set it to: logging.DEBUG
         :type log_level: *int*, optional
-        :raises e: [description]
+        :raises IOError: Raises IOError if Unity build can not be found. 
         """     
         # Create logger
         self.log_path = "log/python_client.log"
@@ -109,7 +109,12 @@ class client_communicator_to_unity:
         self.connect_to_server()
     
     def connect_to_server(self):
-        '''Establish socket connection to Unity server'''
+        '''
+        Establish tcp socket connection to Unity server.\n
+        Load client tcp config from ``data/python/client_tcp_config.json``.\n
+        Try to connect to the Unity server.\n
+        If connection is established save the tcp config to ``data/python/client_tcp_config.json``.
+        '''
 
         self.logger.info("Client now connecting to server.")  
         try:
@@ -162,7 +167,7 @@ class client_communicator_to_unity:
             f.close()
     
     def exit(self):
-        '''Send end request to Unity, close TCP connection and application'''
+        '''Close tcp connection and send end request to Unity which quits the build application.'''
 
         if(self.use_unity_build):
             self.logger.info("Exit-message is sent. Unity build and socket now closing.\n")
@@ -172,7 +177,14 @@ class client_communicator_to_unity:
         self.socket.close()
     
     def send_to_unity(self, json_string, exit = False):    
-        '''Send Data to Unity server'''
+        """Send data to Unity server.
+        
+        :param json_string: This string will be sent to Unity. Has to be readable by Unity.
+        :type json_string: *string*
+        :param exit: defaults to ``False``,\n 
+                    If this is True the Unity build will close.
+        :type exit: bool, optional
+        """
         
         if exit:
             self.logger.debug("Exit request sent.\n")
@@ -182,7 +194,11 @@ class client_communicator_to_unity:
             self.socket.sendall((json_string + "eod.").encode())
             
     def receive_data_as_bytes(self):
-        '''Receive image data from Unity trough socket. Ends by timeout, returns bytearray'''
+        """Receive image data from Unity trough socket. Ends by timeout, returns bytearray
+        
+        :return: From Unity recived bytearray. 
+        :rtype: ``bytearray``
+        """        
 
         data_complete = bytearray([0])
         while 1:
@@ -201,8 +217,14 @@ class client_communicator_to_unity:
         return data_complete
 
     def recive_image(self, json_string):
-        '''Send json_string to Unity server and returns image in PngImageFile-array '''
-
+        """Send string to Unity server and recive corresponding image.
+        
+        :param json_string: This ``string`` has to be comprehensible for Unity which are strings returned by :meth:`~client.client_communicator_to_unity.write_json_crane`
+        :type json_string: string
+        :return: Image corresponding to the input string.
+        :rtype: `PngImageFile-array`
+        """        
+        
         while(self.connected==False):
             # Socket must be connnected at this point
             self.logger.critical("Socket is still not connected. Waiting...\n")
@@ -237,7 +259,103 @@ class client_communicator_to_unity:
     totalPointLights=1, same_PointLightsColor = True, PointLightsColor_r = 1, PointLightsColor_g = 1, PointLightsColor_b = 1, PointLightsColor_a = 1, PointLightsRadius=[7], PointLightsTheta=[20], PointLightsPhi=[0], PointLightsIntensity=[1], PointLightsRange=[10], 
     totalSpotLights=1, same_SpotLightsColor = True, SpotLightsColor_r = 1, SpotLightsColor_g = 1, SpotLightsColor_b = 1, SpotLightsColor_a = 1, SpotLightsRadius=[10], SpotLightsTheta=[0], SpotLightsPhi=[0], SpotLightsIntensity=[1], SpotLightsRange=[10], SpotAngle=[30],
     DirectionalLightTheta = 30, DirectionalLightIntensity = 0.8):
-        '''Returns json data according to input parameter which can be interpreted by the Unity server'''
+        """Returns string according to input parameter which can be interpreted by the Unity server.
+        
+        :param totalSegments: [description], defaults to 3
+        :type totalSegments: int, optional
+        :param same_scale: [description], defaults to True
+        :type same_scale: bool, optional
+        :param scale: [description], defaults to 2
+        :type scale: int, optional
+        :param same_theta: [description], defaults to True
+        :type same_theta: bool, optional
+        :param theta: [description], defaults to 40
+        :type theta: int, optional
+        :param phi: [description], defaults to 0
+        :type phi: int, optional
+        :param totalArms_Segment: [description], defaults to None
+        :type totalArms_Segment: [type], optional
+        :param same_material: [description], defaults to True
+        :type same_material: bool, optional
+        :param metallic: [description], defaults to 0.5
+        :type metallic: float, optional
+        :param smoothness: [description], defaults to 0.5
+        :type smoothness: float, optional
+        :param r: [description], defaults to 1
+        :type r: int, optional
+        :param g: [description], defaults to 1
+        :type g: int, optional
+        :param b: [description], defaults to 1
+        :type b: int, optional
+        :param a: [description], defaults to 1
+        :type a: int, optional
+        :param CameraRes_width: [description], defaults to 256
+        :type CameraRes_width: int, optional
+        :param CameraRes_height: [description], defaults to 256
+        :type CameraRes_height: int, optional
+        :param Camera_FieldofView: [description], defaults to 60
+        :type Camera_FieldofView: int, optional
+        :param CameraRadius: [description], defaults to None
+        :type CameraRadius: [type], optional
+        :param CameraTheta: [description], defaults to 90
+        :type CameraTheta: int, optional
+        :param CameraPhi: [description], defaults to 0
+        :type CameraPhi: int, optional
+        :param CameraVerticalOffset: [description], defaults to 0
+        :type CameraVerticalOffset: int, optional
+        :param totalPointLights: [description], defaults to 1
+        :type totalPointLights: int, optional
+        :param same_PointLightsColor: [description], defaults to True
+        :type same_PointLightsColor: bool, optional
+        :param PointLightsColor_r: [description], defaults to 1
+        :type PointLightsColor_r: int, optional
+        :param PointLightsColor_g: [description], defaults to 1
+        :type PointLightsColor_g: int, optional
+        :param PointLightsColor_b: [description], defaults to 1
+        :type PointLightsColor_b: int, optional
+        :param PointLightsColor_a: [description], defaults to 1
+        :type PointLightsColor_a: int, optional
+        :param PointLightsRadius: [description], defaults to [7]
+        :type PointLightsRadius: list, optional
+        :param PointLightsTheta: [description], defaults to [20]
+        :type PointLightsTheta: list, optional
+        :param PointLightsPhi: [description], defaults to [0]
+        :type PointLightsPhi: list, optional
+        :param PointLightsIntensity: [description], defaults to [1]
+        :type PointLightsIntensity: list, optional
+        :param PointLightsRange: [description], defaults to [10]
+        :type PointLightsRange: list, optional
+        :param totalSpotLights: [description], defaults to 1
+        :type totalSpotLights: int, optional
+        :param same_SpotLightsColor: [description], defaults to True
+        :type same_SpotLightsColor: bool, optional
+        :param SpotLightsColor_r: [description], defaults to 1
+        :type SpotLightsColor_r: int, optional
+        :param SpotLightsColor_g: [description], defaults to 1
+        :type SpotLightsColor_g: int, optional
+        :param SpotLightsColor_b: [description], defaults to 1
+        :type SpotLightsColor_b: int, optional
+        :param SpotLightsColor_a: [description], defaults to 1
+        :type SpotLightsColor_a: int, optional
+        :param SpotLightsRadius: [description], defaults to [10]
+        :type SpotLightsRadius: list, optional
+        :param SpotLightsTheta: [description], defaults to [0]
+        :type SpotLightsTheta: list, optional
+        :param SpotLightsPhi: [description], defaults to [0]
+        :type SpotLightsPhi: list, optional
+        :param SpotLightsIntensity: [description], defaults to [1]
+        :type SpotLightsIntensity: list, optional
+        :param SpotLightsRange: [description], defaults to [10]
+        :type SpotLightsRange: list, optional
+        :param SpotAngle: [description], defaults to [30]
+        :type SpotAngle: list, optional
+        :param DirectionalLightTheta: [description], defaults to 30
+        :type DirectionalLightTheta: int, optional
+        :param DirectionalLightIntensity: [description], defaults to 0.8
+        :type DirectionalLightIntensity: float, optional
+        :return: Corresponding string fromatted for Unity. Can be used in :meth:`~client.client_communicator_to_unity.recive_image`.
+        :rtype: `string`
+        """        
         
         # Create a Dictionary with all the given information which can be read by the Unity script
         data = {}

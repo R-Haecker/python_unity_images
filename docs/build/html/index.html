@@ -41,12 +41,12 @@
 <dt id="client.client_communicator_to_unity.__init__">
 <code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param">use_unity_build=True</em>, <em class="sig-param">log_level=20</em><span class="sig-paren">)</span><a class="headerlink" href="#client.client_communicator_to_unity.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Creates a socket and a logger for the console and saves a log file at: <code class="docutils literal notranslate"><span class="pre">log/python_client.log</span></code>.
-Starts Unity if <code class="docutils literal notranslate"><span class="pre">use_unity_build</span> <span class="pre">==</span> <span class="pre">True</span></code> and waits until unity is fully started to then call the function <code class="docutils literal notranslate"><span class="pre">connect_to_server()</span></code>.</p>
+Starts Unity if <code class="docutils literal notranslate"><span class="pre">use_unity_build</span> <span class="pre">==</span> <span class="pre">True</span></code> and waits until Unity is fully started to then call the function <code class="docutils literal notranslate"><span class="pre">connect_to_server()</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>use_unity_build</strong> (<em>bool</em><em>, </em><em>optional</em>) -- <p>defaults to <code class="docutils literal notranslate"><span class="pre">True</span></code>,</p>
-<p>If this is set true the unity build will start. Otherwise you should already set the unity editor to play.,</p>
+<p>If this is set true the Unity build will start. Otherwise you should already set the Unity editor to play.,</p>
 </p></li>
 <li><p><strong>log_level</strong> (<em>int</em>, optional) -- <p>defaults to <code class="docutils literal notranslate"><span class="pre">logging.INFO</span></code>,</p>
 <p>This variable sets the logging level of the console handler for the class which means how much information is displayed to your console.
@@ -55,7 +55,7 @@ For debugging set it to: logging.DEBUG</p>
 </ul>
 </dd>
 <dt class="field-even">Raises</dt>
-<dd class="field-even"><p><strong>e</strong> -- [description]</p>
+<dd class="field-even"><p><strong>IOError</strong> -- Raises IOError if Unity build can not be found.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -63,37 +63,127 @@ For debugging set it to: logging.DEBUG</p>
 <dl class="method">
 <dt id="client.client_communicator_to_unity.connect_to_server">
 <code class="sig-name descname">connect_to_server</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#client.client_communicator_to_unity.connect_to_server" title="Permalink to this definition">¶</a></dt>
-<dd><p>Establish socket connection to Unity server</p>
+<dd><p>Establish tcp socket connection to Unity server.</p>
+<p>Load client tcp config from <code class="docutils literal notranslate"><span class="pre">data/python/client_tcp_config.json</span></code>.</p>
+<p>Try to connect to the Unity server.</p>
+<p>If connection is established save the tcp config to <code class="docutils literal notranslate"><span class="pre">data/python/client_tcp_config.json</span></code>.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="client.client_communicator_to_unity.exit">
 <code class="sig-name descname">exit</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#client.client_communicator_to_unity.exit" title="Permalink to this definition">¶</a></dt>
-<dd><p>Send end request to Unity, close TCP connection and application</p>
+<dd><p>Close tcp connection and send end request to Unity which quits the build application.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="client.client_communicator_to_unity.receive_data_as_bytes">
 <code class="sig-name descname">receive_data_as_bytes</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#client.client_communicator_to_unity.receive_data_as_bytes" title="Permalink to this definition">¶</a></dt>
 <dd><p>Receive image data from Unity trough socket. Ends by timeout, returns bytearray</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>From Unity recived bytearray.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">bytearray</span></code></p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="client.client_communicator_to_unity.recive_image">
 <code class="sig-name descname">recive_image</code><span class="sig-paren">(</span><em class="sig-param">json_string</em><span class="sig-paren">)</span><a class="headerlink" href="#client.client_communicator_to_unity.recive_image" title="Permalink to this definition">¶</a></dt>
-<dd><p>Send json_string to Unity server and returns image in PngImageFile-array</p>
+<dd><p>Send string to Unity server and recive corresponding image.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>json_string</strong> (<em>string</em>) -- This <code class="docutils literal notranslate"><span class="pre">string</span></code> has to be comprehensible for Unity which are strings returned by <a class="reference internal" href="#client.client_communicator_to_unity.write_json_crane" title="client.client_communicator_to_unity.write_json_crane"><code class="xref py py-meth docutils literal notranslate"><span class="pre">write_json_crane()</span></code></a></p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Image corresponding to the input string.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><cite>PngImageFile-array</cite></p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="client.client_communicator_to_unity.send_to_unity">
 <code class="sig-name descname">send_to_unity</code><span class="sig-paren">(</span><em class="sig-param">json_string</em>, <em class="sig-param">exit=False</em><span class="sig-paren">)</span><a class="headerlink" href="#client.client_communicator_to_unity.send_to_unity" title="Permalink to this definition">¶</a></dt>
-<dd><p>Send Data to Unity server</p>
+<dd><p>Send data to Unity server.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>json_string</strong> (<em>string</em>) -- This string will be sent to Unity. Has to be readable by Unity.</p></li>
+<li><p><strong>exit</strong> (<em>bool</em><em>, </em><em>optional</em>) -- <p>defaults to <code class="docutils literal notranslate"><span class="pre">False</span></code>,</p>
+<p>If this is True the Unity build will close.</p>
+</p></li>
+</ul>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="client.client_communicator_to_unity.write_json_crane">
 <code class="sig-name descname">write_json_crane</code><span class="sig-paren">(</span><em class="sig-param">totalSegments=3, same_scale=True, scale=2, same_theta=True, theta=40, phi=0, totalArms_Segment=None, same_material=True, metallic=0.5, smoothness=0.5, r=1, g=1, b=1, a=1, CameraRes_width=256, CameraRes_height=256, Camera_FieldofView=60, CameraRadius=None, CameraTheta=90, CameraPhi=0, CameraVerticalOffset=0, totalPointLights=1, same_PointLightsColor=True, PointLightsColor_r=1, PointLightsColor_g=1, PointLightsColor_b=1, PointLightsColor_a=1, PointLightsRadius=[7], PointLightsTheta=[20], PointLightsPhi=[0], PointLightsIntensity=[1], PointLightsRange=[10], totalSpotLights=1, same_SpotLightsColor=True, SpotLightsColor_r=1, SpotLightsColor_g=1, SpotLightsColor_b=1, SpotLightsColor_a=1, SpotLightsRadius=[10], SpotLightsTheta=[0], SpotLightsPhi=[0], SpotLightsIntensity=[1], SpotLightsRange=[10], SpotAngle=[30], DirectionalLightTheta=30, DirectionalLightIntensity=0.8</em><span class="sig-paren">)</span><a class="headerlink" href="#client.client_communicator_to_unity.write_json_crane" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns json data according to input parameter which can be interpreted by the Unity server</p>
+<dd><p>Returns string according to input parameter for <a class="reference internal" href="#client.client_communicator_to_unity.recive_image" title="client.client_communicator_to_unity.recive_image"><code class="xref py py-meth docutils literal notranslate"><span class="pre">recive_image()</span></code></a> which can be interpreted by the Unity server.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>totalSegments</strong> (<em>int</em><em>, </em><em>optional</em>) -- [description], defaults to 3</p></li>
+<li><p><strong>same_scale</strong> (<em>bool</em><em>, </em><em>optional</em>) -- [description], defaults to True</p></li>
+<li><p><strong>scale</strong> (<em>int</em><em>, </em><em>optional</em>) -- [description], defaults to 2</p></li>
+<li><p><strong>same_theta</strong> (<em>bool</em><em>, </em><em>optional</em>) -- [description], defaults to True</p></li>
+<li><p><strong>theta</strong> (<em>int</em><em>, </em><em>optional</em>) -- [description], defaults to 40</p></li>
+<li><p><strong>phi</strong> (<em>int</em><em>, </em><em>optional</em>) -- [description], defaults to 0</p></li>
+<li><p><strong>totalArms_Segment</strong> (<em>[</em><em>type</em><em>]</em><em>, </em><em>optional</em>) -- [description], defaults to None</p></li>
+<li><p><strong>same_material</strong> (<em>bool</em><em>, </em><em>optional</em>) -- [description], defaults to True</p></li>
+<li><p><strong>metallic</strong> (<em>float</em><em>, </em><em>optional</em>) -- [description], defaults to 0.5</p></li>
+<li><p><strong>smoothness</strong> (<em>float</em><em>, </em><em>optional</em>) -- [description], defaults to 0.5</p></li>
+<li><p><strong>r</strong> (<em>int</em><em>, </em><em>optional</em>) -- [description], defaults to 1</p></li>
+<li><p><strong>g</strong> (<em>int</em><em>, </em><em>optional</em>) -- [description], defaults to 1</p></li>
+<li><p><strong>b</strong> (<em>int</em><em>, </em><em>optional</em>) -- [description], defaults to 1</p></li>
+<li><p><strong>a</strong> (<em>int</em><em>, </em><em>optional</em>) -- [description], defaults to 1</p></li>
+<li><p><strong>CameraRes_width</strong> (<em>int</em><em>, </em><em>optional</em>) -- [description], defaults to 256</p></li>
+<li><p><strong>CameraRes_height</strong> (<em>int</em><em>, </em><em>optional</em>) -- [description], defaults to 256</p></li>
+<li><p><strong>Camera_FieldofView</strong> (<em>int</em><em>, </em><em>optional</em>) -- [description], defaults to 60</p></li>
+<li><p><strong>CameraRadius</strong> (<em>[</em><em>type</em><em>]</em><em>, </em><em>optional</em>) -- [description], defaults to None</p></li>
+<li><p><strong>CameraTheta</strong> (<em>int</em><em>, </em><em>optional</em>) -- [description], defaults to 90</p></li>
+<li><p><strong>CameraPhi</strong> (<em>int</em><em>, </em><em>optional</em>) -- [description], defaults to 0</p></li>
+<li><p><strong>CameraVerticalOffset</strong> (<em>int</em><em>, </em><em>optional</em>) -- [description], defaults to 0</p></li>
+<li><p><strong>totalPointLights</strong> (<em>int</em><em>, </em><em>optional</em>) -- [description], defaults to 1</p></li>
+<li><p><strong>same_PointLightsColor</strong> (<em>bool</em><em>, </em><em>optional</em>) -- [description], defaults to True</p></li>
+<li><p><strong>PointLightsColor_r</strong> (<em>int</em><em>, </em><em>optional</em>) -- [description], defaults to 1</p></li>
+<li><p><strong>PointLightsColor_g</strong> (<em>int</em><em>, </em><em>optional</em>) -- [description], defaults to 1</p></li>
+<li><p><strong>PointLightsColor_b</strong> (<em>int</em><em>, </em><em>optional</em>) -- [description], defaults to 1</p></li>
+<li><p><strong>PointLightsColor_a</strong> (<em>int</em><em>, </em><em>optional</em>) -- [description], defaults to 1</p></li>
+<li><p><strong>PointLightsRadius</strong> (<em>list</em><em>, </em><em>optional</em>) -- [description], defaults to [7]</p></li>
+<li><p><strong>PointLightsTheta</strong> (<em>list</em><em>, </em><em>optional</em>) -- [description], defaults to [20]</p></li>
+<li><p><strong>PointLightsPhi</strong> (<em>list</em><em>, </em><em>optional</em>) -- [description], defaults to [0]</p></li>
+<li><p><strong>PointLightsIntensity</strong> (<em>list</em><em>, </em><em>optional</em>) -- [description], defaults to [1]</p></li>
+<li><p><strong>PointLightsRange</strong> (<em>list</em><em>, </em><em>optional</em>) -- [description], defaults to [10]</p></li>
+<li><p><strong>totalSpotLights</strong> (<em>int</em><em>, </em><em>optional</em>) -- [description], defaults to 1</p></li>
+<li><p><strong>same_SpotLightsColor</strong> (<em>bool</em><em>, </em><em>optional</em>) -- [description], defaults to True</p></li>
+<li><p><strong>SpotLightsColor_r</strong> (<em>int</em><em>, </em><em>optional</em>) -- [description], defaults to 1</p></li>
+<li><p><strong>SpotLightsColor_g</strong> (<em>int</em><em>, </em><em>optional</em>) -- [description], defaults to 1</p></li>
+<li><p><strong>SpotLightsColor_b</strong> (<em>int</em><em>, </em><em>optional</em>) -- [description], defaults to 1</p></li>
+<li><p><strong>SpotLightsColor_a</strong> (<em>int</em><em>, </em><em>optional</em>) -- [description], defaults to 1</p></li>
+<li><p><strong>SpotLightsRadius</strong> (<em>list</em><em>, </em><em>optional</em>) -- [description], defaults to [10]</p></li>
+<li><p><strong>SpotLightsTheta</strong> (<em>list</em><em>, </em><em>optional</em>) -- [description], defaults to [0]</p></li>
+<li><p><strong>SpotLightsPhi</strong> (<em>list</em><em>, </em><em>optional</em>) -- [description], defaults to [0]</p></li>
+<li><p><strong>SpotLightsIntensity</strong> (<em>list</em><em>, </em><em>optional</em>) -- [description], defaults to [1]</p></li>
+<li><p><strong>SpotLightsRange</strong> (<em>list</em><em>, </em><em>optional</em>) -- [description], defaults to [10]</p></li>
+<li><p><strong>SpotAngle</strong> (<em>list</em><em>, </em><em>optional</em>) -- [description], defaults to [30]</p></li>
+<li><p><strong>DirectionalLightTheta</strong> (<em>int</em><em>, </em><em>optional</em>) -- [description], defaults to 30</p></li>
+<li><p><strong>DirectionalLightIntensity</strong> (<em>float</em><em>, </em><em>optional</em>) -- [description], defaults to 0.8</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>[description]</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>[type]</p>
+</dd>
+</dl>
 </dd></dl>
 
 </dd></dl>
