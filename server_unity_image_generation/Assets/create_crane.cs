@@ -27,16 +27,16 @@ public class create_crane : MonoBehaviour
     {
         return new Vector3(vec.x*Mathf.Cos(phi)-vec.y*Mathf.Sin(phi),vec.x*Mathf.Sin(phi)+vec.y*Mathf.Cos(phi),vec.z);
     }
-    int getTotalAmountofSegments(int[] totalArmsSegment)
+    int getTotalAmountofCuboids(int[] total_branches)
     {
         int multi=1;
-        int sum = jsonCrane.totalSegments;
-        for (int i=0;i<jsonCrane.totalSegments-1;i++)
+        int sum = jsonCrane.total_cuboids;
+        for (int i=0;i<jsonCrane.total_cuboids-1;i++)
         {
-            if(totalArmsSegment[i]>1)
+            if(total_branches[i]>1)
             {
-                sum = sum + (totalArmsSegment[i]*multi-multi)*(jsonCrane.totalSegments-i-1);
-                multi = multi *totalArmsSegment[i];
+                sum = sum + (total_branches[i]*multi-multi)*(jsonCrane.total_cuboids-i-1);
+                multi = multi *total_branches[i];
             }
         }
         return sum;
@@ -75,15 +75,15 @@ public class create_crane : MonoBehaviour
         //load json data from TCP_server script   
         jsonCrane = TCP_server_object.GetComponent<TCP_server>().jsonCrane_here;
         //create enough cubes and hinges
-        cubes = new GameObject[getTotalAmountofSegments(jsonCrane.totalArmsSegment)];
-        hinges = new Vector3[getTotalAmountofSegments(jsonCrane.totalArmsSegment)];
+        cubes = new GameObject[getTotalAmountofCuboids(jsonCrane.total_branches)];
+        hinges = new Vector3[getTotalAmountofCuboids(jsonCrane.total_branches)];
         Jcamera = new JsonCamera();
         PointLights = new SphericalGameObject[jsonCrane.totalPointLights];
         SpotLights = new SphericalGameObject[jsonCrane.totalSpotLights];
         string jsondata = JsonUtility.ToJson(jsonCrane);
         Debug.Log("CreateCrane in Starter; jsondata: " + jsondata);
-        UnityEngine.Assertions.Assert.IsTrue(jsonCrane.totalSegments>0, "The variable totalSegments from python has to be bigger than zero. totalSegments: "+ jsonCrane.totalSegments.ToString());
-        if (jsonCrane.totalSegments==0)
+        UnityEngine.Assertions.Assert.IsTrue(jsonCrane.total_cuboids>0, "The variable total_cuboids from python has to be bigger than zero. total_cuboids: "+ jsonCrane.total_cuboids.ToString());
+        if (jsonCrane.total_cuboids==0)
         {
             return;
         }
@@ -140,44 +140,44 @@ public class create_crane : MonoBehaviour
             SpotLights[i].Update();    
         }
         //create Cube-GameObjects, names ans set scale of cubes
-        for (int i=0; i<getTotalAmountofSegments(jsonCrane.totalArmsSegment); i++)
+        for (int i=0; i<getTotalAmountofCuboids(jsonCrane.total_branches); i++)
         {
             Vector3 hinge = new Vector3(0,0,0);
             GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
             cube.name = string.Format("Cube_{0}",i);
-            if(i<jsonCrane.totalSegments)
+            if(i<jsonCrane.total_cuboids)
             {
-                cube.transform.localScale = new Vector3(1,jsonCrane.segments[i].scale,1);
+                cube.transform.localScale = new Vector3(1,jsonCrane.cuboids[i].scale,1);
             }
             cubes[i] = cube;
             hinges[i] = hinge;
         }
         //adjust Material color
-        for (int i = 0; i<jsonCrane.totalSegments; i++)
+        for (int i = 0; i<jsonCrane.total_cuboids; i++)
         {
             Shader shader = Shader.Find("Custom/standard_shader");
             cubes[i].GetComponent<Renderer>().material.shader = shader;
-            cubes[i].GetComponent<Renderer>().material.color = jsonCrane.segments[i%jsonCrane.totalSegments].material.color;
-            cubes[i].GetComponent<Renderer>().material.SetFloat("_Metallic", jsonCrane.segments[i%jsonCrane.totalSegments].material.metallic);
-            cubes[i].GetComponent<Renderer>().material.SetFloat("_Glossiness", jsonCrane.segments[i%jsonCrane.totalSegments].material.smoothness);
+            cubes[i].GetComponent<Renderer>().material.color = jsonCrane.cuboids[i%jsonCrane.total_cuboids].material.color;
+            cubes[i].GetComponent<Renderer>().material.SetFloat("_Metallic", jsonCrane.cuboids[i%jsonCrane.total_cuboids].material.metallic);
+            cubes[i].GetComponent<Renderer>().material.SetFloat("_Glossiness", jsonCrane.cuboids[i%jsonCrane.total_cuboids].material.smoothness);
         }
 
         float max_x = 0;
         float max_y = 0;
         float min_y = 0;
 
-        theta_rad_sumed = new float [jsonCrane.totalSegments];
-        theta_deg_sumed = new float [jsonCrane.totalSegments];    
-        theta_rad_sumed[0] = jsonCrane.segments[0].theta_deg/180 * Mathf.PI;    
-        theta_deg_sumed[0] = jsonCrane.segments[0].theta_deg;
+        theta_rad_sumed = new float [jsonCrane.total_cuboids];
+        theta_deg_sumed = new float [jsonCrane.total_cuboids];    
+        theta_rad_sumed[0] = jsonCrane.cuboids[0].theta_deg/180 * Mathf.PI;    
+        theta_deg_sumed[0] = jsonCrane.cuboids[0].theta_deg;
         //put the first hinge and cube on the right position
         cubes[0].transform.position = new Vector3(0,0,0);        
         hinges[0] = new Vector3(cubes[0].transform.localScale.x/2,cubes[0].transform.localScale.y/2,0);
         //adjust relative positions of hinges and cubes
-        for (int i = 1; i<jsonCrane.totalSegments; i++)
+        for (int i = 1; i<jsonCrane.total_cuboids; i++)
         {
-            theta_rad_sumed[i] = theta_rad_sumed[i-1] + jsonCrane.segments[i].theta_deg/180 * Mathf.PI;
-            theta_deg_sumed[i] = theta_deg_sumed[i-1] + jsonCrane.segments[i].theta_deg;   
+            theta_rad_sumed[i] = theta_rad_sumed[i-1] + jsonCrane.cuboids[i].theta_deg/180 * Mathf.PI;
+            theta_deg_sumed[i] = theta_deg_sumed[i-1] + jsonCrane.cuboids[i].theta_deg;   
             Vector3 del_pos = rotVec_xy(new Vector3(-cubes[i].transform.localScale.x/2, cubes[i].transform.localScale.y/2, 0),-theta_rad_sumed[i]);
             Vector3 del_hinge = rotVec_xy(new Vector3(0,cubes[i].transform.localScale.y,0), -theta_rad_sumed[i]);
             hinges[i] = hinges[i-1] + del_hinge;
@@ -188,13 +188,13 @@ public class create_crane : MonoBehaviour
         cubes[0].transform.rotation = Quaternion.Euler(0,-jsonCrane.phi,0);
 
         Vector3 rotAxis = new Vector3();
-        int counter = jsonCrane.totalSegments;
-        for (int i = jsonCrane.totalSegments-2; i>=0;i--)
+        int counter = jsonCrane.total_cuboids;
+        for (int i = jsonCrane.total_cuboids-2; i>=0;i--)
         {
-            if(jsonCrane.totalArmsSegment[i]>1)
+            if(jsonCrane.total_branches[i]>1)
             {
                 int counter_now = counter;
-                for(int l=1; l<jsonCrane.totalArmsSegment[i];l++)
+                for(int l=1; l<jsonCrane.total_branches[i];l++)
                 {
                     for(int j = i+1; j<counter_now;j++)
                     {   
@@ -205,7 +205,7 @@ public class create_crane : MonoBehaviour
 
                         rotAxis = rotVec_xz(rotVec_xy(new Vector3(0,1,0),-theta_rad_sumed[i]),jsonCrane.phi/180 *Mathf.PI);
                         rotAxis = rotAxis.normalized;
-                        cubes[counter].transform.RotateAround(cubes[i].transform.position,rotAxis,l*360/jsonCrane.totalArmsSegment[i]);    
+                        cubes[counter].transform.RotateAround(cubes[i].transform.position,rotAxis,l*360/jsonCrane.total_branches[i]);    
                         counter = counter +1;
                     }    
                 }
@@ -327,7 +327,7 @@ public class create_crane : MonoBehaviour
                     Debug.Log((max_y+min_y)/2);
                     Jcamera.y_offset = (max_y+min_y)/2;
                     Debug.Log("y is choosen");
-                    Jcamera.radius = ((Mathf.Abs(max_y)+Mathf.Abs(min_y))/2 + jsonCrane.segments[jsonCrane.totalSegments-1].scale)/Mathf.Sin(Mathf.PI*jsonCrane.camera.FOV/360);
+                    Jcamera.radius = ((Mathf.Abs(max_y)+Mathf.Abs(min_y))/2 + jsonCrane.cuboids[jsonCrane.total_cuboids-1].scale)/Mathf.Sin(Mathf.PI*jsonCrane.camera.FOV/360);
                 }    
                 else
                 {

@@ -10,10 +10,24 @@ import math
 import logging
 import copy
 import time
+import os
 
-class DataSetCrane(DatasetMixin):
+class dataset_cuboids(DatasetMixin):
     def __init__(self, config = None, use_unity_build = True, combine_logs = True, debug_log = False):
-        # Set up log level
+        """[summary]
+        
+        :param DatasetMixin: [description]
+        :type DatasetMixin: [type]
+        :param config: [description], defaults to None
+        :type config: [type], optional
+        :param use_unity_build: [description], defaults to True
+        :type use_unity_build: bool, optional
+        :param combine_logs: [description], defaults to True
+        :type combine_logs: bool, optional
+        :param debug_log: [description], defaults to False
+        :type debug_log: bool, optional
+        """        
+        #  Set up log level
         if debug_log:
             log_level = logging.DEBUG
         else:
@@ -21,8 +35,9 @@ class DataSetCrane(DatasetMixin):
         # Set up a client and start unity 
         self.uc = client.client_communicator_to_unity(use_unity_build=use_unity_build, log_level = log_level)
         
+        self.file_directory =  os.path.dirname(os.path.realpath(__file__)) #os.path.split(os.path.abspath(__file__)) 
         # Use already existing logger from pthon for dataset as well
-        self.log_path = "log/python_dataset_and_client.log"
+        self.log_path = self.file_directory + "/log/python_dataset_and_client.log"
         self.logger = self.uc.logger
         # Create file handler
         self.fh = logging.FileHandler(self.log_path)
@@ -47,16 +62,106 @@ class DataSetCrane(DatasetMixin):
             self.config = config
         self.logger.debug("Dataset initialised.\n")        
 
-    def writeConfig(self,same_scale=None, scale=[0.5,4], totalSegments=[2,12], phi=[0,360], enable_many_arms=[1,3],same_theta=None, theta=None, 
+    def writeConfig(self,same_scale=None, scale=[0.5,4], total_cuboids=[2,12], phi=[0,360], enable_many_arms=[1,3],same_theta=None, theta=None, 
     same_material=None, r=[0,1], g=[0,1], b=[0,1], a=[0.5,1], metallic=[0,1], smoothness=[0,1], CameraRadius = 10.0, CameraTheta = [30,100], CameraPhi = [0,360], CameraVerticalOffset = None,
     totalPointLights=[5,12], PointLightsRadius=[5,20], PointLightsPhi=[0,360], PointLightsTheta=[0,90], PointLightsIntensity=[7,17], PointLightsRange=[5,25], samePointLightColor=None, PointLightsColor_r=[0,1], PointLightsColor_g=[0,1], PointLightsColor_b=[0,1], PointLightsColor_a=[0.5,1],
     totalSpotLights=None, SpotLightsRadius=[5,20], SpotLightsPhi=[0,360], SpotLightsTheta=[0,90], SpotLightsIntensity=[5,15], SpotLightsRange=[5,25], SpotLightsAngle=[5,120], sameSpotLightColor=None, SpotLightsColor_r=[0,1], SpotLightsColor_g=[0,1], SpotLightsColor_b=[0,1], SpotLightsColor_a=[0.5,1],
     DirectionalLightTheta = [0,90], DirectionalLightIntensity = [0.1,1.8]):
-        ### Retruns a config as dictionary which determines the interval for all random parameters created in the function create_random_parameters  
+        """Retruns a config as dictionary which determines the interval for all random parameters created in the function create_random_parameters.
+        
+        :param same_scale: [description], defaults to None
+        :type same_scale: [type], optional
+        :param scale: [description], defaults to [0.5,4]
+        :type scale: list, optional
+        :param total_cuboids: [description], defaults to [2,12]
+        :type total_cuboids: list, optional
+        :param phi: [description], defaults to [0,360]
+        :type phi: list, optional
+        :param enable_many_arms: [description], defaults to [1,3]
+        :type enable_many_arms: list, optional
+        :param same_theta: [description], defaults to None
+        :type same_theta: [type], optional
+        :param theta: [description], defaults to None
+        :type theta: [type], optional
+        :param same_material: [description], defaults to None
+        :type same_material: [type], optional
+        :param r: [description], defaults to [0,1]
+        :type r: list, optional
+        :param g: [description], defaults to [0,1]
+        :type g: list, optional
+        :param b: [description], defaults to [0,1]
+        :type b: list, optional
+        :param a: [description], defaults to [0.5,1]
+        :type a: list, optional
+        :param metallic: [description], defaults to [0,1]
+        :type metallic: list, optional
+        :param smoothness: [description], defaults to [0,1]
+        :type smoothness: list, optional
+        :param CameraRadius: [description], defaults to 10.0
+        :type CameraRadius: float, optional
+        :param CameraTheta: [description], defaults to [30,100]
+        :type CameraTheta: list, optional
+        :param CameraPhi: [description], defaults to [0,360]
+        :type CameraPhi: list, optional
+        :param CameraVerticalOffset: [description], defaults to None
+        :type CameraVerticalOffset: [type], optional
+        :param totalPointLights: [description], defaults to [5,12]
+        :type totalPointLights: list, optional
+        :param PointLightsRadius: [description], defaults to [5,20]
+        :type PointLightsRadius: list, optional
+        :param PointLightsPhi: [description], defaults to [0,360]
+        :type PointLightsPhi: list, optional
+        :param PointLightsTheta: [description], defaults to [0,90]
+        :type PointLightsTheta: list, optional
+        :param PointLightsIntensity: [description], defaults to [7,17]
+        :type PointLightsIntensity: list, optional
+        :param PointLightsRange: [description], defaults to [5,25]
+        :type PointLightsRange: list, optional
+        :param samePointLightColor: [description], defaults to None
+        :type samePointLightColor: [type], optional
+        :param PointLightsColor_r: [description], defaults to [0,1]
+        :type PointLightsColor_r: list, optional
+        :param PointLightsColor_g: [description], defaults to [0,1]
+        :type PointLightsColor_g: list, optional
+        :param PointLightsColor_b: [description], defaults to [0,1]
+        :type PointLightsColor_b: list, optional
+        :param PointLightsColor_a: [description], defaults to [0.5,1]
+        :type PointLightsColor_a: list, optional
+        :param totalSpotLights: [description], defaults to None
+        :type totalSpotLights: [type], optional
+        :param SpotLightsRadius: [description], defaults to [5,20]
+        :type SpotLightsRadius: list, optional
+        :param SpotLightsPhi: [description], defaults to [0,360]
+        :type SpotLightsPhi: list, optional
+        :param SpotLightsTheta: [description], defaults to [0,90]
+        :type SpotLightsTheta: list, optional
+        :param SpotLightsIntensity: [description], defaults to [5,15]
+        :type SpotLightsIntensity: list, optional
+        :param SpotLightsRange: [description], defaults to [5,25]
+        :type SpotLightsRange: list, optional
+        :param SpotLightsAngle: [description], defaults to [5,120]
+        :type SpotLightsAngle: list, optional
+        :param sameSpotLightColor: [description], defaults to None
+        :type sameSpotLightColor: [type], optional
+        :param SpotLightsColor_r: [description], defaults to [0,1]
+        :type SpotLightsColor_r: list, optional
+        :param SpotLightsColor_g: [description], defaults to [0,1]
+        :type SpotLightsColor_g: list, optional
+        :param SpotLightsColor_b: [description], defaults to [0,1]
+        :type SpotLightsColor_b: list, optional
+        :param SpotLightsColor_a: [description], defaults to [0.5,1]
+        :type SpotLightsColor_a: list, optional
+        :param DirectionalLightTheta: [description], defaults to [0,90]
+        :type DirectionalLightTheta: list, optional
+        :param DirectionalLightIntensity: [description], defaults to [0.1,1.8]
+        :type DirectionalLightIntensity: list, optional
+        :return: [description]
+        :rtype: [type]
+        """        
         config = {}
         # Create intervals for general properties
-        assert len(totalSegments) == 2, "totalSegments[0] is minimal limit and totalSegments[1] is maximal limit for random generation of totalSegments"
-        config["totalSegments"]=totalSegments
+        assert len(total_cuboids) == 2, "total_cuboids[0] is minimal limit and total_cuboids[1] is maximal limit for random generation of total_cuboids"
+        config["total_cuboids"]=total_cuboids
         # Use the same_theta for every angle between two cubiods
         config["same_theta"]=same_theta
         if theta!=None:
@@ -72,7 +177,7 @@ class DataSetCrane(DatasetMixin):
         assert len(scale) == 2, "scale[0] is minimal limit and scale[1] is maximal limit for random generation of the scale of the cubiods."
         # Vertical Scale of the cubiods
         config["scale"]=scale    
-        # The upper limit for the arms is dicribing the three sigma variance of the guassion normal distribution for random generation of TotalArms_Segment
+        # The upper limit for the arms is dicribing the three sigma variance of the guassion normal distribution for random generation of total_branches
         if enable_many_arms!=None:
             assert len(enable_many_arms) == 2, "Has to be list of length 2 or type None; enable_many_arms defines boundaries for how many arms could be created in getRandomJsonData. This means that there is a chance that the crane splits up in the given range. If it is None then there will be only one arm." 
             assert enable_many_arms[0] > 0, "enable_many_arms has to be 1 or greater to even create one Arm."
@@ -100,17 +205,17 @@ class DataSetCrane(DatasetMixin):
         if same_material!=None:
             assert type(same_material)==bool, "Has to be bool or None. same_material sets the bool of same_material in getRandomJsonData. If it is None bool is set randomly." 
         config["same_material"] = same_material
-        assert len(r) == 2, "r[0] is minimal limit and r[1] is maximal limit for random generation of the segmentscolor r (red)"
+        assert len(r) == 2, "r[0] is minimal limit and r[1] is maximal limit for random generation of the cuboidscolor r (red)"
         config["r"]=r
-        assert len(g) == 2, "g[0] is minimal limit and g[1] is maximal limit for random generation of the segmentscolor g"
+        assert len(g) == 2, "g[0] is minimal limit and g[1] is maximal limit for random generation of the cuboidscolor g"
         config["g"]=g
-        assert len(b) == 2, "b[0] is minimal limit and b[1] is maximal limit for random generation of the segmentscolor b"
+        assert len(b) == 2, "b[0] is minimal limit and b[1] is maximal limit for random generation of the cuboidscolor b"
         config["b"]=b
-        assert len(a) == 2, "a[0] is minimal limit and a[1] is maximal limit for random generation of the segmentscolor a (alpha/transparency)"
+        assert len(a) == 2, "a[0] is minimal limit and a[1] is maximal limit for random generation of the cuboidscolor a (alpha/transparency)"
         config["a"]=a
-        assert len(metallic) == 2, "metallic[0] is minimal limit and metallic[1] is maximal limit for random generation of the segmentsmaterial property metallic"
+        assert len(metallic) == 2, "metallic[0] is minimal limit and metallic[1] is maximal limit for random generation of the cuboidsmaterial property metallic"
         config["metallic"]=metallic
-        assert len(smoothness) == 2, "smoothness[0] is minimal limit and smoothness[1] is maximal limit for random generation of the segmentsmaterial property smoothness"
+        assert len(smoothness) == 2, "smoothness[0] is minimal limit and smoothness[1] is maximal limit for random generation of the cuboidsmaterial property smoothness"
         config["smoothness"]=smoothness
         if same_theta!=None:
             assert type(same_theta)==bool, "Has to be bool or none. same_theta sets the bool of same_theta in getRandomJsonData. If it is None bool is set randomly." 
@@ -185,8 +290,24 @@ class DataSetCrane(DatasetMixin):
             
         return config
         
+    def set_config(self,config):
+        """[summary]
+        
+        :param config: [description]
+        :type config: [type]
+        """        
+        self.config = config
+    
     def create_random_parameters(self , CameraRes_width= 520, CameraRes_height=520,):
-        ### Creates random input parameter depending on your config, the camera parameters are not random
+        """Creates random input parameter depending on your config, the camera parameters are not random
+        
+        :param CameraRes_width: [description], defaults to 520
+        :type CameraRes_width: int, optional
+        :param CameraRes_height: [description], defaults to 520
+        :type CameraRes_height: int, optional
+        :return: [description]
+        :rtype: [type]
+        """
         dictionary={}
 
         # not random set variables for the Camera
@@ -219,7 +340,7 @@ class DataSetCrane(DatasetMixin):
             dictionary["CameraVerticalOffset"] = np.random.uniform(self.config["CameraVerticalOffset"][0],self.config["CameraVerticalOffset"][1])
         
         # Create how many Cubiods are in one branch.
-        TotalSegments = np.random.randint(self.config["totalSegments"][0],self.config["totalSegments"][1])
+        total_cuboids = np.random.randint(self.config["total_cuboids"][0],self.config["total_cuboids"][1])
         # Create the angle and the intensity of the directional light
         if self.config["DirectionalLightIntensity"] == None:
             DirectionalLightIntensity = 0   
@@ -319,23 +440,23 @@ class DataSetCrane(DatasetMixin):
             # The Angle specifies the "spread" of the lightcone created by the Spotlight
             SpotLightsAngle=np.random.uniform(self.config["SpotLightsAngle"][0],self.config["SpotLightsAngle"][1],TotalSpotLights).tolist()
         
-        # Amount of branches (Arms) and at which cubiod to branch. The first element of the list TotalArms_Segments counts the amount of branches at the first cubiod and and so on...
-        # if TotalArms_Segment = [1,1,1,1,1] then there is only one "main" Branch and no splits  
-        TotalArms_Segment = []
+        # Amount of branches (Arms) and at which cubiod to branch. The first element of the list total_branchess counts the amount of branches at the first cubiod and and so on...
+        # if total_branches = [1,1,1,1,1] then there is only one "main" Branch and no splits  
+        total_branches = []
         if self.config["enable_many_arms"]==None:
-            TotalArms_Segment = None
+            total_branches = None
         else:
             if self.config["enable_many_arms"][0] < 1:
                 self.logger.info("config['enable_many_arms'][0] is bigger than 1. This means you create at every segment new arms. Change the dataset config if you do not want this.")
             # the upper limit for the arms is dicribing the three sigma variance of the guassion normal distribution
-            arms = np.random.normal(0,(self.config["enable_many_arms"][1] - self.config["enable_many_arms"][0])/3, TotalSegments-1)  
+            arms = np.random.normal(0,(self.config["enable_many_arms"][1] - self.config["enable_many_arms"][0])/3, total_cuboids-1)  
             arms = np.absolute(arms) + self.config["enable_many_arms"][0] 
-            for i in range(TotalSegments-1):
+            for i in range(total_cuboids-1):
                 if arms[i]<=1 :
-                    TotalArms_Segment.append(1)
+                    total_branches.append(1)
                 else:
-                    TotalArms_Segment.append(int(arms[i]))
-            self.logger.debug("TotalArms_Segment: "+str(TotalArms_Segment)) 
+                    total_branches.append(int(arms[i]))
+            self.logger.debug("total_branches: "+str(total_branches)) 
         # Decide if there should be only one theta angle for cubiods
         if(self.config["same_theta"]==None):
             Same_Theta = bool(np.random.randint(2))
@@ -345,12 +466,12 @@ class DataSetCrane(DatasetMixin):
         Theta = []
         if(Same_Theta):
             if self.config["theta"]==None:
-                Theta.append(np.random.uniform(0,360/TotalSegments))
+                Theta.append(np.random.uniform(0,360/total_cuboids))
         else:
             if self.config["theta"]==None:
-                Theta=np.random.uniform(0,360/TotalSegments,TotalSegments-1).tolist()
+                Theta=np.random.uniform(0,360/total_cuboids,total_cuboids-1).tolist()
             else:
-                Theta=np.random.uniform(self.config["theta"][0],self.config["theta"][1],TotalSegments-1).tolist()
+                Theta=np.random.uniform(self.config["theta"][0],self.config["theta"][1],total_cuboids-1).tolist()
         # Decide if all cubiods use the same Material
         if(self.config["same_material"]==None):
             Same_Material = bool(np.random.randint(2))
@@ -372,12 +493,12 @@ class DataSetCrane(DatasetMixin):
             Smoothness=np.random.uniform(self.config["smoothness"][0],self.config["smoothness"][1])
             
         else:
-            R=np.random.uniform(self.config["r"][0],self.config["r"][1],TotalSegments).tolist()
-            G=np.random.uniform(self.config["g"][0],self.config["g"][1],TotalSegments).tolist()
-            B=np.random.uniform(self.config["b"][0],self.config["b"][1],TotalSegments).tolist()
-            A=np.random.uniform(self.config["a"][0],self.config["a"][1],TotalSegments).tolist()
-            Metallic=np.random.uniform(self.config["metallic"][0],self.config["metallic"][1],TotalSegments).tolist()
-            Smoothness=np.random.uniform(self.config["smoothness"][0],self.config["smoothness"][1],TotalSegments).tolist()
+            R=np.random.uniform(self.config["r"][0],self.config["r"][1],total_cuboids).tolist()
+            G=np.random.uniform(self.config["g"][0],self.config["g"][1],total_cuboids).tolist()
+            B=np.random.uniform(self.config["b"][0],self.config["b"][1],total_cuboids).tolist()
+            A=np.random.uniform(self.config["a"][0],self.config["a"][1],total_cuboids).tolist()
+            Metallic=np.random.uniform(self.config["metallic"][0],self.config["metallic"][1],total_cuboids).tolist()
+            Smoothness=np.random.uniform(self.config["smoothness"][0],self.config["smoothness"][1],total_cuboids).tolist()
         # Decide if all cubiods should have the same vertical scale
         if(self.config["same_scale"]==None):
             Same_Scale = bool(np.random.randint(2))
@@ -387,15 +508,15 @@ class DataSetCrane(DatasetMixin):
         if(Same_Scale):
             Scale = np.random.uniform(self.config["scale"][0],self.config["scale"][1])
         else:
-            Scale = np.random.uniform(self.config["scale"][0],self.config["scale"][1],TotalSegments).tolist()
+            Scale = np.random.uniform(self.config["scale"][0],self.config["scale"][1],total_cuboids).tolist()
         # Create Phi the rotation of the crane
         Phi=np.random.uniform(self.config["phi"][0],self.config["phi"][1])
         
         # Add all parameters to a dictionary
-        dictionary["totalSegments"] = TotalSegments
+        dictionary["total_cuboids"] = total_cuboids
         dictionary["scale"] = Scale
         dictionary["same_scale"] = Same_Scale
-        dictionary["totalArms_Segment"] = TotalArms_Segment
+        dictionary["total_branches"] = total_branches
         dictionary["same_theta"] = Same_Theta
         dictionary["theta"] = Theta
         dictionary["phi"] = Phi
@@ -467,14 +588,28 @@ class DataSetCrane(DatasetMixin):
         return dictionary
         
     def create_json_string_from_parameters(self, dictionary):
-        ### Return a String depending on your input parameters wich can be interpreted afterwards by the Unity script 
-        return self.uc.write_json_crane(totalSegments=dictionary["totalSegments"], same_scale=dictionary["same_scale"], scale=dictionary["scale"], same_theta=dictionary["same_theta"], theta=dictionary["theta"], phi=dictionary["phi"], totalArms_Segment=dictionary["totalArms_Segment"], same_material=dictionary["same_material"], metallic=dictionary["metallic"], smoothness=dictionary["smoothness"], r=dictionary["r"], g=dictionary["g"], b=dictionary["b"], a=dictionary["a"], CameraRes_width=dictionary["CameraRes_width"], CameraRes_height=dictionary["CameraRes_height"], Camera_FieldofView=dictionary["Camera_FieldofView"], CameraRadius=dictionary["CameraRadius"], CameraTheta=dictionary["CameraTheta"], CameraPhi=dictionary["CameraPhi"], CameraVerticalOffset=dictionary["CameraVerticalOffset"], 
+        """Return a String depending on your input parameters wich can be interpreted afterwards by the Unity script.
+
+        :param dictionary: [description]
+        :type dictionary: [type]
+        :return: [description]
+        :rtype: [type]
+        """        
+        return self.uc.write_json_crane(total_cuboids=dictionary["total_cuboids"], same_scale=dictionary["same_scale"], scale=dictionary["scale"], same_theta=dictionary["same_theta"], theta=dictionary["theta"], phi=dictionary["phi"], total_branches=dictionary["total_branches"], same_material=dictionary["same_material"], metallic=dictionary["metallic"], smoothness=dictionary["smoothness"], r=dictionary["r"], g=dictionary["g"], b=dictionary["b"], a=dictionary["a"], CameraRes_width=dictionary["CameraRes_width"], CameraRes_height=dictionary["CameraRes_height"], Camera_FieldofView=dictionary["Camera_FieldofView"], CameraRadius=dictionary["CameraRadius"], CameraTheta=dictionary["CameraTheta"], CameraPhi=dictionary["CameraPhi"], CameraVerticalOffset=dictionary["CameraVerticalOffset"], 
             totalPointLights=dictionary["totalPointLights"], same_PointLightsColor=dictionary["same_PointLightsColor"], PointLightsColor_r=dictionary["PointLightsColor_r"], PointLightsColor_g=dictionary["PointLightsColor_g"], PointLightsColor_b=dictionary["PointLightsColor_b"], PointLightsColor_a=dictionary["PointLightsColor_a"], PointLightsRadius=dictionary["PointLightsRadius"], PointLightsTheta=dictionary["PointLightsTheta"], PointLightsPhi=dictionary["PointLightsPhi"], PointLightsIntensity=dictionary["PointLightsIntensity"], PointLightsRange=dictionary["PointLightsRange"], 
             totalSpotLights=dictionary["totalSpotLights"], same_SpotLightsColor=dictionary["same_SpotLightsColor"], SpotLightsColor_r=dictionary["SpotLightsColor_r"], SpotLightsColor_g=dictionary["SpotLightsColor_g"], SpotLightsColor_b=dictionary["SpotLightsColor_b"], SpotLightsColor_a=dictionary["SpotLightsColor_a"], SpotLightsRadius=dictionary["SpotLightsRadius"], SpotLightsTheta=dictionary["SpotLightsTheta"], SpotLightsPhi=dictionary["SpotLightsPhi"], SpotLightsIntensity=dictionary["SpotLightsIntensity"], SpotLightsRange=dictionary["SpotLightsRange"],SpotAngle=dictionary["SpotAngle"],
             DirectionalLightTheta=dictionary["DirectionalLightTheta"], DirectionalLightIntensity=dictionary["DirectionalLightIntensity"])
 
     def save(self, dictionary, save_para = True, save_image = False):
-        ### Save parameter data or an image of a dictionary in the data/parameters folder or the data/images folder.
+        """Save parameter data or an image of a dictionary in the data/parameters folder or the data/images folder.
+        
+        :param dictionary: [description]
+        :type dictionary: [type]
+        :param save_para: [description], defaults to True
+        :type save_para: bool, optional
+        :param save_image: [description], defaults to False
+        :type save_image: bool, optional
+        """        
         # Save parameters.
         if save_para:
             # Check if the parameters and the index is in the dictionary.
@@ -505,7 +640,15 @@ class DataSetCrane(DatasetMixin):
                 self.logger.error("Image could not be saved. No image data not found in dictionary.")
 
     def load_parameters(self,index = [-1], amount = 1):
-        ### Load and return a given aoumt of parameters. If index is not specified the index will be chooden randomly.  
+        """Load and return a given aoumt of parameters. If index is not specified the index will be chooden randomly.
+        
+        :param index: [description], defaults to [-1]
+        :type index: list, optional
+        :param amount: [description], defaults to 1
+        :type amount: int, optional
+        :return: [description]
+        :rtype: [type]
+        """        
         if index[0]==-1:
             index = np.random.randint(0,self.load_index(),amount)
         else:
@@ -530,7 +673,17 @@ class DataSetCrane(DatasetMixin):
             return parameter_list    
    
     def parameters_to_finished_data(self, parameters, save_para = True, save_image = False):
-        ### Return dictionary with all relevant data. Input parameters and get an corresponding image. 
+        """Return dictionary with all relevant data. Input parameters and get an corresponding image. 
+        
+        :param parameters: [description]
+        :type parameters: [type]
+        :param save_para: [description], defaults to True
+        :type save_para: bool, optional
+        :param save_image: [description], defaults to False
+        :type save_image: bool, optional
+        :return: [description]
+        :rtype: [type]
+        """        
         # Format the parameters to a jsonstring that can be sent and interpreted by Unity.
         jsonstring = self.create_json_string_from_parameters(parameters)
         # Recive an image depending on your parameters.
@@ -544,15 +697,35 @@ class DataSetCrane(DatasetMixin):
         return newDict  
 
     def get_example(self,index = None, save_para = True, save_image = False):
-        ### Returns a dictionary with all relevant data and the image. Create an exampel image from random parameters.
+        """Returns a dictionary with all relevant data and the image. Create an exampel image from random parameters.
+        
+        :param index: [description], defaults to None
+        :type index: [type], optional
+        :param save_para: [description], defaults to True
+        :type save_para: bool, optional
+        :param save_image: [description], defaults to False
+        :type save_image: bool, optional
+        :return: [description]
+        :rtype: [type]
+        """        
         # Create random parameters depending o your config.  
         random_parameters = self.create_random_parameters()
         # Get data with image in dictionary.
-        newDict = data.parameters_to_finished_data(random_parameters, save_para = save_para, save_image = save_image)
+        newDict = self.parameters_to_finished_data(random_parameters, save_para = save_para, save_image = save_image)
         return newDict
 
     def plot_images(self, dicts, images_in_one_row = 4, save_fig = True, show_index = True):
-        ### Plot and show all images contained in the list of dictionaries and label them with their corresponding index. 
+        """Plot and show all images contained in the list of dictionaries and label them with their corresponding index.
+        
+        :param dicts: [description]
+        :type dicts: [type]
+        :param images_in_one_row: [description], defaults to 4
+        :type images_in_one_row: int, optional
+        :param save_fig: [description], defaults to True
+        :type save_fig: bool, optional
+        :param show_index: [description], defaults to True
+        :type show_index: bool, optional
+        """         
         # How many images are there
         numb = len(dicts)
         if numb < images_in_one_row:
@@ -607,7 +780,15 @@ class DataSetCrane(DatasetMixin):
         plt.show()
 
     def change_app1_art2(self, para1, para2):
-        # Returns parameters in a dictionary which combine the apperence of para1 and articulation of para2 
+        """Returns parameters in a dictionary which combine the apperence of para1 and articulation of para2.
+        
+        :param para1: [description]
+        :type para1: [type]
+        :param para2: [description]
+        :type para2: [type]
+        :return: [description]
+        :rtype: [type]
+        """        
         # Deepcopy para1
         param1 = para1.copy()
         param2 = para2
@@ -619,45 +800,63 @@ class DataSetCrane(DatasetMixin):
             self.logger.debug("param1['same_material']: " + str(param1["same_material"]))
             param1["theta"]=param2["theta"]
             param1["scale"]=param2["scale"]
-            param1["totalSegments"] = param2["totalSegments"]
-            param1["totalArms_Segment"]=param2["totalArms_Segment"]
+            param1["total_cuboids"] = param2["total_cuboids"]
+            param1["total_branches"]=param2["total_branches"]
         else:
             self.logger.debug("param1['same_material']: " + str(param1["same_material"]))
             self.logger.debug("param1['theta']: " + str(param1["theta"]))
             self.logger.debug("param2['theta']: " + str(param2["theta"]))
-            if param1["totalSegments"] > param2["totalSegments"]:
-                # If same material is false and para1 has more cuboids than para2 we have to crop out all apperence data for the segments which can't be shown with the articulation from para2 
-                self.logger.debug('param1["totalSegments"] > param2["totalSegments"] == True')
-                param1["totalSegments"] = param2["totalSegments"]
-                param1["metallic"] = param1["metallic"][:param1["totalSegments"]]
-                param1["smoothness"] = param1["smoothness"][:param1["totalSegments"]]
-                param1["r"] = param1["r"][:param1["totalSegments"]]
-                param1["g"] = param1["g"][:param1["totalSegments"]]
-                param1["b"] = param1["b"][:param1["totalSegments"]]
-                param1["a"] = param1["a"][:param1["totalSegments"]]
-                param1["totalArms_Segment"]=param2["totalArms_Segment"]
+            if param1["total_cuboids"] > param2["total_cuboids"]:
+                # If same material is false and para1 has more cuboids than para2 we have to crop out all apperence data for the cuboids which can't be shown with the articulation from para2 
+                self.logger.debug('param1["total_cuboids"] > param2["total_cuboids"] == True')
+                param1["total_cuboids"] = param2["total_cuboids"]
+                param1["metallic"] = param1["metallic"][:param1["total_cuboids"]]
+                param1["smoothness"] = param1["smoothness"][:param1["total_cuboids"]]
+                param1["r"] = param1["r"][:param1["total_cuboids"]]
+                param1["g"] = param1["g"][:param1["total_cuboids"]]
+                param1["b"] = param1["b"][:param1["total_cuboids"]]
+                param1["a"] = param1["a"][:param1["total_cuboids"]]
+                param1["total_branches"]=param2["total_branches"]
                 param1["theta"]=param2["theta"]
                 param1["scale"]=param2["scale"]
             else:
                 # If para2 has more cuboids, we can not fully display the articulation of para2 beacause we don't have the apperence data for the cuboids at the top
-                # this means we can only show the articulation of para2 until the cubiod number: param1["totalSegments"] 
-                self.logger.debug('param1["totalSegments"] > param2["totalSegments"] == false')
-                param1["totalArms_Segment"] = param2["totalArms_Segment"][:param1["totalSegments"]-1]
-                param1["theta"] = param2["theta"][:param1["totalSegments"]-1]
+                # this means we can only show the articulation of para2 until the cubiod number: param1["total_cuboids"] 
+                self.logger.debug('param1["total_cuboids"] > param2["total_cuboids"] == false')
+                param1["total_branches"] = param2["total_branches"][:param1["total_cuboids"]-1]
+                param1["theta"] = param2["theta"][:param1["total_cuboids"]-1]
                 self.logger.debug("param2['same_scale']: " + str(param2["same_scale"]))
                 if param2["same_scale"]:
                     param1["scale"] = param2["scale"]
                 else:
-                    param1["scale"] = param2["scale"][:param1["totalSegments"]]
+                    param1["scale"] = param2["scale"][:param1["total_cuboids"]]
         return param1
 
     def change_apperence_camera_phi_relative(self, parameters, delta_phi = 20):
-        ### Return parameters with Camera position Phi shifted by delta_phi   
+        """Return parameters with Camera position Phi shifted by delta_phi.
+        
+        :param parameters: [description]
+        :type parameters: [type]
+        :param delta_phi: [description], defaults to 20
+        :type delta_phi: int, optional
+        :return: [description]
+        :rtype: [type]
+        """        
         parameters["CameraPhi"] += delta_phi 
         return parameters
 
     def change_apperence_camera_phi(self, parameters, start_value, end_value, amount_of_pics):
-        ### Return list with amount_of_pics of parameters in wich Camera position Phi is between the start_value and the end_value    
+        """Return list with amount_of_pics of parameters in wich Camera position Phi is between the start_value and the end_value.
+        
+        :param parameters: [description]
+        :type parameters: [type]
+        :param start_value: [description]
+        :type start_value: [type]
+        :param end_value: [description]
+        :type end_value: [type]
+        :param amount_of_pics: [description]
+        :type amount_of_pics: [type]
+        """            
         parameters_list = []
         para = parameters.copy()
         new_phi = np.linspace(start_value, end_value, amount_of_pics)
@@ -667,12 +866,32 @@ class DataSetCrane(DatasetMixin):
         return para
 
     def change_apperence_camera_theta_relative(self, parameters, delta_theta = 20):
-        ### Return parameters with Camera position Theta shifted by delta_phi   
+        """Return parameters with Camera position Theta shifted by delta_phi.
+        
+        :param parameters: [description]
+        :type parameters: [type]
+        :param delta_theta: [description], defaults to 20
+        :type delta_theta: int, optional
+        :return: [description]
+        :rtype: [type]
+        """        
         parameters["CameraTheta"] += delta_theta 
         return parameters
 
     def change_apperence_camera_theta(self, parameters, start_value, end_value, amount_of_pics):
-        ### Return list with amount_of_pics of parameters in wich Camera position Theta is between the start_value and the end_value    
+        """Return list with amount_of_pics of parameters in wich Camera position Theta is between the start_value and the end_value.
+        
+        :param parameters: [description]
+        :type parameters: [type]
+        :param start_value: [description]
+        :type start_value: [type]
+        :param end_value: [description]
+        :type end_value: [type]
+        :param amount_of_pics: [description]
+        :type amount_of_pics: [type]
+        :return: [description]
+        :rtype: [type]
+        """        
         parameters_list = []
         para = parameters.copy()
         new_theta = np.linspace(start_value, end_value, amount_of_pics)
@@ -682,26 +901,40 @@ class DataSetCrane(DatasetMixin):
         return para
 
     def change_articulation_theta(self, parameters, start_value, end_value, amount_of_pics, theta_pos = None):
-        ### Return a list with amount_of_pics parameters with changed theta from start_value to end_value at the cubiod theta_pos 
+        """Return a list with amount_of_pics parameters with changed theta from start_value to end_value at the cubiod theta_pos.
+        
+        :param parameters: [description]
+        :type parameters: [type]
+        :param start_value: [description]
+        :type start_value: [type]
+        :param end_value: [description]
+        :type end_value: [type]
+        :param amount_of_pics: [description]
+        :type amount_of_pics: [type]
+        :param theta_pos: [description], defaults to None
+        :type theta_pos: [type], optional
+        :return: [description]
+        :rtype: [type]
+        """        
         new_theta = np.linspace(start_value, end_value, amount_of_pics)
         parameters_list = []
         if(theta_pos==None):
             # If theta_pos is None then all thetas are going to change
             for i in range(amount_of_pics):
                 New_Theta = []                
-                for j in range(parameters["totalSegments"]-1):
+                for j in range(parameters["total_cuboids"]-1):
                     New_Theta.append(new_theta[i])
                 parameters["theta"] = New_Theta
                 parameters_list.append(parameters)
     
         else:    
             assert type(theta_pos) == int , "Dataset in change_articulation_theta: wrong input theta_pos has to be an integer or None; integer chooses position of manipulated theta, if None all theta are going to change the same."
-            if theta_pos >= parameters["totalSegments"]:
-                theta_pos = parameters["totalSegments"]-1
-                self.logger.error("theta_pos is bigger or equal to parameters['totalSegments']. Now set to the last cubiod.")
+            if theta_pos >= parameters["total_cuboids"]:
+                theta_pos = parameters["total_cuboids"]-1
+                self.logger.error("theta_pos is bigger or equal to parameters['total_cuboids']. Now set to the last cubiod.")
             New_Theta = []
             if parameters["same_theta"]==True:
-                for i in range(parameters["totalSegments"]):
+                for i in range(parameters["total_cuboids"]):
                     New_Theta.append(parameters["theta"][0]) 
                     parameters["same_theta"]==False
                 self.logger.info("Changing only one theta while same_theta is true")
@@ -715,7 +948,12 @@ class DataSetCrane(DatasetMixin):
         return parameters_list
     
     def increment_index(self):
-        ### Load, increment and return the externaly saved index.
+        """Load, increment and return the externaly saved index.
+        
+        :raises e: [description]
+        :return: [description]
+        :rtype: [type]
+        """        
         index = self.load_index()
         self.logger.debug("index: " + str(index))
         index = index + 1
@@ -730,7 +968,12 @@ class DataSetCrane(DatasetMixin):
         return index
 
     def load_index(self):
-        ### Load and return the externaly saved index.
+        """Load and return the externaly saved index.
+        
+        :raises e: [description]
+        :return: [description]
+        :rtype: [type]
+        """        
         try:
             with open("data/python/index.txt","r") as f:
                 index = f.read()
@@ -741,24 +984,28 @@ class DataSetCrane(DatasetMixin):
         return int(index)
 
     def reset_index(self, set_index = 0):
-        ### Reset the externaly saved index to set_index
+        """Reset the externaly saved index to set_index.
+        
+        :param set_index: [description], defaults to 0
+        :type set_index: int, optional
+        """        
         # Use this function if your data folder takes up too much space 
         with open("data/index.txt","w") as f:
             f.write(str(set_index))
             f.close()
 
     def exit(self):
-        ### Close TCP connection. Send end request to Unity and with that quit the application.  
+        """Close TCP connection. Send end request to Unity and with that quit the application.
+        """        
         self.uc.exit()
         self.logger.debug("Exit socket connection to unity.")
 
-
-data = DataSetCrane(use_unity_build = True,debug_log=False)
+'''
+data = dataset_cuboids(use_unity_build = True,debug_log=True)
 
 dicts = []
 for i in range(1):
     dicts.append(data[0])
-'''
 for i in range(5):
     para = data.create_random_parameters()
     para1 = data.create_random_parameters()
@@ -767,8 +1014,7 @@ for i in range(5):
     dicts.append(data.parameters_to_finished_data(para))
     dicts.append(data.parameters_to_finished_data(para1))
     dicts.append(data.parameters_to_finished_data(para2))
-'''
 data.exit()
 
 data.plot_images(dicts, images_in_one_row=5)
-
+'''

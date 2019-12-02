@@ -32,6 +32,11 @@
             
   <div class="section" id="welcome-to-python-unity-images-documentation">
 <h1>Welcome to Python-Unity Images documentation!<a class="headerlink" href="#welcome-to-python-unity-images-documentation" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="python-code">
+<h1>Python Code<a class="headerlink" href="#python-code" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="client-py">
+<h2>client.py<a class="headerlink" href="#client-py" title="Permalink to this headline">¶</a></h2>
 <div class="toctree-wrapper compound">
 </div>
 <dl class="class">
@@ -124,18 +129,18 @@ For debugging set it to: logging.DEBUG</p>
 
 <dl class="method">
 <dt id="client.client_communicator_to_unity.write_json_crane">
-<code class="sig-name descname">write_json_crane</code><span class="sig-paren">(</span><em class="sig-param">totalSegments=3, same_scale=True, scale=2, same_theta=True, theta=40, phi=0, totalArms_Segment=None, same_material=True, metallic=0.5, smoothness=0.5, r=1, g=1, b=1, a=1, CameraRes_width=256, CameraRes_height=256, Camera_FieldofView=60, CameraRadius=None, CameraTheta=90, CameraPhi=0, CameraVerticalOffset=0, totalPointLights=1, same_PointLightsColor=True, PointLightsColor_r=1, PointLightsColor_g=1, PointLightsColor_b=1, PointLightsColor_a=1, PointLightsRadius=[7], PointLightsTheta=[20], PointLightsPhi=[0], PointLightsIntensity=[1], PointLightsRange=[10], totalSpotLights=1, same_SpotLightsColor=True, SpotLightsColor_r=1, SpotLightsColor_g=1, SpotLightsColor_b=1, SpotLightsColor_a=1, SpotLightsRadius=[10], SpotLightsTheta=[0], SpotLightsPhi=[0], SpotLightsIntensity=[1], SpotLightsRange=[10], SpotAngle=[30], DirectionalLightTheta=30, DirectionalLightIntensity=0.8</em><span class="sig-paren">)</span><a class="headerlink" href="#client.client_communicator_to_unity.write_json_crane" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns string according to input parameter for <a class="reference internal" href="#client.client_communicator_to_unity.recive_image" title="client.client_communicator_to_unity.recive_image"><code class="xref py py-meth docutils literal notranslate"><span class="pre">recive_image()</span></code></a> which can be interpreted by the Unity server.</p>
+<code class="sig-name descname">write_json_crane</code><span class="sig-paren">(</span><em class="sig-param">total_cuboids=3, same_scale=True, scale=2.0, same_theta=True, theta=40.0, phi=0.0, total_branches=None, same_material=True, metallic=0.5, smoothness=0.5, r=1.0, g=1.0, b=1.0, a=1.0, CameraRes_width=256, CameraRes_height=256, Camera_FieldofView=60.0, CameraRadius=None, CameraTheta=90.0, CameraPhi=0.0, CameraVerticalOffset=0.0, totalPointLights=1, same_PointLightsColor=True, PointLightsColor_r=1.0, PointLightsColor_g=1.0, PointLightsColor_b=1.0, PointLightsColor_a=1.0, PointLightsRadius=[7.0], PointLightsTheta=[20.0], PointLightsPhi=[0.0], PointLightsIntensity=[1.0], PointLightsRange=[10.0], totalSpotLights=1, same_SpotLightsColor=True, SpotLightsColor_r=1.0, SpotLightsColor_g=1.0, SpotLightsColor_b=1.0, SpotLightsColor_a=1.0, SpotLightsRadius=[10.0], SpotLightsTheta=[0.0], SpotLightsPhi=[0.0], SpotLightsIntensity=[1.0], SpotLightsRange=[10.0], SpotAngle=[30.0], DirectionalLightTheta=30.0, DirectionalLightIntensity=0.8</em><span class="sig-paren">)</span><a class="headerlink" href="#client.client_communicator_to_unity.write_json_crane" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns string according to input parameter which can be interpreted by the Unity server.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>totalSegments</strong> (<em>int</em><em>, </em><em>optional</em>) -- [description], defaults to 3</p></li>
+<li><p><strong>total_cuboids</strong> (<em>int</em><em>, </em><em>optional</em>) -- [description], defaults to 3</p></li>
 <li><p><strong>same_scale</strong> (<em>bool</em><em>, </em><em>optional</em>) -- [description], defaults to True</p></li>
 <li><p><strong>scale</strong> (<em>int</em><em>, </em><em>optional</em>) -- [description], defaults to 2</p></li>
 <li><p><strong>same_theta</strong> (<em>bool</em><em>, </em><em>optional</em>) -- [description], defaults to True</p></li>
 <li><p><strong>theta</strong> (<em>int</em><em>, </em><em>optional</em>) -- [description], defaults to 40</p></li>
 <li><p><strong>phi</strong> (<em>int</em><em>, </em><em>optional</em>) -- [description], defaults to 0</p></li>
-<li><p><strong>totalArms_Segment</strong> (<em>[</em><em>type</em><em>]</em><em>, </em><em>optional</em>) -- [description], defaults to None</p></li>
+<li><p><strong>total_branches</strong> (<em>[</em><em>type</em><em>]</em><em>, </em><em>optional</em>) -- [description], defaults to None</p></li>
 <li><p><strong>same_material</strong> (<em>bool</em><em>, </em><em>optional</em>) -- [description], defaults to True</p></li>
 <li><p><strong>metallic</strong> (<em>float</em><em>, </em><em>optional</em>) -- [description], defaults to 0.5</p></li>
 <li><p><strong>smoothness</strong> (<em>float</em><em>, </em><em>optional</em>) -- [description], defaults to 0.5</p></li>
@@ -146,7 +151,7 @@ For debugging set it to: logging.DEBUG</p>
 <li><p><strong>CameraRes_width</strong> (<em>int</em><em>, </em><em>optional</em>) -- [description], defaults to 256</p></li>
 <li><p><strong>CameraRes_height</strong> (<em>int</em><em>, </em><em>optional</em>) -- [description], defaults to 256</p></li>
 <li><p><strong>Camera_FieldofView</strong> (<em>int</em><em>, </em><em>optional</em>) -- [description], defaults to 60</p></li>
-<li><p><strong>CameraRadius</strong> (<em>[</em><em>type</em><em>]</em><em>, </em><em>optional</em>) -- [description], defaults to None</p></li>
+<li><p><strong>CameraRadius</strong> (<em>float</em><em>, </em><em>optional</em>) -- [description], defaults to None</p></li>
 <li><p><strong>CameraTheta</strong> (<em>int</em><em>, </em><em>optional</em>) -- [description], defaults to 90</p></li>
 <li><p><strong>CameraPhi</strong> (<em>int</em><em>, </em><em>optional</em>) -- [description], defaults to 0</p></li>
 <li><p><strong>CameraVerticalOffset</strong> (<em>int</em><em>, </em><em>optional</em>) -- [description], defaults to 0</p></li>
@@ -178,6 +183,407 @@ For debugging set it to: logging.DEBUG</p>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Corresponding string fromatted for Unity. Can be used in <a class="reference internal" href="#client.client_communicator_to_unity.recive_image" title="client.client_communicator_to_unity.recive_image"><code class="xref py py-meth docutils literal notranslate"><span class="pre">recive_image()</span></code></a>.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><cite>string</cite></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="dataset-py">
+<h2>dataset.py<a class="headerlink" href="#dataset-py" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<dl class="class">
+<dt id="dataset.dataset_cuboids">
+<em class="property">class </em><code class="sig-prename descclassname">dataset.</code><code class="sig-name descname">dataset_cuboids</code><span class="sig-paren">(</span><em class="sig-param">config=None</em>, <em class="sig-param">use_unity_build=True</em>, <em class="sig-param">combine_logs=True</em>, <em class="sig-param">debug_log=False</em><span class="sig-paren">)</span><a class="headerlink" href="#dataset.dataset_cuboids" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="dataset.dataset_cuboids.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param">config=None</em>, <em class="sig-param">use_unity_build=True</em>, <em class="sig-param">combine_logs=True</em>, <em class="sig-param">debug_log=False</em><span class="sig-paren">)</span><a class="headerlink" href="#dataset.dataset_cuboids.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>[summary]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>DatasetMixin</strong> (<em>[</em><em>type</em><em>]</em>) -- [description]</p></li>
+<li><p><strong>config</strong> (<em>[</em><em>type</em><em>]</em><em>, </em><em>optional</em>) -- [description], defaults to None</p></li>
+<li><p><strong>use_unity_build</strong> (<em>bool</em><em>, </em><em>optional</em>) -- [description], defaults to True</p></li>
+<li><p><strong>combine_logs</strong> (<em>bool</em><em>, </em><em>optional</em>) -- [description], defaults to True</p></li>
+<li><p><strong>debug_log</strong> (<em>bool</em><em>, </em><em>optional</em>) -- [description], defaults to False</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="dataset.dataset_cuboids.change_app1_art2">
+<code class="sig-name descname">change_app1_art2</code><span class="sig-paren">(</span><em class="sig-param">para1</em>, <em class="sig-param">para2</em><span class="sig-paren">)</span><a class="headerlink" href="#dataset.dataset_cuboids.change_app1_art2" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns parameters in a dictionary which combine the apperence of para1 and articulation of para2.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>para1</strong> (<em>[</em><em>type</em><em>]</em>) -- [description]</p></li>
+<li><p><strong>para2</strong> (<em>[</em><em>type</em><em>]</em>) -- [description]</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>[description]</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>[type]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="dataset.dataset_cuboids.change_apperence_camera_phi">
+<code class="sig-name descname">change_apperence_camera_phi</code><span class="sig-paren">(</span><em class="sig-param">parameters</em>, <em class="sig-param">start_value</em>, <em class="sig-param">end_value</em>, <em class="sig-param">amount_of_pics</em><span class="sig-paren">)</span><a class="headerlink" href="#dataset.dataset_cuboids.change_apperence_camera_phi" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return list with amount_of_pics of parameters in wich Camera position Phi is between the start_value and the end_value.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>parameters</strong> (<em>[</em><em>type</em><em>]</em>) -- [description]</p></li>
+<li><p><strong>start_value</strong> (<em>[</em><em>type</em><em>]</em>) -- [description]</p></li>
+<li><p><strong>end_value</strong> (<em>[</em><em>type</em><em>]</em>) -- [description]</p></li>
+<li><p><strong>amount_of_pics</strong> (<em>[</em><em>type</em><em>]</em>) -- [description]</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="dataset.dataset_cuboids.change_apperence_camera_phi_relative">
+<code class="sig-name descname">change_apperence_camera_phi_relative</code><span class="sig-paren">(</span><em class="sig-param">parameters</em>, <em class="sig-param">delta_phi=20</em><span class="sig-paren">)</span><a class="headerlink" href="#dataset.dataset_cuboids.change_apperence_camera_phi_relative" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return parameters with Camera position Phi shifted by delta_phi.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>parameters</strong> (<em>[</em><em>type</em><em>]</em>) -- [description]</p></li>
+<li><p><strong>delta_phi</strong> (<em>int</em><em>, </em><em>optional</em>) -- [description], defaults to 20</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>[description]</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>[type]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="dataset.dataset_cuboids.change_apperence_camera_theta">
+<code class="sig-name descname">change_apperence_camera_theta</code><span class="sig-paren">(</span><em class="sig-param">parameters</em>, <em class="sig-param">start_value</em>, <em class="sig-param">end_value</em>, <em class="sig-param">amount_of_pics</em><span class="sig-paren">)</span><a class="headerlink" href="#dataset.dataset_cuboids.change_apperence_camera_theta" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return list with amount_of_pics of parameters in wich Camera position Theta is between the start_value and the end_value.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>parameters</strong> (<em>[</em><em>type</em><em>]</em>) -- [description]</p></li>
+<li><p><strong>start_value</strong> (<em>[</em><em>type</em><em>]</em>) -- [description]</p></li>
+<li><p><strong>end_value</strong> (<em>[</em><em>type</em><em>]</em>) -- [description]</p></li>
+<li><p><strong>amount_of_pics</strong> (<em>[</em><em>type</em><em>]</em>) -- [description]</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>[description]</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>[type]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="dataset.dataset_cuboids.change_apperence_camera_theta_relative">
+<code class="sig-name descname">change_apperence_camera_theta_relative</code><span class="sig-paren">(</span><em class="sig-param">parameters</em>, <em class="sig-param">delta_theta=20</em><span class="sig-paren">)</span><a class="headerlink" href="#dataset.dataset_cuboids.change_apperence_camera_theta_relative" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return parameters with Camera position Theta shifted by delta_phi.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>parameters</strong> (<em>[</em><em>type</em><em>]</em>) -- [description]</p></li>
+<li><p><strong>delta_theta</strong> (<em>int</em><em>, </em><em>optional</em>) -- [description], defaults to 20</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>[description]</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>[type]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="dataset.dataset_cuboids.change_articulation_theta">
+<code class="sig-name descname">change_articulation_theta</code><span class="sig-paren">(</span><em class="sig-param">parameters</em>, <em class="sig-param">start_value</em>, <em class="sig-param">end_value</em>, <em class="sig-param">amount_of_pics</em>, <em class="sig-param">theta_pos=None</em><span class="sig-paren">)</span><a class="headerlink" href="#dataset.dataset_cuboids.change_articulation_theta" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a list with amount_of_pics parameters with changed theta from start_value to end_value at the cubiod theta_pos.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>parameters</strong> (<em>[</em><em>type</em><em>]</em>) -- [description]</p></li>
+<li><p><strong>start_value</strong> (<em>[</em><em>type</em><em>]</em>) -- [description]</p></li>
+<li><p><strong>end_value</strong> (<em>[</em><em>type</em><em>]</em>) -- [description]</p></li>
+<li><p><strong>amount_of_pics</strong> (<em>[</em><em>type</em><em>]</em>) -- [description]</p></li>
+<li><p><strong>theta_pos</strong> (<em>[</em><em>type</em><em>]</em><em>, </em><em>optional</em>) -- [description], defaults to None</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>[description]</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>[type]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="dataset.dataset_cuboids.create_json_string_from_parameters">
+<code class="sig-name descname">create_json_string_from_parameters</code><span class="sig-paren">(</span><em class="sig-param">dictionary</em><span class="sig-paren">)</span><a class="headerlink" href="#dataset.dataset_cuboids.create_json_string_from_parameters" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a String depending on your input parameters wich can be interpreted afterwards by the Unity script.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>dictionary</strong> (<em>[</em><em>type</em><em>]</em>) -- [description]</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>[description]</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>[type]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="dataset.dataset_cuboids.create_random_parameters">
+<code class="sig-name descname">create_random_parameters</code><span class="sig-paren">(</span><em class="sig-param">CameraRes_width=520</em>, <em class="sig-param">CameraRes_height=520</em><span class="sig-paren">)</span><a class="headerlink" href="#dataset.dataset_cuboids.create_random_parameters" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates random input parameter depending on your config, the camera parameters are not random</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>CameraRes_width</strong> (<em>int</em><em>, </em><em>optional</em>) -- [description], defaults to 520</p></li>
+<li><p><strong>CameraRes_height</strong> (<em>int</em><em>, </em><em>optional</em>) -- [description], defaults to 520</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>[description]</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>[type]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="dataset.dataset_cuboids.exit">
+<code class="sig-name descname">exit</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#dataset.dataset_cuboids.exit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Close TCP connection. Send end request to Unity and with that quit the application.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="dataset.dataset_cuboids.get_example">
+<code class="sig-name descname">get_example</code><span class="sig-paren">(</span><em class="sig-param">index=None</em>, <em class="sig-param">save_para=True</em>, <em class="sig-param">save_image=False</em><span class="sig-paren">)</span><a class="headerlink" href="#dataset.dataset_cuboids.get_example" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a dictionary with all relevant data and the image. Create an exampel image from random parameters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>index</strong> (<em>[</em><em>type</em><em>]</em><em>, </em><em>optional</em>) -- [description], defaults to None</p></li>
+<li><p><strong>save_para</strong> (<em>bool</em><em>, </em><em>optional</em>) -- [description], defaults to True</p></li>
+<li><p><strong>save_image</strong> (<em>bool</em><em>, </em><em>optional</em>) -- [description], defaults to False</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>[description]</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>[type]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="dataset.dataset_cuboids.increment_index">
+<code class="sig-name descname">increment_index</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#dataset.dataset_cuboids.increment_index" title="Permalink to this definition">¶</a></dt>
+<dd><p>Load, increment and return the externaly saved index.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><p><strong>e</strong> -- [description]</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>[description]</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>[type]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="dataset.dataset_cuboids.load_index">
+<code class="sig-name descname">load_index</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#dataset.dataset_cuboids.load_index" title="Permalink to this definition">¶</a></dt>
+<dd><p>Load and return the externaly saved index.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><p><strong>e</strong> -- [description]</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>[description]</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>[type]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="dataset.dataset_cuboids.load_parameters">
+<code class="sig-name descname">load_parameters</code><span class="sig-paren">(</span><em class="sig-param">index=[-1], amount=1</em><span class="sig-paren">)</span><a class="headerlink" href="#dataset.dataset_cuboids.load_parameters" title="Permalink to this definition">¶</a></dt>
+<dd><p>Load and return a given aoumt of parameters. If index is not specified the index will be chooden randomly.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>index</strong> (<em>list</em><em>, </em><em>optional</em>) -- [description], defaults to [-1]</p></li>
+<li><p><strong>amount</strong> (<em>int</em><em>, </em><em>optional</em>) -- [description], defaults to 1</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>[description]</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>[type]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="dataset.dataset_cuboids.parameters_to_finished_data">
+<code class="sig-name descname">parameters_to_finished_data</code><span class="sig-paren">(</span><em class="sig-param">parameters</em>, <em class="sig-param">save_para=True</em>, <em class="sig-param">save_image=False</em><span class="sig-paren">)</span><a class="headerlink" href="#dataset.dataset_cuboids.parameters_to_finished_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return dictionary with all relevant data. Input parameters and get an corresponding image.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>parameters</strong> (<em>[</em><em>type</em><em>]</em>) -- [description]</p></li>
+<li><p><strong>save_para</strong> (<em>bool</em><em>, </em><em>optional</em>) -- [description], defaults to True</p></li>
+<li><p><strong>save_image</strong> (<em>bool</em><em>, </em><em>optional</em>) -- [description], defaults to False</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>[description]</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>[type]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="dataset.dataset_cuboids.plot_images">
+<code class="sig-name descname">plot_images</code><span class="sig-paren">(</span><em class="sig-param">dicts</em>, <em class="sig-param">images_in_one_row=4</em>, <em class="sig-param">save_fig=True</em>, <em class="sig-param">show_index=True</em><span class="sig-paren">)</span><a class="headerlink" href="#dataset.dataset_cuboids.plot_images" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plot and show all images contained in the list of dictionaries and label them with their corresponding index.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dicts</strong> (<em>[</em><em>type</em><em>]</em>) -- [description]</p></li>
+<li><p><strong>images_in_one_row</strong> (<em>int</em><em>, </em><em>optional</em>) -- [description], defaults to 4</p></li>
+<li><p><strong>save_fig</strong> (<em>bool</em><em>, </em><em>optional</em>) -- [description], defaults to True</p></li>
+<li><p><strong>show_index</strong> (<em>bool</em><em>, </em><em>optional</em>) -- [description], defaults to True</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="dataset.dataset_cuboids.reset_index">
+<code class="sig-name descname">reset_index</code><span class="sig-paren">(</span><em class="sig-param">set_index=0</em><span class="sig-paren">)</span><a class="headerlink" href="#dataset.dataset_cuboids.reset_index" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reset the externaly saved index to set_index.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>set_index</strong> (<em>int</em><em>, </em><em>optional</em>) -- [description], defaults to 0</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="dataset.dataset_cuboids.save">
+<code class="sig-name descname">save</code><span class="sig-paren">(</span><em class="sig-param">dictionary</em>, <em class="sig-param">save_para=True</em>, <em class="sig-param">save_image=False</em><span class="sig-paren">)</span><a class="headerlink" href="#dataset.dataset_cuboids.save" title="Permalink to this definition">¶</a></dt>
+<dd><p>Save parameter data or an image of a dictionary in the data/parameters folder or the data/images folder.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dictionary</strong> (<em>[</em><em>type</em><em>]</em>) -- [description]</p></li>
+<li><p><strong>save_para</strong> (<em>bool</em><em>, </em><em>optional</em>) -- [description], defaults to True</p></li>
+<li><p><strong>save_image</strong> (<em>bool</em><em>, </em><em>optional</em>) -- [description], defaults to False</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="dataset.dataset_cuboids.set_config">
+<code class="sig-name descname">set_config</code><span class="sig-paren">(</span><em class="sig-param">config</em><span class="sig-paren">)</span><a class="headerlink" href="#dataset.dataset_cuboids.set_config" title="Permalink to this definition">¶</a></dt>
+<dd><p>[summary]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>config</strong> (<em>[</em><em>type</em><em>]</em>) -- [description]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="dataset.dataset_cuboids.writeConfig">
+<code class="sig-name descname">writeConfig</code><span class="sig-paren">(</span><em class="sig-param">same_scale=None, scale=[0.5, 4], total_cuboids=[2, 12], phi=[0, 360], enable_many_arms=[1, 3], same_theta=None, theta=None, same_material=None, r=[0, 1], g=[0, 1], b=[0, 1], a=[0.5, 1], metallic=[0, 1], smoothness=[0, 1], CameraRadius=10.0, CameraTheta=[30, 100], CameraPhi=[0, 360], CameraVerticalOffset=None, totalPointLights=[5, 12], PointLightsRadius=[5, 20], PointLightsPhi=[0, 360], PointLightsTheta=[0, 90], PointLightsIntensity=[7, 17], PointLightsRange=[5, 25], samePointLightColor=None, PointLightsColor_r=[0, 1], PointLightsColor_g=[0, 1], PointLightsColor_b=[0, 1], PointLightsColor_a=[0.5, 1], totalSpotLights=None, SpotLightsRadius=[5, 20], SpotLightsPhi=[0, 360], SpotLightsTheta=[0, 90], SpotLightsIntensity=[5, 15], SpotLightsRange=[5, 25], SpotLightsAngle=[5, 120], sameSpotLightColor=None, SpotLightsColor_r=[0, 1], SpotLightsColor_g=[0, 1], SpotLightsColor_b=[0, 1], SpotLightsColor_a=[0.5, 1], DirectionalLightTheta=[0, 90], DirectionalLightIntensity=[0.1, 1.8]</em><span class="sig-paren">)</span><a class="headerlink" href="#dataset.dataset_cuboids.writeConfig" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retruns a config as dictionary which determines the interval for all random parameters created in the function create_random_parameters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>same_scale</strong> (<em>[</em><em>type</em><em>]</em><em>, </em><em>optional</em>) -- [description], defaults to None</p></li>
+<li><p><strong>scale</strong> (<em>list</em><em>, </em><em>optional</em>) -- [description], defaults to [0.5,4]</p></li>
+<li><p><strong>total_cuboids</strong> (<em>list</em><em>, </em><em>optional</em>) -- [description], defaults to [2,12]</p></li>
+<li><p><strong>phi</strong> (<em>list</em><em>, </em><em>optional</em>) -- [description], defaults to [0,360]</p></li>
+<li><p><strong>enable_many_arms</strong> (<em>list</em><em>, </em><em>optional</em>) -- [description], defaults to [1,3]</p></li>
+<li><p><strong>same_theta</strong> (<em>[</em><em>type</em><em>]</em><em>, </em><em>optional</em>) -- [description], defaults to None</p></li>
+<li><p><strong>theta</strong> (<em>[</em><em>type</em><em>]</em><em>, </em><em>optional</em>) -- [description], defaults to None</p></li>
+<li><p><strong>same_material</strong> (<em>[</em><em>type</em><em>]</em><em>, </em><em>optional</em>) -- [description], defaults to None</p></li>
+<li><p><strong>r</strong> (<em>list</em><em>, </em><em>optional</em>) -- [description], defaults to [0,1]</p></li>
+<li><p><strong>g</strong> (<em>list</em><em>, </em><em>optional</em>) -- [description], defaults to [0,1]</p></li>
+<li><p><strong>b</strong> (<em>list</em><em>, </em><em>optional</em>) -- [description], defaults to [0,1]</p></li>
+<li><p><strong>a</strong> (<em>list</em><em>, </em><em>optional</em>) -- [description], defaults to [0.5,1]</p></li>
+<li><p><strong>metallic</strong> (<em>list</em><em>, </em><em>optional</em>) -- [description], defaults to [0,1]</p></li>
+<li><p><strong>smoothness</strong> (<em>list</em><em>, </em><em>optional</em>) -- [description], defaults to [0,1]</p></li>
+<li><p><strong>CameraRadius</strong> (<em>float</em><em>, </em><em>optional</em>) -- [description], defaults to 10.0</p></li>
+<li><p><strong>CameraTheta</strong> (<em>list</em><em>, </em><em>optional</em>) -- [description], defaults to [30,100]</p></li>
+<li><p><strong>CameraPhi</strong> (<em>list</em><em>, </em><em>optional</em>) -- [description], defaults to [0,360]</p></li>
+<li><p><strong>CameraVerticalOffset</strong> (<em>[</em><em>type</em><em>]</em><em>, </em><em>optional</em>) -- [description], defaults to None</p></li>
+<li><p><strong>totalPointLights</strong> (<em>list</em><em>, </em><em>optional</em>) -- [description], defaults to [5,12]</p></li>
+<li><p><strong>PointLightsRadius</strong> (<em>list</em><em>, </em><em>optional</em>) -- [description], defaults to [5,20]</p></li>
+<li><p><strong>PointLightsPhi</strong> (<em>list</em><em>, </em><em>optional</em>) -- [description], defaults to [0,360]</p></li>
+<li><p><strong>PointLightsTheta</strong> (<em>list</em><em>, </em><em>optional</em>) -- [description], defaults to [0,90]</p></li>
+<li><p><strong>PointLightsIntensity</strong> (<em>list</em><em>, </em><em>optional</em>) -- [description], defaults to [7,17]</p></li>
+<li><p><strong>PointLightsRange</strong> (<em>list</em><em>, </em><em>optional</em>) -- [description], defaults to [5,25]</p></li>
+<li><p><strong>samePointLightColor</strong> (<em>[</em><em>type</em><em>]</em><em>, </em><em>optional</em>) -- [description], defaults to None</p></li>
+<li><p><strong>PointLightsColor_r</strong> (<em>list</em><em>, </em><em>optional</em>) -- [description], defaults to [0,1]</p></li>
+<li><p><strong>PointLightsColor_g</strong> (<em>list</em><em>, </em><em>optional</em>) -- [description], defaults to [0,1]</p></li>
+<li><p><strong>PointLightsColor_b</strong> (<em>list</em><em>, </em><em>optional</em>) -- [description], defaults to [0,1]</p></li>
+<li><p><strong>PointLightsColor_a</strong> (<em>list</em><em>, </em><em>optional</em>) -- [description], defaults to [0.5,1]</p></li>
+<li><p><strong>totalSpotLights</strong> (<em>[</em><em>type</em><em>]</em><em>, </em><em>optional</em>) -- [description], defaults to None</p></li>
+<li><p><strong>SpotLightsRadius</strong> (<em>list</em><em>, </em><em>optional</em>) -- [description], defaults to [5,20]</p></li>
+<li><p><strong>SpotLightsPhi</strong> (<em>list</em><em>, </em><em>optional</em>) -- [description], defaults to [0,360]</p></li>
+<li><p><strong>SpotLightsTheta</strong> (<em>list</em><em>, </em><em>optional</em>) -- [description], defaults to [0,90]</p></li>
+<li><p><strong>SpotLightsIntensity</strong> (<em>list</em><em>, </em><em>optional</em>) -- [description], defaults to [5,15]</p></li>
+<li><p><strong>SpotLightsRange</strong> (<em>list</em><em>, </em><em>optional</em>) -- [description], defaults to [5,25]</p></li>
+<li><p><strong>SpotLightsAngle</strong> (<em>list</em><em>, </em><em>optional</em>) -- [description], defaults to [5,120]</p></li>
+<li><p><strong>sameSpotLightColor</strong> (<em>[</em><em>type</em><em>]</em><em>, </em><em>optional</em>) -- [description], defaults to None</p></li>
+<li><p><strong>SpotLightsColor_r</strong> (<em>list</em><em>, </em><em>optional</em>) -- [description], defaults to [0,1]</p></li>
+<li><p><strong>SpotLightsColor_g</strong> (<em>list</em><em>, </em><em>optional</em>) -- [description], defaults to [0,1]</p></li>
+<li><p><strong>SpotLightsColor_b</strong> (<em>list</em><em>, </em><em>optional</em>) -- [description], defaults to [0,1]</p></li>
+<li><p><strong>SpotLightsColor_a</strong> (<em>list</em><em>, </em><em>optional</em>) -- [description], defaults to [0.5,1]</p></li>
+<li><p><strong>DirectionalLightTheta</strong> (<em>list</em><em>, </em><em>optional</em>) -- [description], defaults to [0,90]</p></li>
+<li><p><strong>DirectionalLightIntensity</strong> (<em>list</em><em>, </em><em>optional</em>) -- [description], defaults to [0.1,1.8]</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
 <dd class="field-even"><p>[description]</p>
 </dd>
 <dt class="field-odd">Return type</dt>
@@ -188,6 +594,7 @@ For debugging set it to: logging.DEBUG</p>
 
 </dd></dl>
 
+</div>
 </div>
 <div class="section" id="indices-and-tables">
 <h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>

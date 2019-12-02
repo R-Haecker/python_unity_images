@@ -24,9 +24,13 @@ class client_communicator_to_unity:
                             For debugging set it to: logging.DEBUG
         :type log_level: *int*, optional
         :raises IOError: Raises IOError if Unity build can not be found. 
-        """     
+        """   
+        # Set up Data Paths
+        self.relative_path_TCPsocket_config = "data/python/client_tcp_config.json"
+        self.use_unity_build = use_unity_build
+        self.file_directory = os.path.dirname(os.path.realpath("client.py")) #sys.argv[0] #sys.path[0] # # os.path.split(os.path.abspath(__file__))
         # Create logger
-        self.log_path = "log/python_client.log"
+        self.log_path = self.file_directory + "/log/python_client.log"
         self.logger = logging.getLogger("python_client_log")
         self.logger.setLevel(logging.DEBUG)
         # Create console handler
@@ -52,11 +56,7 @@ class client_communicator_to_unity:
             pass
 
         self.logger.debug("Starting python client.")
-        # Set up Data Paths
-        self.relative_path_TCPsocket_config = "data/python/client_tcp_config.json"
-        self.use_unity_build = use_unity_build
-        self.file_directory = os.path.dirname(os.path.realpath("client.py"))
-
+        
         # Determine OS for the right build to start
         osdata = os.uname()
         if osdata[0] == "Linux":
@@ -253,16 +253,16 @@ class client_communicator_to_unity:
         self.logger.debug("Returning img: type: %s \n" %type(img))
         return img
     
-    def write_json_crane(self, totalSegments=3, same_scale = True, scale=2, same_theta = True, theta=40, phi=0, totalArms_Segment=None,
-    same_material = True, metallic=0.5, smoothness=0.5, r=1,g=1,b=1,a = 1,
-    CameraRes_width = 256, CameraRes_height = 256, Camera_FieldofView = 60, CameraRadius = None, CameraTheta = 90, CameraPhi=0, CameraVerticalOffset = 0,
-    totalPointLights=1, same_PointLightsColor = True, PointLightsColor_r = 1, PointLightsColor_g = 1, PointLightsColor_b = 1, PointLightsColor_a = 1, PointLightsRadius=[7], PointLightsTheta=[20], PointLightsPhi=[0], PointLightsIntensity=[1], PointLightsRange=[10], 
-    totalSpotLights=1, same_SpotLightsColor = True, SpotLightsColor_r = 1, SpotLightsColor_g = 1, SpotLightsColor_b = 1, SpotLightsColor_a = 1, SpotLightsRadius=[10], SpotLightsTheta=[0], SpotLightsPhi=[0], SpotLightsIntensity=[1], SpotLightsRange=[10], SpotAngle=[30],
-    DirectionalLightTheta = 30, DirectionalLightIntensity = 0.8):
+    def write_json_crane(self, total_cuboids=3, same_scale = True, scale=2.0, same_theta = True, theta=40.0, phi=0.0, total_branches=None,
+    same_material = True, metallic=0.5, smoothness=0.5, r=1.0,g=1.0,b=1.0,a = 1.0,
+    CameraRes_width = 256, CameraRes_height = 256, Camera_FieldofView = 60.0, CameraRadius = None, CameraTheta = 90.0, CameraPhi=0.0, CameraVerticalOffset = 0.0,
+    totalPointLights=1, same_PointLightsColor = True, PointLightsColor_r = 1.0, PointLightsColor_g = 1.0, PointLightsColor_b = 1.0, PointLightsColor_a = 1.0, PointLightsRadius=[7.0], PointLightsTheta=[20.0], PointLightsPhi=[0.0], PointLightsIntensity=[1.0], PointLightsRange=[10.0], 
+    totalSpotLights=1, same_SpotLightsColor = True, SpotLightsColor_r = 1.0, SpotLightsColor_g = 1.0, SpotLightsColor_b = 1.0, SpotLightsColor_a = 1.0, SpotLightsRadius=[10.0], SpotLightsTheta=[0.0], SpotLightsPhi=[0.0], SpotLightsIntensity=[1.0], SpotLightsRange=[10.0], SpotAngle=[30.0],
+    DirectionalLightTheta = 30.0, DirectionalLightIntensity = 0.8):
         """Returns string according to input parameter which can be interpreted by the Unity server.
         
-        :param totalSegments: [description], defaults to 3
-        :type totalSegments: int, optional
+        :param total_cuboids: [description], defaults to 3
+        :type total_cuboids: int, optional
         :param same_scale: [description], defaults to True
         :type same_scale: bool, optional
         :param scale: [description], defaults to 2
@@ -273,8 +273,8 @@ class client_communicator_to_unity:
         :type theta: int, optional
         :param phi: [description], defaults to 0
         :type phi: int, optional
-        :param totalArms_Segment: [description], defaults to None
-        :type totalArms_Segment: [type], optional
+        :param total_branches: [description], defaults to None
+        :type total_branches: [type], optional
         :param same_material: [description], defaults to True
         :type same_material: bool, optional
         :param metallic: [description], defaults to 0.5
@@ -296,7 +296,7 @@ class client_communicator_to_unity:
         :param Camera_FieldofView: [description], defaults to 60
         :type Camera_FieldofView: int, optional
         :param CameraRadius: [description], defaults to None
-        :type CameraRadius: [type], optional
+        :type CameraRadius: float, optional
         :param CameraTheta: [description], defaults to 90
         :type CameraTheta: int, optional
         :param CameraPhi: [description], defaults to 0
@@ -359,7 +359,7 @@ class client_communicator_to_unity:
         
         # Create a Dictionary with all the given information which can be read by the Unity script
         data = {}
-        data['totalSegments'] = totalSegments
+        data['total_cuboids'] = total_cuboids
         data['same_scale'] = same_scale
         data['same_theta'] = same_theta
         data['same_material'] = same_material
@@ -372,15 +372,15 @@ class client_communicator_to_unity:
         if(same_scale):
             # Use the same scale for every cuboid
             if(isinstance(scale, list)):    
-                    for i in range(0,totalSegments):
+                    for i in range(0,total_cuboids):
                         newScale.append(scale[0])
             else:
-                    for i in range(0,totalSegments):
+                    for i in range(0,total_cuboids):
                         newScale.append(scale)
         else:
             # Use for every cuboid the given scale 
-            assert len(scale) == totalSegments, " wrong json input Parameter; same_scale: " + str(same_scale) + "; The list scale has to be the size of totalSegments: " + str(totalSegments) + "; len(scale): " + str(len(scale))
-            for i in range(0,totalSegments):
+            assert len(scale) == total_cuboids, " wrong json input Parameter; same_scale: " + str(same_scale) + "; The list scale has to be the size of total_cuboids: " + str(total_cuboids) + "; len(scale): " + str(len(scale))
+            for i in range(0,total_cuboids):
                     newScale.append(scale[i])
 
         # Get all the angels: Theta between two cubiods in an array
@@ -388,15 +388,15 @@ class client_communicator_to_unity:
         if(same_theta):
             # Use the same angle for every Theta 
             if(isinstance(theta, list)):    
-                    for i in range(0,totalSegments):
+                    for i in range(0,total_cuboids):
                         newTheta.append(theta[0])
             else:
-                    for i in range(0,totalSegments):
+                    for i in range(0,total_cuboids):
                         newTheta.append(theta)
         else:
             # Use for every angle the given Theta 
-            assert len(theta) == totalSegments-1, " wrong json input Parameter; sameTheta: " + str(same_theta) + "; The list theta has to be the size totalSegments-1: " + str(totalSegments-1) + "; len(theta): " + str(len(theta))
-            for i in range(0,totalSegments):
+            assert len(theta) == total_cuboids-1, " wrong json input Parameter; sameTheta: " + str(same_theta) + "; The list theta has to be the size total_cuboids-1: " + str(total_cuboids-1) + "; len(theta): " + str(len(theta))
+            for i in range(0,total_cuboids):
                 # Every cuboid has the information Theta for the angle between the cuboid which was placed before it and itself 
                 if(i==0):
                     # By definition the first cuboid can not have an angle
@@ -410,7 +410,7 @@ class client_communicator_to_unity:
         newMaterial = []
         if(same_material==True):
             # Use the same material for every cubiod
-            for i in range(0,totalSegments):
+            for i in range(0,total_cuboids):
                 color = {}
                 color['x'] = r
                 color['y'] = g
@@ -419,14 +419,14 @@ class client_communicator_to_unity:
                 newMaterial.append({"color":color,"metallic":metallic,"smoothness":smoothness})
         else:
             # Use for every material of a cuboid the specified information 
-            assert len(metallic) == totalSegments, "len(metallic) has to be equal to totalSegments"
-            assert len(r) == totalSegments, "len(r) has to be equal to totalSegments"
-            assert len(g) == totalSegments, "len(g) has to be equal to totalSegments"
-            assert len(b) == totalSegments, "len(b) has to be equal to totalSegments"
-            if(len(a)!=totalSegments):
-                for i in range(0,totalSegments):
+            assert len(metallic) == total_cuboids, "len(metallic) has to be equal to total_cuboids"
+            assert len(r) == total_cuboids, "len(r) has to be equal to total_cuboids"
+            assert len(g) == total_cuboids, "len(g) has to be equal to total_cuboids"
+            assert len(b) == total_cuboids, "len(b) has to be equal to total_cuboids"
+            if(len(a)!=total_cuboids):
+                for i in range(0,total_cuboids):
                     a[i]=a[0]
-            for i in range(0,totalSegments):
+            for i in range(0,total_cuboids):
                 color = {}
                 color['x'] = r[i]
                 color['y'] = g[i]
@@ -434,22 +434,22 @@ class client_communicator_to_unity:
                 color['w'] = a[i]
                 newMaterial.append({"color":color,"metallic":metallic[i],"smoothness":smoothness[i]})
         # Add all the data of the cubiods to the dictionary
-        data['segments'] = []
-        for i in range(0,totalSegments):
-            data['segments'].append({"theta_deg":newTheta[i],"scale":newScale[i],"material":newMaterial[i]})
+        data['cuboids'] = []
+        for i in range(0,total_cuboids):
+            data['cuboids'].append({"theta_deg":newTheta[i],"scale":newScale[i],"material":newMaterial[i]})
         
         # Specify if there should be created many cubiods branches
-        if(totalArms_Segment==None):
+        if(total_branches==None):
             # If None there will be no branches created
-            totalArms_Segment = []
-            for i in range(0,totalSegments-1):
-                totalArms_Segment.append(1)    
+            total_branches = []
+            for i in range(0,total_cuboids-1):
+                total_branches.append(1)    
         else:
             # Use the given information
-            assert type(totalArms_Segment)==list, "totalArmsSegment not a list" 
-            assert len(totalArms_Segment)== totalSegments-1, "len(totalArmsSegment): " +  str(len(totalArms_Segment)) + " has to be equal to totalSegments-1: " + str(totalSegments-1) 
+            assert type(total_branches)==list, "total_branches not a list" 
+            assert len(total_branches)== total_cuboids-1, "len(total_branches): " +  str(len(total_branches)) + " has to be equal to total_cuboids-1: " + str(total_cuboids-1) 
         # Add the information to the dictionary
-        data['totalArmsSegment']=totalArms_Segment
+        data['total_branches']=total_branches
         # Add the vertical offset of the coordinates of the camera  
         if(CameraVerticalOffset!=0):
             self.logger.info("CameraVerticalOffset is not zero anymore, the origin of the spherical coordinates of the camera is now vertically offset.\n") 

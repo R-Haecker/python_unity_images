@@ -173,14 +173,14 @@ public class TCP_server : MonoBehaviour
                         jsonparameters = data.Substring(0,data.Length - 4);
                         Debug.Log("TCP_Server in ListenForMessages: jsonparameters: "+ jsonparameters);
                         this.jsonCrane_here = JsonUtility.FromJson<JsonCrane>(jsonparameters);
-                        if(this.jsonCrane_here.totalSegments!=0)
+                        if(this.jsonCrane_here.total_cuboids!=0)
                         {
                             ready_to_build=true;
                             Debug.Log("TCP_Server in ListenForMessages: ready_to_build == true");
                         }
                         else
                         {
-                            Debug.Log("ERROR: Loaded JsonCrane data but totalsegments==0 aborting.");
+                            Debug.Log("ERROR: Loaded JsonCrane data but total_cuboids==0 aborting.");
                         }
                         break;
                     }

@@ -16,8 +16,8 @@ public class TcpConfigParameters
 [System.Serializable]
 public class JsonCrane
 {
-    public int totalSegments;
-    public int[] totalArmsSegment;
+    public int total_cuboids;
+    public int[] total_branches;
     public int totalArms;
     public bool same_scale;
     public bool same_theta;
@@ -30,7 +30,7 @@ public class JsonCrane
     public PointLights[] point_lights;
     public int totalSpotLights;
     public SpotLights[] spot_lights;
-    public JsonSegment[] segments;
+    public JsonSegment[] cuboids;
 }
 
 [System.Serializable]
