@@ -4,7 +4,7 @@ data/images/*
 data/python/*
 data/unity/*
 test_for_plotting_images.ipynb
-#log/*
+log/*
 .ipynb_checkpoints
 __pycache__
 .vscode
