@@ -1,6 +1,6 @@
 Welcome to Python-Unity Images documentation!
 =========================================================
-Python Code
+Python Code description
 =============
 client.py
 ----------    
