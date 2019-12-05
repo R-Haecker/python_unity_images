@@ -6,7 +6,6 @@ client.py
 ----------    
 .. toctree::
    :maxdepth: 1
-   :caption: Contents:
 .. autoclass:: client.client_communicator_to_unity
     :members:
     
@@ -16,7 +15,6 @@ dataset.py
 ----------   
 .. toctree::
    :maxdepth: 1
-   :caption: Contents:
 .. autoclass:: dataset.dataset_cuboids
     :members:
     
