@@ -22,7 +22,7 @@ class client_communicator_to_unity:
         :param log_level: defaults to ``logging.INFO``, \n 
                             This variable sets the logging level of the console handler for the class which means how much information is displayed to your console. 
                             For debugging set it to: logging.DEBUG
-        :type log_level: *int*, optional
+        :type log_level: `int`, optional
         :raises IOError: Raises IOError if Unity build can not be found. 
         """   
         # Set up Data Paths
@@ -180,7 +180,7 @@ class client_communicator_to_unity:
         """Send data to Unity server.
         
         :param json_string: This string will be sent to Unity. Has to be readable by Unity.
-        :type json_string: *string*
+        :type json_string: `string`
         :param exit: defaults to ``False``,\n 
                     If this is True the Unity build will close.
         :type exit: bool, optional
@@ -202,7 +202,7 @@ class client_communicator_to_unity:
 
         data_complete = bytearray([0])
         while 1:
-            # Recive data from socket connection
+            # receive data from socket connection
             try:
                 data = self.socket.recv(1024)
             except socket.timeout:
@@ -216,8 +216,8 @@ class client_communicator_to_unity:
                 break
         return data_complete
 
-    def recive_image(self, json_string):
-        """Send string to Unity server and recive corresponding image.
+    def receive_image(self, json_string):
+        """Send string to Unity server and receive corresponding image.
         
         :param json_string: This ``string`` has to be comprehensible for Unity which are strings returned by :meth:`~client.client_communicator_to_unity.write_json_crane`
         :type json_string: string
@@ -235,12 +235,12 @@ class client_communicator_to_unity:
         
         unity_resp_bytes = bytes()
         while True:
-            # Recive data from Unity until the whole image is transferred
+            # receive data from Unity until the whole image is transferred
             unity_resp_bytes = self.receive_data_as_bytes()
-            self.logger.debug("Trying to recive data.")
+            self.logger.debug("Trying to receive data.")
             if unity_resp_bytes[-8:] == bytearray([125, 99,255,255,255,255,255,255]):
                 # Check if the data contains the whole image by looking for the end tag
-                self.logger.info("Data from Unity recived.")
+                self.logger.info("Data from Unity received.")
                 self.logger.debug("End_tag detected, unity_resp_bytes[0:10]: " + str(unity_resp_bytes[0:10]))
                 break
         # Cut out bytes which are not pixels of the image and format bytes
@@ -255,108 +255,115 @@ class client_communicator_to_unity:
     
     def write_json_crane(self, total_cuboids=3, same_scale = True, scale=2.0, same_theta = True, theta=40.0, phi=0.0, total_branches=None,
     same_material = True, metallic=0.5, smoothness=0.5, r=1.0,g=1.0,b=1.0,a = 1.0,
-    CameraRes_width = 256, CameraRes_height = 256, Camera_FieldofView = 60.0, CameraRadius = None, CameraTheta = 90.0, CameraPhi=0.0, CameraVerticalOffset = 0.0,
+    CameraRes_width = 256, CameraRes_height = 256, Camera_FieldofView = 60.0, CameraRadius = 12.0, CameraTheta = 90.0, CameraPhi=0.0, CameraVerticalOffset = 0.0,
+    DirectionalLightTheta = 30.0, DirectionalLightIntensity = 0.8,
     totalPointLights=1, same_PointLightsColor = True, PointLightsColor_r = 1.0, PointLightsColor_g = 1.0, PointLightsColor_b = 1.0, PointLightsColor_a = 1.0, PointLightsRadius=[7.0], PointLightsTheta=[20.0], PointLightsPhi=[0.0], PointLightsIntensity=[1.0], PointLightsRange=[10.0], 
-    totalSpotLights=1, same_SpotLightsColor = True, SpotLightsColor_r = 1.0, SpotLightsColor_g = 1.0, SpotLightsColor_b = 1.0, SpotLightsColor_a = 1.0, SpotLightsRadius=[10.0], SpotLightsTheta=[0.0], SpotLightsPhi=[0.0], SpotLightsIntensity=[1.0], SpotLightsRange=[10.0], SpotAngle=[30.0],
-    DirectionalLightTheta = 30.0, DirectionalLightIntensity = 0.8):
-        """Returns string according to input parameter which can be interpreted by the Unity server.
+    totalSpotLights=1, same_SpotLightsColor = True, SpotLightsColor_r = 1.0, SpotLightsColor_g = 1.0, SpotLightsColor_b = 1.0, SpotLightsColor_a = 1.0, SpotLightsRadius=[10.0], SpotLightsTheta=[0.0], SpotLightsPhi=[0.0], SpotLightsIntensity=[1.0], SpotLightsRange=[10.0], SpotAngle=[30.0]):
+        """
+        Returns string according to input parameter which can be interpreted by the Unity server. Should be used in function :meth:`~client.client_communicator_to_unity.receive_image` to create an image.
         
-        :param total_cuboids: [description], defaults to 3
+        :param total_cuboids:  The total amount of cubiods which will be "stacked" along one branch. Has to be bigger than zero, defaults to 3
         :type total_cuboids: int, optional
-        :param same_scale: [description], defaults to True
+        :param same_scale: If the vertical scale of the cuboids should all be the same, defaults to True
         :type same_scale: bool, optional
-        :param scale: [description], defaults to 2
-        :type scale: int, optional
-        :param same_theta: [description], defaults to True
+        :param scale: The cuboids size vary only along the vertical dimension others are set to one. It is either a float if ``same_scale == True``  or a list of floats with the lenght of ``total_cuboids``, defaults to 2.0
+        :type scale: 'float' or 'list', optional
+        :param same_theta: If the angle between two stacked cuboids should be the same for every cuboid, defaults to True
         :type same_theta: bool, optional
-        :param theta: [description], defaults to 40
-        :type theta: int, optional
-        :param phi: [description], defaults to 0
-        :type phi: int, optional
-        :param total_branches: [description], defaults to None
-        :type total_branches: [type], optional
-        :param same_material: [description], defaults to True
+        :param theta: The angle between two stacked cuboids in degrees. If it is zero the cuboids will be vertically allinged. If ``same_theta == True`` it has to be a float, else it has to be list of float with the length of ``total_cuboids - 1``, defaults to 40.0
+        :type theta: float, optional
+        :param phi: The rotation in degrees around the origin on the vertical axis for all cuboids i.e. the whole crane, defaults to 0.0
+        :type phi: float, optional
+        :param total_branches: If this is ``None`` there will be a Crane with one arm without any branches. If it is not ``None`` it has to be a ``list`` of integers with the length of ``total_cubiods-1``. 
+                                The integers define how many branches are created at the cubiod corresponding to the index of the element in the list, defaults to None
+        :type total_branches: None or list, optional
+        :param same_material: If all cuboids should have the same material properties, defaults to True
         :type same_material: bool, optional
-        :param metallic: [description], defaults to 0.5
-        :type metallic: float, optional
-        :param smoothness: [description], defaults to 0.5
+        :param metallic: The metallic property of the material of a cuboid should be in the range of zero and one. For more details have a look at the unity documentation. If ``same_material == True`` it has to be a float, else it has to be a list of floats with the length of ``total_cuboids``, defaults to 0.5
+        :type metallic: float or list, optional
+        :param smoothness: 
+            The smoothness property of the material of a cuboid should be in the range of zero and one.
+            If ``same_material == True`` it has to be a float, else it has to be a list of floats with the length of ``total_cuboids``, defaults to 0.5
         :type smoothness: float, optional
-        :param r: [description], defaults to 1
-        :type r: int, optional
-        :param g: [description], defaults to 1
-        :type g: int, optional
-        :param b: [description], defaults to 1
-        :type b: int, optional
-        :param a: [description], defaults to 1
-        :type a: int, optional
-        :param CameraRes_width: [description], defaults to 256
+        :param r: The **red color** property of the material of a cuboid should be in the range of zero and one.
+            If ``same_material == True`` it has to be a float, else it has to be a list of floats with the length of ``total_cuboids``, defaults to 1.0
+        :type r: float or list, optional
+        :param g: The **green color** property of the material of a cuboid should be in the range of zero and one.
+            If ``same_material == True`` it has to be a float, else it has to be a list of floats with the length of ``total_cuboids``, defaults to 1.0
+        :type g: float or list, optional
+        :param b: The **blue color** property of the material of a cuboid should be in the range of zero and one.
+            If ``same_material == True`` it has to be a float, else it has to be a list of floats with the length of ``total_cuboids``, defaults to 1.0
+        :type b: float or list, optional
+        :param a: The **alpha channel/transparency** of the material of a cuboid should be in the range of zero and one with zero beeing fully transparent. For more details have a look at the unity documentation.
+            If ``same_material == True`` it has to be a float, else it has to be a list of floats with the length of ``total_cuboids``, defaults to 1.0
+        :type a: float or list, optional
+        :param CameraRes_width: The **width resolution** of the receiving Image, defaults to 256
         :type CameraRes_width: int, optional
-        :param CameraRes_height: [description], defaults to 256
+        :param CameraRes_height: The **height resolution** of the receiving Image, defaults to 256
         :type CameraRes_height: int, optional
-        :param Camera_FieldofView: [description], defaults to 60
-        :type Camera_FieldofView: int, optional
-        :param CameraRadius: [description], defaults to None
+        :param Camera_FieldofView: The **field of view** of the camera in degrees, defaults to 60.0
+        :type Camera_FieldofView: float, optional
+        :param CameraRadius: Position of the camera in spherical coordinates. The camera always faces the origin of the spherical coordinates, defaults to 12.0
         :type CameraRadius: float, optional
-        :param CameraTheta: [description], defaults to 90
-        :type CameraTheta: int, optional
-        :param CameraPhi: [description], defaults to 0
-        :type CameraPhi: int, optional
-        :param CameraVerticalOffset: [description], defaults to 0
-        :type CameraVerticalOffset: int, optional
-        :param totalPointLights: [description], defaults to 1
-        :type totalPointLights: int, optional
-        :param same_PointLightsColor: [description], defaults to True
-        :type same_PointLightsColor: bool, optional
-        :param PointLightsColor_r: [description], defaults to 1
-        :type PointLightsColor_r: int, optional
-        :param PointLightsColor_g: [description], defaults to 1
-        :type PointLightsColor_g: int, optional
-        :param PointLightsColor_b: [description], defaults to 1
-        :type PointLightsColor_b: int, optional
-        :param PointLightsColor_a: [description], defaults to 1
-        :type PointLightsColor_a: int, optional
-        :param PointLightsRadius: [description], defaults to [7]
-        :type PointLightsRadius: list, optional
-        :param PointLightsTheta: [description], defaults to [20]
-        :type PointLightsTheta: list, optional
-        :param PointLightsPhi: [description], defaults to [0]
-        :type PointLightsPhi: list, optional
-        :param PointLightsIntensity: [description], defaults to [1]
-        :type PointLightsIntensity: list, optional
-        :param PointLightsRange: [description], defaults to [10]
-        :type PointLightsRange: list, optional
-        :param totalSpotLights: [description], defaults to 1
-        :type totalSpotLights: int, optional
-        :param same_SpotLightsColor: [description], defaults to True
-        :type same_SpotLightsColor: bool, optional
-        :param SpotLightsColor_r: [description], defaults to 1
-        :type SpotLightsColor_r: int, optional
-        :param SpotLightsColor_g: [description], defaults to 1
-        :type SpotLightsColor_g: int, optional
-        :param SpotLightsColor_b: [description], defaults to 1
-        :type SpotLightsColor_b: int, optional
-        :param SpotLightsColor_a: [description], defaults to 1
-        :type SpotLightsColor_a: int, optional
-        :param SpotLightsRadius: [description], defaults to [10]
-        :type SpotLightsRadius: list, optional
-        :param SpotLightsTheta: [description], defaults to [0]
-        :type SpotLightsTheta: list, optional
-        :param SpotLightsPhi: [description], defaults to [0]
-        :type SpotLightsPhi: list, optional
-        :param SpotLightsIntensity: [description], defaults to [1]
-        :type SpotLightsIntensity: list, optional
-        :param SpotLightsRange: [description], defaults to [10]
-        :type SpotLightsRange: list, optional
-        :param SpotAngle: [description], defaults to [30]
-        :type SpotAngle: list, optional
-        :param DirectionalLightTheta: [description], defaults to 30
-        :type DirectionalLightTheta: int, optional
-        :param DirectionalLightIntensity: [description], defaults to 0.8
+        :param CameraTheta: In degree the position of the camera in spherical coordinates. The camera always faces the origin of the spherical coordinates, defaults to 90.0
+        :type CameraTheta: float, optional
+        :param CameraPhi: In degree the position of the camera in spherical coordinates. The camera always faces the origin of the spherical coordinates, defaults to 0.0
+        :type CameraPhi: float, optional
+        :param CameraVerticalOffset: This parameter offstets the origin of the spherical coordinate system only for the camera in the vertical i.e y-axis direction. The camera always faces the origin of its spherical coordinates, defaults to 0.0
+        :type CameraVerticalOffset: float, optional
+        :param DirectionalLightTheta: The angle in degrees of the directional light i.e. the sun. *For more details have a look at the unity documentation*. If zero it is at the zenith i.e. directly above the origin, at 90 degrees the light comes from the horizon, defaults to 30.0
+        :type DirectionalLightTheta: float, optional
+        :param DirectionalLightIntensity: The intesity of the light should be between zero and one but can be set higher, defaults to 0.8
         :type DirectionalLightIntensity: float, optional
-        :return: Corresponding string fromatted for Unity. Can be used in :meth:`~client.client_communicator_to_unity.recive_image`.
-        :rtype: `string`
+        :param totalPointLights: The total amount of Pointlights in the scene. *For more details about Pointlights have a look at the unity documentation*, defaults to 1
+        :type totalPointLights: int, optional
+        :param same_PointLightsColor: If all Pointlights should have the same color, defaults to True
+        :type same_PointLightsColor: bool, optional
+        :param PointLightsColor_r: The **red color** property of the light should be in the range of zero and one. If ``same_PointLightsColor == True`` it has to be a float, else it has to be a list of floats with the length of ``totalPointLights``, defaults to 1.0
+        :type PointLightsColor_r: float or list, optional
+        :param PointLightsColor_g: The **green color** property of the light should be in the range of zero and one. If ``same_PointLightsColor == True`` it has to be a float, else it has to be a list of floats with the length of ``totalPointLights``, defaults to 1.0
+        :type PointLightsColor_g: float or list, optional
+        :param PointLightsColor_b: The **blue color** property of the light should be in the range of zero and one. If ``same_PointLightsColor == True`` it has to be a float, else it has to be a list of floats with the length of ``totalPointLights``, defaults to 1.0
+        :type PointLightsColor_b: float or list, optional
+        :param PointLightsColor_a: The **alpha channel/ transparency** of the color of the light should be in the range of zero and one. If ``same_PointLightsColor == True`` it has to be a float, else it has to be a list of floats with the length of ``totalPointLights``, defaults to 1.0
+        :type PointLightsColor_a: float or list, optional
+        :param PointLightsRadius: The positions of all Pointlights in spherical coordinates. Has to be a list of floats with the length of ``totalPointLights``, defaults to [7.0]
+        :type PointLightsRadius: list, optional
+        :param PointLightsTheta: The positions of all Pointlights in spherical coordinates. Has to be a list of floats with the length of ``totalPointLights``, defaults to [20.0]
+        :type PointLightsTheta: list, optional
+        :param PointLightsPhi: The positions of all Pointlights in spherical coordinates. Has to be a list of floats with the length of ``totalPointLights``, defaults to [0.0]
+        :type PointLightsPhi: list, optional
+        :param PointLightsIntensity: The intensities of all Pointlights should be in the range of zero and one. Has to be a list of floats with the length of ``totalPointLights``, defaults to [1.0]
+        :type PointLightsIntensity: list, optional
+        :param PointLightsRange: The range of the emitted light from the Pointlights. Should be adjusted depending on the position of the lights to "reach" the cuboids. Has to be a list of floats with the length of ``totalPointLights``, defaults to [10.0]
+        :type PointLightsRange: list, optional
+        :param totalSpotLights: The total amount of Spotlights in the scene. *For more details about Spotlights have a look at the unity documentation*, defaults to 1
+        :type totalSpotLights: int, optional
+        :param same_SpotLightsColor: If all Spotlights should have the same color, defaults to True
+        :type same_SpotLightsColor: bool, optional
+        :param SpotLightsColor_r: The **red color** property of the light should be in the range of zero and one. If ``same_SpotLightsColor == True`` it has to be a float, else it has to be a list of floats with the length of ``totalSpotLights``, defaults to 1.0
+        :type SpotLightsColor_r: float or list, optional
+        :param SpotLightsColor_g: The **green color** property of the light should be in the range of zero and one. If ``same_SpotLightsColor == True`` it has to be a float, else it has to be a list of floats with the length of ``totalSpotLights``, defaults to 1.0
+        :type SpotLightsColor_g: float or list, optional
+        :param SpotLightsColor_b: The **blue color** property of the light should be in the range of zero and one. If ``same_SpotLightsColor == True`` it has to be a float, else it has to be a list of floats with the length of ``totalSpotLights``, defaults to 1.0
+        :type SpotLightsColor_b: float or list, optional
+        :param SpotLightsColor_a: The **alpha channel/ transparency** of the color of the light should be in the range of zero and one. If ``same_SpotLightsColor == True`` it has to be a float, else it has to be a list of floats with the length of ``totalSpotLights``, defaults to 1.0
+        :type SpotLightsColor_a: float or list, optional
+        :param SpotLightsRadius: The positions of all Spotlights in spherical coordinates. Spotlights always face the origin. Has to be a list of floats with the length of ``totalSpotLights``, defaults to [10.0]
+        :type SpotLightsRadius: list, optional
+        :param SpotLightsTheta: The positions of all Spotlights in spherical coordinates. Spotlights always face the origin. Has to be a list of floats with the length of ``totalSpotLights``, defaults to [0.0]
+        :type SpotLightsTheta: list, optional
+        :param SpotLightsPhi: The positions of all Spotlights in spherical coordinates. Spotlights always face the origin. Has to be a list of floats with the length of ``totalSpotLights``, defaults to [0.0]
+        :type SpotLightsPhi: list, optional
+        :param SpotLightsIntensity: The intensities of all Spotlights should be in the range of zero and one. Has to be a list of floats with the length of ``totalSpotLights``, defaults to [1.0], defaults to [1.0]
+        :type SpotLightsIntensity: list, optional
+        :param SpotLightsRange: The range of the emitted light from the Spotlights. Should be adjusted depending on the position of the lights to "reach" the cuboids. Has to be a list of floats with the length of ``totalSpotLights``, defaults to [10.0]
+        :type SpotLightsRange: list, optional
+        :param SpotAngle: In degree this describes the angle created by the cone of the Spotlight. Has to be a list of floats with the length of ``totalSpotLights``, defaults to [30.0]
+        :type SpotAngle: list, optional
+        :return: Returns a string with all given parameters for unity to interpret. Can be used in function :meth:`~client.client_communicator_to_unity.receive_image` to create an image.
+        :rtype: string
         """        
-        
         # Create a Dictionary with all the given information which can be read by the Unity script
         data = {}
         data['total_cuboids'] = total_cuboids

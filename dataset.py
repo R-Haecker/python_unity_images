@@ -13,18 +13,14 @@ import time
 import os
 
 class dataset_cuboids(DatasetMixin):
-    def __init__(self, config = None, use_unity_build = True, combine_logs = True, debug_log = False):
-        """[summary]
+    def __init__(self, use_unity_build = True, debug_log = False):
+        """Sets up logging, the config, necessary paths and a client instance form :class:`~client.client_communicator_to_unity`.
         
         :param DatasetMixin: [description]
         :type DatasetMixin: [type]
-        :param config: [description], defaults to None
-        :type config: [type], optional
-        :param use_unity_build: [description], defaults to True
+        :param use_unity_build: If this is set to true image generation will work automatically with the Unity build. Otherwise you have to manually set the Unity editor to play, defaults to True
         :type use_unity_build: bool, optional
-        :param combine_logs: [description], defaults to True
-        :type combine_logs: bool, optional
-        :param debug_log: [description], defaults to False
+        :param debug_log: If there should be more information displayed in the console for debugging, defaults to False
         :type debug_log: bool, optional
         """        
         #  Set up log level
@@ -53,110 +49,50 @@ class dataset_cuboids(DatasetMixin):
             pass
         
         self.logger.debug("Create config.")
-        # Create dataset config for random parameter creation
-        if config==None:    
-            # Set the default intervall for all random generated parameters
-            self.config = self.writeConfig()
-        else:
-            # Use the given config
-            self.config = config
+        # Create dataset config for random parameter creation and set the default intervalls for all random generated parameters
+        self.set_config()
         self.logger.debug("Dataset initialised.\n")        
 
-    def writeConfig(self,same_scale=None, scale=[0.5,4], total_cuboids=[2,12], phi=[0,360], enable_many_arms=[1,3],same_theta=None, theta=None, 
+    def set_config(self,same_scale=None, scale=[0.5,4], total_cuboids=[2,12], phi=[0,360], branches=[1,3],same_theta=None, theta=None, 
     same_material=None, r=[0,1], g=[0,1], b=[0,1], a=[0.5,1], metallic=[0,1], smoothness=[0,1], CameraRadius = 10.0, CameraTheta = [30,100], CameraPhi = [0,360], CameraVerticalOffset = None,
     totalPointLights=[5,12], PointLightsRadius=[5,20], PointLightsPhi=[0,360], PointLightsTheta=[0,90], PointLightsIntensity=[7,17], PointLightsRange=[5,25], samePointLightColor=None, PointLightsColor_r=[0,1], PointLightsColor_g=[0,1], PointLightsColor_b=[0,1], PointLightsColor_a=[0.5,1],
     totalSpotLights=None, SpotLightsRadius=[5,20], SpotLightsPhi=[0,360], SpotLightsTheta=[0,90], SpotLightsIntensity=[5,15], SpotLightsRange=[5,25], SpotLightsAngle=[5,120], sameSpotLightColor=None, SpotLightsColor_r=[0,1], SpotLightsColor_g=[0,1], SpotLightsColor_b=[0,1], SpotLightsColor_a=[0.5,1],
     DirectionalLightTheta = [0,90], DirectionalLightIntensity = [0.1,1.8]):
-        """Retruns a config as dictionary which determines the interval for all random parameters created in the function create_random_parameters.
+        """Sets a config for this class instace which determines the interval for all random parameters created in the function :meth:`~dataset.dataset_cuboids.create_random_parameters`. The meaning of all the parameters are explained in this function: :meth:`~client.client_communicator_to_unity.write_json_crane`. 
+            Here are only those parameters mentioned which deviate from the ``standard_parameter``.
         
-        :param same_scale: [description], defaults to None
-        :type same_scale: [type], optional
-        :param scale: [description], defaults to [0.5,4]
-        :type scale: list, optional
-        :param total_cuboids: [description], defaults to [2,12]
-        :type total_cuboids: list, optional
-        :param phi: [description], defaults to [0,360]
-        :type phi: list, optional
-        :param enable_many_arms: [description], defaults to [1,3]
-        :type enable_many_arms: list, optional
-        :param same_theta: [description], defaults to None
-        :type same_theta: [type], optional
-        :param theta: [description], defaults to None
-        :type theta: [type], optional
-        :param same_material: [description], defaults to None
-        :type same_material: [type], optional
-        :param r: [description], defaults to [0,1]
-        :type r: list, optional
-        :param g: [description], defaults to [0,1]
-        :type g: list, optional
-        :param b: [description], defaults to [0,1]
-        :type b: list, optional
-        :param a: [description], defaults to [0.5,1]
-        :type a: list, optional
-        :param metallic: [description], defaults to [0,1]
-        :type metallic: list, optional
-        :param smoothness: [description], defaults to [0,1]
-        :type smoothness: list, optional
-        :param CameraRadius: [description], defaults to 10.0
-        :type CameraRadius: float, optional
-        :param CameraTheta: [description], defaults to [30,100]
-        :type CameraTheta: list, optional
-        :param CameraPhi: [description], defaults to [0,360]
-        :type CameraPhi: list, optional
-        :param CameraVerticalOffset: [description], defaults to None
-        :type CameraVerticalOffset: [type], optional
-        :param totalPointLights: [description], defaults to [5,12]
-        :type totalPointLights: list, optional
-        :param PointLightsRadius: [description], defaults to [5,20]
-        :type PointLightsRadius: list, optional
-        :param PointLightsPhi: [description], defaults to [0,360]
-        :type PointLightsPhi: list, optional
-        :param PointLightsTheta: [description], defaults to [0,90]
-        :type PointLightsTheta: list, optional
-        :param PointLightsIntensity: [description], defaults to [7,17]
-        :type PointLightsIntensity: list, optional
-        :param PointLightsRange: [description], defaults to [5,25]
-        :type PointLightsRange: list, optional
-        :param samePointLightColor: [description], defaults to None
-        :type samePointLightColor: [type], optional
-        :param PointLightsColor_r: [description], defaults to [0,1]
-        :type PointLightsColor_r: list, optional
-        :param PointLightsColor_g: [description], defaults to [0,1]
-        :type PointLightsColor_g: list, optional
-        :param PointLightsColor_b: [description], defaults to [0,1]
-        :type PointLightsColor_b: list, optional
-        :param PointLightsColor_a: [description], defaults to [0.5,1]
-        :type PointLightsColor_a: list, optional
-        :param totalSpotLights: [description], defaults to None
-        :type totalSpotLights: [type], optional
-        :param SpotLightsRadius: [description], defaults to [5,20]
-        :type SpotLightsRadius: list, optional
-        :param SpotLightsPhi: [description], defaults to [0,360]
-        :type SpotLightsPhi: list, optional
-        :param SpotLightsTheta: [description], defaults to [0,90]
-        :type SpotLightsTheta: list, optional
-        :param SpotLightsIntensity: [description], defaults to [5,15]
-        :type SpotLightsIntensity: list, optional
-        :param SpotLightsRange: [description], defaults to [5,25]
-        :type SpotLightsRange: list, optional
-        :param SpotLightsAngle: [description], defaults to [5,120]
-        :type SpotLightsAngle: list, optional
-        :param sameSpotLightColor: [description], defaults to None
-        :type sameSpotLightColor: [type], optional
-        :param SpotLightsColor_r: [description], defaults to [0,1]
-        :type SpotLightsColor_r: list, optional
-        :param SpotLightsColor_g: [description], defaults to [0,1]
-        :type SpotLightsColor_g: list, optional
-        :param SpotLightsColor_b: [description], defaults to [0,1]
-        :type SpotLightsColor_b: list, optional
-        :param SpotLightsColor_a: [description], defaults to [0.5,1]
-        :type SpotLightsColor_a: list, optional
-        :param DirectionalLightTheta: [description], defaults to [0,90]
-        :type DirectionalLightTheta: list, optional
-        :param DirectionalLightIntensity: [description], defaults to [0.1,1.8]
-        :type DirectionalLightIntensity: list, optional
-        :return: [description]
-        :rtype: [type]
+        :param "standard_parameter": Has to be a list with two floats. The first element describes the lower boundary and second element describes the upper boundary for the function :meth:`~dataset.dataset_cuboids.create_random_parameters` in which the variable is set randomly, defaults is a predefined list
+        :type "standard parameter": list, optional
+        :param same_scale: If ``None`` the boolean will be set randomly in :meth:`~dataset.dataset_cuboids.create_random_parameters`. Otherwise it will be set to the given boolean, defaults to None
+        :type same_scale: None or bool, optional
+        :param branches: If ``None`` there will be no branches which means one main branch. Else has to be a list with two integers. The amount of branches created in :meth:`~dataset.dataset_cuboids.create_random_parameters` at every cuboid will be chosen from a normal distribution where the second element of this list is interpreted als three sigma deviation, defaults to [1,3]
+        :type branches: None or list, optional
+        :param same_theta: If ``None`` the boolean will be set randomly in :meth:`~dataset.dataset_cuboids.create_random_parameters`. Otherwise it will be set to the given boolean, defaults to None
+        :type same_theta: None or list, optional
+        :param theta: If ``None`` the values for theta is set randomly between zero and ``360/total_cuboids``. Otherwise it has to be a list of length 2, defaults to None
+        :type theta: None or list, optional
+        :param same_material: If ``None`` the boolean will be set randomly in :meth:`~dataset.dataset_cuboids.create_random_parameters`. Otherwise it will be set to the given boolean, defaults to None
+        :type same_material: None or bool, optional
+        :param CameraRadius: If ``float`` then the value in :meth:`~dataset.dataset_cuboids.create_random_parameters` will not be random, instead set to the given ``float``. If it is a list it has to be a list of length two, defaults to 10.0
+        :type CameraRadius: float or list, optional
+        :param CameraTheta:  If ``float`` then the value in :meth:`~dataset.dataset_cuboids.create_random_parameters` will not be random, instead set to the given ``float``. If it is a list it has to be a list of length two, defaults to [30,100]
+        :type CameraTheta: float or list, optional
+        :param CameraPhi:  If ``float`` then the value in :meth:`~dataset.dataset_cuboids.create_random_parameters` will not be random, instead set to the given ``float``. If it is a list it has to be a list of length two, defaults to [0,360]
+        :type CameraPhi: float or list, optional
+        :param CameraVerticalOffset: If ``None`` it is set to zero. If ``float`` then the value in :meth:`~dataset.dataset_cuboids.create_random_parameters` will not be random, instead set to the given ``float``. If it is a list it has to be a list of length two, defaults to None
+        :type CameraVerticalOffset: None, float or list, optional
+        :param totalPointLights: If ``None`` there will be no Pointlights created in :meth:`~dataset.dataset_cuboids.create_random_parameters`. Else it has to be a list of integers with the length two, defaults to [5,12]
+        :type totalPointLights: None or list, optional
+        :param samePointLightColor: If ``None`` the boolean will be chosen randomly, else the given boolean is used, defaults to None
+        :type samePointLightColor: None or bool, optional
+        :param totalSpotLights:  If ``None`` there will be no Spotlights created in :meth:`~dataset.dataset_cuboids.create_random_parameters`. Else it has to be a list of integers with the length two, defaults to None
+        :type totalSpotLights: None or list, optional
+        :param sameSpotLightColor: If ``None`` the boolean will be chosen randomly, else the given boolean is used, defaults to None
+        :type sameSpotLightColor: None or bool, optional
+        :param DirectionalLightTheta: If ``None`` the ``DirectionalLightIntensity`` will be set to zero, else it has to be a list of floats with the length two, defaults to [0,90]
+        :type DirectionalLightTheta: None or list, optional
+        :param DirectionalLightIntensity: If ``None`` the ``DirectionalLightIntensity`` will be set to zero, else it has to be a list of floats with the length two, defaults to [0.1,1.8]
+        :type DirectionalLightIntensity: None or list, optional
         """        
         config = {}
         # Create intervals for general properties
@@ -178,11 +114,11 @@ class dataset_cuboids(DatasetMixin):
         # Vertical Scale of the cubiods
         config["scale"]=scale    
         # The upper limit for the arms is dicribing the three sigma variance of the guassion normal distribution for random generation of total_branches
-        if enable_many_arms!=None:
-            assert len(enable_many_arms) == 2, "Has to be list of length 2 or type None; enable_many_arms defines boundaries for how many arms could be created in getRandomJsonData. This means that there is a chance that the crane splits up in the given range. If it is None then there will be only one arm." 
-            assert enable_many_arms[0] > 0, "enable_many_arms has to be 1 or greater to even create one Arm."
-            assert enable_many_arms[1] > 0, "enable_many_arms has to be 1 or greater to even create one Arm."
-        config["enable_many_arms"] = enable_many_arms
+        if branches!=None:
+            assert len(branches) == 2, "Has to be list of length 2 or type None; branches defines boundaries for how many arms could be created in getRandomJsonData. This means that there is a chance that the crane splits up in the given range. If it is None then there will be only one arm." 
+            assert branches[0] > 0, "branches has to be 1 or greater to even create one Arm."
+            assert branches[1] > 0, "branches has to be 1 or greater to even create one Arm."
+        config["branches"] = branches
         
         # Create intervals or fixed values for camera position
         if type(CameraRadius)== list:
@@ -288,25 +224,17 @@ class dataset_cuboids(DatasetMixin):
             assert len(SpotLightsColor_a) == 2, "SpotLightsColor_a[0] is minimal limit and SpotLightsColor_a[1] is maximal limit for random generation of SpotLightsColor_a."
             config["SpotLightsColor_a"]=SpotLightsColor_a
             
-        return config
-        
-    def set_config(self,config):
-        """[summary]
-        
-        :param config: [description]
-        :type config: [type]
-        """        
         self.config = config
     
     def create_random_parameters(self , CameraRes_width= 520, CameraRes_height=520,):
-        """Creates random input parameter depending on your config, the camera parameters are not random
-        
-        :param CameraRes_width: [description], defaults to 520
+        """Creates random input parameters depending on your config which defines the interval for the generated parameters, the camera parameters are not set randomly
+    
+        :param CameraRes_width: Image resolution width, defaults to 520
         :type CameraRes_width: int, optional
-        :param CameraRes_height: [description], defaults to 520
+        :param CameraRes_height: Image resolution height, defaults to 520
         :type CameraRes_height: int, optional
-        :return: [description]
-        :rtype: [type]
+        :return: A dictionary to use as input for function :meth:`~dataset.dataset_cuboids.create_json_string_from_parameters`.
+        :rtype: dictionary
         """
         dictionary={}
 
@@ -443,14 +371,14 @@ class dataset_cuboids(DatasetMixin):
         # Amount of branches (Arms) and at which cubiod to branch. The first element of the list total_branchess counts the amount of branches at the first cubiod and and so on...
         # if total_branches = [1,1,1,1,1] then there is only one "main" Branch and no splits  
         total_branches = []
-        if self.config["enable_many_arms"]==None:
+        if self.config["branches"]==None:
             total_branches = None
         else:
-            if self.config["enable_many_arms"][0] < 1:
-                self.logger.info("config['enable_many_arms'][0] is bigger than 1. This means you create at every segment new arms. Change the dataset config if you do not want this.")
+            if self.config["branches"][0] < 1:
+                self.logger.info("config['branches'][0] is bigger than 1. This means you create at every segment new arms. Change the dataset config if you do not want this.")
             # the upper limit for the arms is dicribing the three sigma variance of the guassion normal distribution
-            arms = np.random.normal(0,(self.config["enable_many_arms"][1] - self.config["enable_many_arms"][0])/3, total_cuboids-1)  
-            arms = np.absolute(arms) + self.config["enable_many_arms"][0] 
+            arms = np.random.normal(0,(self.config["branches"][1] - self.config["branches"][0])/3, total_cuboids-1)  
+            arms = np.absolute(arms) + self.config["branches"][0] 
             for i in range(total_cuboids-1):
                 if arms[i]<=1 :
                     total_branches.append(1)
@@ -588,12 +516,13 @@ class dataset_cuboids(DatasetMixin):
         return dictionary
         
     def create_json_string_from_parameters(self, dictionary):
-        """Return a String depending on your input parameters wich can be interpreted afterwards by the Unity script.
+        """
+        Inputs the parameters/dictionary into the function :meth:`~client.client_communicator_to_unity.write_json_crane`.
 
-        :param dictionary: [description]
-        :type dictionary: [type]
-        :return: [description]
-        :rtype: [type]
+        :param dictionary: A dictionary similar to one from :meth:`~dataset.dataset_cuboids.create_random_parameters` with all input parameters for the function :meth:`~client.client_communicator_to_unity.write_json_crane`.
+        :type dictionary: dictionary
+        :return: A string depending on your input parameters wich can be interpreted afterwards by the Unity script. 
+        :rtype: string
         """        
         return self.uc.write_json_crane(total_cuboids=dictionary["total_cuboids"], same_scale=dictionary["same_scale"], scale=dictionary["scale"], same_theta=dictionary["same_theta"], theta=dictionary["theta"], phi=dictionary["phi"], total_branches=dictionary["total_branches"], same_material=dictionary["same_material"], metallic=dictionary["metallic"], smoothness=dictionary["smoothness"], r=dictionary["r"], g=dictionary["g"], b=dictionary["b"], a=dictionary["a"], CameraRes_width=dictionary["CameraRes_width"], CameraRes_height=dictionary["CameraRes_height"], Camera_FieldofView=dictionary["Camera_FieldofView"], CameraRadius=dictionary["CameraRadius"], CameraTheta=dictionary["CameraTheta"], CameraPhi=dictionary["CameraPhi"], CameraVerticalOffset=dictionary["CameraVerticalOffset"], 
             totalPointLights=dictionary["totalPointLights"], same_PointLightsColor=dictionary["same_PointLightsColor"], PointLightsColor_r=dictionary["PointLightsColor_r"], PointLightsColor_g=dictionary["PointLightsColor_g"], PointLightsColor_b=dictionary["PointLightsColor_b"], PointLightsColor_a=dictionary["PointLightsColor_a"], PointLightsRadius=dictionary["PointLightsRadius"], PointLightsTheta=dictionary["PointLightsTheta"], PointLightsPhi=dictionary["PointLightsPhi"], PointLightsIntensity=dictionary["PointLightsIntensity"], PointLightsRange=dictionary["PointLightsRange"], 
@@ -601,13 +530,13 @@ class dataset_cuboids(DatasetMixin):
             DirectionalLightTheta=dictionary["DirectionalLightTheta"], DirectionalLightIntensity=dictionary["DirectionalLightIntensity"])
 
     def save(self, dictionary, save_para = True, save_image = False):
-        """Save parameter data or an image of a dictionary in the data/parameters folder or the data/images folder.
+        """Save parameter data or/and an image of a dictionary in the ``data/parameters`` folder or the ``data/images`` folder. The saved parameters can be loaded with :meth:`~dataset.dataset_cuboids.load_parameters` and then manipulated to create an altered image.
         
-        :param dictionary: [description]
-        :type dictionary: [type]
-        :param save_para: [description], defaults to True
+        :param dictionary: A dictionary with keys as "index", "parameters" and if needed "image". For example a returned dictionary from :meth:`~dataset.dataset_cuboids.parameters_to_finished_data`.
+        :type dictionary: dictionary
+        :param save_para: If the parameters should be saved to ``data/parameters`` labeled with the index if available, defaults to True
         :type save_para: bool, optional
-        :param save_image: [description], defaults to False
+        :param save_image: If the image should be saved to ``data/images`` labeled with the index if available, defaults to False
         :type save_image: bool, optional
         """        
         # Save parameters.
@@ -640,14 +569,14 @@ class dataset_cuboids(DatasetMixin):
                 self.logger.error("Image could not be saved. No image data not found in dictionary.")
 
     def load_parameters(self,index = [-1], amount = 1):
-        """Load and return a given aoumt of parameters. If index is not specified the index will be chooden randomly.
+        """Load and return a given amount of parameters as dictionaries in a list. If index is not specified the index will be chosen randomly.
         
-        :param index: [description], defaults to [-1]
+        :param index: If index is default it will be generated randomly else it has to be a list of integers the length of ``amount``, defaults to [-1]
         :type index: list, optional
-        :param amount: [description], defaults to 1
+        :param amount: The amount of dictionaries in the returned list, defaults to 1
         :type amount: int, optional
-        :return: [description]
-        :rtype: [type]
+        :return: A list of parameters as dictionaries is returned except the amount is one or default the dictionary itself will be returned.
+        :rtype: list or dictionary
         """        
         if index[0]==-1:
             index = np.random.randint(0,self.load_index(),amount)
@@ -673,21 +602,21 @@ class dataset_cuboids(DatasetMixin):
             return parameter_list    
    
     def parameters_to_finished_data(self, parameters, save_para = True, save_image = False):
-        """Return dictionary with all relevant data. Input parameters and get an corresponding image. 
+        """Input parameters and get an corresponding image. 
         
-        :param parameters: [description]
-        :type parameters: [type]
-        :param save_para: [description], defaults to True
+        :param parameters: Parameters to use for :meth:`~dataset.dataset_cuboids.create_json_string_from_parameters`.
+        :type parameters: dictionary
+        :param save_para: If the parameters should be saved at ``data/parameters``, defaults to True
         :type save_para: bool, optional
-        :param save_image: [description], defaults to False
+        :param save_image: If the image should be saved at ``data/images``, defaults to False
         :type save_image: bool, optional
-        :return: [description]
-        :rtype: [type]
+        :return: A dictionary with all relevant data in keys as "index","parameters" and "image". 
+        :rtype: dictionary
         """        
         # Format the parameters to a jsonstring that can be sent and interpreted by Unity.
         jsonstring = self.create_json_string_from_parameters(parameters)
-        # Recive an image depending on your parameters.
-        img = self.uc.recive_image(jsonstring)
+        # receive an image depending on your parameters.
+        img = self.uc.receive_image(jsonstring)
         # Load and increment the extern saved index.
         index = self.increment_index()
         # Put data in an dictionary.
@@ -696,17 +625,17 @@ class dataset_cuboids(DatasetMixin):
         self.save(newDict,save_para = save_para, save_image = save_image)
         return newDict  
 
-    def get_example(self,index = None, save_para = True, save_image = False):
-        """Returns a dictionary with all relevant data and the image. Create an exampel image from random parameters.
+    def get_example(self, save_para = True, save_image = False, index = None):
+        """Create an example of the dataset.
         
-        :param index: [description], defaults to None
-        :type index: [type], optional
-        :param save_para: [description], defaults to True
+        :param save_para: If the parameters should be saved at ``data/parameters``, defaults to True
         :type save_para: bool, optional
-        :param save_image: [description], defaults to False
+        :param save_image: If the image should be saved at ``data/images``, defaults to False
         :type save_image: bool, optional
-        :return: [description]
-        :rtype: [type]
+        :param index: Shoukd be default. If specified the the new data will overwrite the old data at the given index if available, defaults to None
+        :type index: None or int, optional
+        :return: A dictionary with all relevant data in the keys "index", "parameter" and "image".
+        :rtype: dictionary
         """        
         # Create random parameters depending o your config.  
         random_parameters = self.create_random_parameters()
@@ -714,34 +643,34 @@ class dataset_cuboids(DatasetMixin):
         newDict = self.parameters_to_finished_data(random_parameters, save_para = save_para, save_image = save_image)
         return newDict
 
-    def plot_images(self, dicts, images_in_one_row = 4, save_fig = True, show_index = True):
-        """Plot and show all images contained in the list of dictionaries and label them with their corresponding index.
+    def plot_images(self, dicts, images_per_row = 4, save_fig = True, show_index = True):
+        """Plot and show all images contained in the list dicts of dictionaries and label them with their corresponding index.
         
-        :param dicts: [description]
-        :type dicts: [type]
-        :param images_in_one_row: [description], defaults to 4
-        :type images_in_one_row: int, optional
-        :param save_fig: [description], defaults to True
+        :param dicts: Has to be a list with dictionaries in which there is the key "image" and if wanted "index" as returned from :meth:`~dataset.dataset_cuboids.parameters_to_finished_data`
+        :type dicts: list
+        :param images_per_row: How many images are plotted in one row, defaults to 4
+        :type images_per_row: int, optional
+        :param save_fig: If the created plot of all images should be saved to ``data/figures``, defaults to True
         :type save_fig: bool, optional
-        :param show_index: [description], defaults to True
+        :param show_index: If the corresponding index of every image is shown in the plot, defaults to True
         :type show_index: bool, optional
         """         
         # How many images are there
         numb = len(dicts)
-        if numb < images_in_one_row:
-            images_in_one_row = numb
+        if numb < images_per_row:
+            images_per_row = numb
         numb_y = 0
-        numb_x = images_in_one_row
+        numb_x = images_per_row
         # numb_y and numb_x determine the size of the grid of images
         while numb > numb_x:
             numb_y += 1
-            numb -= images_in_one_row
+            numb -= images_per_row
         numb_y += 1
         self.logger.debug("numb_y: " + str(numb_y))
         self.logger.debug("dicts[0]['image'].shape[0]: " + str(dicts[0]["image"].shape[0]))
-        self.logger.debug("(images_in_one_row*dicts[0][image].shape[1]: " + str((images_in_one_row*dicts[0]["image"].shape[1])))
+        self.logger.debug("(images_per_row*dicts[0][image].shape[1]: " + str((images_per_row*dicts[0]["image"].shape[1])))
         self.logger.debug("dicts[0][image].shape[2]: " + str(dicts[0]["image"].shape[2]))
-        h_stacked = np.ones((numb_y, dicts[0]["image"].shape[0], (images_in_one_row*dicts[0]["image"].shape[1]), dicts[0]["image"].shape[2]), dtype=int)
+        h_stacked = np.ones((numb_y, dicts[0]["image"].shape[0], (images_per_row*dicts[0]["image"].shape[1]), dicts[0]["image"].shape[2]), dtype=int)
         self.logger.debug("h_stacked.shape: " + str(h_stacked.shape))
         # Stack all images in one row together with np.hstack() for all numb_y
         for i in range(numb_y):
@@ -780,14 +709,14 @@ class dataset_cuboids(DatasetMixin):
         plt.show()
 
     def change_app1_art2(self, para1, para2):
-        """Returns parameters in a dictionary which combine the apperence of para1 and articulation of para2.
+        """Combines the appearence and the articulation of two different parameters.  
         
-        :param para1: [description]
-        :type para1: [type]
-        :param para2: [description]
-        :type para2: [type]
-        :return: [description]
-        :rtype: [type]
+        :param para1: Loaded or created parameters as from :meth:`~dataset.dataset_cuboids.create_random_parameters`.
+        :type para1: dictionary
+        :param para2: Loaded or created parameters as from :meth:`~dataset.dataset_cuboids.create_random_parameters`.
+        :type para2: dictionary
+        :return: Parameters which combine the appearence of para1 and articulation of para2.
+        :rtype: dictionary
         """        
         # Deepcopy para1
         param1 = para1.copy()
@@ -833,94 +762,97 @@ class dataset_cuboids(DatasetMixin):
         return param1
 
     def change_apperence_camera_phi_relative(self, parameters, delta_phi = 20):
-        """Return parameters with Camera position Phi shifted by delta_phi.
+        """Input parameters and get parameters with the Camera position Phi shifted by ``delta_phi``.
         
-        :param parameters: [description]
-        :type parameters: [type]
-        :param delta_phi: [description], defaults to 20
-        :type delta_phi: int, optional
-        :return: [description]
-        :rtype: [type]
+        :param parameters: Loaded or created parameters as from :meth:`~dataset.dataset_cuboids.create_random_parameters`.
+        :type parameters: dictionary
+        :param delta_phi: The amount of the added angle to Phi in degrees, defaults to 20
+        :type delta_phi: float, optional
+        :return: Parameters with Camera position Phi shifted by ``delta_phi``.
+        :rtype: dictionary
         """        
         parameters["CameraPhi"] += delta_phi 
         return parameters
 
-    def change_apperence_camera_phi(self, parameters, start_value, end_value, amount_of_pics):
-        """Return list with amount_of_pics of parameters in wich Camera position Phi is between the start_value and the end_value.
+    def change_apperence_camera_phi(self, parameters, start_value, end_value, numb_of_changes):
+        """Create many parameters in a list with the only difference in the Camera Phi value between ``start_value`` and the ``end_value``. 
         
-        :param parameters: [description]
-        :type parameters: [type]
-        :param start_value: [description]
-        :type start_value: [type]
-        :param end_value: [description]
-        :type end_value: [type]
-        :param amount_of_pics: [description]
-        :type amount_of_pics: [type]
-        """            
+        :param parameters: Loaded or created parameters as from :meth:`~dataset.dataset_cuboids.create_random_parameters`.
+        :type parameters: dictionary
+        :param start_value: The value of phi of the camera in the first parameters in degree.
+        :type start_value: float
+        :param end_value: The value of phi of the camera in the last parameters in degree. 
+        :type end_value: float
+        :param numb_of_changes: How many parameters are going to be added to the returned list.
+        :type numb_of_changes: int
+        :return: List with the length: ``numb_of_changes`` of parameters in wich Camera position Phi is linearly extrapolated between the ``start_value`` and the ``end_value``.
+        :rtype: list
+        """        
         parameters_list = []
         para = parameters.copy()
-        new_phi = np.linspace(start_value, end_value, amount_of_pics)
-        for i in range(amount_of_pics):
+        new_phi = np.linspace(start_value, end_value, numb_of_changes)
+        for i in range(numb_of_changes):
             para["CameraPhi"] = new_phi[i]
             parameters_list.append(para) 
         return para
 
     def change_apperence_camera_theta_relative(self, parameters, delta_theta = 20):
-        """Return parameters with Camera position Theta shifted by delta_phi.
+        """Input parameters and get parameters with the Camera position theta shifted by ``delta_theta``.
         
-        :param parameters: [description]
-        :type parameters: [type]
-        :param delta_theta: [description], defaults to 20
-        :type delta_theta: int, optional
-        :return: [description]
-        :rtype: [type]
+        :param parameters: Loaded or created parameters as from :meth:`~dataset.dataset_cuboids.create_random_parameters`.
+        :type parameters: dictionary
+        :param delta_theta: The amount of the added angle to Theta in degrees, defaults to 20
+        :type delta_theta: float, optional
+        :return: Parameters with Camera position Theta shifted by ``delta_theta``.
+        :rtype: dictionary
         """        
         parameters["CameraTheta"] += delta_theta 
         return parameters
 
-    def change_apperence_camera_theta(self, parameters, start_value, end_value, amount_of_pics):
-        """Return list with amount_of_pics of parameters in wich Camera position Theta is between the start_value and the end_value.
+    def change_apperence_camera_theta(self, parameters, start_value, end_value, numb_of_changes):
+        """Create many parameters in a list with the only difference in the Camera theta value between ``start_value`` and the ``end_value``. 
         
-        :param parameters: [description]
-        :type parameters: [type]
-        :param start_value: [description]
-        :type start_value: [type]
-        :param end_value: [description]
-        :type end_value: [type]
-        :param amount_of_pics: [description]
-        :type amount_of_pics: [type]
-        :return: [description]
-        :rtype: [type]
+        :param parameters: Loaded or created parameters as from :meth:`~dataset.dataset_cuboids.create_random_parameters`.
+        :type parameters: dictionary
+        :param start_value: The value of theta of the camera in the first parameters in degree.
+        :type start_value: float
+        :param end_value: The value of theta of the camera in the last parameters in degree. 
+        :type end_value: float
+        :param numb_of_changes: How many parameters are going to be added to the returned list.
+        :type numb_of_changes: int
+        :return: List with the length: ``numb_of_changes`` of parameters in wich Camera position theta is linearly extrapolated between the ``start_value`` and the ``end_value``.
+        :rtype: dictionary
         """        
         parameters_list = []
         para = parameters.copy()
-        new_theta = np.linspace(start_value, end_value, amount_of_pics)
-        for i in range(amount_of_pics):
+        new_theta = np.linspace(start_value, end_value, numb_of_changes)
+        for i in range(numb_of_changes):
             para["CameraTheta"] = new_theta[i]
             parameters_list.append(para) 
         return para
 
-    def change_articulation_theta(self, parameters, start_value, end_value, amount_of_pics, theta_pos = None):
-        """Return a list with amount_of_pics parameters with changed theta from start_value to end_value at the cubiod theta_pos.
+    def change_articulation_theta(self, parameters, start_value, end_value, numb_of_changes, theta_pos = None):
+        """Get a list of the input parameters with a changed crane articulation at the cuboid ``theta_pos`` between ``start_value`` and ``end_value``.
+        If ``theta_pos`` is default then all theta of the crane are changing.
         
-        :param parameters: [description]
-        :type parameters: [type]
-        :param start_value: [description]
-        :type start_value: [type]
-        :param end_value: [description]
-        :type end_value: [type]
-        :param amount_of_pics: [description]
-        :type amount_of_pics: [type]
-        :param theta_pos: [description], defaults to None
-        :type theta_pos: [type], optional
-        :return: [description]
-        :rtype: [type]
+        :param parameters: Loaded or created parameters as from :meth:`~dataset.dataset_cuboids.create_random_parameters`.
+        :type parameters: dictionary
+        :param start_value: The theta angel in degrees for the first parameters in the list. 
+        :type start_value: float
+        :param end_value:  The theta angel in degrees for the last parameters in the list. 
+        :type end_value: float
+        :param numb_of_changes: How many parameters are going to be added to the returned list.
+        :type numb_of_changes: int
+        :param theta_pos: Defines at which cuboid theta is going to change. Has to be smaller than ``parameters["total_cuboids"]`` if not, set to ``parameters["total_cuboids"]-1``. If it is default: `None` all thetas are changing, defaults to None
+        :type theta_pos: int, optional
+        :return: A list with ``numb_of_changes`` parameters with changed theta from ``start_value`` to ``end_value`` at the cubiod ``theta_pos``.
+        :rtype: `list`
         """        
-        new_theta = np.linspace(start_value, end_value, amount_of_pics)
+        new_theta = np.linspace(start_value, end_value, numb_of_changes)
         parameters_list = []
         if(theta_pos==None):
             # If theta_pos is None then all thetas are going to change
-            for i in range(amount_of_pics):
+            for i in range(numb_of_changes):
                 New_Theta = []                
                 for j in range(parameters["total_cuboids"]-1):
                     New_Theta.append(new_theta[i])
@@ -940,7 +872,7 @@ class dataset_cuboids(DatasetMixin):
                 self.logger.info("Changing only one theta while same_theta is true")
             else:
                 New_Theta = parameters["theta"]
-            for i in range(amount_of_pics):
+            for i in range(numb_of_changes):
                 self.logger.debug("i: " + str(i) + " new_theta: " + str(new_theta) + " theta_pos: " + str(theta_pos) + " New_Theta: " + str(New_Theta) )
                 New_Theta[theta_pos] = new_theta[i]
                 parameters["theta"] = New_Theta          
@@ -948,11 +880,11 @@ class dataset_cuboids(DatasetMixin):
         return parameters_list
     
     def increment_index(self):
-        """Load, increment and return the externaly saved index.
+        """Load, increment and return the new external saved index.
         
-        :raises e: [description]
-        :return: [description]
-        :rtype: [type]
+        :raises FileNotFoundError: If the file ``data/python/index.txt`` is not found.
+        :return: An integer which represents the next index.
+        :rtype: int
         """        
         index = self.load_index()
         self.logger.debug("index: " + str(index))
@@ -968,11 +900,11 @@ class dataset_cuboids(DatasetMixin):
         return index
 
     def load_index(self):
-        """Load and return the externaly saved index.
+        """Load and return the old external saved index.
         
-        :raises e: [description]
-        :return: [description]
-        :rtype: [type]
+        :raises FileNotFoundError: If the file ``data/python/index.txt`` is not found.
+        :return: An integer which represents the last used index.
+        :rtype: int
         """        
         try:
             with open("data/python/index.txt","r") as f:
@@ -984,9 +916,9 @@ class dataset_cuboids(DatasetMixin):
         return int(index)
 
     def reset_index(self, set_index = 0):
-        """Reset the externaly saved index to set_index.
+        """Reset the external saved index to ``set_index`` to save storage and overwrite old parameters and images.
         
-        :param set_index: [description], defaults to 0
+        :param set_index: The index to which it will be set, defaults to 0
         :type set_index: int, optional
         """        
         # Use this function if your data folder takes up too much space 
@@ -995,7 +927,7 @@ class dataset_cuboids(DatasetMixin):
             f.close()
 
     def exit(self):
-        """Close TCP connection. Send end request to Unity and with that quit the application.
+        """Closes TCP connection. Send end request to Unity and with that quit the application.
         """        
         self.uc.exit()
         self.logger.debug("Exit socket connection to unity.")
@@ -1016,5 +948,5 @@ for i in range(5):
     dicts.append(data.parameters_to_finished_data(para2))
 data.exit()
 
-data.plot_images(dicts, images_in_one_row=5)
+data.plot_images(dicts, images_per_row=5)
 '''
