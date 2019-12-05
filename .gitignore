@@ -5,7 +5,9 @@ data/parameters/*
 data/images/*
 !data/images/examples
 data/python/*
+!data/python/examples
 data/unity/*
+data/unity/examples
 test_for_plotting_images.ipynb/
 log/*
 .ipynb_checkpoints
