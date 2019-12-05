@@ -1,0 +1,641 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="y">
+  <head>
+    <meta charset="utf-8" />
+    <title>Welcome to Python-Unity Images documentation! &#8212; Python-Unity Images 0.1 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="welcome-to-python-unity-images-documentation">
+<h1>Welcome to Python-Unity Images documentation!<a class="headerlink" href="#welcome-to-python-unity-images-documentation" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="python-code">
+<h1>Python Code<a class="headerlink" href="#python-code" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="client-py">
+<h2>client.py<a class="headerlink" href="#client-py" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<dl class="class">
+<dt id="client.client_communicator_to_unity">
+<em class="property">class </em><code class="sig-prename descclassname">client.</code><code class="sig-name descname">client_communicator_to_unity</code><span class="sig-paren">(</span><em class="sig-param">use_unity_build=True</em>, <em class="sig-param">log_level=20</em><span class="sig-paren">)</span><a class="headerlink" href="#client.client_communicator_to_unity" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="client.client_communicator_to_unity.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param">use_unity_build=True</em>, <em class="sig-param">log_level=20</em><span class="sig-paren">)</span><a class="headerlink" href="#client.client_communicator_to_unity.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a socket and a logger for the console and saves a log file at: <code class="docutils literal notranslate"><span class="pre">log/python_client.log</span></code>.
+Starts Unity if <code class="docutils literal notranslate"><span class="pre">use_unity_build</span> <span class="pre">==</span> <span class="pre">True</span></code> and waits until Unity is fully started to then call the function <code class="docutils literal notranslate"><span class="pre">connect_to_server()</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>use_unity_build</strong> (<em>bool</em><em>, </em><em>optional</em>) -- <p>defaults to <code class="docutils literal notranslate"><span class="pre">True</span></code>,</p>
+<p>If this is set true the Unity build will start. Otherwise you should already set the Unity editor to play.,</p>
+</p></li>
+<li><p><strong>log_level</strong> (<cite>int</cite>, optional) -- <p>defaults to <code class="docutils literal notranslate"><span class="pre">logging.INFO</span></code>,</p>
+<p>This variable sets the logging level of the console handler for the class which means how much information is displayed to your console.
+For debugging set it to: logging.DEBUG</p>
+</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><strong>IOError</strong> -- Raises IOError if Unity build can not be found.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="client.client_communicator_to_unity.connect_to_server">
+<code class="sig-name descname">connect_to_server</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#client.client_communicator_to_unity.connect_to_server" title="Permalink to this definition">¶</a></dt>
+<dd><p>Establish tcp socket connection to Unity server.</p>
+<p>Load client tcp config from <code class="docutils literal notranslate"><span class="pre">data/python/client_tcp_config.json</span></code>.</p>
+<p>Try to connect to the Unity server.</p>
+<p>If connection is established save the tcp config to <code class="docutils literal notranslate"><span class="pre">data/python/client_tcp_config.json</span></code>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="client.client_communicator_to_unity.exit">
+<code class="sig-name descname">exit</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#client.client_communicator_to_unity.exit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Close tcp connection and send end request to Unity which quits the build application.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="client.client_communicator_to_unity.receive_data_as_bytes">
+<code class="sig-name descname">receive_data_as_bytes</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#client.client_communicator_to_unity.receive_data_as_bytes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Receive image data from Unity trough socket. Ends by timeout, returns bytearray</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>From Unity recived bytearray.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">bytearray</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="client.client_communicator_to_unity.receive_image">
+<code class="sig-name descname">receive_image</code><span class="sig-paren">(</span><em class="sig-param">json_string</em><span class="sig-paren">)</span><a class="headerlink" href="#client.client_communicator_to_unity.receive_image" title="Permalink to this definition">¶</a></dt>
+<dd><p>Send string to Unity server and receive corresponding image.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>json_string</strong> (<em>string</em>) -- This <code class="docutils literal notranslate"><span class="pre">string</span></code> has to be comprehensible for Unity which are strings returned by <a class="reference internal" href="#client.client_communicator_to_unity.write_json_crane" title="client.client_communicator_to_unity.write_json_crane"><code class="xref py py-meth docutils literal notranslate"><span class="pre">write_json_crane()</span></code></a></p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Image corresponding to the input string.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><cite>PngImageFile-array</cite></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="client.client_communicator_to_unity.send_to_unity">
+<code class="sig-name descname">send_to_unity</code><span class="sig-paren">(</span><em class="sig-param">json_string</em>, <em class="sig-param">exit=False</em><span class="sig-paren">)</span><a class="headerlink" href="#client.client_communicator_to_unity.send_to_unity" title="Permalink to this definition">¶</a></dt>
+<dd><p>Send data to Unity server.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>json_string</strong> (<cite>string</cite>) -- This string will be sent to Unity. Has to be readable by Unity.</p></li>
+<li><p><strong>exit</strong> (<em>bool</em><em>, </em><em>optional</em>) -- <p>defaults to <code class="docutils literal notranslate"><span class="pre">False</span></code>,</p>
+<p>If this is True the Unity build will close.</p>
+</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="client.client_communicator_to_unity.write_json_crane">
+<code class="sig-name descname">write_json_crane</code><span class="sig-paren">(</span><em class="sig-param">total_cuboids=3, same_scale=True, scale=2.0, same_theta=True, theta=40.0, phi=0.0, total_branches=None, same_material=True, metallic=0.5, smoothness=0.5, r=1.0, g=1.0, b=1.0, a=1.0, CameraRes_width=256, CameraRes_height=256, Camera_FieldofView=60.0, CameraRadius=12.0, CameraTheta=90.0, CameraPhi=0.0, CameraVerticalOffset=0.0, DirectionalLightTheta=30.0, DirectionalLightIntensity=0.8, totalPointLights=1, same_PointLightsColor=True, PointLightsColor_r=1.0, PointLightsColor_g=1.0, PointLightsColor_b=1.0, PointLightsColor_a=1.0, PointLightsRadius=[7.0], PointLightsTheta=[20.0], PointLightsPhi=[0.0], PointLightsIntensity=[1.0], PointLightsRange=[10.0], totalSpotLights=1, same_SpotLightsColor=True, SpotLightsColor_r=1.0, SpotLightsColor_g=1.0, SpotLightsColor_b=1.0, SpotLightsColor_a=1.0, SpotLightsRadius=[10.0], SpotLightsTheta=[0.0], SpotLightsPhi=[0.0], SpotLightsIntensity=[1.0], SpotLightsRange=[10.0], SpotAngle=[30.0]</em><span class="sig-paren">)</span><a class="headerlink" href="#client.client_communicator_to_unity.write_json_crane" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns string according to input parameter which can be interpreted by the Unity server. Should be used in function <a class="reference internal" href="#client.client_communicator_to_unity.receive_image" title="client.client_communicator_to_unity.receive_image"><code class="xref py py-meth docutils literal notranslate"><span class="pre">receive_image()</span></code></a> to create an image.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>total_cuboids</strong> (<em>int</em><em>, </em><em>optional</em>) -- The total amount of cubiods which will be &quot;stacked&quot; along one branch. Has to be bigger than zero, defaults to 3</p></li>
+<li><p><strong>same_scale</strong> (<em>bool</em><em>, </em><em>optional</em>) -- If the vertical scale of the cuboids should all be the same, defaults to True</p></li>
+<li><p><strong>scale</strong> (<em>'float'</em><em> or </em><em>'list'</em><em>, </em><em>optional</em>) -- The cuboids size vary only along the vertical dimension others are set to one. It is either a float if <code class="docutils literal notranslate"><span class="pre">same_scale</span> <span class="pre">==</span> <span class="pre">True</span></code>  or a list of floats with the lenght of <code class="docutils literal notranslate"><span class="pre">total_cuboids</span></code>, defaults to 2.0</p></li>
+<li><p><strong>same_theta</strong> (<em>bool</em><em>, </em><em>optional</em>) -- If the angle between two stacked cuboids should be the same for every cuboid, defaults to True</p></li>
+<li><p><strong>theta</strong> (<em>float</em><em>, </em><em>optional</em>) -- The angle between two stacked cuboids in degrees. If it is zero the cuboids will be vertically allinged. If <code class="docutils literal notranslate"><span class="pre">same_theta</span> <span class="pre">==</span> <span class="pre">True</span></code> it has to be a float, else it has to be list of float with the length of <code class="docutils literal notranslate"><span class="pre">total_cuboids</span> <span class="pre">-</span> <span class="pre">1</span></code>, defaults to 40.0</p></li>
+<li><p><strong>phi</strong> (<em>float</em><em>, </em><em>optional</em>) -- The rotation in degrees around the origin on the vertical axis for all cuboids i.e. the whole crane, defaults to 0.0</p></li>
+<li><p><strong>total_branches</strong> (<em>None</em><em> or </em><em>list</em><em>, </em><em>optional</em>) -- If this is <code class="docutils literal notranslate"><span class="pre">None</span></code> there will be a Crane with one arm without any branches. If it is not <code class="docutils literal notranslate"><span class="pre">None</span></code> it has to be a <code class="docutils literal notranslate"><span class="pre">list</span></code> of integers with the length of <code class="docutils literal notranslate"><span class="pre">total_cubiods-1</span></code>.
+The integers define how many branches are created at the cubiod corresponding to the index of the element in the list, defaults to None</p></li>
+<li><p><strong>same_material</strong> (<em>bool</em><em>, </em><em>optional</em>) -- If all cuboids should have the same material properties, defaults to True</p></li>
+<li><p><strong>metallic</strong> (<em>float</em><em> or </em><em>list</em><em>, </em><em>optional</em>) -- The metallic property of the material of a cuboid should be in the range of zero and one. For more details have a look at the unity documentation. If <code class="docutils literal notranslate"><span class="pre">same_material</span> <span class="pre">==</span> <span class="pre">True</span></code> it has to be a float, else it has to be a list of floats with the length of <code class="docutils literal notranslate"><span class="pre">total_cuboids</span></code>, defaults to 0.5</p></li>
+<li><p><strong>smoothness</strong> (<em>float</em><em>, </em><em>optional</em>) -- The smoothness property of the material of a cuboid should be in the range of zero and one.
+If <code class="docutils literal notranslate"><span class="pre">same_material</span> <span class="pre">==</span> <span class="pre">True</span></code> it has to be a float, else it has to be a list of floats with the length of <code class="docutils literal notranslate"><span class="pre">total_cuboids</span></code>, defaults to 0.5</p></li>
+<li><p><strong>r</strong> (<em>float</em><em> or </em><em>list</em><em>, </em><em>optional</em>) -- The <strong>red color</strong> property of the material of a cuboid should be in the range of zero and one.
+If <code class="docutils literal notranslate"><span class="pre">same_material</span> <span class="pre">==</span> <span class="pre">True</span></code> it has to be a float, else it has to be a list of floats with the length of <code class="docutils literal notranslate"><span class="pre">total_cuboids</span></code>, defaults to 1.0</p></li>
+<li><p><strong>g</strong> (<em>float</em><em> or </em><em>list</em><em>, </em><em>optional</em>) -- The <strong>green color</strong> property of the material of a cuboid should be in the range of zero and one.
+If <code class="docutils literal notranslate"><span class="pre">same_material</span> <span class="pre">==</span> <span class="pre">True</span></code> it has to be a float, else it has to be a list of floats with the length of <code class="docutils literal notranslate"><span class="pre">total_cuboids</span></code>, defaults to 1.0</p></li>
+<li><p><strong>b</strong> (<em>float</em><em> or </em><em>list</em><em>, </em><em>optional</em>) -- The <strong>blue color</strong> property of the material of a cuboid should be in the range of zero and one.
+If <code class="docutils literal notranslate"><span class="pre">same_material</span> <span class="pre">==</span> <span class="pre">True</span></code> it has to be a float, else it has to be a list of floats with the length of <code class="docutils literal notranslate"><span class="pre">total_cuboids</span></code>, defaults to 1.0</p></li>
+<li><p><strong>a</strong> (<em>float</em><em> or </em><em>list</em><em>, </em><em>optional</em>) -- The <strong>alpha channel/transparency</strong> of the material of a cuboid should be in the range of zero and one with zero beeing fully transparent. For more details have a look at the unity documentation.
+If <code class="docutils literal notranslate"><span class="pre">same_material</span> <span class="pre">==</span> <span class="pre">True</span></code> it has to be a float, else it has to be a list of floats with the length of <code class="docutils literal notranslate"><span class="pre">total_cuboids</span></code>, defaults to 1.0</p></li>
+<li><p><strong>CameraRes_width</strong> (<em>int</em><em>, </em><em>optional</em>) -- The <strong>width resolution</strong> of the receiving Image, defaults to 256</p></li>
+<li><p><strong>CameraRes_height</strong> (<em>int</em><em>, </em><em>optional</em>) -- The <strong>height resolution</strong> of the receiving Image, defaults to 256</p></li>
+<li><p><strong>Camera_FieldofView</strong> (<em>float</em><em>, </em><em>optional</em>) -- The <strong>field of view</strong> of the camera in degrees, defaults to 60.0</p></li>
+<li><p><strong>CameraRadius</strong> (<em>float</em><em>, </em><em>optional</em>) -- Position of the camera in spherical coordinates. The camera always faces the origin of the spherical coordinates, defaults to 12.0</p></li>
+<li><p><strong>CameraTheta</strong> (<em>float</em><em>, </em><em>optional</em>) -- In degree the position of the camera in spherical coordinates. The camera always faces the origin of the spherical coordinates, defaults to 90.0</p></li>
+<li><p><strong>CameraPhi</strong> (<em>float</em><em>, </em><em>optional</em>) -- In degree the position of the camera in spherical coordinates. The camera always faces the origin of the spherical coordinates, defaults to 0.0</p></li>
+<li><p><strong>CameraVerticalOffset</strong> (<em>float</em><em>, </em><em>optional</em>) -- This parameter offstets the origin of the spherical coordinate system only for the camera in the vertical i.e y-axis direction. The camera always faces the origin of its spherical coordinates, defaults to 0.0</p></li>
+<li><p><strong>DirectionalLightTheta</strong> (<em>float</em><em>, </em><em>optional</em>) -- The angle in degrees of the directional light i.e. the sun. <em>For more details have a look at the unity documentation</em>. If zero it is at the zenith i.e. directly above the origin, at 90 degrees the light comes from the horizon, defaults to 30.0</p></li>
+<li><p><strong>DirectionalLightIntensity</strong> (<em>float</em><em>, </em><em>optional</em>) -- The intesity of the light should be between zero and one but can be set higher, defaults to 0.8</p></li>
+<li><p><strong>totalPointLights</strong> (<em>int</em><em>, </em><em>optional</em>) -- The total amount of Pointlights in the scene. <em>For more details about Pointlights have a look at the unity documentation</em>, defaults to 1</p></li>
+<li><p><strong>same_PointLightsColor</strong> (<em>bool</em><em>, </em><em>optional</em>) -- If all Pointlights should have the same color, defaults to True</p></li>
+<li><p><strong>PointLightsColor_r</strong> (<em>float</em><em> or </em><em>list</em><em>, </em><em>optional</em>) -- The <strong>red color</strong> property of the light should be in the range of zero and one. If <code class="docutils literal notranslate"><span class="pre">same_PointLightsColor</span> <span class="pre">==</span> <span class="pre">True</span></code> it has to be a float, else it has to be a list of floats with the length of <code class="docutils literal notranslate"><span class="pre">totalPointLights</span></code>, defaults to 1.0</p></li>
+<li><p><strong>PointLightsColor_g</strong> (<em>float</em><em> or </em><em>list</em><em>, </em><em>optional</em>) -- The <strong>green color</strong> property of the light should be in the range of zero and one. If <code class="docutils literal notranslate"><span class="pre">same_PointLightsColor</span> <span class="pre">==</span> <span class="pre">True</span></code> it has to be a float, else it has to be a list of floats with the length of <code class="docutils literal notranslate"><span class="pre">totalPointLights</span></code>, defaults to 1.0</p></li>
+<li><p><strong>PointLightsColor_b</strong> (<em>float</em><em> or </em><em>list</em><em>, </em><em>optional</em>) -- The <strong>blue color</strong> property of the light should be in the range of zero and one. If <code class="docutils literal notranslate"><span class="pre">same_PointLightsColor</span> <span class="pre">==</span> <span class="pre">True</span></code> it has to be a float, else it has to be a list of floats with the length of <code class="docutils literal notranslate"><span class="pre">totalPointLights</span></code>, defaults to 1.0</p></li>
+<li><p><strong>PointLightsColor_a</strong> (<em>float</em><em> or </em><em>list</em><em>, </em><em>optional</em>) -- The <strong>alpha channel/ transparency</strong> of the color of the light should be in the range of zero and one. If <code class="docutils literal notranslate"><span class="pre">same_PointLightsColor</span> <span class="pre">==</span> <span class="pre">True</span></code> it has to be a float, else it has to be a list of floats with the length of <code class="docutils literal notranslate"><span class="pre">totalPointLights</span></code>, defaults to 1.0</p></li>
+<li><p><strong>PointLightsRadius</strong> (<em>list</em><em>, </em><em>optional</em>) -- The positions of all Pointlights in spherical coordinates. Has to be a list of floats with the length of <code class="docutils literal notranslate"><span class="pre">totalPointLights</span></code>, defaults to [7.0]</p></li>
+<li><p><strong>PointLightsTheta</strong> (<em>list</em><em>, </em><em>optional</em>) -- The positions of all Pointlights in spherical coordinates. Has to be a list of floats with the length of <code class="docutils literal notranslate"><span class="pre">totalPointLights</span></code>, defaults to [20.0]</p></li>
+<li><p><strong>PointLightsPhi</strong> (<em>list</em><em>, </em><em>optional</em>) -- The positions of all Pointlights in spherical coordinates. Has to be a list of floats with the length of <code class="docutils literal notranslate"><span class="pre">totalPointLights</span></code>, defaults to [0.0]</p></li>
+<li><p><strong>PointLightsIntensity</strong> (<em>list</em><em>, </em><em>optional</em>) -- The intensities of all Pointlights should be in the range of zero and one. Has to be a list of floats with the length of <code class="docutils literal notranslate"><span class="pre">totalPointLights</span></code>, defaults to [1.0]</p></li>
+<li><p><strong>PointLightsRange</strong> (<em>list</em><em>, </em><em>optional</em>) -- The range of the emitted light from the Pointlights. Should be adjusted depending on the position of the lights to &quot;reach&quot; the cuboids. Has to be a list of floats with the length of <code class="docutils literal notranslate"><span class="pre">totalPointLights</span></code>, defaults to [10.0]</p></li>
+<li><p><strong>totalSpotLights</strong> (<em>int</em><em>, </em><em>optional</em>) -- The total amount of Spotlights in the scene. <em>For more details about Spotlights have a look at the unity documentation</em>, defaults to 1</p></li>
+<li><p><strong>same_SpotLightsColor</strong> (<em>bool</em><em>, </em><em>optional</em>) -- If all Spotlights should have the same color, defaults to True</p></li>
+<li><p><strong>SpotLightsColor_r</strong> (<em>float</em><em> or </em><em>list</em><em>, </em><em>optional</em>) -- The <strong>red color</strong> property of the light should be in the range of zero and one. If <code class="docutils literal notranslate"><span class="pre">same_SpotLightsColor</span> <span class="pre">==</span> <span class="pre">True</span></code> it has to be a float, else it has to be a list of floats with the length of <code class="docutils literal notranslate"><span class="pre">totalSpotLights</span></code>, defaults to 1.0</p></li>
+<li><p><strong>SpotLightsColor_g</strong> (<em>float</em><em> or </em><em>list</em><em>, </em><em>optional</em>) -- The <strong>green color</strong> property of the light should be in the range of zero and one. If <code class="docutils literal notranslate"><span class="pre">same_SpotLightsColor</span> <span class="pre">==</span> <span class="pre">True</span></code> it has to be a float, else it has to be a list of floats with the length of <code class="docutils literal notranslate"><span class="pre">totalSpotLights</span></code>, defaults to 1.0</p></li>
+<li><p><strong>SpotLightsColor_b</strong> (<em>float</em><em> or </em><em>list</em><em>, </em><em>optional</em>) -- The <strong>blue color</strong> property of the light should be in the range of zero and one. If <code class="docutils literal notranslate"><span class="pre">same_SpotLightsColor</span> <span class="pre">==</span> <span class="pre">True</span></code> it has to be a float, else it has to be a list of floats with the length of <code class="docutils literal notranslate"><span class="pre">totalSpotLights</span></code>, defaults to 1.0</p></li>
+<li><p><strong>SpotLightsColor_a</strong> (<em>float</em><em> or </em><em>list</em><em>, </em><em>optional</em>) -- The <strong>alpha channel/ transparency</strong> of the color of the light should be in the range of zero and one. If <code class="docutils literal notranslate"><span class="pre">same_SpotLightsColor</span> <span class="pre">==</span> <span class="pre">True</span></code> it has to be a float, else it has to be a list of floats with the length of <code class="docutils literal notranslate"><span class="pre">totalSpotLights</span></code>, defaults to 1.0</p></li>
+<li><p><strong>SpotLightsRadius</strong> (<em>list</em><em>, </em><em>optional</em>) -- The positions of all Spotlights in spherical coordinates. Spotlights always face the origin. Has to be a list of floats with the length of <code class="docutils literal notranslate"><span class="pre">totalSpotLights</span></code>, defaults to [10.0]</p></li>
+<li><p><strong>SpotLightsTheta</strong> (<em>list</em><em>, </em><em>optional</em>) -- The positions of all Spotlights in spherical coordinates. Spotlights always face the origin. Has to be a list of floats with the length of <code class="docutils literal notranslate"><span class="pre">totalSpotLights</span></code>, defaults to [0.0]</p></li>
+<li><p><strong>SpotLightsPhi</strong> (<em>list</em><em>, </em><em>optional</em>) -- The positions of all Spotlights in spherical coordinates. Spotlights always face the origin. Has to be a list of floats with the length of <code class="docutils literal notranslate"><span class="pre">totalSpotLights</span></code>, defaults to [0.0]</p></li>
+<li><p><strong>SpotLightsIntensity</strong> (<em>list</em><em>, </em><em>optional</em>) -- The intensities of all Spotlights should be in the range of zero and one. Has to be a list of floats with the length of <code class="docutils literal notranslate"><span class="pre">totalSpotLights</span></code>, defaults to [1.0], defaults to [1.0]</p></li>
+<li><p><strong>SpotLightsRange</strong> (<em>list</em><em>, </em><em>optional</em>) -- The range of the emitted light from the Spotlights. Should be adjusted depending on the position of the lights to &quot;reach&quot; the cuboids. Has to be a list of floats with the length of <code class="docutils literal notranslate"><span class="pre">totalSpotLights</span></code>, defaults to [10.0]</p></li>
+<li><p><strong>SpotAngle</strong> (<em>list</em><em>, </em><em>optional</em>) -- In degree this describes the angle created by the cone of the Spotlight. Has to be a list of floats with the length of <code class="docutils literal notranslate"><span class="pre">totalSpotLights</span></code>, defaults to [30.0]</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Returns a string with all given parameters for unity to interpret. Can be used in function <a class="reference internal" href="#client.client_communicator_to_unity.receive_image" title="client.client_communicator_to_unity.receive_image"><code class="xref py py-meth docutils literal notranslate"><span class="pre">receive_image()</span></code></a> to create an image.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>string</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="dataset-py">
+<h2>dataset.py<a class="headerlink" href="#dataset-py" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<dl class="class">
+<dt id="dataset.dataset_cuboids">
+<em class="property">class </em><code class="sig-prename descclassname">dataset.</code><code class="sig-name descname">dataset_cuboids</code><span class="sig-paren">(</span><em class="sig-param">use_unity_build=True</em>, <em class="sig-param">debug_log=False</em><span class="sig-paren">)</span><a class="headerlink" href="#dataset.dataset_cuboids" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="dataset.dataset_cuboids.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param">use_unity_build=True</em>, <em class="sig-param">debug_log=False</em><span class="sig-paren">)</span><a class="headerlink" href="#dataset.dataset_cuboids.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets up logging, the config, necessary paths and a client instance form <a class="reference internal" href="#client.client_communicator_to_unity" title="client.client_communicator_to_unity"><code class="xref py py-class docutils literal notranslate"><span class="pre">client_communicator_to_unity</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>DatasetMixin</strong> (<em>[</em><em>type</em><em>]</em>) -- [description]</p></li>
+<li><p><strong>use_unity_build</strong> (<em>bool</em><em>, </em><em>optional</em>) -- If this is set to true image generation will work automatically with the Unity build. Otherwise you have to manually set the Unity editor to play, defaults to True</p></li>
+<li><p><strong>debug_log</strong> (<em>bool</em><em>, </em><em>optional</em>) -- If there should be more information displayed in the console for debugging, defaults to False</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="dataset.dataset_cuboids.change_app1_art2">
+<code class="sig-name descname">change_app1_art2</code><span class="sig-paren">(</span><em class="sig-param">para1</em>, <em class="sig-param">para2</em><span class="sig-paren">)</span><a class="headerlink" href="#dataset.dataset_cuboids.change_app1_art2" title="Permalink to this definition">¶</a></dt>
+<dd><p>Combines the appearence and the articulation of two different parameters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>para1</strong> (<em>dictionary</em>) -- Loaded or created parameters as from <a class="reference internal" href="#dataset.dataset_cuboids.create_random_parameters" title="dataset.dataset_cuboids.create_random_parameters"><code class="xref py py-meth docutils literal notranslate"><span class="pre">create_random_parameters()</span></code></a>.</p></li>
+<li><p><strong>para2</strong> (<em>dictionary</em>) -- Loaded or created parameters as from <a class="reference internal" href="#dataset.dataset_cuboids.create_random_parameters" title="dataset.dataset_cuboids.create_random_parameters"><code class="xref py py-meth docutils literal notranslate"><span class="pre">create_random_parameters()</span></code></a>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Parameters which combine the appearence of para1 and articulation of para2.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dictionary</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="dataset.dataset_cuboids.change_apperence_camera_phi">
+<code class="sig-name descname">change_apperence_camera_phi</code><span class="sig-paren">(</span><em class="sig-param">parameters</em>, <em class="sig-param">start_value</em>, <em class="sig-param">end_value</em>, <em class="sig-param">numb_of_changes</em><span class="sig-paren">)</span><a class="headerlink" href="#dataset.dataset_cuboids.change_apperence_camera_phi" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create many parameters in a list with the only difference in the Camera Phi value between <code class="docutils literal notranslate"><span class="pre">start_value</span></code> and the <code class="docutils literal notranslate"><span class="pre">end_value</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>parameters</strong> (<em>dictionary</em>) -- Loaded or created parameters as from <a class="reference internal" href="#dataset.dataset_cuboids.create_random_parameters" title="dataset.dataset_cuboids.create_random_parameters"><code class="xref py py-meth docutils literal notranslate"><span class="pre">create_random_parameters()</span></code></a>.</p></li>
+<li><p><strong>start_value</strong> (<em>float</em>) -- The value of phi of the camera in the first parameters in degree.</p></li>
+<li><p><strong>end_value</strong> (<em>float</em>) -- The value of phi of the camera in the last parameters in degree.</p></li>
+<li><p><strong>numb_of_changes</strong> (<em>int</em>) -- How many parameters are going to be added to the returned list.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>List with the length: <code class="docutils literal notranslate"><span class="pre">numb_of_changes</span></code> of parameters in wich Camera position Phi is linearly extrapolated between the <code class="docutils literal notranslate"><span class="pre">start_value</span></code> and the <code class="docutils literal notranslate"><span class="pre">end_value</span></code>.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="dataset.dataset_cuboids.change_apperence_camera_phi_relative">
+<code class="sig-name descname">change_apperence_camera_phi_relative</code><span class="sig-paren">(</span><em class="sig-param">parameters</em>, <em class="sig-param">delta_phi=20</em><span class="sig-paren">)</span><a class="headerlink" href="#dataset.dataset_cuboids.change_apperence_camera_phi_relative" title="Permalink to this definition">¶</a></dt>
+<dd><p>Input parameters and get parameters with the Camera position Phi shifted by <code class="docutils literal notranslate"><span class="pre">delta_phi</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>parameters</strong> (<em>dictionary</em>) -- Loaded or created parameters as from <a class="reference internal" href="#dataset.dataset_cuboids.create_random_parameters" title="dataset.dataset_cuboids.create_random_parameters"><code class="xref py py-meth docutils literal notranslate"><span class="pre">create_random_parameters()</span></code></a>.</p></li>
+<li><p><strong>delta_phi</strong> (<em>float</em><em>, </em><em>optional</em>) -- The amount of the added angle to Phi in degrees, defaults to 20</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Parameters with Camera position Phi shifted by <code class="docutils literal notranslate"><span class="pre">delta_phi</span></code>.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dictionary</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="dataset.dataset_cuboids.change_apperence_camera_theta">
+<code class="sig-name descname">change_apperence_camera_theta</code><span class="sig-paren">(</span><em class="sig-param">parameters</em>, <em class="sig-param">start_value</em>, <em class="sig-param">end_value</em>, <em class="sig-param">numb_of_changes</em><span class="sig-paren">)</span><a class="headerlink" href="#dataset.dataset_cuboids.change_apperence_camera_theta" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create many parameters in a list with the only difference in the Camera theta value between <code class="docutils literal notranslate"><span class="pre">start_value</span></code> and the <code class="docutils literal notranslate"><span class="pre">end_value</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>parameters</strong> (<em>dictionary</em>) -- Loaded or created parameters as from <a class="reference internal" href="#dataset.dataset_cuboids.create_random_parameters" title="dataset.dataset_cuboids.create_random_parameters"><code class="xref py py-meth docutils literal notranslate"><span class="pre">create_random_parameters()</span></code></a>.</p></li>
+<li><p><strong>start_value</strong> (<em>float</em>) -- The value of theta of the camera in the first parameters in degree.</p></li>
+<li><p><strong>end_value</strong> (<em>float</em>) -- The value of theta of the camera in the last parameters in degree.</p></li>
+<li><p><strong>numb_of_changes</strong> (<em>int</em>) -- How many parameters are going to be added to the returned list.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>List with the length: <code class="docutils literal notranslate"><span class="pre">numb_of_changes</span></code> of parameters in wich Camera position theta is linearly extrapolated between the <code class="docutils literal notranslate"><span class="pre">start_value</span></code> and the <code class="docutils literal notranslate"><span class="pre">end_value</span></code>.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dictionary</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="dataset.dataset_cuboids.change_apperence_camera_theta_relative">
+<code class="sig-name descname">change_apperence_camera_theta_relative</code><span class="sig-paren">(</span><em class="sig-param">parameters</em>, <em class="sig-param">delta_theta=20</em><span class="sig-paren">)</span><a class="headerlink" href="#dataset.dataset_cuboids.change_apperence_camera_theta_relative" title="Permalink to this definition">¶</a></dt>
+<dd><p>Input parameters and get parameters with the Camera position theta shifted by <code class="docutils literal notranslate"><span class="pre">delta_theta</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>parameters</strong> (<em>dictionary</em>) -- Loaded or created parameters as from <a class="reference internal" href="#dataset.dataset_cuboids.create_random_parameters" title="dataset.dataset_cuboids.create_random_parameters"><code class="xref py py-meth docutils literal notranslate"><span class="pre">create_random_parameters()</span></code></a>.</p></li>
+<li><p><strong>delta_theta</strong> (<em>float</em><em>, </em><em>optional</em>) -- The amount of the added angle to Theta in degrees, defaults to 20</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Parameters with Camera position Theta shifted by <code class="docutils literal notranslate"><span class="pre">delta_theta</span></code>.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dictionary</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="dataset.dataset_cuboids.change_articulation_theta">
+<code class="sig-name descname">change_articulation_theta</code><span class="sig-paren">(</span><em class="sig-param">parameters</em>, <em class="sig-param">start_value</em>, <em class="sig-param">end_value</em>, <em class="sig-param">numb_of_changes</em>, <em class="sig-param">theta_pos=None</em><span class="sig-paren">)</span><a class="headerlink" href="#dataset.dataset_cuboids.change_articulation_theta" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a list of the input parameters with a changed crane articulation at the cuboid <code class="docutils literal notranslate"><span class="pre">theta_pos</span></code> between <code class="docutils literal notranslate"><span class="pre">start_value</span></code> and <code class="docutils literal notranslate"><span class="pre">end_value</span></code>.
+If <code class="docutils literal notranslate"><span class="pre">theta_pos</span></code> is default then all theta of the crane are changing.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>parameters</strong> (<em>dictionary</em>) -- Loaded or created parameters as from <a class="reference internal" href="#dataset.dataset_cuboids.create_random_parameters" title="dataset.dataset_cuboids.create_random_parameters"><code class="xref py py-meth docutils literal notranslate"><span class="pre">create_random_parameters()</span></code></a>.</p></li>
+<li><p><strong>start_value</strong> (<em>float</em>) -- The theta angel in degrees for the first parameters in the list.</p></li>
+<li><p><strong>end_value</strong> (<em>float</em>) -- The theta angel in degrees for the last parameters in the list.</p></li>
+<li><p><strong>numb_of_changes</strong> (<em>int</em>) -- How many parameters are going to be added to the returned list.</p></li>
+<li><p><strong>theta_pos</strong> (<em>int</em><em>, </em><em>optional</em>) -- Defines at which cuboid theta is going to change. Has to be smaller than <code class="docutils literal notranslate"><span class="pre">parameters[&quot;total_cuboids&quot;]</span></code> if not, set to <code class="docutils literal notranslate"><span class="pre">parameters[&quot;total_cuboids&quot;]-1</span></code>. If it is default: <cite>None</cite> all thetas are changing, defaults to None</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A list with <code class="docutils literal notranslate"><span class="pre">numb_of_changes</span></code> parameters with changed theta from <code class="docutils literal notranslate"><span class="pre">start_value</span></code> to <code class="docutils literal notranslate"><span class="pre">end_value</span></code> at the cubiod <code class="docutils literal notranslate"><span class="pre">theta_pos</span></code>.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><cite>list</cite></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="dataset.dataset_cuboids.create_json_string_from_parameters">
+<code class="sig-name descname">create_json_string_from_parameters</code><span class="sig-paren">(</span><em class="sig-param">dictionary</em><span class="sig-paren">)</span><a class="headerlink" href="#dataset.dataset_cuboids.create_json_string_from_parameters" title="Permalink to this definition">¶</a></dt>
+<dd><p>Inputs the parameters/dictionary into the function <a class="reference internal" href="#client.client_communicator_to_unity.write_json_crane" title="client.client_communicator_to_unity.write_json_crane"><code class="xref py py-meth docutils literal notranslate"><span class="pre">write_json_crane()</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>dictionary</strong> (<em>dictionary</em>) -- A dictionary similar to one from <a class="reference internal" href="#dataset.dataset_cuboids.create_random_parameters" title="dataset.dataset_cuboids.create_random_parameters"><code class="xref py py-meth docutils literal notranslate"><span class="pre">create_random_parameters()</span></code></a> with all input parameters for the function <a class="reference internal" href="#client.client_communicator_to_unity.write_json_crane" title="client.client_communicator_to_unity.write_json_crane"><code class="xref py py-meth docutils literal notranslate"><span class="pre">write_json_crane()</span></code></a>.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A string depending on your input parameters wich can be interpreted afterwards by the Unity script.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>string</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="dataset.dataset_cuboids.create_random_parameters">
+<code class="sig-name descname">create_random_parameters</code><span class="sig-paren">(</span><em class="sig-param">CameraRes_width=520</em>, <em class="sig-param">CameraRes_height=520</em><span class="sig-paren">)</span><a class="headerlink" href="#dataset.dataset_cuboids.create_random_parameters" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates random input parameters depending on your config which defines the interval for the generated parameters, the camera parameters are not set randomly</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>CameraRes_width</strong> (<em>int</em><em>, </em><em>optional</em>) -- Image resolution width, defaults to 520</p></li>
+<li><p><strong>CameraRes_height</strong> (<em>int</em><em>, </em><em>optional</em>) -- Image resolution height, defaults to 520</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A dictionary to use as input for function <a class="reference internal" href="#dataset.dataset_cuboids.create_json_string_from_parameters" title="dataset.dataset_cuboids.create_json_string_from_parameters"><code class="xref py py-meth docutils literal notranslate"><span class="pre">create_json_string_from_parameters()</span></code></a>.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dictionary</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="dataset.dataset_cuboids.exit">
+<code class="sig-name descname">exit</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#dataset.dataset_cuboids.exit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Closes TCP connection. Send end request to Unity and with that quit the application.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="dataset.dataset_cuboids.get_example">
+<code class="sig-name descname">get_example</code><span class="sig-paren">(</span><em class="sig-param">save_para=True</em>, <em class="sig-param">save_image=False</em>, <em class="sig-param">index=None</em><span class="sig-paren">)</span><a class="headerlink" href="#dataset.dataset_cuboids.get_example" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create an example of the dataset.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>save_para</strong> (<em>bool</em><em>, </em><em>optional</em>) -- If the parameters should be saved at <code class="docutils literal notranslate"><span class="pre">data/parameters</span></code>, defaults to True</p></li>
+<li><p><strong>save_image</strong> (<em>bool</em><em>, </em><em>optional</em>) -- If the image should be saved at <code class="docutils literal notranslate"><span class="pre">data/images</span></code>, defaults to False</p></li>
+<li><p><strong>index</strong> (<em>None</em><em> or </em><em>int</em><em>, </em><em>optional</em>) -- Shoukd be default. If specified the the new data will overwrite the old data at the given index if available, defaults to None</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A dictionary with all relevant data in the keys &quot;index&quot;, &quot;parameter&quot; and &quot;image&quot;.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dictionary</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="dataset.dataset_cuboids.increment_index">
+<code class="sig-name descname">increment_index</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#dataset.dataset_cuboids.increment_index" title="Permalink to this definition">¶</a></dt>
+<dd><p>Load, increment and return the new external saved index.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><p><strong>FileNotFoundError</strong> -- If the file <code class="docutils literal notranslate"><span class="pre">data/python/index.txt</span></code> is not found.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>An integer which represents the next index.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="dataset.dataset_cuboids.load_index">
+<code class="sig-name descname">load_index</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#dataset.dataset_cuboids.load_index" title="Permalink to this definition">¶</a></dt>
+<dd><p>Load and return the old external saved index.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><p><strong>FileNotFoundError</strong> -- If the file <code class="docutils literal notranslate"><span class="pre">data/python/index.txt</span></code> is not found.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>An integer which represents the last used index.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="dataset.dataset_cuboids.load_parameters">
+<code class="sig-name descname">load_parameters</code><span class="sig-paren">(</span><em class="sig-param">index=[-1], amount=1</em><span class="sig-paren">)</span><a class="headerlink" href="#dataset.dataset_cuboids.load_parameters" title="Permalink to this definition">¶</a></dt>
+<dd><p>Load and return a given amount of parameters as dictionaries in a list. If index is not specified the index will be chosen randomly.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>index</strong> (<em>list</em><em>, </em><em>optional</em>) -- If index is default it will be generated randomly else it has to be a list of integers the length of <code class="docutils literal notranslate"><span class="pre">amount</span></code>, defaults to [-1]</p></li>
+<li><p><strong>amount</strong> (<em>int</em><em>, </em><em>optional</em>) -- The amount of dictionaries in the returned list, defaults to 1</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A list of parameters as dictionaries is returned except the amount is one or default the dictionary itself will be returned.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>list or dictionary</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="dataset.dataset_cuboids.parameters_to_finished_data">
+<code class="sig-name descname">parameters_to_finished_data</code><span class="sig-paren">(</span><em class="sig-param">parameters</em>, <em class="sig-param">save_para=True</em>, <em class="sig-param">save_image=False</em><span class="sig-paren">)</span><a class="headerlink" href="#dataset.dataset_cuboids.parameters_to_finished_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Input parameters and get an corresponding image.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>parameters</strong> (<em>dictionary</em>) -- Parameters to use for <a class="reference internal" href="#dataset.dataset_cuboids.create_json_string_from_parameters" title="dataset.dataset_cuboids.create_json_string_from_parameters"><code class="xref py py-meth docutils literal notranslate"><span class="pre">create_json_string_from_parameters()</span></code></a>.</p></li>
+<li><p><strong>save_para</strong> (<em>bool</em><em>, </em><em>optional</em>) -- If the parameters should be saved at <code class="docutils literal notranslate"><span class="pre">data/parameters</span></code>, defaults to True</p></li>
+<li><p><strong>save_image</strong> (<em>bool</em><em>, </em><em>optional</em>) -- If the image should be saved at <code class="docutils literal notranslate"><span class="pre">data/images</span></code>, defaults to False</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A dictionary with all relevant data in keys as &quot;index&quot;,&quot;parameters&quot; and &quot;image&quot;.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dictionary</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="dataset.dataset_cuboids.plot_images">
+<code class="sig-name descname">plot_images</code><span class="sig-paren">(</span><em class="sig-param">dicts</em>, <em class="sig-param">images_per_row=4</em>, <em class="sig-param">save_fig=True</em>, <em class="sig-param">show_index=True</em><span class="sig-paren">)</span><a class="headerlink" href="#dataset.dataset_cuboids.plot_images" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plot and show all images contained in the list dicts of dictionaries and label them with their corresponding index.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dicts</strong> (<em>list</em>) -- Has to be a list with dictionaries in which there is the key &quot;image&quot; and if wanted &quot;index&quot; as returned from <a class="reference internal" href="#dataset.dataset_cuboids.parameters_to_finished_data" title="dataset.dataset_cuboids.parameters_to_finished_data"><code class="xref py py-meth docutils literal notranslate"><span class="pre">parameters_to_finished_data()</span></code></a></p></li>
+<li><p><strong>images_per_row</strong> (<em>int</em><em>, </em><em>optional</em>) -- How many images are plotted in one row, defaults to 4</p></li>
+<li><p><strong>save_fig</strong> (<em>bool</em><em>, </em><em>optional</em>) -- If the created plot of all images should be saved to <code class="docutils literal notranslate"><span class="pre">data/figures</span></code>, defaults to True</p></li>
+<li><p><strong>show_index</strong> (<em>bool</em><em>, </em><em>optional</em>) -- If the corresponding index of every image is shown in the plot, defaults to True</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="dataset.dataset_cuboids.reset_index">
+<code class="sig-name descname">reset_index</code><span class="sig-paren">(</span><em class="sig-param">set_index=0</em><span class="sig-paren">)</span><a class="headerlink" href="#dataset.dataset_cuboids.reset_index" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reset the external saved index to <code class="docutils literal notranslate"><span class="pre">set_index</span></code> to save storage and overwrite old parameters and images.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>set_index</strong> (<em>int</em><em>, </em><em>optional</em>) -- The index to which it will be set, defaults to 0</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="dataset.dataset_cuboids.save">
+<code class="sig-name descname">save</code><span class="sig-paren">(</span><em class="sig-param">dictionary</em>, <em class="sig-param">save_para=True</em>, <em class="sig-param">save_image=False</em><span class="sig-paren">)</span><a class="headerlink" href="#dataset.dataset_cuboids.save" title="Permalink to this definition">¶</a></dt>
+<dd><p>Save parameter data or/and an image of a dictionary in the <code class="docutils literal notranslate"><span class="pre">data/parameters</span></code> folder or the <code class="docutils literal notranslate"><span class="pre">data/images</span></code> folder. The saved parameters can be loaded with <a class="reference internal" href="#dataset.dataset_cuboids.load_parameters" title="dataset.dataset_cuboids.load_parameters"><code class="xref py py-meth docutils literal notranslate"><span class="pre">load_parameters()</span></code></a> and then manipulated to create an altered image.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dictionary</strong> (<em>dictionary</em>) -- A dictionary with keys as &quot;index&quot;, &quot;parameters&quot; and if needed &quot;image&quot;. For example a returned dictionary from <a class="reference internal" href="#dataset.dataset_cuboids.parameters_to_finished_data" title="dataset.dataset_cuboids.parameters_to_finished_data"><code class="xref py py-meth docutils literal notranslate"><span class="pre">parameters_to_finished_data()</span></code></a>.</p></li>
+<li><p><strong>save_para</strong> (<em>bool</em><em>, </em><em>optional</em>) -- If the parameters should be saved to <code class="docutils literal notranslate"><span class="pre">data/parameters</span></code> labeled with the index if available, defaults to True</p></li>
+<li><p><strong>save_image</strong> (<em>bool</em><em>, </em><em>optional</em>) -- If the image should be saved to <code class="docutils literal notranslate"><span class="pre">data/images</span></code> labeled with the index if available, defaults to False</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="dataset.dataset_cuboids.set_config">
+<code class="sig-name descname">set_config</code><span class="sig-paren">(</span><em class="sig-param">same_scale=None, scale=[0.5, 4], total_cuboids=[2, 12], phi=[0, 360], branches=[1, 3], same_theta=None, theta=None, same_material=None, r=[0, 1], g=[0, 1], b=[0, 1], a=[0.5, 1], metallic=[0, 1], smoothness=[0, 1], CameraRadius=10.0, CameraTheta=[30, 100], CameraPhi=[0, 360], CameraVerticalOffset=None, totalPointLights=[5, 12], PointLightsRadius=[5, 20], PointLightsPhi=[0, 360], PointLightsTheta=[0, 90], PointLightsIntensity=[7, 17], PointLightsRange=[5, 25], samePointLightColor=None, PointLightsColor_r=[0, 1], PointLightsColor_g=[0, 1], PointLightsColor_b=[0, 1], PointLightsColor_a=[0.5, 1], totalSpotLights=None, SpotLightsRadius=[5, 20], SpotLightsPhi=[0, 360], SpotLightsTheta=[0, 90], SpotLightsIntensity=[5, 15], SpotLightsRange=[5, 25], SpotLightsAngle=[5, 120], sameSpotLightColor=None, SpotLightsColor_r=[0, 1], SpotLightsColor_g=[0, 1], SpotLightsColor_b=[0, 1], SpotLightsColor_a=[0.5, 1], DirectionalLightTheta=[0, 90], DirectionalLightIntensity=[0.1, 1.8]</em><span class="sig-paren">)</span><a class="headerlink" href="#dataset.dataset_cuboids.set_config" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>Sets a config for this class instace which determines the interval for all random parameters created in the function <a class="reference internal" href="#dataset.dataset_cuboids.create_random_parameters" title="dataset.dataset_cuboids.create_random_parameters"><code class="xref py py-meth docutils literal notranslate"><span class="pre">create_random_parameters()</span></code></a>. The meaning of all the parameters are explained in this function: <a class="reference internal" href="#client.client_communicator_to_unity.write_json_crane" title="client.client_communicator_to_unity.write_json_crane"><code class="xref py py-meth docutils literal notranslate"><span class="pre">write_json_crane()</span></code></a>.</dt><dd><p>Here are only those parameters mentioned which deviate from the <code class="docutils literal notranslate"><span class="pre">standard_parameter</span></code>.</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>&quot;standard_parameter&quot;</strong> -- Has to be a list with two floats. The first element describes the lower boundary and second element describes the upper boundary for the function <a class="reference internal" href="#dataset.dataset_cuboids.create_random_parameters" title="dataset.dataset_cuboids.create_random_parameters"><code class="xref py py-meth docutils literal notranslate"><span class="pre">create_random_parameters()</span></code></a> in which the variable is set randomly, defaults is a predefined list</p></li>
+<li><p><strong>same_scale</strong> (<em>None</em><em> or </em><em>bool</em><em>, </em><em>optional</em>) -- If <code class="docutils literal notranslate"><span class="pre">None</span></code> the boolean will be set randomly in <a class="reference internal" href="#dataset.dataset_cuboids.create_random_parameters" title="dataset.dataset_cuboids.create_random_parameters"><code class="xref py py-meth docutils literal notranslate"><span class="pre">create_random_parameters()</span></code></a>. Otherwise it will be set to the given boolean, defaults to None</p></li>
+<li><p><strong>branches</strong> (<em>None</em><em> or </em><em>list</em><em>, </em><em>optional</em>) -- If <code class="docutils literal notranslate"><span class="pre">None</span></code> there will be no branches which means one main branch. Else has to be a list with two integers. The amount of branches created in <a class="reference internal" href="#dataset.dataset_cuboids.create_random_parameters" title="dataset.dataset_cuboids.create_random_parameters"><code class="xref py py-meth docutils literal notranslate"><span class="pre">create_random_parameters()</span></code></a> at every cuboid will be chosen from a normal distribution where the second element of this list is interpreted als three sigma deviation, defaults to [1,3]</p></li>
+<li><p><strong>same_theta</strong> (<em>None</em><em> or </em><em>list</em><em>, </em><em>optional</em>) -- If <code class="docutils literal notranslate"><span class="pre">None</span></code> the boolean will be set randomly in <a class="reference internal" href="#dataset.dataset_cuboids.create_random_parameters" title="dataset.dataset_cuboids.create_random_parameters"><code class="xref py py-meth docutils literal notranslate"><span class="pre">create_random_parameters()</span></code></a>. Otherwise it will be set to the given boolean, defaults to None</p></li>
+<li><p><strong>theta</strong> (<em>None</em><em> or </em><em>list</em><em>, </em><em>optional</em>) -- If <code class="docutils literal notranslate"><span class="pre">None</span></code> the values for theta is set randomly between zero and <code class="docutils literal notranslate"><span class="pre">360/total_cuboids</span></code>. Otherwise it has to be a list of length 2, defaults to None</p></li>
+<li><p><strong>same_material</strong> (<em>None</em><em> or </em><em>bool</em><em>, </em><em>optional</em>) -- If <code class="docutils literal notranslate"><span class="pre">None</span></code> the boolean will be set randomly in <a class="reference internal" href="#dataset.dataset_cuboids.create_random_parameters" title="dataset.dataset_cuboids.create_random_parameters"><code class="xref py py-meth docutils literal notranslate"><span class="pre">create_random_parameters()</span></code></a>. Otherwise it will be set to the given boolean, defaults to None</p></li>
+<li><p><strong>CameraRadius</strong> (<em>float</em><em> or </em><em>list</em><em>, </em><em>optional</em>) -- If <code class="docutils literal notranslate"><span class="pre">float</span></code> then the value in <a class="reference internal" href="#dataset.dataset_cuboids.create_random_parameters" title="dataset.dataset_cuboids.create_random_parameters"><code class="xref py py-meth docutils literal notranslate"><span class="pre">create_random_parameters()</span></code></a> will not be random, instead set to the given <code class="docutils literal notranslate"><span class="pre">float</span></code>. If it is a list it has to be a list of length two, defaults to 10.0</p></li>
+<li><p><strong>CameraTheta</strong> (<em>float</em><em> or </em><em>list</em><em>, </em><em>optional</em>) -- If <code class="docutils literal notranslate"><span class="pre">float</span></code> then the value in <a class="reference internal" href="#dataset.dataset_cuboids.create_random_parameters" title="dataset.dataset_cuboids.create_random_parameters"><code class="xref py py-meth docutils literal notranslate"><span class="pre">create_random_parameters()</span></code></a> will not be random, instead set to the given <code class="docutils literal notranslate"><span class="pre">float</span></code>. If it is a list it has to be a list of length two, defaults to [30,100]</p></li>
+<li><p><strong>CameraPhi</strong> (<em>float</em><em> or </em><em>list</em><em>, </em><em>optional</em>) -- If <code class="docutils literal notranslate"><span class="pre">float</span></code> then the value in <a class="reference internal" href="#dataset.dataset_cuboids.create_random_parameters" title="dataset.dataset_cuboids.create_random_parameters"><code class="xref py py-meth docutils literal notranslate"><span class="pre">create_random_parameters()</span></code></a> will not be random, instead set to the given <code class="docutils literal notranslate"><span class="pre">float</span></code>. If it is a list it has to be a list of length two, defaults to [0,360]</p></li>
+<li><p><strong>CameraVerticalOffset</strong> (<em>None</em><em>, </em><em>float</em><em> or </em><em>list</em><em>, </em><em>optional</em>) -- If <code class="docutils literal notranslate"><span class="pre">None</span></code> it is set to zero. If <code class="docutils literal notranslate"><span class="pre">float</span></code> then the value in <a class="reference internal" href="#dataset.dataset_cuboids.create_random_parameters" title="dataset.dataset_cuboids.create_random_parameters"><code class="xref py py-meth docutils literal notranslate"><span class="pre">create_random_parameters()</span></code></a> will not be random, instead set to the given <code class="docutils literal notranslate"><span class="pre">float</span></code>. If it is a list it has to be a list of length two, defaults to None</p></li>
+<li><p><strong>totalPointLights</strong> (<em>None</em><em> or </em><em>list</em><em>, </em><em>optional</em>) -- If <code class="docutils literal notranslate"><span class="pre">None</span></code> there will be no Pointlights created in <a class="reference internal" href="#dataset.dataset_cuboids.create_random_parameters" title="dataset.dataset_cuboids.create_random_parameters"><code class="xref py py-meth docutils literal notranslate"><span class="pre">create_random_parameters()</span></code></a>. Else it has to be a list of integers with the length two, defaults to [5,12]</p></li>
+<li><p><strong>samePointLightColor</strong> (<em>None</em><em> or </em><em>bool</em><em>, </em><em>optional</em>) -- If <code class="docutils literal notranslate"><span class="pre">None</span></code> the boolean will be chosen randomly, else the given boolean is used, defaults to None</p></li>
+<li><p><strong>totalSpotLights</strong> (<em>None</em><em> or </em><em>list</em><em>, </em><em>optional</em>) -- If <code class="docutils literal notranslate"><span class="pre">None</span></code> there will be no Spotlights created in <a class="reference internal" href="#dataset.dataset_cuboids.create_random_parameters" title="dataset.dataset_cuboids.create_random_parameters"><code class="xref py py-meth docutils literal notranslate"><span class="pre">create_random_parameters()</span></code></a>. Else it has to be a list of integers with the length two, defaults to None</p></li>
+<li><p><strong>sameSpotLightColor</strong> (<em>None</em><em> or </em><em>bool</em><em>, </em><em>optional</em>) -- If <code class="docutils literal notranslate"><span class="pre">None</span></code> the boolean will be chosen randomly, else the given boolean is used, defaults to None</p></li>
+<li><p><strong>DirectionalLightTheta</strong> (<em>None</em><em> or </em><em>list</em><em>, </em><em>optional</em>) -- If <code class="docutils literal notranslate"><span class="pre">None</span></code> the <code class="docutils literal notranslate"><span class="pre">DirectionalLightIntensity</span></code> will be set to zero, else it has to be a list of floats with the length two, defaults to [0,90]</p></li>
+<li><p><strong>DirectionalLightIntensity</strong> (<em>None</em><em> or </em><em>list</em><em>, </em><em>optional</em>) -- If <code class="docutils literal notranslate"><span class="pre">None</span></code> the <code class="docutils literal notranslate"><span class="pre">DirectionalLightIntensity</span></code> will be set to zero, else it has to be a list of floats with the length two, defaults to [0.1,1.8]</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="indices-and-tables">
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
+<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
+</ul>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="#">Python-Unity Images</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="#">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, Richard Häcker.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.2.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/contents.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
