@@ -1,9 +1,8 @@
-Welcome to Python-Unity Images documentation!
-=========================================================
-Python Code description
-=============
-client.py
-----------    
+Python-Unity Images documentation!
+===================================
+
+**client.py**
+==============
 .. toctree::
    :maxdepth: 2
    :caption: content:
@@ -12,8 +11,8 @@ client.py
     
     .. automethod:: __init__
 
-dataset.py
-----------   
+**dataset.py**
+===============   
 .. toctree::
    :maxdepth: 2
    :caption: content:
@@ -21,6 +20,7 @@ dataset.py
     :members:
     
     .. automethod:: __init__
+
 
 
 Indices and tables
