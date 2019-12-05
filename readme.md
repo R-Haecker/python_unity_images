@@ -12,4 +12,4 @@ This repository was created in a project at the research group Computer Vision a
 
 Documentation
 ---------------
-The documentation of the python code can be found here: python-unity-images.rtfd.io
+The documentation of the python code can be found [here](python-unity-images.rtfd.io). 
