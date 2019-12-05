@@ -1,6 +1,6 @@
 from PIL import Image
 import client
-from edflow.data.dataset import DatasetMixin
+#from edflow.data.dataset import DatasetMixin
 import numpy as np
 import matplotlib
 import matplotlib.pyplot as plt
@@ -12,7 +12,7 @@ import copy
 import time
 import os
 
-class dataset_cuboids(DatasetMixin):
+class dataset_cuboids():
     def __init__(self, use_unity_build = True, debug_log = False):
         """Sets up logging, the config, necessary paths and a client instance form :class:`~client.client_communicator_to_unity`.
         
@@ -68,7 +68,7 @@ class dataset_cuboids(DatasetMixin):
         :param branches: If ``None`` there will be no branches which means one main branch. Else has to be a list with two integers. The amount of branches created in :meth:`~dataset.dataset_cuboids.create_random_parameters` at every cuboid will be chosen from a normal distribution where the second element of this list is interpreted als three sigma deviation, defaults to [1,3]
         :type branches: None or list, optional
         :param same_theta: If ``None`` the boolean will be set randomly in :meth:`~dataset.dataset_cuboids.create_random_parameters`. Otherwise it will be set to the given boolean, defaults to None
-        :type same_theta: None or list, optional
+        :type same_theta: None or bool, optional
         :param theta: If ``None`` the values for theta is set randomly between zero and ``360/total_cuboids``. Otherwise it has to be a list of length 2, defaults to None
         :type theta: None or list, optional
         :param same_material: If ``None`` the boolean will be set randomly in :meth:`~dataset.dataset_cuboids.create_random_parameters`. Otherwise it will be set to the given boolean, defaults to None
