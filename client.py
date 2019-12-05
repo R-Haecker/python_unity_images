@@ -127,7 +127,7 @@ class client_communicator_to_unity:
             self.logger.debug("Config data for TCP socket: host: " + self.host + "; port: " + str(self.port)) 
         except IOError as e:
             self.logger.error("tcpconfig.json can not be found. Now using default: host: " + self.host + "; port: " + str(self.port))
-            self.logger.error("Check: python client: client_communicator_to_unity in init(): self.relative_path_TCPsocket_config; tcpconfig.json should be found in the same folder as client.py")
+            self.logger.error("ERROR: Check: python client: client_communicator_to_unity in init(): self.relative_path_TCPsocket_config; tcpconfig.json should be found in the same folder as client.py")
             pass
         while 1:
             # Connect the socket to the listening server

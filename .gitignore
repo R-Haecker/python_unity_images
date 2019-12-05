@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 data/figures/
 data/parameters/
 data/images/
@@ -8,3 +9,16 @@ test_for_plotting_images.ipynb*
 __pycache__
 debug_test.py
 /docs/build/
+=======
+data/figures/*
+data/parameters/*
+data/images/*
+data/python/*
+data/unity/*
+test_for_plotting_images.ipynb
+log/*
+.ipynb_checkpoints
+__pycache__
+.vscode
+docs/build/*
+>>>>>>> datastructure_for_publishing
