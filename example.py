@@ -1,7 +1,8 @@
 import dataset
 data = dataset.dataset_cuboids(use_unity_build=True,debug_log=False)
+data.reset_index()
 dicts = []
-for i in range(3):
-    dicts.append(data[i])
+for i in range(10):
+    dicts.append(data.get_example(save_para=True, save_image=True))
 data.exit()
-data.plot_images(dicts)
+data.plot_images(dicts, images_per_row=5, save_fig=True)
