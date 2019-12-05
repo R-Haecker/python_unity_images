@@ -7,7 +7,7 @@ public class class_structures : MonoBehaviour
 }
 
 [System.Serializable]
-public class TcpConfigParameters
+public class TcpConfigParameters 
 {
     public string host;
     public int port;
