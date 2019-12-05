@@ -11,6 +11,6 @@
 test_for_plotting_images.ipynb/
 log/*
 .ipynb_checkpoints
-__pycach__
+__pycache__
 .vscode
 docs/build/*
