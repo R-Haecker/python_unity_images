@@ -1,10 +1,10 @@
-/data/figures/*
-/data/parameters/*
-/data/images/
-/data/index.txt
+data/figures/
+data/parameters/
+data/images/
+data/index.txt
 test_for_plotting_images.ipynb*
 *.[log]
 .ipynb_checkpoints*
-/__pycache__*
-debug_test.py/
-/docs/build/*
+__pycache__
+debug_test.py
+/docs/build/
