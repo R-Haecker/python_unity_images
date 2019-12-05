@@ -1,6 +1,6 @@
 import dataset
 data = dataset.dataset_cuboids(use_unity_build=True,debug_log=False)
-data.reset_index()
+#data.reset_index()
 dicts = []
 for i in range(10):
     dicts.append(data.get_example(save_para=True, save_image=True))
