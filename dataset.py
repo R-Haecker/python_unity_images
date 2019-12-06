@@ -53,11 +53,11 @@ class dataset_cuboids():
         self.set_config()
         self.logger.debug("Dataset initialised.\n")        
 
-    def set_config(self,same_scale=None, scale=[0.5,4], total_cuboids=[2,12], phi=[0,360], branches=[1,3],same_theta=None, theta=None, 
-    same_material=None, r=[0,1], g=[0,1], b=[0,1], a=[0.5,1], metallic=[0,1], smoothness=[0,1], CameraRadius = 10.0, CameraTheta = [30,100], CameraPhi = [0,360], CameraVerticalOffset = None,
+    def set_config(self,same_scale=None, scale=[0.5,4], total_cuboids=[2,5], phi=[0,360], branches=[1,3],same_theta=None, theta=None, 
+    same_material=None, r=[0,1], g=[0,1], b=[0,1], a=[0.5,1], metallic=[0,1], smoothness=[0,1], CameraRadius = 10.0, CameraTheta = [60,100], CameraPhi = [0,360], CameraVerticalOffset = None,
     totalPointLights=[5,12], PointLightsRadius=[5,20], PointLightsPhi=[0,360], PointLightsTheta=[0,90], PointLightsIntensity=[7,17], PointLightsRange=[5,25], samePointLightColor=None, PointLightsColor_r=[0,1], PointLightsColor_g=[0,1], PointLightsColor_b=[0,1], PointLightsColor_a=[0.5,1],
     totalSpotLights=[3,7], SpotLightsRadius=[5,20], SpotLightsPhi=[0,360], SpotLightsTheta=[0,90], SpotLightsIntensity=[5,15], SpotLightsRange=[5,25], SpotLightsAngle=[5,120], sameSpotLightColor=None, SpotLightsColor_r=[0,1], SpotLightsColor_g=[0,1], SpotLightsColor_b=[0,1], SpotLightsColor_a=[0.5,1],
-    DirectionalLightTheta = [0,90], DirectionalLightIntensity = [0.1,1.8]):
+    DirectionalLightTheta = [0,90], DirectionalLightIntensity = [0.1,1.1]):
         """Sets a config for this class instace which determines the interval for all random parameters created in the function :meth:`~dataset.dataset_cuboids.create_random_parameters`. The meaning of all the parameters are explained in this function: :meth:`~client.client_communicator_to_unity.write_json_crane`. 
         Here are only those parameters mentioned which deviate from the ``standard_parameter``.
         

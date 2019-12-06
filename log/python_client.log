@@ -1,263 +1,829 @@
-<<<<<<< HEAD
-2019-12-02 15:15:42,883; client.py - line: 58 -DEBUG: Starting python client.
-2019-12-02 15:15:42,883; client.py - line: 78 -INFO: Starting Unity...
-2019-12-02 15:15:42,883; client.py - line: 79 -DEBUG: path to unity: /home/haecker/Documents/src/git/python_unity_images/build_linux/unity_server_rendering_images.x86_64
-2019-12-02 15:15:42,888; client.py - line: 92 -INFO: Waiting for unity...
-2019-12-02 15:15:45,895; client.py - line: 119 -INFO: Client now connecting to server.
-2019-12-02 15:15:45,896; client.py - line: 127 -DEBUG: Config data for TCP socket: host: 127.0.0.1; port: 50050
-2019-12-02 15:15:45,897; client.py - line: 136 -INFO: Socket connected.
-2019-12-02 15:15:45,897; client.py - line: 137 -DEBUG: Saving TCP config to self.relative_path_TCPsocket_config.
+2019-12-05 17:22:02,374; client.py - line: 58 -DEBUG: Starting python client.
+2019-12-05 17:22:02,374; client.py - line: 78 -INFO: Starting Unity...
+2019-12-05 17:22:02,374; client.py - line: 79 -DEBUG: path to unity: /home/haecker/Documents/src/git/python_unity_images/build_linux/unity_server_rendering_images.x86_64
+2019-12-05 17:22:02,377; client.py - line: 92 -INFO: Waiting for unity...
+2019-12-05 17:22:05,885; client.py - line: 119 -INFO: Client now connecting to server.
+2019-12-05 17:22:05,886; client.py - line: 127 -DEBUG: Config data for TCP socket: host: 127.0.0.1; port: 50050
+2019-12-05 17:22:05,887; client.py - line: 136 -INFO: Socket connected.
+2019-12-05 17:22:05,888; client.py - line: 137 -DEBUG: Saving TCP config to self.relative_path_TCPsocket_config.
 
-2019-12-02 15:15:45,902; dataset.py - line: 55 -DEBUG: Create config.
-2019-12-02 15:15:45,903; dataset.py - line: 63 -DEBUG: Dataset initialised.
+2019-12-05 17:22:05,891; dataset.py - line: 51 -DEBUG: Create config.
+2019-12-05 17:22:05,892; dataset.py - line: 54 -DEBUG: Dataset initialised.
 
-2019-12-02 15:15:45,907; dataset.py - line: 459 -DEBUG: total_branches: [1, 1, 1, 1, 1, 2, 2, 2, 1]
-2019-12-02 15:15:45,914; client.py - line: 193 -DEBUG: Json string sent.
+2019-12-05 17:22:05,896; dataset.py - line: 387 -DEBUG: total_branches: [1]
+2019-12-05 17:22:05,903; client.py - line: 193 -DEBUG: Json string sent.
 
-2019-12-02 15:15:45,915; client.py - line: 234 -DEBUG: Json string sent.
+2019-12-05 17:22:05,904; client.py - line: 234 -DEBUG: Json string sent.
 
-2019-12-02 15:15:46,016; client.py - line: 209 -DEBUG: Timeout -> exit _receiveData()
-2019-12-02 15:15:46,016; client.py - line: 210 -DEBUG: data_complete: type: <class 'bytearray'>, data_complete len: 1, data_complete [:10]: bytearray(b'\x00')
-2019-12-02 15:15:46,016; client.py - line: 240 -DEBUG: Trying to recive data.
-2019-12-02 15:15:46,136; client.py - line: 209 -DEBUG: Timeout -> exit _receiveData()
-2019-12-02 15:15:46,136; client.py - line: 210 -DEBUG: data_complete: type: <class 'bytearray'>, data_complete len: 87736, data_complete [:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
-2019-12-02 15:15:46,137; client.py - line: 240 -DEBUG: Trying to recive data.
-2019-12-02 15:15:46,137; client.py - line: 243 -INFO: Data from Unity recived.
-2019-12-02 15:15:46,138; client.py - line: 244 -DEBUG: End_tag detected, unity_resp_bytes[0:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
-2019-12-02 15:15:46,138; client.py - line: 248 -DEBUG: img_bytes type: <class 'bytearray'>, img_bytes len: 87727, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
-2019-12-02 15:15:46,172; client.py - line: 251 -DEBUG: PIL Img: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
-2019-12-02 15:15:46,184; client.py - line: 253 -DEBUG: Returning img: type: <class 'numpy.ndarray'> 
+2019-12-05 17:22:06,005; client.py - line: 209 -DEBUG: Timeout -> exit _receiveData()
+2019-12-05 17:22:06,005; client.py - line: 210 -DEBUG: data_complete: type: <class 'bytearray'>, data_complete len: 1, data_complete [:10]: bytearray(b'\x00')
+2019-12-05 17:22:06,006; client.py - line: 240 -DEBUG: Trying to receive data.
+2019-12-05 17:22:06,118; client.py - line: 209 -DEBUG: Timeout -> exit _receiveData()
+2019-12-05 17:22:06,118; client.py - line: 210 -DEBUG: data_complete: type: <class 'bytearray'>, data_complete len: 37288, data_complete [:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2019-12-05 17:22:06,119; client.py - line: 240 -DEBUG: Trying to receive data.
+2019-12-05 17:22:06,119; client.py - line: 243 -INFO: Data from Unity received.
+2019-12-05 17:22:06,120; client.py - line: 244 -DEBUG: End_tag detected, unity_resp_bytes[0:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2019-12-05 17:22:06,120; client.py - line: 248 -DEBUG: img_bytes type: <class 'bytearray'>, img_bytes len: 37279, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
+2019-12-05 17:22:06,150; client.py - line: 251 -DEBUG: PIL Img: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
+2019-12-05 17:22:06,159; client.py - line: 253 -DEBUG: Returning img: type: <class 'numpy.ndarray'> 
 
-2019-12-02 15:15:46,184; dataset.py - line: 958 -DEBUG: index: 87
-2019-12-02 15:15:46,184; dataset.py - line: 960 -DEBUG: index: 88
-2019-12-02 15:15:46,185; dataset.py - line: 459 -DEBUG: total_branches: [1, 1, 2, 1, 1]
-2019-12-02 15:15:46,186; client.py - line: 193 -DEBUG: Json string sent.
+2019-12-05 17:22:06,159; dataset.py - line: 890 -DEBUG: index: 69
+2019-12-05 17:22:06,159; dataset.py - line: 892 -DEBUG: index: 70
+2019-12-05 17:22:06,184; dataset.py - line: 387 -DEBUG: total_branches: [1, 1, 2]
+2019-12-05 17:22:06,185; client.py - line: 193 -DEBUG: Json string sent.
 
-2019-12-02 15:15:46,186; client.py - line: 234 -DEBUG: Json string sent.
+2019-12-05 17:22:06,185; client.py - line: 234 -DEBUG: Json string sent.
 
-2019-12-02 15:15:46,354; client.py - line: 209 -DEBUG: Timeout -> exit _receiveData()
-2019-12-02 15:15:46,354; client.py - line: 210 -DEBUG: data_complete: type: <class 'bytearray'>, data_complete len: 45625, data_complete [:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
-2019-12-02 15:15:46,355; client.py - line: 240 -DEBUG: Trying to recive data.
-2019-12-02 15:15:46,356; client.py - line: 243 -INFO: Data from Unity recived.
-2019-12-02 15:15:46,356; client.py - line: 244 -DEBUG: End_tag detected, unity_resp_bytes[0:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
-2019-12-02 15:15:46,357; client.py - line: 248 -DEBUG: img_bytes type: <class 'bytearray'>, img_bytes len: 45616, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
-2019-12-02 15:15:46,358; client.py - line: 251 -DEBUG: PIL Img: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
-2019-12-02 15:15:46,388; client.py - line: 253 -DEBUG: Returning img: type: <class 'numpy.ndarray'> 
+2019-12-05 17:22:06,349; client.py - line: 209 -DEBUG: Timeout -> exit _receiveData()
+2019-12-05 17:22:06,349; client.py - line: 210 -DEBUG: data_complete: type: <class 'bytearray'>, data_complete len: 52587, data_complete [:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2019-12-05 17:22:06,349; client.py - line: 240 -DEBUG: Trying to receive data.
+2019-12-05 17:22:06,350; client.py - line: 243 -INFO: Data from Unity received.
+2019-12-05 17:22:06,350; client.py - line: 244 -DEBUG: End_tag detected, unity_resp_bytes[0:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2019-12-05 17:22:06,350; client.py - line: 248 -DEBUG: img_bytes type: <class 'bytearray'>, img_bytes len: 52578, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
+2019-12-05 17:22:06,350; client.py - line: 251 -DEBUG: PIL Img: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
+2019-12-05 17:22:06,358; client.py - line: 253 -DEBUG: Returning img: type: <class 'numpy.ndarray'> 
 
-2019-12-02 15:15:46,388; dataset.py - line: 958 -DEBUG: index: 88
-2019-12-02 15:15:46,389; dataset.py - line: 960 -DEBUG: index: 89
-2019-12-02 15:15:46,390; dataset.py - line: 459 -DEBUG: total_branches: [1, 1, 1]
-2019-12-02 15:15:46,391; client.py - line: 193 -DEBUG: Json string sent.
+2019-12-05 17:22:06,359; dataset.py - line: 890 -DEBUG: index: 70
+2019-12-05 17:22:06,359; dataset.py - line: 892 -DEBUG: index: 71
+2019-12-05 17:22:06,390; dataset.py - line: 387 -DEBUG: total_branches: [1, 1, 1]
+2019-12-05 17:22:06,390; client.py - line: 193 -DEBUG: Json string sent.
 
-2019-12-02 15:15:46,392; client.py - line: 234 -DEBUG: Json string sent.
+2019-12-05 17:22:06,390; client.py - line: 234 -DEBUG: Json string sent.
 
-2019-12-02 15:15:46,588; client.py - line: 209 -DEBUG: Timeout -> exit _receiveData()
-2019-12-02 15:15:46,589; client.py - line: 210 -DEBUG: data_complete: type: <class 'bytearray'>, data_complete len: 20171, data_complete [:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
-2019-12-02 15:15:46,589; client.py - line: 240 -DEBUG: Trying to recive data.
-2019-12-02 15:15:46,590; client.py - line: 243 -INFO: Data from Unity recived.
-2019-12-02 15:15:46,590; client.py - line: 244 -DEBUG: End_tag detected, unity_resp_bytes[0:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
-2019-12-02 15:15:46,590; client.py - line: 248 -DEBUG: img_bytes type: <class 'bytearray'>, img_bytes len: 20162, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
-2019-12-02 15:15:46,591; client.py - line: 251 -DEBUG: PIL Img: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
-2019-12-02 15:15:46,614; client.py - line: 253 -DEBUG: Returning img: type: <class 'numpy.ndarray'> 
+2019-12-05 17:22:06,570; client.py - line: 209 -DEBUG: Timeout -> exit _receiveData()
+2019-12-05 17:22:06,570; client.py - line: 210 -DEBUG: data_complete: type: <class 'bytearray'>, data_complete len: 33092, data_complete [:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2019-12-05 17:22:06,570; client.py - line: 240 -DEBUG: Trying to receive data.
+2019-12-05 17:22:06,571; client.py - line: 243 -INFO: Data from Unity received.
+2019-12-05 17:22:06,571; client.py - line: 244 -DEBUG: End_tag detected, unity_resp_bytes[0:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2019-12-05 17:22:06,571; client.py - line: 248 -DEBUG: img_bytes type: <class 'bytearray'>, img_bytes len: 33083, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
+2019-12-05 17:22:06,571; client.py - line: 251 -DEBUG: PIL Img: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
+2019-12-05 17:22:06,590; client.py - line: 253 -DEBUG: Returning img: type: <class 'numpy.ndarray'> 
 
-2019-12-02 15:15:46,615; dataset.py - line: 958 -DEBUG: index: 89
-2019-12-02 15:15:46,615; dataset.py - line: 960 -DEBUG: index: 90
-2019-12-02 15:15:46,616; client.py - line: 173 -INFO: Exit-message is sent. Unity build and socket now closing.
+2019-12-05 17:22:06,590; dataset.py - line: 890 -DEBUG: index: 71
+2019-12-05 17:22:06,591; dataset.py - line: 892 -DEBUG: index: 72
+2019-12-05 17:22:06,624; dataset.py - line: 387 -DEBUG: total_branches: [1, 1, 2]
+2019-12-05 17:22:06,625; client.py - line: 193 -DEBUG: Json string sent.
 
-2019-12-02 15:15:46,616; client.py - line: 190 -DEBUG: Exit request sent.
+2019-12-05 17:22:06,626; client.py - line: 234 -DEBUG: Json string sent.
 
-2019-12-02 15:15:46,616; dataset.py - line: 1001 -DEBUG: Exit socket connection to unity.
-2019-12-02 15:15:46,617; dataset.py - line: 740 -DEBUG: numb_y: 1
-2019-12-02 15:15:46,617; dataset.py - line: 741 -DEBUG: dicts[0]['image'].shape[0]: 520
-2019-12-02 15:15:46,617; dataset.py - line: 742 -DEBUG: (images_in_one_row*dicts[0][image].shape[1]: 1560
-2019-12-02 15:15:46,617; dataset.py - line: 743 -DEBUG: dicts[0][image].shape[2]: 3
-2019-12-02 15:15:46,622; dataset.py - line: 745 -DEBUG: h_stacked.shape: (1, 520, 1560, 3)
-2019-12-02 15:15:46,642; dataset.py - line: 758 -DEBUG: final_img.shape: (520, 1560, 3)
-=======
-2019-12-05 14:42:11,764; client.py - line: 58 -DEBUG: Starting python client.
-2019-12-05 14:42:11,764; client.py - line: 78 -INFO: Starting Unity...
-2019-12-05 14:42:11,764; client.py - line: 79 -DEBUG: path to unity: /home/haecker/Documents/src/git/python_unity_images/build_linux/unity_server_rendering_images.x86_64
-2019-12-05 14:42:11,767; client.py - line: 92 -INFO: Waiting for unity...
-2019-12-05 14:42:15,275; client.py - line: 119 -INFO: Client now connecting to server.
-2019-12-05 14:42:15,276; client.py - line: 127 -DEBUG: Config data for TCP socket: host: 127.0.0.1; port: 50050
-2019-12-05 14:42:15,277; client.py - line: 136 -INFO: Socket connected.
-2019-12-05 14:42:15,278; client.py - line: 137 -DEBUG: Saving TCP config to self.relative_path_TCPsocket_config.
+2019-12-05 17:22:06,826; client.py - line: 209 -DEBUG: Timeout -> exit _receiveData()
+2019-12-05 17:22:06,827; client.py - line: 210 -DEBUG: data_complete: type: <class 'bytearray'>, data_complete len: 58394, data_complete [:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2019-12-05 17:22:06,828; client.py - line: 240 -DEBUG: Trying to receive data.
+2019-12-05 17:22:06,829; client.py - line: 243 -INFO: Data from Unity received.
+2019-12-05 17:22:06,829; client.py - line: 244 -DEBUG: End_tag detected, unity_resp_bytes[0:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2019-12-05 17:22:06,830; client.py - line: 248 -DEBUG: img_bytes type: <class 'bytearray'>, img_bytes len: 58385, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
+2019-12-05 17:22:06,831; client.py - line: 251 -DEBUG: PIL Img: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
+2019-12-05 17:22:06,855; client.py - line: 253 -DEBUG: Returning img: type: <class 'numpy.ndarray'> 
 
-2019-12-05 14:42:15,282; dataset.py - line: 51 -DEBUG: Create config.
-2019-12-05 14:42:15,283; dataset.py - line: 54 -DEBUG: Dataset initialised.
+2019-12-05 17:22:06,855; dataset.py - line: 890 -DEBUG: index: 72
+2019-12-05 17:22:06,855; dataset.py - line: 892 -DEBUG: index: 73
+2019-12-05 17:22:06,893; dataset.py - line: 387 -DEBUG: total_branches: [1]
+2019-12-05 17:22:06,894; client.py - line: 193 -DEBUG: Json string sent.
 
-2019-12-05 14:42:15,288; dataset.py - line: 387 -DEBUG: total_branches: [1, 2, 1]
-2019-12-05 14:42:15,294; client.py - line: 193 -DEBUG: Json string sent.
+2019-12-05 17:22:06,894; client.py - line: 234 -DEBUG: Json string sent.
 
-2019-12-05 14:42:15,295; client.py - line: 234 -DEBUG: Json string sent.
+2019-12-05 17:22:07,066; client.py - line: 209 -DEBUG: Timeout -> exit _receiveData()
+2019-12-05 17:22:07,069; client.py - line: 210 -DEBUG: data_complete: type: <class 'bytearray'>, data_complete len: 46421, data_complete [:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2019-12-05 17:22:07,070; client.py - line: 240 -DEBUG: Trying to receive data.
+2019-12-05 17:22:07,070; client.py - line: 243 -INFO: Data from Unity received.
+2019-12-05 17:22:07,070; client.py - line: 244 -DEBUG: End_tag detected, unity_resp_bytes[0:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2019-12-05 17:22:07,070; client.py - line: 248 -DEBUG: img_bytes type: <class 'bytearray'>, img_bytes len: 46412, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
+2019-12-05 17:22:07,071; client.py - line: 251 -DEBUG: PIL Img: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
+2019-12-05 17:22:07,103; client.py - line: 253 -DEBUG: Returning img: type: <class 'numpy.ndarray'> 
 
-2019-12-05 14:42:15,396; client.py - line: 209 -DEBUG: Timeout -> exit _receiveData()
-2019-12-05 14:42:15,397; client.py - line: 210 -DEBUG: data_complete: type: <class 'bytearray'>, data_complete len: 1, data_complete [:10]: bytearray(b'\x00')
-2019-12-05 14:42:15,397; client.py - line: 240 -DEBUG: Trying to receive data.
-2019-12-05 14:42:15,531; client.py - line: 209 -DEBUG: Timeout -> exit _receiveData()
-2019-12-05 14:42:15,532; client.py - line: 210 -DEBUG: data_complete: type: <class 'bytearray'>, data_complete len: 70064, data_complete [:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
-2019-12-05 14:42:15,532; client.py - line: 240 -DEBUG: Trying to receive data.
-2019-12-05 14:42:15,532; client.py - line: 243 -INFO: Data from Unity received.
-2019-12-05 14:42:15,533; client.py - line: 244 -DEBUG: End_tag detected, unity_resp_bytes[0:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
-2019-12-05 14:42:15,533; client.py - line: 248 -DEBUG: img_bytes type: <class 'bytearray'>, img_bytes len: 70055, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
-2019-12-05 14:42:15,554; client.py - line: 251 -DEBUG: PIL Img: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
-2019-12-05 14:42:15,565; client.py - line: 253 -DEBUG: Returning img: type: <class 'numpy.ndarray'> 
+2019-12-05 17:22:07,103; dataset.py - line: 890 -DEBUG: index: 73
+2019-12-05 17:22:07,103; dataset.py - line: 892 -DEBUG: index: 74
+2019-12-05 17:22:07,135; dataset.py - line: 387 -DEBUG: total_branches: [1, 2]
+2019-12-05 17:22:07,136; client.py - line: 193 -DEBUG: Json string sent.
 
-2019-12-05 14:42:15,565; dataset.py - line: 890 -DEBUG: index: 9
-2019-12-05 14:42:15,565; dataset.py - line: 892 -DEBUG: index: 10
-2019-12-05 14:42:15,599; dataset.py - line: 387 -DEBUG: total_branches: [1, 1]
-2019-12-05 14:42:15,600; client.py - line: 193 -DEBUG: Json string sent.
+2019-12-05 17:22:07,136; client.py - line: 234 -DEBUG: Json string sent.
 
-2019-12-05 14:42:15,600; client.py - line: 234 -DEBUG: Json string sent.
+2019-12-05 17:22:07,300; client.py - line: 209 -DEBUG: Timeout -> exit _receiveData()
+2019-12-05 17:22:07,300; client.py - line: 210 -DEBUG: data_complete: type: <class 'bytearray'>, data_complete len: 56551, data_complete [:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2019-12-05 17:22:07,301; client.py - line: 240 -DEBUG: Trying to receive data.
+2019-12-05 17:22:07,301; client.py - line: 243 -INFO: Data from Unity received.
+2019-12-05 17:22:07,301; client.py - line: 244 -DEBUG: End_tag detected, unity_resp_bytes[0:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2019-12-05 17:22:07,302; client.py - line: 248 -DEBUG: img_bytes type: <class 'bytearray'>, img_bytes len: 56542, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
+2019-12-05 17:22:07,303; client.py - line: 251 -DEBUG: PIL Img: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
+2019-12-05 17:22:07,333; client.py - line: 253 -DEBUG: Returning img: type: <class 'numpy.ndarray'> 
 
-2019-12-05 14:42:15,768; client.py - line: 209 -DEBUG: Timeout -> exit _receiveData()
-2019-12-05 14:42:15,768; client.py - line: 210 -DEBUG: data_complete: type: <class 'bytearray'>, data_complete len: 45029, data_complete [:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
-2019-12-05 14:42:15,769; client.py - line: 240 -DEBUG: Trying to receive data.
-2019-12-05 14:42:15,769; client.py - line: 243 -INFO: Data from Unity received.
-2019-12-05 14:42:15,770; client.py - line: 244 -DEBUG: End_tag detected, unity_resp_bytes[0:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
-2019-12-05 14:42:15,770; client.py - line: 248 -DEBUG: img_bytes type: <class 'bytearray'>, img_bytes len: 45020, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
-2019-12-05 14:42:15,771; client.py - line: 251 -DEBUG: PIL Img: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
-2019-12-05 14:42:15,800; client.py - line: 253 -DEBUG: Returning img: type: <class 'numpy.ndarray'> 
+2019-12-05 17:22:07,333; dataset.py - line: 890 -DEBUG: index: 74
+2019-12-05 17:22:07,333; dataset.py - line: 892 -DEBUG: index: 75
+2019-12-05 17:22:07,370; dataset.py - line: 387 -DEBUG: total_branches: [2]
+2019-12-05 17:22:07,370; client.py - line: 193 -DEBUG: Json string sent.
 
-2019-12-05 14:42:15,800; dataset.py - line: 890 -DEBUG: index: 10
-2019-12-05 14:42:15,800; dataset.py - line: 892 -DEBUG: index: 11
-2019-12-05 14:42:15,833; dataset.py - line: 387 -DEBUG: total_branches: [1]
-2019-12-05 14:42:15,834; client.py - line: 193 -DEBUG: Json string sent.
+2019-12-05 17:22:07,371; client.py - line: 234 -DEBUG: Json string sent.
 
-2019-12-05 14:42:15,834; client.py - line: 234 -DEBUG: Json string sent.
+2019-12-05 17:22:07,530; client.py - line: 209 -DEBUG: Timeout -> exit _receiveData()
+2019-12-05 17:22:07,531; client.py - line: 210 -DEBUG: data_complete: type: <class 'bytearray'>, data_complete len: 69617, data_complete [:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2019-12-05 17:22:07,531; client.py - line: 240 -DEBUG: Trying to receive data.
+2019-12-05 17:22:07,531; client.py - line: 243 -INFO: Data from Unity received.
+2019-12-05 17:22:07,531; client.py - line: 244 -DEBUG: End_tag detected, unity_resp_bytes[0:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2019-12-05 17:22:07,531; client.py - line: 248 -DEBUG: img_bytes type: <class 'bytearray'>, img_bytes len: 69608, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
+2019-12-05 17:22:07,531; client.py - line: 251 -DEBUG: PIL Img: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
+2019-12-05 17:22:07,540; client.py - line: 253 -DEBUG: Returning img: type: <class 'numpy.ndarray'> 
 
-2019-12-05 14:42:16,002; client.py - line: 209 -DEBUG: Timeout -> exit _receiveData()
-2019-12-05 14:42:16,002; client.py - line: 210 -DEBUG: data_complete: type: <class 'bytearray'>, data_complete len: 65891, data_complete [:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
-2019-12-05 14:42:16,003; client.py - line: 240 -DEBUG: Trying to receive data.
-2019-12-05 14:42:16,003; client.py - line: 243 -INFO: Data from Unity received.
-2019-12-05 14:42:16,004; client.py - line: 244 -DEBUG: End_tag detected, unity_resp_bytes[0:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
-2019-12-05 14:42:16,004; client.py - line: 248 -DEBUG: img_bytes type: <class 'bytearray'>, img_bytes len: 65882, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
-2019-12-05 14:42:16,005; client.py - line: 251 -DEBUG: PIL Img: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
-2019-12-05 14:42:16,037; client.py - line: 253 -DEBUG: Returning img: type: <class 'numpy.ndarray'> 
+2019-12-05 17:22:07,540; dataset.py - line: 890 -DEBUG: index: 75
+2019-12-05 17:22:07,540; dataset.py - line: 892 -DEBUG: index: 76
+2019-12-05 17:22:07,580; dataset.py - line: 387 -DEBUG: total_branches: [1]
+2019-12-05 17:22:07,581; client.py - line: 193 -DEBUG: Json string sent.
 
-2019-12-05 14:42:16,038; dataset.py - line: 890 -DEBUG: index: 11
-2019-12-05 14:42:16,038; dataset.py - line: 892 -DEBUG: index: 12
-2019-12-05 14:42:16,075; dataset.py - line: 387 -DEBUG: total_branches: [2, 1, 1]
-2019-12-05 14:42:16,075; client.py - line: 193 -DEBUG: Json string sent.
+2019-12-05 17:22:07,581; client.py - line: 234 -DEBUG: Json string sent.
 
-2019-12-05 14:42:16,076; client.py - line: 234 -DEBUG: Json string sent.
+2019-12-05 17:22:07,749; client.py - line: 209 -DEBUG: Timeout -> exit _receiveData()
+2019-12-05 17:22:07,750; client.py - line: 210 -DEBUG: data_complete: type: <class 'bytearray'>, data_complete len: 75924, data_complete [:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2019-12-05 17:22:07,750; client.py - line: 240 -DEBUG: Trying to receive data.
+2019-12-05 17:22:07,751; client.py - line: 243 -INFO: Data from Unity received.
+2019-12-05 17:22:07,751; client.py - line: 244 -DEBUG: End_tag detected, unity_resp_bytes[0:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2019-12-05 17:22:07,752; client.py - line: 248 -DEBUG: img_bytes type: <class 'bytearray'>, img_bytes len: 75915, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
+2019-12-05 17:22:07,753; client.py - line: 251 -DEBUG: PIL Img: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
+2019-12-05 17:22:07,785; client.py - line: 253 -DEBUG: Returning img: type: <class 'numpy.ndarray'> 
 
-2019-12-05 14:42:16,257; client.py - line: 209 -DEBUG: Timeout -> exit _receiveData()
-2019-12-05 14:42:16,257; client.py - line: 210 -DEBUG: data_complete: type: <class 'bytearray'>, data_complete len: 82348, data_complete [:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
-2019-12-05 14:42:16,258; client.py - line: 240 -DEBUG: Trying to receive data.
-2019-12-05 14:42:16,258; client.py - line: 243 -INFO: Data from Unity received.
-2019-12-05 14:42:16,258; client.py - line: 244 -DEBUG: End_tag detected, unity_resp_bytes[0:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
-2019-12-05 14:42:16,258; client.py - line: 248 -DEBUG: img_bytes type: <class 'bytearray'>, img_bytes len: 82339, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
-2019-12-05 14:42:16,258; client.py - line: 251 -DEBUG: PIL Img: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
-2019-12-05 14:42:16,267; client.py - line: 253 -DEBUG: Returning img: type: <class 'numpy.ndarray'> 
+2019-12-05 17:22:07,785; dataset.py - line: 890 -DEBUG: index: 76
+2019-12-05 17:22:07,785; dataset.py - line: 892 -DEBUG: index: 77
+2019-12-05 17:22:07,828; dataset.py - line: 387 -DEBUG: total_branches: [1, 1]
+2019-12-05 17:22:07,829; client.py - line: 193 -DEBUG: Json string sent.
 
-2019-12-05 14:42:16,267; dataset.py - line: 890 -DEBUG: index: 12
-2019-12-05 14:42:16,267; dataset.py - line: 892 -DEBUG: index: 13
-2019-12-05 14:42:16,317; dataset.py - line: 387 -DEBUG: total_branches: [2, 1, 1, 1, 1, 1]
-2019-12-05 14:42:16,318; client.py - line: 193 -DEBUG: Json string sent.
+2019-12-05 17:22:07,829; client.py - line: 234 -DEBUG: Json string sent.
 
-2019-12-05 14:42:16,318; client.py - line: 234 -DEBUG: Json string sent.
+2019-12-05 17:22:08,022; client.py - line: 209 -DEBUG: Timeout -> exit _receiveData()
+2019-12-05 17:22:08,023; client.py - line: 210 -DEBUG: data_complete: type: <class 'bytearray'>, data_complete len: 61147, data_complete [:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2019-12-05 17:22:08,024; client.py - line: 240 -DEBUG: Trying to receive data.
+2019-12-05 17:22:08,025; client.py - line: 243 -INFO: Data from Unity received.
+2019-12-05 17:22:08,025; client.py - line: 244 -DEBUG: End_tag detected, unity_resp_bytes[0:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2019-12-05 17:22:08,026; client.py - line: 248 -DEBUG: img_bytes type: <class 'bytearray'>, img_bytes len: 61138, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
+2019-12-05 17:22:08,027; client.py - line: 251 -DEBUG: PIL Img: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
+2019-12-05 17:22:08,058; client.py - line: 253 -DEBUG: Returning img: type: <class 'numpy.ndarray'> 
 
-2019-12-05 14:42:16,484; client.py - line: 209 -DEBUG: Timeout -> exit _receiveData()
-2019-12-05 14:42:16,484; client.py - line: 210 -DEBUG: data_complete: type: <class 'bytearray'>, data_complete len: 55213, data_complete [:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
-2019-12-05 14:42:16,485; client.py - line: 240 -DEBUG: Trying to receive data.
-2019-12-05 14:42:16,485; client.py - line: 243 -INFO: Data from Unity received.
-2019-12-05 14:42:16,485; client.py - line: 244 -DEBUG: End_tag detected, unity_resp_bytes[0:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
-2019-12-05 14:42:16,486; client.py - line: 248 -DEBUG: img_bytes type: <class 'bytearray'>, img_bytes len: 55204, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
-2019-12-05 14:42:16,486; client.py - line: 251 -DEBUG: PIL Img: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
-2019-12-05 14:42:16,507; client.py - line: 253 -DEBUG: Returning img: type: <class 'numpy.ndarray'> 
+2019-12-05 17:22:08,058; dataset.py - line: 890 -DEBUG: index: 77
+2019-12-05 17:22:08,058; dataset.py - line: 892 -DEBUG: index: 78
+2019-12-05 17:22:08,097; dataset.py - line: 387 -DEBUG: total_branches: [1]
+2019-12-05 17:22:08,098; client.py - line: 193 -DEBUG: Json string sent.
 
-2019-12-05 14:42:16,507; dataset.py - line: 890 -DEBUG: index: 13
-2019-12-05 14:42:16,507; dataset.py - line: 892 -DEBUG: index: 14
-2019-12-05 14:42:16,540; dataset.py - line: 387 -DEBUG: total_branches: [1, 1, 1, 2, 1, 1]
-2019-12-05 14:42:16,542; client.py - line: 193 -DEBUG: Json string sent.
+2019-12-05 17:22:08,098; client.py - line: 234 -DEBUG: Json string sent.
 
-2019-12-05 14:42:16,542; client.py - line: 234 -DEBUG: Json string sent.
+2019-12-05 17:22:08,270; client.py - line: 209 -DEBUG: Timeout -> exit _receiveData()
+2019-12-05 17:22:08,271; client.py - line: 210 -DEBUG: data_complete: type: <class 'bytearray'>, data_complete len: 65603, data_complete [:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2019-12-05 17:22:08,271; client.py - line: 240 -DEBUG: Trying to receive data.
+2019-12-05 17:22:08,272; client.py - line: 243 -INFO: Data from Unity received.
+2019-12-05 17:22:08,273; client.py - line: 244 -DEBUG: End_tag detected, unity_resp_bytes[0:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2019-12-05 17:22:08,273; client.py - line: 248 -DEBUG: img_bytes type: <class 'bytearray'>, img_bytes len: 65594, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
+2019-12-05 17:22:08,274; client.py - line: 251 -DEBUG: PIL Img: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
+2019-12-05 17:22:08,303; client.py - line: 253 -DEBUG: Returning img: type: <class 'numpy.ndarray'> 
 
-2019-12-05 14:42:16,719; client.py - line: 209 -DEBUG: Timeout -> exit _receiveData()
-2019-12-05 14:42:16,719; client.py - line: 210 -DEBUG: data_complete: type: <class 'bytearray'>, data_complete len: 21667, data_complete [:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
-2019-12-05 14:42:16,720; client.py - line: 240 -DEBUG: Trying to receive data.
-2019-12-05 14:42:16,720; client.py - line: 243 -INFO: Data from Unity received.
-2019-12-05 14:42:16,720; client.py - line: 244 -DEBUG: End_tag detected, unity_resp_bytes[0:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
-2019-12-05 14:42:16,720; client.py - line: 248 -DEBUG: img_bytes type: <class 'bytearray'>, img_bytes len: 21658, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
-2019-12-05 14:42:16,720; client.py - line: 251 -DEBUG: PIL Img: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
-2019-12-05 14:42:16,728; client.py - line: 253 -DEBUG: Returning img: type: <class 'numpy.ndarray'> 
+2019-12-05 17:22:08,303; dataset.py - line: 890 -DEBUG: index: 78
+2019-12-05 17:22:08,304; dataset.py - line: 892 -DEBUG: index: 79
+2019-12-05 17:22:08,344; dataset.py - line: 387 -DEBUG: total_branches: [1, 1, 1]
+2019-12-05 17:22:08,346; client.py - line: 193 -DEBUG: Json string sent.
 
-2019-12-05 14:42:16,729; dataset.py - line: 890 -DEBUG: index: 14
-2019-12-05 14:42:16,729; dataset.py - line: 892 -DEBUG: index: 15
-2019-12-05 14:42:16,752; dataset.py - line: 387 -DEBUG: total_branches: [1, 1, 1, 2, 1, 2, 1, 2]
-2019-12-05 14:42:16,753; client.py - line: 193 -DEBUG: Json string sent.
+2019-12-05 17:22:08,346; client.py - line: 234 -DEBUG: Json string sent.
 
-2019-12-05 14:42:16,753; client.py - line: 234 -DEBUG: Json string sent.
+2019-12-05 17:22:08,519; client.py - line: 209 -DEBUG: Timeout -> exit _receiveData()
+2019-12-05 17:22:08,519; client.py - line: 210 -DEBUG: data_complete: type: <class 'bytearray'>, data_complete len: 34447, data_complete [:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2019-12-05 17:22:08,520; client.py - line: 240 -DEBUG: Trying to receive data.
+2019-12-05 17:22:08,521; client.py - line: 243 -INFO: Data from Unity received.
+2019-12-05 17:22:08,521; client.py - line: 244 -DEBUG: End_tag detected, unity_resp_bytes[0:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2019-12-05 17:22:08,522; client.py - line: 248 -DEBUG: img_bytes type: <class 'bytearray'>, img_bytes len: 34438, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
+2019-12-05 17:22:08,523; client.py - line: 251 -DEBUG: PIL Img: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
+2019-12-05 17:22:08,546; client.py - line: 253 -DEBUG: Returning img: type: <class 'numpy.ndarray'> 
 
-2019-12-05 14:42:16,944; client.py - line: 209 -DEBUG: Timeout -> exit _receiveData()
-2019-12-05 14:42:16,944; client.py - line: 210 -DEBUG: data_complete: type: <class 'bytearray'>, data_complete len: 22783, data_complete [:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
-2019-12-05 14:42:16,944; client.py - line: 240 -DEBUG: Trying to receive data.
-2019-12-05 14:42:16,944; client.py - line: 243 -INFO: Data from Unity received.
-2019-12-05 14:42:16,944; client.py - line: 244 -DEBUG: End_tag detected, unity_resp_bytes[0:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
-2019-12-05 14:42:16,944; client.py - line: 248 -DEBUG: img_bytes type: <class 'bytearray'>, img_bytes len: 22774, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
-2019-12-05 14:42:16,944; client.py - line: 251 -DEBUG: PIL Img: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
-2019-12-05 14:42:16,949; client.py - line: 253 -DEBUG: Returning img: type: <class 'numpy.ndarray'> 
+2019-12-05 17:22:08,546; dataset.py - line: 890 -DEBUG: index: 79
+2019-12-05 17:22:08,546; dataset.py - line: 892 -DEBUG: index: 80
+2019-12-05 17:22:08,576; dataset.py - line: 387 -DEBUG: total_branches: [1, 2]
+2019-12-05 17:22:08,577; client.py - line: 193 -DEBUG: Json string sent.
 
-2019-12-05 14:42:16,949; dataset.py - line: 890 -DEBUG: index: 15
-2019-12-05 14:42:16,949; dataset.py - line: 892 -DEBUG: index: 16
-2019-12-05 14:42:16,969; dataset.py - line: 387 -DEBUG: total_branches: [1, 1]
-2019-12-05 14:42:16,970; client.py - line: 193 -DEBUG: Json string sent.
+2019-12-05 17:22:08,577; client.py - line: 234 -DEBUG: Json string sent.
 
-2019-12-05 14:42:16,970; client.py - line: 234 -DEBUG: Json string sent.
+2019-12-05 17:22:08,775; client.py - line: 209 -DEBUG: Timeout -> exit _receiveData()
+2019-12-05 17:22:08,776; client.py - line: 210 -DEBUG: data_complete: type: <class 'bytearray'>, data_complete len: 48149, data_complete [:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2019-12-05 17:22:08,776; client.py - line: 240 -DEBUG: Trying to receive data.
+2019-12-05 17:22:08,777; client.py - line: 243 -INFO: Data from Unity received.
+2019-12-05 17:22:08,778; client.py - line: 244 -DEBUG: End_tag detected, unity_resp_bytes[0:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2019-12-05 17:22:08,778; client.py - line: 248 -DEBUG: img_bytes type: <class 'bytearray'>, img_bytes len: 48140, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
+2019-12-05 17:22:08,779; client.py - line: 251 -DEBUG: PIL Img: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
+2019-12-05 17:22:08,806; client.py - line: 253 -DEBUG: Returning img: type: <class 'numpy.ndarray'> 
 
-2019-12-05 14:42:17,134; client.py - line: 209 -DEBUG: Timeout -> exit _receiveData()
-2019-12-05 14:42:17,135; client.py - line: 210 -DEBUG: data_complete: type: <class 'bytearray'>, data_complete len: 16998, data_complete [:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
-2019-12-05 14:42:17,136; client.py - line: 240 -DEBUG: Trying to receive data.
-2019-12-05 14:42:17,136; client.py - line: 243 -INFO: Data from Unity received.
-2019-12-05 14:42:17,137; client.py - line: 244 -DEBUG: End_tag detected, unity_resp_bytes[0:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
-2019-12-05 14:42:17,137; client.py - line: 248 -DEBUG: img_bytes type: <class 'bytearray'>, img_bytes len: 16989, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
-2019-12-05 14:42:17,138; client.py - line: 251 -DEBUG: PIL Img: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
-2019-12-05 14:42:17,162; client.py - line: 253 -DEBUG: Returning img: type: <class 'numpy.ndarray'> 
+2019-12-05 17:22:08,807; dataset.py - line: 890 -DEBUG: index: 80
+2019-12-05 17:22:08,807; dataset.py - line: 892 -DEBUG: index: 81
+2019-12-05 17:22:08,841; dataset.py - line: 387 -DEBUG: total_branches: [1, 1]
+2019-12-05 17:22:08,842; client.py - line: 193 -DEBUG: Json string sent.
 
-2019-12-05 14:42:17,163; dataset.py - line: 890 -DEBUG: index: 16
-2019-12-05 14:42:17,163; dataset.py - line: 892 -DEBUG: index: 17
-2019-12-05 14:42:17,184; dataset.py - line: 387 -DEBUG: total_branches: [1, 1, 1, 1, 2, 2, 1]
-2019-12-05 14:42:17,185; client.py - line: 193 -DEBUG: Json string sent.
+2019-12-05 17:22:08,843; client.py - line: 234 -DEBUG: Json string sent.
 
-2019-12-05 14:42:17,185; client.py - line: 234 -DEBUG: Json string sent.
+2019-12-05 17:22:09,020; client.py - line: 209 -DEBUG: Timeout -> exit _receiveData()
+2019-12-05 17:22:09,021; client.py - line: 210 -DEBUG: data_complete: type: <class 'bytearray'>, data_complete len: 35290, data_complete [:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2019-12-05 17:22:09,021; client.py - line: 240 -DEBUG: Trying to receive data.
+2019-12-05 17:22:09,022; client.py - line: 243 -INFO: Data from Unity received.
+2019-12-05 17:22:09,022; client.py - line: 244 -DEBUG: End_tag detected, unity_resp_bytes[0:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2019-12-05 17:22:09,023; client.py - line: 248 -DEBUG: img_bytes type: <class 'bytearray'>, img_bytes len: 35281, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
+2019-12-05 17:22:09,023; client.py - line: 251 -DEBUG: PIL Img: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
+2019-12-05 17:22:09,051; client.py - line: 253 -DEBUG: Returning img: type: <class 'numpy.ndarray'> 
 
-2019-12-05 14:42:17,354; client.py - line: 209 -DEBUG: Timeout -> exit _receiveData()
-2019-12-05 14:42:17,355; client.py - line: 210 -DEBUG: data_complete: type: <class 'bytearray'>, data_complete len: 82553, data_complete [:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
-2019-12-05 14:42:17,355; client.py - line: 240 -DEBUG: Trying to receive data.
-2019-12-05 14:42:17,356; client.py - line: 243 -INFO: Data from Unity received.
-2019-12-05 14:42:17,356; client.py - line: 244 -DEBUG: End_tag detected, unity_resp_bytes[0:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
-2019-12-05 14:42:17,357; client.py - line: 248 -DEBUG: img_bytes type: <class 'bytearray'>, img_bytes len: 82544, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
-2019-12-05 14:42:17,358; client.py - line: 251 -DEBUG: PIL Img: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
-2019-12-05 14:42:17,380; client.py - line: 253 -DEBUG: Returning img: type: <class 'numpy.ndarray'> 
+2019-12-05 17:22:09,051; dataset.py - line: 890 -DEBUG: index: 81
+2019-12-05 17:22:09,052; dataset.py - line: 892 -DEBUG: index: 82
+2019-12-05 17:22:09,080; dataset.py - line: 387 -DEBUG: total_branches: [1, 1, 1]
+2019-12-05 17:22:09,080; client.py - line: 193 -DEBUG: Json string sent.
 
-2019-12-05 14:42:17,380; dataset.py - line: 890 -DEBUG: index: 17
-2019-12-05 14:42:17,380; dataset.py - line: 892 -DEBUG: index: 18
-2019-12-05 14:42:17,420; dataset.py - line: 387 -DEBUG: total_branches: [1, 1, 1, 1, 2, 1]
-2019-12-05 14:42:17,421; client.py - line: 193 -DEBUG: Json string sent.
+2019-12-05 17:22:09,080; client.py - line: 234 -DEBUG: Json string sent.
 
-2019-12-05 14:42:17,421; client.py - line: 234 -DEBUG: Json string sent.
+2019-12-05 17:22:09,256; client.py - line: 209 -DEBUG: Timeout -> exit _receiveData()
+2019-12-05 17:22:09,257; client.py - line: 210 -DEBUG: data_complete: type: <class 'bytearray'>, data_complete len: 80059, data_complete [:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2019-12-05 17:22:09,257; client.py - line: 240 -DEBUG: Trying to receive data.
+2019-12-05 17:22:09,258; client.py - line: 243 -INFO: Data from Unity received.
+2019-12-05 17:22:09,259; client.py - line: 244 -DEBUG: End_tag detected, unity_resp_bytes[0:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2019-12-05 17:22:09,260; client.py - line: 248 -DEBUG: img_bytes type: <class 'bytearray'>, img_bytes len: 80050, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
+2019-12-05 17:22:09,261; client.py - line: 251 -DEBUG: PIL Img: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
+2019-12-05 17:22:09,287; client.py - line: 253 -DEBUG: Returning img: type: <class 'numpy.ndarray'> 
 
-2019-12-05 14:42:17,590; client.py - line: 209 -DEBUG: Timeout -> exit _receiveData()
-2019-12-05 14:42:17,590; client.py - line: 210 -DEBUG: data_complete: type: <class 'bytearray'>, data_complete len: 31526, data_complete [:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
-2019-12-05 14:42:17,590; client.py - line: 240 -DEBUG: Trying to receive data.
-2019-12-05 14:42:17,590; client.py - line: 243 -INFO: Data from Unity received.
-2019-12-05 14:42:17,590; client.py - line: 244 -DEBUG: End_tag detected, unity_resp_bytes[0:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
-2019-12-05 14:42:17,590; client.py - line: 248 -DEBUG: img_bytes type: <class 'bytearray'>, img_bytes len: 31517, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
-2019-12-05 14:42:17,590; client.py - line: 251 -DEBUG: PIL Img: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
-2019-12-05 14:42:17,596; client.py - line: 253 -DEBUG: Returning img: type: <class 'numpy.ndarray'> 
+2019-12-05 17:22:09,287; dataset.py - line: 890 -DEBUG: index: 82
+2019-12-05 17:22:09,288; dataset.py - line: 892 -DEBUG: index: 83
+2019-12-05 17:22:09,335; dataset.py - line: 387 -DEBUG: total_branches: [1]
+2019-12-05 17:22:09,336; client.py - line: 193 -DEBUG: Json string sent.
 
-2019-12-05 14:42:17,597; dataset.py - line: 890 -DEBUG: index: 18
-2019-12-05 14:42:17,597; dataset.py - line: 892 -DEBUG: index: 19
-2019-12-05 14:42:17,619; client.py - line: 173 -INFO: Exit-message is sent. Unity build and socket now closing.
+2019-12-05 17:22:09,336; client.py - line: 234 -DEBUG: Json string sent.
 
-2019-12-05 14:42:17,619; client.py - line: 190 -DEBUG: Exit request sent.
+2019-12-05 17:22:09,498; client.py - line: 209 -DEBUG: Timeout -> exit _receiveData()
+2019-12-05 17:22:09,499; client.py - line: 210 -DEBUG: data_complete: type: <class 'bytearray'>, data_complete len: 49147, data_complete [:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2019-12-05 17:22:09,499; client.py - line: 240 -DEBUG: Trying to receive data.
+2019-12-05 17:22:09,499; client.py - line: 243 -INFO: Data from Unity received.
+2019-12-05 17:22:09,500; client.py - line: 244 -DEBUG: End_tag detected, unity_resp_bytes[0:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2019-12-05 17:22:09,500; client.py - line: 248 -DEBUG: img_bytes type: <class 'bytearray'>, img_bytes len: 49138, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
+2019-12-05 17:22:09,501; client.py - line: 251 -DEBUG: PIL Img: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
+2019-12-05 17:22:09,527; client.py - line: 253 -DEBUG: Returning img: type: <class 'numpy.ndarray'> 
 
-2019-12-05 14:42:17,620; dataset.py - line: 933 -DEBUG: Exit socket connection to unity.
-2019-12-05 14:42:17,620; dataset.py - line: 669 -DEBUG: numb_y: 2
-2019-12-05 14:42:17,620; dataset.py - line: 670 -DEBUG: dicts[0]['image'].shape[0]: 520
-2019-12-05 14:42:17,620; dataset.py - line: 671 -DEBUG: (images_per_row*dicts[0][image].shape[1]: 2600
-2019-12-05 14:42:17,620; dataset.py - line: 672 -DEBUG: dicts[0][image].shape[2]: 3
-2019-12-05 14:42:17,630; dataset.py - line: 674 -DEBUG: h_stacked.shape: (2, 520, 2600, 3)
-2019-12-05 14:42:17,680; dataset.py - line: 687 -DEBUG: final_img.shape: (1040, 2600, 3)
->>>>>>> datastructure_for_publishing
+2019-12-05 17:22:09,527; dataset.py - line: 890 -DEBUG: index: 83
+2019-12-05 17:22:09,527; dataset.py - line: 892 -DEBUG: index: 84
+2019-12-05 17:22:09,556; dataset.py - line: 387 -DEBUG: total_branches: [1, 1, 1]
+2019-12-05 17:22:09,557; client.py - line: 193 -DEBUG: Json string sent.
+
+2019-12-05 17:22:09,557; client.py - line: 234 -DEBUG: Json string sent.
+
+2019-12-05 17:22:09,733; client.py - line: 209 -DEBUG: Timeout -> exit _receiveData()
+2019-12-05 17:22:09,733; client.py - line: 210 -DEBUG: data_complete: type: <class 'bytearray'>, data_complete len: 56026, data_complete [:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2019-12-05 17:22:09,733; client.py - line: 240 -DEBUG: Trying to receive data.
+2019-12-05 17:22:09,733; client.py - line: 243 -INFO: Data from Unity received.
+2019-12-05 17:22:09,733; client.py - line: 244 -DEBUG: End_tag detected, unity_resp_bytes[0:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2019-12-05 17:22:09,734; client.py - line: 248 -DEBUG: img_bytes type: <class 'bytearray'>, img_bytes len: 56017, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
+2019-12-05 17:22:09,734; client.py - line: 251 -DEBUG: PIL Img: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
+2019-12-05 17:22:09,747; client.py - line: 253 -DEBUG: Returning img: type: <class 'numpy.ndarray'> 
+
+2019-12-05 17:22:09,747; dataset.py - line: 890 -DEBUG: index: 84
+2019-12-05 17:22:09,747; dataset.py - line: 892 -DEBUG: index: 85
+2019-12-05 17:22:09,782; dataset.py - line: 387 -DEBUG: total_branches: [2]
+2019-12-05 17:22:09,783; client.py - line: 193 -DEBUG: Json string sent.
+
+2019-12-05 17:22:09,783; client.py - line: 234 -DEBUG: Json string sent.
+
+2019-12-05 17:22:09,949; client.py - line: 209 -DEBUG: Timeout -> exit _receiveData()
+2019-12-05 17:22:09,949; client.py - line: 210 -DEBUG: data_complete: type: <class 'bytearray'>, data_complete len: 40344, data_complete [:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2019-12-05 17:22:09,951; client.py - line: 240 -DEBUG: Trying to receive data.
+2019-12-05 17:22:09,951; client.py - line: 243 -INFO: Data from Unity received.
+2019-12-05 17:22:09,952; client.py - line: 244 -DEBUG: End_tag detected, unity_resp_bytes[0:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2019-12-05 17:22:09,953; client.py - line: 248 -DEBUG: img_bytes type: <class 'bytearray'>, img_bytes len: 40335, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
+2019-12-05 17:22:09,954; client.py - line: 251 -DEBUG: PIL Img: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
+2019-12-05 17:22:09,977; client.py - line: 253 -DEBUG: Returning img: type: <class 'numpy.ndarray'> 
+
+2019-12-05 17:22:09,977; dataset.py - line: 890 -DEBUG: index: 85
+2019-12-05 17:22:09,977; dataset.py - line: 892 -DEBUG: index: 86
+2019-12-05 17:22:10,004; dataset.py - line: 387 -DEBUG: total_branches: [1]
+2019-12-05 17:22:10,005; client.py - line: 193 -DEBUG: Json string sent.
+
+2019-12-05 17:22:10,006; client.py - line: 234 -DEBUG: Json string sent.
+
+2019-12-05 17:22:10,188; client.py - line: 209 -DEBUG: Timeout -> exit _receiveData()
+2019-12-05 17:22:10,188; client.py - line: 210 -DEBUG: data_complete: type: <class 'bytearray'>, data_complete len: 52059, data_complete [:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2019-12-05 17:22:10,188; client.py - line: 240 -DEBUG: Trying to receive data.
+2019-12-05 17:22:10,188; client.py - line: 243 -INFO: Data from Unity received.
+2019-12-05 17:22:10,188; client.py - line: 244 -DEBUG: End_tag detected, unity_resp_bytes[0:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2019-12-05 17:22:10,188; client.py - line: 248 -DEBUG: img_bytes type: <class 'bytearray'>, img_bytes len: 52050, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
+2019-12-05 17:22:10,189; client.py - line: 251 -DEBUG: PIL Img: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
+2019-12-05 17:22:10,196; client.py - line: 253 -DEBUG: Returning img: type: <class 'numpy.ndarray'> 
+
+2019-12-05 17:22:10,197; dataset.py - line: 890 -DEBUG: index: 86
+2019-12-05 17:22:10,197; dataset.py - line: 892 -DEBUG: index: 87
+2019-12-05 17:22:10,229; dataset.py - line: 387 -DEBUG: total_branches: [1]
+2019-12-05 17:22:10,230; client.py - line: 193 -DEBUG: Json string sent.
+
+2019-12-05 17:22:10,230; client.py - line: 234 -DEBUG: Json string sent.
+
+2019-12-05 17:22:10,430; client.py - line: 209 -DEBUG: Timeout -> exit _receiveData()
+2019-12-05 17:22:10,431; client.py - line: 210 -DEBUG: data_complete: type: <class 'bytearray'>, data_complete len: 56265, data_complete [:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2019-12-05 17:22:10,432; client.py - line: 240 -DEBUG: Trying to receive data.
+2019-12-05 17:22:10,432; client.py - line: 243 -INFO: Data from Unity received.
+2019-12-05 17:22:10,433; client.py - line: 244 -DEBUG: End_tag detected, unity_resp_bytes[0:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2019-12-05 17:22:10,434; client.py - line: 248 -DEBUG: img_bytes type: <class 'bytearray'>, img_bytes len: 56256, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
+2019-12-05 17:22:10,436; client.py - line: 251 -DEBUG: PIL Img: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
+2019-12-05 17:22:10,466; client.py - line: 253 -DEBUG: Returning img: type: <class 'numpy.ndarray'> 
+
+2019-12-05 17:22:10,467; dataset.py - line: 890 -DEBUG: index: 87
+2019-12-05 17:22:10,467; dataset.py - line: 892 -DEBUG: index: 88
+2019-12-05 17:22:10,504; dataset.py - line: 387 -DEBUG: total_branches: [1]
+2019-12-05 17:22:10,505; client.py - line: 193 -DEBUG: Json string sent.
+
+2019-12-05 17:22:10,505; client.py - line: 234 -DEBUG: Json string sent.
+
+2019-12-05 17:22:10,691; client.py - line: 209 -DEBUG: Timeout -> exit _receiveData()
+2019-12-05 17:22:10,692; client.py - line: 210 -DEBUG: data_complete: type: <class 'bytearray'>, data_complete len: 43031, data_complete [:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2019-12-05 17:22:10,692; client.py - line: 240 -DEBUG: Trying to receive data.
+2019-12-05 17:22:10,693; client.py - line: 243 -INFO: Data from Unity received.
+2019-12-05 17:22:10,693; client.py - line: 244 -DEBUG: End_tag detected, unity_resp_bytes[0:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2019-12-05 17:22:10,694; client.py - line: 248 -DEBUG: img_bytes type: <class 'bytearray'>, img_bytes len: 43022, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
+2019-12-05 17:22:10,694; client.py - line: 251 -DEBUG: PIL Img: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
+2019-12-05 17:22:10,728; client.py - line: 253 -DEBUG: Returning img: type: <class 'numpy.ndarray'> 
+
+2019-12-05 17:22:10,728; dataset.py - line: 890 -DEBUG: index: 88
+2019-12-05 17:22:10,728; dataset.py - line: 892 -DEBUG: index: 89
+2019-12-05 17:22:10,762; dataset.py - line: 387 -DEBUG: total_branches: [1, 1]
+2019-12-05 17:22:10,763; client.py - line: 193 -DEBUG: Json string sent.
+
+2019-12-05 17:22:10,763; client.py - line: 234 -DEBUG: Json string sent.
+
+2019-12-05 17:22:10,943; client.py - line: 209 -DEBUG: Timeout -> exit _receiveData()
+2019-12-05 17:22:10,944; client.py - line: 210 -DEBUG: data_complete: type: <class 'bytearray'>, data_complete len: 80757, data_complete [:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2019-12-05 17:22:10,945; client.py - line: 240 -DEBUG: Trying to receive data.
+2019-12-05 17:22:10,945; client.py - line: 243 -INFO: Data from Unity received.
+2019-12-05 17:22:10,946; client.py - line: 244 -DEBUG: End_tag detected, unity_resp_bytes[0:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2019-12-05 17:22:10,946; client.py - line: 248 -DEBUG: img_bytes type: <class 'bytearray'>, img_bytes len: 80748, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
+2019-12-05 17:22:10,947; client.py - line: 251 -DEBUG: PIL Img: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
+2019-12-05 17:22:10,969; client.py - line: 253 -DEBUG: Returning img: type: <class 'numpy.ndarray'> 
+
+2019-12-05 17:22:10,969; dataset.py - line: 890 -DEBUG: index: 89
+2019-12-05 17:22:10,969; dataset.py - line: 892 -DEBUG: index: 90
+2019-12-05 17:22:11,017; dataset.py - line: 387 -DEBUG: total_branches: [2, 1]
+2019-12-05 17:22:11,018; client.py - line: 193 -DEBUG: Json string sent.
+
+2019-12-05 17:22:11,018; client.py - line: 234 -DEBUG: Json string sent.
+
+2019-12-05 17:22:11,184; client.py - line: 209 -DEBUG: Timeout -> exit _receiveData()
+2019-12-05 17:22:11,185; client.py - line: 210 -DEBUG: data_complete: type: <class 'bytearray'>, data_complete len: 68748, data_complete [:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2019-12-05 17:22:11,185; client.py - line: 240 -DEBUG: Trying to receive data.
+2019-12-05 17:22:11,186; client.py - line: 243 -INFO: Data from Unity received.
+2019-12-05 17:22:11,186; client.py - line: 244 -DEBUG: End_tag detected, unity_resp_bytes[0:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2019-12-05 17:22:11,186; client.py - line: 248 -DEBUG: img_bytes type: <class 'bytearray'>, img_bytes len: 68739, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
+2019-12-05 17:22:11,187; client.py - line: 251 -DEBUG: PIL Img: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
+2019-12-05 17:22:11,212; client.py - line: 253 -DEBUG: Returning img: type: <class 'numpy.ndarray'> 
+
+2019-12-05 17:22:11,213; dataset.py - line: 890 -DEBUG: index: 90
+2019-12-05 17:22:11,213; dataset.py - line: 892 -DEBUG: index: 91
+2019-12-05 17:22:11,261; dataset.py - line: 387 -DEBUG: total_branches: [1, 1, 1]
+2019-12-05 17:22:11,262; client.py - line: 193 -DEBUG: Json string sent.
+
+2019-12-05 17:22:11,262; client.py - line: 234 -DEBUG: Json string sent.
+
+2019-12-05 17:22:11,428; client.py - line: 209 -DEBUG: Timeout -> exit _receiveData()
+2019-12-05 17:22:11,428; client.py - line: 210 -DEBUG: data_complete: type: <class 'bytearray'>, data_complete len: 37133, data_complete [:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2019-12-05 17:22:11,428; client.py - line: 240 -DEBUG: Trying to receive data.
+2019-12-05 17:22:11,428; client.py - line: 243 -INFO: Data from Unity received.
+2019-12-05 17:22:11,428; client.py - line: 244 -DEBUG: End_tag detected, unity_resp_bytes[0:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2019-12-05 17:22:11,428; client.py - line: 248 -DEBUG: img_bytes type: <class 'bytearray'>, img_bytes len: 37124, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
+2019-12-05 17:22:11,428; client.py - line: 251 -DEBUG: PIL Img: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
+2019-12-05 17:22:11,436; client.py - line: 253 -DEBUG: Returning img: type: <class 'numpy.ndarray'> 
+
+2019-12-05 17:22:11,437; dataset.py - line: 890 -DEBUG: index: 91
+2019-12-05 17:22:11,437; dataset.py - line: 892 -DEBUG: index: 92
+2019-12-05 17:22:11,466; dataset.py - line: 387 -DEBUG: total_branches: [1, 1, 1]
+2019-12-05 17:22:11,467; client.py - line: 193 -DEBUG: Json string sent.
+
+2019-12-05 17:22:11,467; client.py - line: 234 -DEBUG: Json string sent.
+
+2019-12-05 17:22:11,636; client.py - line: 209 -DEBUG: Timeout -> exit _receiveData()
+2019-12-05 17:22:11,636; client.py - line: 210 -DEBUG: data_complete: type: <class 'bytearray'>, data_complete len: 51933, data_complete [:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2019-12-05 17:22:11,636; client.py - line: 240 -DEBUG: Trying to receive data.
+2019-12-05 17:22:11,636; client.py - line: 243 -INFO: Data from Unity received.
+2019-12-05 17:22:11,637; client.py - line: 244 -DEBUG: End_tag detected, unity_resp_bytes[0:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2019-12-05 17:22:11,637; client.py - line: 248 -DEBUG: img_bytes type: <class 'bytearray'>, img_bytes len: 51924, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
+2019-12-05 17:22:11,637; client.py - line: 251 -DEBUG: PIL Img: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
+2019-12-05 17:22:11,645; client.py - line: 253 -DEBUG: Returning img: type: <class 'numpy.ndarray'> 
+
+2019-12-05 17:22:11,645; dataset.py - line: 890 -DEBUG: index: 92
+2019-12-05 17:22:11,645; dataset.py - line: 892 -DEBUG: index: 93
+2019-12-05 17:22:11,680; dataset.py - line: 387 -DEBUG: total_branches: [1, 2, 1]
+2019-12-05 17:22:11,681; client.py - line: 193 -DEBUG: Json string sent.
+
+2019-12-05 17:22:11,681; client.py - line: 234 -DEBUG: Json string sent.
+
+2019-12-05 17:22:11,878; client.py - line: 209 -DEBUG: Timeout -> exit _receiveData()
+2019-12-05 17:22:11,878; client.py - line: 210 -DEBUG: data_complete: type: <class 'bytearray'>, data_complete len: 65795, data_complete [:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2019-12-05 17:22:11,879; client.py - line: 240 -DEBUG: Trying to receive data.
+2019-12-05 17:22:11,879; client.py - line: 243 -INFO: Data from Unity received.
+2019-12-05 17:22:11,880; client.py - line: 244 -DEBUG: End_tag detected, unity_resp_bytes[0:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2019-12-05 17:22:11,880; client.py - line: 248 -DEBUG: img_bytes type: <class 'bytearray'>, img_bytes len: 65786, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
+2019-12-05 17:22:11,881; client.py - line: 251 -DEBUG: PIL Img: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
+2019-12-05 17:22:11,915; client.py - line: 253 -DEBUG: Returning img: type: <class 'numpy.ndarray'> 
+
+2019-12-05 17:22:11,915; dataset.py - line: 890 -DEBUG: index: 93
+2019-12-05 17:22:11,915; dataset.py - line: 892 -DEBUG: index: 94
+2019-12-05 17:22:11,952; dataset.py - line: 387 -DEBUG: total_branches: [1, 1]
+2019-12-05 17:22:11,953; client.py - line: 193 -DEBUG: Json string sent.
+
+2019-12-05 17:22:11,953; client.py - line: 234 -DEBUG: Json string sent.
+
+2019-12-05 17:22:12,113; client.py - line: 209 -DEBUG: Timeout -> exit _receiveData()
+2019-12-05 17:22:12,113; client.py - line: 210 -DEBUG: data_complete: type: <class 'bytearray'>, data_complete len: 56683, data_complete [:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2019-12-05 17:22:12,114; client.py - line: 240 -DEBUG: Trying to receive data.
+2019-12-05 17:22:12,114; client.py - line: 243 -INFO: Data from Unity received.
+2019-12-05 17:22:12,114; client.py - line: 244 -DEBUG: End_tag detected, unity_resp_bytes[0:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2019-12-05 17:22:12,115; client.py - line: 248 -DEBUG: img_bytes type: <class 'bytearray'>, img_bytes len: 56674, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
+2019-12-05 17:22:12,116; client.py - line: 251 -DEBUG: PIL Img: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
+2019-12-05 17:22:12,146; client.py - line: 253 -DEBUG: Returning img: type: <class 'numpy.ndarray'> 
+
+2019-12-05 17:22:12,146; dataset.py - line: 890 -DEBUG: index: 94
+2019-12-05 17:22:12,146; dataset.py - line: 892 -DEBUG: index: 95
+2019-12-05 17:22:12,178; dataset.py - line: 387 -DEBUG: total_branches: [1, 1, 1]
+2019-12-05 17:22:12,179; client.py - line: 193 -DEBUG: Json string sent.
+
+2019-12-05 17:22:12,179; client.py - line: 234 -DEBUG: Json string sent.
+
+2019-12-05 17:22:12,352; client.py - line: 209 -DEBUG: Timeout -> exit _receiveData()
+2019-12-05 17:22:12,353; client.py - line: 210 -DEBUG: data_complete: type: <class 'bytearray'>, data_complete len: 64445, data_complete [:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2019-12-05 17:22:12,354; client.py - line: 240 -DEBUG: Trying to receive data.
+2019-12-05 17:22:12,354; client.py - line: 243 -INFO: Data from Unity received.
+2019-12-05 17:22:12,355; client.py - line: 244 -DEBUG: End_tag detected, unity_resp_bytes[0:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2019-12-05 17:22:12,356; client.py - line: 248 -DEBUG: img_bytes type: <class 'bytearray'>, img_bytes len: 64436, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
+2019-12-05 17:22:12,357; client.py - line: 251 -DEBUG: PIL Img: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
+2019-12-05 17:22:12,383; client.py - line: 253 -DEBUG: Returning img: type: <class 'numpy.ndarray'> 
+
+2019-12-05 17:22:12,383; dataset.py - line: 890 -DEBUG: index: 95
+2019-12-05 17:22:12,383; dataset.py - line: 892 -DEBUG: index: 96
+2019-12-05 17:22:12,422; dataset.py - line: 387 -DEBUG: total_branches: [1]
+2019-12-05 17:22:12,423; client.py - line: 193 -DEBUG: Json string sent.
+
+2019-12-05 17:22:12,423; client.py - line: 234 -DEBUG: Json string sent.
+
+2019-12-05 17:22:12,621; client.py - line: 209 -DEBUG: Timeout -> exit _receiveData()
+2019-12-05 17:22:12,621; client.py - line: 210 -DEBUG: data_complete: type: <class 'bytearray'>, data_complete len: 57833, data_complete [:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2019-12-05 17:22:12,622; client.py - line: 240 -DEBUG: Trying to receive data.
+2019-12-05 17:22:12,622; client.py - line: 243 -INFO: Data from Unity received.
+2019-12-05 17:22:12,623; client.py - line: 244 -DEBUG: End_tag detected, unity_resp_bytes[0:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2019-12-05 17:22:12,623; client.py - line: 248 -DEBUG: img_bytes type: <class 'bytearray'>, img_bytes len: 57824, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
+2019-12-05 17:22:12,625; client.py - line: 251 -DEBUG: PIL Img: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
+2019-12-05 17:22:12,664; client.py - line: 253 -DEBUG: Returning img: type: <class 'numpy.ndarray'> 
+
+2019-12-05 17:22:12,664; dataset.py - line: 890 -DEBUG: index: 96
+2019-12-05 17:22:12,664; dataset.py - line: 892 -DEBUG: index: 97
+2019-12-05 17:22:12,707; dataset.py - line: 387 -DEBUG: total_branches: [1, 1]
+2019-12-05 17:22:12,708; client.py - line: 193 -DEBUG: Json string sent.
+
+2019-12-05 17:22:12,709; client.py - line: 234 -DEBUG: Json string sent.
+
+2019-12-05 17:22:12,890; client.py - line: 209 -DEBUG: Timeout -> exit _receiveData()
+2019-12-05 17:22:12,891; client.py - line: 210 -DEBUG: data_complete: type: <class 'bytearray'>, data_complete len: 81332, data_complete [:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2019-12-05 17:22:12,892; client.py - line: 240 -DEBUG: Trying to receive data.
+2019-12-05 17:22:12,892; client.py - line: 243 -INFO: Data from Unity received.
+2019-12-05 17:22:12,893; client.py - line: 244 -DEBUG: End_tag detected, unity_resp_bytes[0:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2019-12-05 17:22:12,894; client.py - line: 248 -DEBUG: img_bytes type: <class 'bytearray'>, img_bytes len: 81323, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
+2019-12-05 17:22:12,895; client.py - line: 251 -DEBUG: PIL Img: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
+2019-12-05 17:22:12,925; client.py - line: 253 -DEBUG: Returning img: type: <class 'numpy.ndarray'> 
+
+2019-12-05 17:22:12,925; dataset.py - line: 890 -DEBUG: index: 97
+2019-12-05 17:22:12,925; dataset.py - line: 892 -DEBUG: index: 98
+2019-12-05 17:22:12,970; dataset.py - line: 387 -DEBUG: total_branches: [1]
+2019-12-05 17:22:12,970; client.py - line: 193 -DEBUG: Json string sent.
+
+2019-12-05 17:22:12,971; client.py - line: 234 -DEBUG: Json string sent.
+
+2019-12-05 17:22:13,071; client.py - line: 209 -DEBUG: Timeout -> exit _receiveData()
+2019-12-05 17:22:13,071; client.py - line: 210 -DEBUG: data_complete: type: <class 'bytearray'>, data_complete len: 1, data_complete [:10]: bytearray(b'\x00')
+2019-12-05 17:22:13,071; client.py - line: 240 -DEBUG: Trying to receive data.
+2019-12-05 17:22:13,172; client.py - line: 209 -DEBUG: Timeout -> exit _receiveData()
+2019-12-05 17:22:13,173; client.py - line: 210 -DEBUG: data_complete: type: <class 'bytearray'>, data_complete len: 58727, data_complete [:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2019-12-05 17:22:13,174; client.py - line: 240 -DEBUG: Trying to receive data.
+2019-12-05 17:22:13,174; client.py - line: 243 -INFO: Data from Unity received.
+2019-12-05 17:22:13,175; client.py - line: 244 -DEBUG: End_tag detected, unity_resp_bytes[0:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2019-12-05 17:22:13,175; client.py - line: 248 -DEBUG: img_bytes type: <class 'bytearray'>, img_bytes len: 58718, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
+2019-12-05 17:22:13,177; client.py - line: 251 -DEBUG: PIL Img: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
+2019-12-05 17:22:13,207; client.py - line: 253 -DEBUG: Returning img: type: <class 'numpy.ndarray'> 
+
+2019-12-05 17:22:13,208; dataset.py - line: 890 -DEBUG: index: 98
+2019-12-05 17:22:13,208; dataset.py - line: 892 -DEBUG: index: 99
+2019-12-05 17:22:13,240; dataset.py - line: 387 -DEBUG: total_branches: [2, 1, 1]
+2019-12-05 17:22:13,241; client.py - line: 193 -DEBUG: Json string sent.
+
+2019-12-05 17:22:13,241; client.py - line: 234 -DEBUG: Json string sent.
+
+2019-12-05 17:22:13,422; client.py - line: 209 -DEBUG: Timeout -> exit _receiveData()
+2019-12-05 17:22:13,422; client.py - line: 210 -DEBUG: data_complete: type: <class 'bytearray'>, data_complete len: 62373, data_complete [:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2019-12-05 17:22:13,423; client.py - line: 240 -DEBUG: Trying to receive data.
+2019-12-05 17:22:13,424; client.py - line: 243 -INFO: Data from Unity received.
+2019-12-05 17:22:13,424; client.py - line: 244 -DEBUG: End_tag detected, unity_resp_bytes[0:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2019-12-05 17:22:13,425; client.py - line: 248 -DEBUG: img_bytes type: <class 'bytearray'>, img_bytes len: 62364, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
+2019-12-05 17:22:13,426; client.py - line: 251 -DEBUG: PIL Img: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
+2019-12-05 17:22:13,451; client.py - line: 253 -DEBUG: Returning img: type: <class 'numpy.ndarray'> 
+
+2019-12-05 17:22:13,451; dataset.py - line: 890 -DEBUG: index: 99
+2019-12-05 17:22:13,451; dataset.py - line: 892 -DEBUG: index: 100
+2019-12-05 17:22:13,485; dataset.py - line: 387 -DEBUG: total_branches: [1]
+2019-12-05 17:22:13,486; client.py - line: 193 -DEBUG: Json string sent.
+
+2019-12-05 17:22:13,486; client.py - line: 234 -DEBUG: Json string sent.
+
+2019-12-05 17:22:13,648; client.py - line: 209 -DEBUG: Timeout -> exit _receiveData()
+2019-12-05 17:22:13,648; client.py - line: 210 -DEBUG: data_complete: type: <class 'bytearray'>, data_complete len: 59676, data_complete [:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2019-12-05 17:22:13,649; client.py - line: 240 -DEBUG: Trying to receive data.
+2019-12-05 17:22:13,649; client.py - line: 243 -INFO: Data from Unity received.
+2019-12-05 17:22:13,650; client.py - line: 244 -DEBUG: End_tag detected, unity_resp_bytes[0:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2019-12-05 17:22:13,650; client.py - line: 248 -DEBUG: img_bytes type: <class 'bytearray'>, img_bytes len: 59667, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
+2019-12-05 17:22:13,651; client.py - line: 251 -DEBUG: PIL Img: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
+2019-12-05 17:22:13,680; client.py - line: 253 -DEBUG: Returning img: type: <class 'numpy.ndarray'> 
+
+2019-12-05 17:22:13,680; dataset.py - line: 890 -DEBUG: index: 100
+2019-12-05 17:22:13,680; dataset.py - line: 892 -DEBUG: index: 101
+2019-12-05 17:22:13,714; dataset.py - line: 387 -DEBUG: total_branches: [1, 1]
+2019-12-05 17:22:13,715; client.py - line: 193 -DEBUG: Json string sent.
+
+2019-12-05 17:22:13,715; client.py - line: 234 -DEBUG: Json string sent.
+
+2019-12-05 17:22:13,878; client.py - line: 209 -DEBUG: Timeout -> exit _receiveData()
+2019-12-05 17:22:13,878; client.py - line: 210 -DEBUG: data_complete: type: <class 'bytearray'>, data_complete len: 46983, data_complete [:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2019-12-05 17:22:13,879; client.py - line: 240 -DEBUG: Trying to receive data.
+2019-12-05 17:22:13,879; client.py - line: 243 -INFO: Data from Unity received.
+2019-12-05 17:22:13,879; client.py - line: 244 -DEBUG: End_tag detected, unity_resp_bytes[0:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2019-12-05 17:22:13,879; client.py - line: 248 -DEBUG: img_bytes type: <class 'bytearray'>, img_bytes len: 46974, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
+2019-12-05 17:22:13,880; client.py - line: 251 -DEBUG: PIL Img: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
+2019-12-05 17:22:13,906; client.py - line: 253 -DEBUG: Returning img: type: <class 'numpy.ndarray'> 
+
+2019-12-05 17:22:13,906; dataset.py - line: 890 -DEBUG: index: 101
+2019-12-05 17:22:13,906; dataset.py - line: 892 -DEBUG: index: 102
+2019-12-05 17:22:13,938; dataset.py - line: 387 -DEBUG: total_branches: [1, 1, 1]
+2019-12-05 17:22:13,939; client.py - line: 193 -DEBUG: Json string sent.
+
+2019-12-05 17:22:13,939; client.py - line: 234 -DEBUG: Json string sent.
+
+2019-12-05 17:22:14,130; client.py - line: 209 -DEBUG: Timeout -> exit _receiveData()
+2019-12-05 17:22:14,131; client.py - line: 210 -DEBUG: data_complete: type: <class 'bytearray'>, data_complete len: 85084, data_complete [:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2019-12-05 17:22:14,131; client.py - line: 240 -DEBUG: Trying to receive data.
+2019-12-05 17:22:14,131; client.py - line: 243 -INFO: Data from Unity received.
+2019-12-05 17:22:14,132; client.py - line: 244 -DEBUG: End_tag detected, unity_resp_bytes[0:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2019-12-05 17:22:14,132; client.py - line: 248 -DEBUG: img_bytes type: <class 'bytearray'>, img_bytes len: 85075, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
+2019-12-05 17:22:14,133; client.py - line: 251 -DEBUG: PIL Img: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
+2019-12-05 17:22:14,165; client.py - line: 253 -DEBUG: Returning img: type: <class 'numpy.ndarray'> 
+
+2019-12-05 17:22:14,165; dataset.py - line: 890 -DEBUG: index: 102
+2019-12-05 17:22:14,165; dataset.py - line: 892 -DEBUG: index: 103
+2019-12-05 17:22:14,211; dataset.py - line: 387 -DEBUG: total_branches: [1, 1, 1]
+2019-12-05 17:22:14,211; client.py - line: 193 -DEBUG: Json string sent.
+
+2019-12-05 17:22:14,212; client.py - line: 234 -DEBUG: Json string sent.
+
+2019-12-05 17:22:14,383; client.py - line: 209 -DEBUG: Timeout -> exit _receiveData()
+2019-12-05 17:22:14,383; client.py - line: 210 -DEBUG: data_complete: type: <class 'bytearray'>, data_complete len: 55446, data_complete [:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2019-12-05 17:22:14,383; client.py - line: 240 -DEBUG: Trying to receive data.
+2019-12-05 17:22:14,383; client.py - line: 243 -INFO: Data from Unity received.
+2019-12-05 17:22:14,383; client.py - line: 244 -DEBUG: End_tag detected, unity_resp_bytes[0:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2019-12-05 17:22:14,384; client.py - line: 248 -DEBUG: img_bytes type: <class 'bytearray'>, img_bytes len: 55437, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
+2019-12-05 17:22:14,384; client.py - line: 251 -DEBUG: PIL Img: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
+2019-12-05 17:22:14,407; client.py - line: 253 -DEBUG: Returning img: type: <class 'numpy.ndarray'> 
+
+2019-12-05 17:22:14,408; dataset.py - line: 890 -DEBUG: index: 103
+2019-12-05 17:22:14,408; dataset.py - line: 892 -DEBUG: index: 104
+2019-12-05 17:22:14,444; dataset.py - line: 387 -DEBUG: total_branches: [1]
+2019-12-05 17:22:14,445; client.py - line: 193 -DEBUG: Json string sent.
+
+2019-12-05 17:22:14,445; client.py - line: 234 -DEBUG: Json string sent.
+
+2019-12-05 17:22:14,620; client.py - line: 209 -DEBUG: Timeout -> exit _receiveData()
+2019-12-05 17:22:14,621; client.py - line: 210 -DEBUG: data_complete: type: <class 'bytearray'>, data_complete len: 40151, data_complete [:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2019-12-05 17:22:14,621; client.py - line: 240 -DEBUG: Trying to receive data.
+2019-12-05 17:22:14,622; client.py - line: 243 -INFO: Data from Unity received.
+2019-12-05 17:22:14,622; client.py - line: 244 -DEBUG: End_tag detected, unity_resp_bytes[0:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2019-12-05 17:22:14,623; client.py - line: 248 -DEBUG: img_bytes type: <class 'bytearray'>, img_bytes len: 40142, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
+2019-12-05 17:22:14,624; client.py - line: 251 -DEBUG: PIL Img: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
+2019-12-05 17:22:14,651; client.py - line: 253 -DEBUG: Returning img: type: <class 'numpy.ndarray'> 
+
+2019-12-05 17:22:14,652; dataset.py - line: 890 -DEBUG: index: 104
+2019-12-05 17:22:14,652; dataset.py - line: 892 -DEBUG: index: 105
+2019-12-05 17:22:14,679; dataset.py - line: 387 -DEBUG: total_branches: [1, 1, 1]
+2019-12-05 17:22:14,680; client.py - line: 193 -DEBUG: Json string sent.
+
+2019-12-05 17:22:14,680; client.py - line: 234 -DEBUG: Json string sent.
+
+2019-12-05 17:22:14,850; client.py - line: 209 -DEBUG: Timeout -> exit _receiveData()
+2019-12-05 17:22:14,851; client.py - line: 210 -DEBUG: data_complete: type: <class 'bytearray'>, data_complete len: 72447, data_complete [:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2019-12-05 17:22:14,852; client.py - line: 240 -DEBUG: Trying to receive data.
+2019-12-05 17:22:14,852; client.py - line: 243 -INFO: Data from Unity received.
+2019-12-05 17:22:14,852; client.py - line: 244 -DEBUG: End_tag detected, unity_resp_bytes[0:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2019-12-05 17:22:14,853; client.py - line: 248 -DEBUG: img_bytes type: <class 'bytearray'>, img_bytes len: 72438, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
+2019-12-05 17:22:14,854; client.py - line: 251 -DEBUG: PIL Img: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
+2019-12-05 17:22:14,877; client.py - line: 253 -DEBUG: Returning img: type: <class 'numpy.ndarray'> 
+
+2019-12-05 17:22:14,877; dataset.py - line: 890 -DEBUG: index: 105
+2019-12-05 17:22:14,877; dataset.py - line: 892 -DEBUG: index: 106
+2019-12-05 17:22:14,914; dataset.py - line: 387 -DEBUG: total_branches: [1, 1]
+2019-12-05 17:22:14,915; client.py - line: 193 -DEBUG: Json string sent.
+
+2019-12-05 17:22:14,915; client.py - line: 234 -DEBUG: Json string sent.
+
+2019-12-05 17:22:15,115; client.py - line: 209 -DEBUG: Timeout -> exit _receiveData()
+2019-12-05 17:22:15,115; client.py - line: 210 -DEBUG: data_complete: type: <class 'bytearray'>, data_complete len: 59869, data_complete [:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2019-12-05 17:22:15,116; client.py - line: 240 -DEBUG: Trying to receive data.
+2019-12-05 17:22:15,117; client.py - line: 243 -INFO: Data from Unity received.
+2019-12-05 17:22:15,117; client.py - line: 244 -DEBUG: End_tag detected, unity_resp_bytes[0:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2019-12-05 17:22:15,118; client.py - line: 248 -DEBUG: img_bytes type: <class 'bytearray'>, img_bytes len: 59860, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
+2019-12-05 17:22:15,119; client.py - line: 251 -DEBUG: PIL Img: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
+2019-12-05 17:22:15,141; client.py - line: 253 -DEBUG: Returning img: type: <class 'numpy.ndarray'> 
+
+2019-12-05 17:22:15,142; dataset.py - line: 890 -DEBUG: index: 106
+2019-12-05 17:22:15,142; dataset.py - line: 892 -DEBUG: index: 107
+2019-12-05 17:22:15,178; dataset.py - line: 387 -DEBUG: total_branches: [1]
+2019-12-05 17:22:15,179; client.py - line: 193 -DEBUG: Json string sent.
+
+2019-12-05 17:22:15,179; client.py - line: 234 -DEBUG: Json string sent.
+
+2019-12-05 17:22:15,348; client.py - line: 209 -DEBUG: Timeout -> exit _receiveData()
+2019-12-05 17:22:15,349; client.py - line: 210 -DEBUG: data_complete: type: <class 'bytearray'>, data_complete len: 34021, data_complete [:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2019-12-05 17:22:15,349; client.py - line: 240 -DEBUG: Trying to receive data.
+2019-12-05 17:22:15,350; client.py - line: 243 -INFO: Data from Unity received.
+2019-12-05 17:22:15,350; client.py - line: 244 -DEBUG: End_tag detected, unity_resp_bytes[0:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2019-12-05 17:22:15,351; client.py - line: 248 -DEBUG: img_bytes type: <class 'bytearray'>, img_bytes len: 34012, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
+2019-12-05 17:22:15,351; client.py - line: 251 -DEBUG: PIL Img: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
+2019-12-05 17:22:15,373; client.py - line: 253 -DEBUG: Returning img: type: <class 'numpy.ndarray'> 
+
+2019-12-05 17:22:15,373; dataset.py - line: 890 -DEBUG: index: 107
+2019-12-05 17:22:15,373; dataset.py - line: 892 -DEBUG: index: 108
+2019-12-05 17:22:15,397; dataset.py - line: 387 -DEBUG: total_branches: [1, 1, 1]
+2019-12-05 17:22:15,399; client.py - line: 193 -DEBUG: Json string sent.
+
+2019-12-05 17:22:15,399; client.py - line: 234 -DEBUG: Json string sent.
+
+2019-12-05 17:22:15,566; client.py - line: 209 -DEBUG: Timeout -> exit _receiveData()
+2019-12-05 17:22:15,566; client.py - line: 210 -DEBUG: data_complete: type: <class 'bytearray'>, data_complete len: 52644, data_complete [:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2019-12-05 17:22:15,567; client.py - line: 240 -DEBUG: Trying to receive data.
+2019-12-05 17:22:15,567; client.py - line: 243 -INFO: Data from Unity received.
+2019-12-05 17:22:15,567; client.py - line: 244 -DEBUG: End_tag detected, unity_resp_bytes[0:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2019-12-05 17:22:15,567; client.py - line: 248 -DEBUG: img_bytes type: <class 'bytearray'>, img_bytes len: 52635, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
+2019-12-05 17:22:15,567; client.py - line: 251 -DEBUG: PIL Img: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
+2019-12-05 17:22:15,575; client.py - line: 253 -DEBUG: Returning img: type: <class 'numpy.ndarray'> 
+
+2019-12-05 17:22:15,575; dataset.py - line: 890 -DEBUG: index: 108
+2019-12-05 17:22:15,575; dataset.py - line: 892 -DEBUG: index: 109
+2019-12-05 17:22:15,617; dataset.py - line: 387 -DEBUG: total_branches: [2, 1, 1]
+2019-12-05 17:22:15,618; client.py - line: 193 -DEBUG: Json string sent.
+
+2019-12-05 17:22:15,618; client.py - line: 234 -DEBUG: Json string sent.
+
+2019-12-05 17:22:15,782; client.py - line: 209 -DEBUG: Timeout -> exit _receiveData()
+2019-12-05 17:22:15,783; client.py - line: 210 -DEBUG: data_complete: type: <class 'bytearray'>, data_complete len: 78942, data_complete [:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2019-12-05 17:22:15,783; client.py - line: 240 -DEBUG: Trying to receive data.
+2019-12-05 17:22:15,783; client.py - line: 243 -INFO: Data from Unity received.
+2019-12-05 17:22:15,783; client.py - line: 244 -DEBUG: End_tag detected, unity_resp_bytes[0:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2019-12-05 17:22:15,784; client.py - line: 248 -DEBUG: img_bytes type: <class 'bytearray'>, img_bytes len: 78933, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
+2019-12-05 17:22:15,784; client.py - line: 251 -DEBUG: PIL Img: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
+2019-12-05 17:22:15,810; client.py - line: 253 -DEBUG: Returning img: type: <class 'numpy.ndarray'> 
+
+2019-12-05 17:22:15,810; dataset.py - line: 890 -DEBUG: index: 109
+2019-12-05 17:22:15,810; dataset.py - line: 892 -DEBUG: index: 110
+2019-12-05 17:22:15,859; dataset.py - line: 387 -DEBUG: total_branches: [2, 1]
+2019-12-05 17:22:15,859; client.py - line: 193 -DEBUG: Json string sent.
+
+2019-12-05 17:22:15,859; client.py - line: 234 -DEBUG: Json string sent.
+
+2019-12-05 17:22:16,037; client.py - line: 209 -DEBUG: Timeout -> exit _receiveData()
+2019-12-05 17:22:16,038; client.py - line: 210 -DEBUG: data_complete: type: <class 'bytearray'>, data_complete len: 63659, data_complete [:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2019-12-05 17:22:16,038; client.py - line: 240 -DEBUG: Trying to receive data.
+2019-12-05 17:22:16,038; client.py - line: 243 -INFO: Data from Unity received.
+2019-12-05 17:22:16,039; client.py - line: 244 -DEBUG: End_tag detected, unity_resp_bytes[0:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2019-12-05 17:22:16,040; client.py - line: 248 -DEBUG: img_bytes type: <class 'bytearray'>, img_bytes len: 63650, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
+2019-12-05 17:22:16,041; client.py - line: 251 -DEBUG: PIL Img: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
+2019-12-05 17:22:16,073; client.py - line: 253 -DEBUG: Returning img: type: <class 'numpy.ndarray'> 
+
+2019-12-05 17:22:16,074; dataset.py - line: 890 -DEBUG: index: 110
+2019-12-05 17:22:16,075; dataset.py - line: 892 -DEBUG: index: 111
+2019-12-05 17:22:16,112; dataset.py - line: 387 -DEBUG: total_branches: [1]
+2019-12-05 17:22:16,112; client.py - line: 193 -DEBUG: Json string sent.
+
+2019-12-05 17:22:16,112; client.py - line: 234 -DEBUG: Json string sent.
+
+2019-12-05 17:22:16,292; client.py - line: 209 -DEBUG: Timeout -> exit _receiveData()
+2019-12-05 17:22:16,293; client.py - line: 210 -DEBUG: data_complete: type: <class 'bytearray'>, data_complete len: 67815, data_complete [:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2019-12-05 17:22:16,294; client.py - line: 240 -DEBUG: Trying to receive data.
+2019-12-05 17:22:16,294; client.py - line: 243 -INFO: Data from Unity received.
+2019-12-05 17:22:16,295; client.py - line: 244 -DEBUG: End_tag detected, unity_resp_bytes[0:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2019-12-05 17:22:16,295; client.py - line: 248 -DEBUG: img_bytes type: <class 'bytearray'>, img_bytes len: 67806, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
+2019-12-05 17:22:16,296; client.py - line: 251 -DEBUG: PIL Img: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
+2019-12-05 17:22:16,328; client.py - line: 253 -DEBUG: Returning img: type: <class 'numpy.ndarray'> 
+
+2019-12-05 17:22:16,328; dataset.py - line: 890 -DEBUG: index: 111
+2019-12-05 17:22:16,328; dataset.py - line: 892 -DEBUG: index: 112
+2019-12-05 17:22:16,366; dataset.py - line: 387 -DEBUG: total_branches: [2]
+2019-12-05 17:22:16,367; client.py - line: 193 -DEBUG: Json string sent.
+
+2019-12-05 17:22:16,367; client.py - line: 234 -DEBUG: Json string sent.
+
+2019-12-05 17:22:16,561; client.py - line: 209 -DEBUG: Timeout -> exit _receiveData()
+2019-12-05 17:22:16,561; client.py - line: 210 -DEBUG: data_complete: type: <class 'bytearray'>, data_complete len: 60862, data_complete [:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2019-12-05 17:22:16,562; client.py - line: 240 -DEBUG: Trying to receive data.
+2019-12-05 17:22:16,562; client.py - line: 243 -INFO: Data from Unity received.
+2019-12-05 17:22:16,563; client.py - line: 244 -DEBUG: End_tag detected, unity_resp_bytes[0:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2019-12-05 17:22:16,563; client.py - line: 248 -DEBUG: img_bytes type: <class 'bytearray'>, img_bytes len: 60853, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
+2019-12-05 17:22:16,564; client.py - line: 251 -DEBUG: PIL Img: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
+2019-12-05 17:22:16,586; client.py - line: 253 -DEBUG: Returning img: type: <class 'numpy.ndarray'> 
+
+2019-12-05 17:22:16,586; dataset.py - line: 890 -DEBUG: index: 112
+2019-12-05 17:22:16,586; dataset.py - line: 892 -DEBUG: index: 113
+2019-12-05 17:22:16,617; dataset.py - line: 387 -DEBUG: total_branches: [1, 1]
+2019-12-05 17:22:16,618; client.py - line: 193 -DEBUG: Json string sent.
+
+2019-12-05 17:22:16,618; client.py - line: 234 -DEBUG: Json string sent.
+
+2019-12-05 17:22:16,782; client.py - line: 209 -DEBUG: Timeout -> exit _receiveData()
+2019-12-05 17:22:16,782; client.py - line: 210 -DEBUG: data_complete: type: <class 'bytearray'>, data_complete len: 33109, data_complete [:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2019-12-05 17:22:16,782; client.py - line: 240 -DEBUG: Trying to receive data.
+2019-12-05 17:22:16,782; client.py - line: 243 -INFO: Data from Unity received.
+2019-12-05 17:22:16,782; client.py - line: 244 -DEBUG: End_tag detected, unity_resp_bytes[0:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2019-12-05 17:22:16,782; client.py - line: 248 -DEBUG: img_bytes type: <class 'bytearray'>, img_bytes len: 33100, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
+2019-12-05 17:22:16,782; client.py - line: 251 -DEBUG: PIL Img: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
+2019-12-05 17:22:16,790; client.py - line: 253 -DEBUG: Returning img: type: <class 'numpy.ndarray'> 
+
+2019-12-05 17:22:16,791; dataset.py - line: 890 -DEBUG: index: 113
+2019-12-05 17:22:16,791; dataset.py - line: 892 -DEBUG: index: 114
+2019-12-05 17:22:16,816; dataset.py - line: 387 -DEBUG: total_branches: [1, 1, 1]
+2019-12-05 17:22:16,817; client.py - line: 193 -DEBUG: Json string sent.
+
+2019-12-05 17:22:16,817; client.py - line: 234 -DEBUG: Json string sent.
+
+2019-12-05 17:22:16,980; client.py - line: 209 -DEBUG: Timeout -> exit _receiveData()
+2019-12-05 17:22:16,980; client.py - line: 210 -DEBUG: data_complete: type: <class 'bytearray'>, data_complete len: 73152, data_complete [:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2019-12-05 17:22:16,980; client.py - line: 240 -DEBUG: Trying to receive data.
+2019-12-05 17:22:16,981; client.py - line: 243 -INFO: Data from Unity received.
+2019-12-05 17:22:16,981; client.py - line: 244 -DEBUG: End_tag detected, unity_resp_bytes[0:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2019-12-05 17:22:16,981; client.py - line: 248 -DEBUG: img_bytes type: <class 'bytearray'>, img_bytes len: 73143, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
+2019-12-05 17:22:16,981; client.py - line: 251 -DEBUG: PIL Img: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
+2019-12-05 17:22:16,993; client.py - line: 253 -DEBUG: Returning img: type: <class 'numpy.ndarray'> 
+
+2019-12-05 17:22:16,994; dataset.py - line: 890 -DEBUG: index: 114
+2019-12-05 17:22:16,994; dataset.py - line: 892 -DEBUG: index: 115
+2019-12-05 17:22:17,041; dataset.py - line: 387 -DEBUG: total_branches: [2]
+2019-12-05 17:22:17,042; client.py - line: 193 -DEBUG: Json string sent.
+
+2019-12-05 17:22:17,042; client.py - line: 234 -DEBUG: Json string sent.
+
+2019-12-05 17:22:17,212; client.py - line: 209 -DEBUG: Timeout -> exit _receiveData()
+2019-12-05 17:22:17,213; client.py - line: 210 -DEBUG: data_complete: type: <class 'bytearray'>, data_complete len: 46142, data_complete [:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2019-12-05 17:22:17,213; client.py - line: 240 -DEBUG: Trying to receive data.
+2019-12-05 17:22:17,214; client.py - line: 243 -INFO: Data from Unity received.
+2019-12-05 17:22:17,214; client.py - line: 244 -DEBUG: End_tag detected, unity_resp_bytes[0:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2019-12-05 17:22:17,215; client.py - line: 248 -DEBUG: img_bytes type: <class 'bytearray'>, img_bytes len: 46133, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
+2019-12-05 17:22:17,215; client.py - line: 251 -DEBUG: PIL Img: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
+2019-12-05 17:22:17,248; client.py - line: 253 -DEBUG: Returning img: type: <class 'numpy.ndarray'> 
+
+2019-12-05 17:22:17,248; dataset.py - line: 890 -DEBUG: index: 115
+2019-12-05 17:22:17,249; dataset.py - line: 892 -DEBUG: index: 116
+2019-12-05 17:22:17,287; dataset.py - line: 387 -DEBUG: total_branches: [1]
+2019-12-05 17:22:17,288; client.py - line: 193 -DEBUG: Json string sent.
+
+2019-12-05 17:22:17,288; client.py - line: 234 -DEBUG: Json string sent.
+
+2019-12-05 17:22:17,465; client.py - line: 209 -DEBUG: Timeout -> exit _receiveData()
+2019-12-05 17:22:17,465; client.py - line: 210 -DEBUG: data_complete: type: <class 'bytearray'>, data_complete len: 80349, data_complete [:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2019-12-05 17:22:17,465; client.py - line: 240 -DEBUG: Trying to receive data.
+2019-12-05 17:22:17,465; client.py - line: 243 -INFO: Data from Unity received.
+2019-12-05 17:22:17,465; client.py - line: 244 -DEBUG: End_tag detected, unity_resp_bytes[0:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2019-12-05 17:22:17,466; client.py - line: 248 -DEBUG: img_bytes type: <class 'bytearray'>, img_bytes len: 80340, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
+2019-12-05 17:22:17,466; client.py - line: 251 -DEBUG: PIL Img: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
+2019-12-05 17:22:17,475; client.py - line: 253 -DEBUG: Returning img: type: <class 'numpy.ndarray'> 
+
+2019-12-05 17:22:17,475; dataset.py - line: 890 -DEBUG: index: 116
+2019-12-05 17:22:17,475; dataset.py - line: 892 -DEBUG: index: 117
+2019-12-05 17:22:17,528; dataset.py - line: 387 -DEBUG: total_branches: [1]
+2019-12-05 17:22:17,529; client.py - line: 193 -DEBUG: Json string sent.
+
+2019-12-05 17:22:17,529; client.py - line: 234 -DEBUG: Json string sent.
+
+2019-12-05 17:22:17,696; client.py - line: 209 -DEBUG: Timeout -> exit _receiveData()
+2019-12-05 17:22:17,696; client.py - line: 210 -DEBUG: data_complete: type: <class 'bytearray'>, data_complete len: 42568, data_complete [:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2019-12-05 17:22:17,697; client.py - line: 240 -DEBUG: Trying to receive data.
+2019-12-05 17:22:17,697; client.py - line: 243 -INFO: Data from Unity received.
+2019-12-05 17:22:17,698; client.py - line: 244 -DEBUG: End_tag detected, unity_resp_bytes[0:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2019-12-05 17:22:17,698; client.py - line: 248 -DEBUG: img_bytes type: <class 'bytearray'>, img_bytes len: 42559, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
+2019-12-05 17:22:17,699; client.py - line: 251 -DEBUG: PIL Img: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
+2019-12-05 17:22:17,732; client.py - line: 253 -DEBUG: Returning img: type: <class 'numpy.ndarray'> 
+
+2019-12-05 17:22:17,733; dataset.py - line: 890 -DEBUG: index: 117
+2019-12-05 17:22:17,733; dataset.py - line: 892 -DEBUG: index: 118
+2019-12-05 17:22:17,763; dataset.py - line: 387 -DEBUG: total_branches: [1, 1, 1]
+2019-12-05 17:22:17,764; client.py - line: 193 -DEBUG: Json string sent.
+
+2019-12-05 17:22:17,765; client.py - line: 234 -DEBUG: Json string sent.
+
+2019-12-05 17:22:17,929; client.py - line: 209 -DEBUG: Timeout -> exit _receiveData()
+2019-12-05 17:22:17,929; client.py - line: 210 -DEBUG: data_complete: type: <class 'bytearray'>, data_complete len: 29511, data_complete [:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2019-12-05 17:22:17,930; client.py - line: 240 -DEBUG: Trying to receive data.
+2019-12-05 17:22:17,930; client.py - line: 243 -INFO: Data from Unity received.
+2019-12-05 17:22:17,931; client.py - line: 244 -DEBUG: End_tag detected, unity_resp_bytes[0:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2019-12-05 17:22:17,931; client.py - line: 248 -DEBUG: img_bytes type: <class 'bytearray'>, img_bytes len: 29502, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
+2019-12-05 17:22:17,932; client.py - line: 251 -DEBUG: PIL Img: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
+2019-12-05 17:22:17,956; client.py - line: 253 -DEBUG: Returning img: type: <class 'numpy.ndarray'> 
+
+2019-12-05 17:22:17,957; dataset.py - line: 890 -DEBUG: index: 118
+2019-12-05 17:22:17,958; dataset.py - line: 892 -DEBUG: index: 119
+2019-12-05 17:22:17,981; client.py - line: 173 -INFO: Exit-message is sent. Unity build and socket now closing.
+
+2019-12-05 17:22:17,982; client.py - line: 190 -DEBUG: Exit request sent.
+
+2019-12-05 17:22:17,982; dataset.py - line: 933 -DEBUG: Exit socket connection to unity.
+2019-12-05 17:22:17,982; dataset.py - line: 669 -DEBUG: numb_y: 10
+2019-12-05 17:22:17,982; dataset.py - line: 670 -DEBUG: dicts[0]['image'].shape[0]: 520
+2019-12-05 17:22:17,982; dataset.py - line: 671 -DEBUG: (images_per_row*dicts[0][image].shape[1]: 2600
+2019-12-05 17:22:17,983; dataset.py - line: 672 -DEBUG: dicts[0][image].shape[2]: 3
+2019-12-05 17:22:18,020; dataset.py - line: 674 -DEBUG: h_stacked.shape: (10, 520, 2600, 3)
+2019-12-05 17:22:18,228; dataset.py - line: 687 -DEBUG: final_img.shape: (5200, 2600, 3)
