@@ -25,15 +25,15 @@ data.exit()
 data.plot_images(dictionaries, images_per_row=5, save_fig=True)
 ```
 
-In the first line the file dataset.py is imported.
-The first thing you want to do is to initialize an object of the class ``dataset_cuboids()``.
-    This starts Unity and connects to it with code from ``client.py``. 
-After this you can use it as you want. 
-In this exampel we create random images with the function ``get_example()``.
-    This returns an dictionnary with the keys "index", "parameters" and "image".
-    The argumets ``save_para`` and ``save_image`` are ``True``. This means that the parameters of the created scene are saved at ``data/parameters`` as well as the image at ``data/images``.
-    This is done ten times and every returned dictionary is save in a list.
-If we are done with requesting images you should always close and exit the Unity application and the connection with ``exit()``.
-At last we want to have a look at the created images with the function ``plot_images()``.
-    The argument ``images_per_row = 5`` means that the images will be plotted in the shape: 5 Images horizontal and 2 rows vertically images.
+* In the first line the file dataset.py is imported.
+* The first thing you want to do is to initialize an object of the class ``dataset_cuboids()``.
+    * This starts Unity and connects to it with code from ``client.py``. 
+* After this you can use it as you want. 
+* In this exampel we create random images with the function ``get_example()``.
+    * This returns an dictionnary with the keys "index", "parameters" and "image".
+    * The argumets ``save_para`` and ``save_image`` are ``True``. This means that the parameters of the created scene are saved at ``data/parameters`` as well as the image at ``data/images``.
+    * This is done ten times and every returned dictionary is save in a list.
+* If we are done with requesting images you should always close and exit the Unity application and the connection with ``exit()``.
+* At last we want to have a look at the created images with the function ``plot_images()``.
+    * The argument ``images_per_row = 5`` means that the images will be plotted in the shape: 5 Images horizontal and 2 rows vertically images.
     ``save_fig = True`` which means that the resulting figure is saved at ``data/figures``.
