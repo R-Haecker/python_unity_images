@@ -1,0 +1,73 @@
+{
+    "CameraRes_width": 520,
+    "CameraRes_height": 520,
+    "Camera_FieldofView": 80,
+    "CameraRadius": 10.0,
+    "CameraTheta": 63.07044717744266,
+    "CameraPhi": 232.36151358995647,
+    "CameraVerticalOffset": 0,
+    "total_cuboids": 2,
+    "scale": [
+        0.7991759215157022,
+        1.4102202988559045
+    ],
+    "same_scale": false,
+    "total_branches": [
+        1
+    ],
+    "same_theta": false,
+    "theta": [
+        67.93107294182694
+    ],
+    "phi": 12.747731931577242,
+    "same_material": false,
+    "r": [
+        0.25755209063106244,
+        0.38167867447341497
+    ],
+    "g": [
+        0.3414934023350993,
+        0.528848541282264
+    ],
+    "b": [
+        0.27286198416221585,
+        0.3738316094076948
+    ],
+    "a": [
+        0.9887922741442041,
+        0.7016503814840818
+    ],
+    "metallic": [
+        0.42441726509746147,
+        0.6660349515491075
+    ],
+    "smoothness": [
+        0.4797678916116075,
+        0.5346899831705583
+    ],
+    "DirectionalLightTheta": 82.4000016600181,
+    "DirectionalLightIntensity": 0.3302275768945888,
+    "totalPointLights": 0,
+    "PointLightsRadius": null,
+    "PointLightsPhi": null,
+    "PointLightsTheta": null,
+    "PointLightsIntensity": null,
+    "PointLightsRange": null,
+    "PointLightsColor_r": null,
+    "PointLightsColor_g": null,
+    "PointLightsColor_b": null,
+    "PointLightsColor_a": null,
+    "same_PointLightsColor": null,
+    "totalSpotLights": 0,
+    "SpotLightsRadius": null,
+    "SpotLightsPhi": null,
+    "SpotLightsTheta": null,
+    "SpotLightsIntensity": null,
+    "SpotLightsRange": null,
+    "SpotLightsColor_r": null,
+    "SpotLightsColor_g": null,
+    "SpotLightsColor_b": null,
+    "SpotLightsColor_a": null,
+    "same_SpotLightsColor": null,
+    "SpotAngle": null
+}

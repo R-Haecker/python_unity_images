@@ -16,9 +16,9 @@ class dataset_cuboids():
     def __init__(self, dataset_name = None, unique_data_folder = True, debug_log = False, use_unity_build = True):
         """Sets up logging, the config, necessary paths and a client instance form :class:`~client.client_communicator_to_unity`.
         
-        :param dataset_name: If this is not default the created images and parameters are saved into a folder nested in `data/dataset/` containing the dataset_name, defaults to None
+        :param dataset_name: If this is not default the created images and parameters are saved into a folder nested in ``data/dataset/`` containing the dataset_name, defaults to None
         :type dataset_name: string or None, optional
-        :param unique_data_folder: If `True` the name of the folder for your dataset will start with a time stamp. If `False` the name of the folder will only contain the name of the dataset and can be used across many instances of this class, defaults to True
+        :param unique_data_folder: If ``True`` the name of the folder for your dataset will start with a time stamp. If ``False`` the name of the folder will only contain the name of the dataset and can be used across many instances of this class, defaults to True
         :type unique_data_folder: bool, optional
         :param use_unity_build: If this is set to true image generation will work automatically with the Unity build. Otherwise you have to manually set the Unity editor to play, defaults to True
         :type use_unity_build: bool, optional
@@ -960,21 +960,4 @@ class dataset_cuboids():
         self.uc.exit()
         self.logger.debug("Exit socket connection to unity.")
 
-'''
-data = dataset_cuboids(use_unity_build = True,debug_log=True)
-
-dicts = []
-for i in range(1):
-    dicts.append(data[0])
-for i in range(5):
-    para = data.create_random_parameters()
-    para1 = data.create_random_parameters()
-    para2 = data.change_app1_art2(para, para1)
-
-    dicts.append(data.parameters_to_finished_data(para))
-    dicts.append(data.parameters_to_finished_data(para1))
-    dicts.append(data.parameters_to_finished_data(para2))
-data.exit()
-
-data.plot_images(dicts, images_per_row=5)
-'''
+#TODO renew the function load_parameters
