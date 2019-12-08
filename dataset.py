@@ -13,11 +13,13 @@ import time
 import os
 
 class dataset_cuboids():
-    def __init__(self, use_unity_build = True, debug_log = False):
+    def __init__(self, dataset_name = None, unique_data_folder = True, debug_log = False, use_unity_build = True):
         """Sets up logging, the config, necessary paths and a client instance form :class:`~client.client_communicator_to_unity`.
         
-        :param DatasetMixin: [description]
-        :type DatasetMixin: [type]
+        :param dataset_name: If this is not default the created images and parameters are saved into a folder nested in `data/dataset/` containing the dataset_name, defaults to None
+        :type dataset_name: string or None, optional
+        :param unique_data_folder: If `True` the name of the folder for your dataset will start with a time stamp. If `False` the name of the folder will only contain the name of the dataset and can be used across many instances of this class, defaults to True
+        :type unique_data_folder: bool, optional
         :param use_unity_build: If this is set to true image generation will work automatically with the Unity build. Otherwise you have to manually set the Unity editor to play, defaults to True
         :type use_unity_build: bool, optional
         :param debug_log: If there should be more information displayed in the console for debugging, defaults to False
@@ -51,6 +53,12 @@ class dataset_cuboids():
         self.logger.debug("Create config.")
         # Create dataset config for random parameter creation and set the default intervalls for all random generated parameters
         self.set_config()
+        if dataset_name != None:
+            assert type(dataset_name) == str , "In dataset.py, __init__() function: dataset_name has to be a string."       
+        self.dataset_name = dataset_name
+        self.unique_folder = unique_data_folder
+        self.init_time = time.strftime("%Y-%m-%d %H:%M", time.gmtime())
+        self.init_index = self.read_index() + 1
         self.logger.debug("Dataset initialised.\n")        
 
     def set_config(self,same_scale=None, scale=[0.5,4], total_cuboids=[2,5], phi=[0,360], branches=[1,3],same_theta=None, theta=None, 
@@ -538,33 +546,50 @@ class dataset_cuboids():
         :type save_para: bool, optional
         :param save_image: If the image should be saved to ``data/images`` labeled with the index if available, defaults to False
         :type save_image: bool, optional
-        """        
+        """ 
+        # Create unique name for the folder where the dataset is saved
+        if self.dataset_name != None:
+            if self.unique_folder:
+                full_folder_name = self.init_time + "  " + self.dataset_name 
+            else:
+                full_folder_name = self.dataset_name 
+        else:
+            full_folder_name = self.init_time + "__starting_from_index__" + str(self.init_index)
+        
         # Save parameters.
         if save_para:
+            # Check and if necessary create directory
+            directory_para = "data/dataset/" + full_folder_name + "/parameters"
+            if not os.path.exists(directory_para):
+                os.makedirs(directory_para)
             # Check if the parameters and the index is in the dictionary.
             if "parameters" in dictionary:
                 if "index" in dictionary:
-                    with open("data/parameters/parameters_index_" + str(dictionary["index"]) + '.json', 'w') as f:
+                    with open(directory_para + "/parameters_index_" + str(dictionary["index"]) + '.json', 'w') as f:
                         json.dump(dictionary["parameters"],f)
                         f.close()
                 else:
                     # Change the name of the json file if there is no index given.
                     fake_index = np.random.randint(0,1000)
-                    with open("data/parameters/parameters_NO_index_" + str(fake_index) + '.json', 'w') as f:
+                    with open(directory_para + "/parameters_NO_index_" + str(fake_index) + '.json', 'w') as f:
                         json.dump(dictionary["parameters"],f)
                         f.close()
             else:
                 self.logger.error("Image parameters could not be saved. No parameters found in dictionary.")
         # Save the image as png.
         if save_image:
+            # Check and if necessary create directory
+            directory_images = "data/dataset/" + full_folder_name + "/images"
+            if not os.path.exists(directory_images):
+                os.makedirs(directory_images)
             # Check if the image and the index is in the dictionary.
             if "image" in dictionary:
                 if "index" in dictionary:
-                    Image.fromarray(dictionary["image"]).save("data/images/image_index_" + str(dictionary["index"]) + '.png')
+                    Image.fromarray(dictionary["image"]).save(directory_images + "/image_index_" + str(dictionary["index"]) + '.png')
                 else:
                     # Change the name of the image if there is no index given.
                     fake_index = np.random.randint(0,1000)
-                    Image.fromarray(dictionary["image"]).save("data/images/image_NO_index_" + str(fake_index) + '.png')
+                    Image.fromarray(dictionary["image"]).save(directory_images + "/image_NO_index_" + str(fake_index) + '.png')
             else:
                 self.logger.error("Image could not be saved. No image data not found in dictionary.")
 
@@ -579,7 +604,7 @@ class dataset_cuboids():
         :rtype: list or dictionary
         """        
         if index[0]==-1:
-            index = np.random.randint(0,self.load_index(),amount)
+            index = np.random.randint(0,self.read_index(),amount)
         else:
             assert len(index)==amount, "Specified Index has to be len(Index):" + str(len(index)) + " equal to amount:" + str(amount)
         parameter_list = []
@@ -622,7 +647,7 @@ class dataset_cuboids():
         # Put data in an dictionary.
         newDict = {"index":index,"parameters":parameters,"image":img}
         # Save parameters for later recreating and manipulating the image.
-        self.save(newDict,save_para = save_para, save_image = save_image)
+        self.save(newDict, save_para = save_para, save_image = save_image)
         return newDict  
 
     def get_example(self, save_para = True, save_image = False, index = None):
@@ -705,7 +730,10 @@ class dataset_cuboids():
         plt.axis('off')
         # Save figure if wanted.
         if save_fig:
-            plt.savefig("data/figures/fig_from_index_" + str(dicts[0]["index"]) + "_to_index_" + str(dicts[len(dicts)-1]["index"]) + ".png")
+            if self.dataset_name != None:
+                plt.savefig("data/figures/fig_" + self.dataset_name + "_from_index_" + str(dicts[0]["index"]) + "_to_index_" + str(dicts[len(dicts)-1]["index"]) + ".png")
+            else:
+                plt.savefig("data/figures/fig_from_index_" + str(dicts[0]["index"]) + "_to_index_" + str(dicts[len(dicts)-1]["index"]) + ".png")
         plt.show()
 
     def change_app1_art2(self, para1, para2):
@@ -886,7 +914,7 @@ class dataset_cuboids():
         :return: An integer which represents the next index.
         :rtype: int
         """        
-        index = self.load_index()
+        index = self.read_index()
         self.logger.debug("index: " + str(index))
         index = index + 1
         self.logger.debug("index: " + str(index))
@@ -899,7 +927,7 @@ class dataset_cuboids():
                 raise e
         return index
 
-    def load_index(self):
+    def read_index(self):
         """Load and return the old external saved index.
         
         :raises FileNotFoundError: If the file ``data/python/index.txt`` is not found.
