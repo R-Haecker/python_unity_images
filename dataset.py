@@ -728,6 +728,8 @@ class dataset_cuboids():
                 else:
                     self.logger.error("dicts[" + str(i) + "] has no index.")
         plt.axis('off')
+        #plt.xlim(0, images_per_row*dicts[0]["image"].shape[1])
+        #plt.ylim(0, numb_y*dicts[0]["image"].shape[0])
         # Save figure if wanted.
         if save_fig:
             if self.dataset_name != None:

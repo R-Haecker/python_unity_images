@@ -41,7 +41,7 @@ data.plot_images(dictionaries, save_fig = True)
 
 That is it we have successfully created and saved images with a ground truth. 
 Here is the figure of the plotted images:
-![alt text](https://github.com/R-Haecker/python_unity_images/data/figures/fig_simple example_from_index_0_to_index_7.png "Plot of created Images")
+![alt text](https://github.com/R-Haecker/python_unity_images/raw/master/data/figures/fig_simple_example_from_index_0_to_index_7.png "Plot of created Images")
 
 
 ### 2) Advanced Example
@@ -87,6 +87,6 @@ data2.plot_images(dictionaries2, images_per_row=5, save_fig=True, show_index=Fal
 
 We now created a dataset with two different configs in the same dataset folder.
 Here is the figure of images with the default config:
-![alt text](https://github.com/R-Haecker/python_unity_images/data/figures/fig_advanced example_from_index_0_to_index_9.png "Plot of images with default config.")
+![alt text](https://github.com/R-Haecker/python_unity_images/raw/master/data/figures/fig_advanced example_from_index_0_to_index_9.png "Plot of images with default config.")
 Here is the figure of images with the modified config:
-![alt text](https://github.com/R-Haecker/python_unity_images/data/figures/fig_advanced example_from_index_10_to_index_19.png "Plot of images with personal config")
+![alt text](https://github.com/R-Haecker/python_unity_images/raw/master/data/figures/fig_advanced example_from_index_10_to_index_19.png "Plot of images with personal config")
