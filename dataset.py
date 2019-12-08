@@ -57,7 +57,7 @@ class dataset_cuboids():
             assert type(dataset_name) == str , "In dataset.py, __init__() function: dataset_name has to be a string."       
         self.dataset_name = dataset_name
         self.unique_folder = unique_data_folder
-        self.init_time = time.strftime("%Y-%m-%d %H:%M", time.gmtime())
+        self.init_time = time.strftime("%Y-%m-%d_%H:%M", time.gmtime())
         self.init_index = self.read_index() + 1
         self.logger.debug("Dataset initialised.\n")        
 
@@ -550,7 +550,7 @@ class dataset_cuboids():
         # Create unique name for the folder where the dataset is saved
         if self.dataset_name != None:
             if self.unique_folder:
-                full_folder_name = self.init_time + "  " + self.dataset_name 
+                full_folder_name = self.init_time + "__" + self.dataset_name 
             else:
                 full_folder_name = self.dataset_name 
         else:
@@ -731,7 +731,7 @@ class dataset_cuboids():
         # Save figure if wanted.
         if save_fig:
             if self.dataset_name != None:
-                plt.savefig("data/figures/fig_" + self.dataset_name + "_from_index_" + str(dicts[0]["index"]) + "_to_index_" + str(dicts[len(dicts)-1]["index"]) + ".png")
+                plt.savefig("data/figures/fig_" + self.dataset_name + "__from_index_" + str(dicts[0]["index"]) + "_to_index_" + str(dicts[len(dicts)-1]["index"]) + ".png")
             else:
                 plt.savefig("data/figures/fig_from_index_" + str(dicts[0]["index"]) + "_to_index_" + str(dicts[len(dicts)-1]["index"]) + ".png")
         plt.show()
