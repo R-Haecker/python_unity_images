@@ -12,9 +12,9 @@ This repository was created in a project at the research group Computer Vision a
 <img src="https://github.com/R-Haecker/python_unity_images/raw/master/data/dataset/examples_to_show/ex2.png" height="210" width="410">
 
 ## Documentation
-The documentation of the python code can be found here: <https://python-unity-images.readthedocs.io/en/latest/>. 
+This read me file is a part of a a detailed [report](report.pdf)
+and the used python code is commented in this [Documentation](https://python-unity-images.readthedocs.io/en/latest/).  
 
-Additionaly a detailed report as pdf can be found here: report.pdf
 
 ## Getting Started
 * Download this repository or
