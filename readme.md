@@ -29,7 +29,8 @@ data.plot_images(dictionaries, save_fig = True)
 * In the first line the file dataset.py is imported.
 * The first thing you want to do is to initialize an object of the class ``dataset_cuboids()``.
     * This starts Unity and connects to it with code from ``client.py``. 
-* After that you can use it as you want. 
+    * make sure that the string ``dataset_name`` does not contain any white spaces.
+* After that you can use it as you desire. 
 * In this exampel we create random images with the function ``get_example()``.
     * This function returns an dictionnary with the keys: ``index``, ``parameters`` and ``image``.
     * The argumets ``save_para`` and ``save_image`` are ``True``. This means that the parameters of the created scene are saved inside a unique folder for your dataset. This folder can be found in ``data/dataset/``, it is named with a time stamp and the name of your dataset specified in ``dataset_name``.

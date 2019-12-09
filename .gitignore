@@ -1,5 +1,5 @@
-#data/figures/
-#data/dataset/*
+data/figures/
+data/dataset/*
 test_for_plotting_images.ipynb*
 *.[log]
 .ipynb_checkpoints*
