@@ -8,9 +8,10 @@ Unity receives parameters from the script to build up a specific scene and sends
 
 This repository was created in a project at the research group Computer Vision at the Heidelberg Collaboratory for Image processing.   
 
-<img src="https://github.com/R-Haecker/python_unity_images/raw/master/data/dataset/2019-12-09_00:04__simple_example/images/image_index_3.png" height="210" width="210">
-<img src="https://github.com/R-Haecker/python_unity_images/raw/master/data/dataset/advanced_example/images/image_index_1.png" height="210" width="210">
-<img src="https://github.com/R-Haecker/python_unity_images/raw/master/data/dataset/advanced_example/images/image_index_9.png" height="210" width="210">
+<img src="https://github.com/R-Haecker/python_unity_images/raw/master/data/dataset/examples_to_show/ex2.png" height="210" width="510">
+
+<img src="https://github.com/R-Haecker/python_unity_images/raw/master/data/dataset/examples_to_show/ex1.png" height="210" width="255">
+<img src="https://github.com/R-Haecker/python_unity_images/raw/master/data/dataset/examples_to_show/ex3.png" height="210" width="255">
 
 ## Documentation
 The documentation of the python code can be found here: <https://python-unity-images.readthedocs.io/en/latest/>. 
