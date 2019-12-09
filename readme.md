@@ -7,6 +7,7 @@ The framework and the rendering are achieved through the game engine Unity 3D wh
 Unity receives parameters from the script to build up a specific scene and sends the rendered image back to python.
 
 This repository was created in a project at the research group Computer Vision at the Heidelberg Collaboratory for Image processing.   
+![test](https://github.com/R-Haecker/python_unity_images/raw/master/data/dataset/2019-12-09_00:04__simple_example/images/image_index_3.png | width=250)
 
 ## Documentation
 The documentation of the python code can be found here: <https://python-unity-images.readthedocs.io/en/latest/>. 
