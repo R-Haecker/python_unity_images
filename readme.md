@@ -8,16 +8,33 @@ Unity receives parameters from the script to build up a specific scene and sends
 
 This repository was created in a project at the research group Computer Vision at the Heidelberg Collaboratory for Image processing.   
 
-<img src="https://github.com/R-Haecker/python_unity_images/raw/master/data/dataset/examples_to_show/ex2.png" height="210" width="510">
 
-<img src="https://github.com/R-Haecker/python_unity_images/raw/master/data/dataset/examples_to_show/ex1.png" height="210" width="255">
-<img src="https://github.com/R-Haecker/python_unity_images/raw/master/data/dataset/examples_to_show/ex3.png" height="210" width="255">
+<img src="https://github.com/R-Haecker/python_unity_images/raw/master/data/dataset/examples_to_show/ex2.png" height="210" width="410">
 
 ## Documentation
 The documentation of the python code can be found here: <https://python-unity-images.readthedocs.io/en/latest/>. 
-Additionaly a detailed report as pdf can be found in this repository at the root directory: "Documentation.pdf"
+
+Additionaly a detailed report as pdf can be found here: report.pdf
+
+## Getting Started
+* Download this repository or
+* Go to the directory you want to clone this project to and copy the following code into you terminal.
+
+        ```git clone https://github.com/R-Haecker/python_unity_images.git}```
+
+* Try out the examples given in the next section and modify them as you desire to learn to work with this project.
+    * You can have a look into the Documentation of the code and the meaning of all functions as well as their parameters [here](https://python-unity-images.readthedocs.io/en/latest/).
 
 ## Examples
+### Prerequisites
+You need all of the following packages installed:
+* Both Files:
+    * PIL, numpy, json, logging, os, time
+* dataset.py:
+    * matplotlib, tkinter, math, copy,
+* client.py:
+    * socket, sys, io, subprocess, inspect,
+
 ### 1) Simple Example 
 The following code represents a simple example how to use this project.
 This code creates and plots eight randomly generated images. 
