@@ -1,7 +1,8 @@
 data/figures/
 data/dataset/*
 test_for_plotting_images.ipynb*
-*.[log]
+Logs/*
+*.log
 .ipynb_checkpoints*
 __pycache__
 debug_test.py
