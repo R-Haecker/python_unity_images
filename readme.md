@@ -18,7 +18,7 @@ The following code represents a simple example how to use this project.
 This code creates and plots eight randomly generated images. 
 ```python
 import dataset
-data = dataset.dataset_cuboids(dataset_name = "simple example")
+data = dataset.dataset_cuboids(dataset_name = "simple_example")
 dictionaries = []
 for i in range(8):
     dictionaries.append(data.get_example(save_para = True, save_image = True))
@@ -48,7 +48,7 @@ Here is the figure of the plotted images:
 
 ```python
 import dataset
-data = dataset.dataset_cuboids(dataset_name = "advanced example", unique_data_folder = False)
+data = dataset.dataset_cuboids(dataset_name = "advanced_example", unique_data_folder = False)
 data.reset_index()
 dictionaries = []
 for i in range(10):
@@ -56,7 +56,7 @@ for i in range(10):
 data.exit()
 data.plot_images(dictionaries, images_per_row=5, save_fig=True)
 
-data2 = dataset.dataset_cuboids(dataset_name = "advanced example", unique_data_folder = False)
+data2 = dataset.dataset_cuboids(dataset_name = "advanced_example", unique_data_folder = False)
 data2.set_config(total_cuboids=[2,3],same_theta=False, DirectionalLightTheta=[80,90], totalPointLights=None, totalSpotLights=None)
 dictionaries2 = []
 for i in range(10):
@@ -68,7 +68,7 @@ data2.plot_images(dictionaries2, images_per_row=5, save_fig=True, show_index=Fal
 * The first block of code is pretty similar to the simple example
 * The initialization differs by one additional argument.
     * ``unique_data_folder = True`` means that if you later save images or parameters your personal dataset folder will not include a time stamp. This enables another instance as ``data2`` with the same ``dataset_name`` to use the same dataset folder to store more and different images and parameters.
-    * The folder in ``data/dataset/`` will now just be named:  ``advanced example``.
+    * The folder in ``data/dataset/`` will now just be named:  ``advanced_example``.
 * Since the simple example was executed befor this example the index is currently at nine. It is stored externally in ``data/python/index.txt``.
 * With the function ``reset_index()`` we now set it back to zero. Keep in mind that if you choose to set ``unique_data_folder = True`` and reset the index you can overwrite your old data.
 * In the function ``plot_images()`` we specified the shape of the figure.
@@ -86,7 +86,10 @@ data2.plot_images(dictionaries2, images_per_row=5, save_fig=True, show_index=Fal
 * This time when using the function ``plot_images()`` we set ``show_index = False`` to not show the index displayed on top of the images.
 
 We now created a dataset with two different configs in the same dataset folder.
+
 Here is the figure of images with the default config:
-![alt text](https://github.com/R-Haecker/python_unity_images/raw/master/data/figures/fig_advanced example_from_index_0_to_index_9.png "Plot of images with default config.")
+![alt text](https://github.com/R-Haecker/python_unity_images/raw/master/data/figures/fig_advanced_example__from_index_0_to_index_9.png "Plot of images with default config.")
+
+
 Here is the figure of images with the modified config:
-![alt text](https://github.com/R-Haecker/python_unity_images/raw/master/data/figures/fig_advanced example_from_index_10_to_index_19.png "Plot of images with personal config")
+![alt text](https://github.com/R-Haecker/python_unity_images/raw/master/data/figures/fig_advanced_example__from_index_10_to_index_19.png "Plot of images with personal config")

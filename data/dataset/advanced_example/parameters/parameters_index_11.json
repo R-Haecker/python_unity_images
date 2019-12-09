@@ -3,32 +3,47 @@
     "CameraRes_height": 520,
     "Camera_FieldofView": 80,
     "CameraRadius": 10.0,
-    "CameraTheta": 90.70449185016204,
-    "CameraPhi": 154.3634674098712,
+    "CameraTheta": 89.8693926822937,
+    "CameraPhi": 194.27382250822563,
     "CameraVerticalOffset": 0,
     "total_cuboids": 2,
-    "scale": [
-        2.283221159268815,
-        0.5839736141592334
-    ],
-    "same_scale": false,
+    "scale": 0.5997441823476906,
+    "same_scale": true,
     "total_branches": [
         1
     ],
     "same_theta": false,
     "theta": [
-        118.55540991343237
+        111.16965606880969
     ],
-    "phi": 355.2703492833354,
-    "same_material": true,
-    "r": 0.3958844084942691,
-    "g": 0.1680630721498786,
-    "b": 0.7670076798986534,
-    "a": 0.5409096712698216,
-    "metallic": 0.9622355060885466,
-    "smoothness": 0.9562229887156222,
-    "DirectionalLightTheta": 82.91788528608718,
-    "DirectionalLightIntensity": 0.5740240983411892,
+    "phi": 92.16693547484435,
+    "same_material": false,
+    "r": [
+        0.5768575619510475,
+        0.0469964865987712
+    ],
+    "g": [
+        0.6035699766378624,
+        0.22042855778098935
+    ],
+    "b": [
+        0.8386785699790221,
+        0.10376117295170573
+    ],
+    "a": [
+        0.7980086807836011,
+        0.6193644583399796
+    ],
+    "metallic": [
+        0.9128855367839057,
+        0.028806724340874168
+    ],
+    "smoothness": [
+        0.8695333792246613,
+        0.9752794886209432
+    ],
+    "DirectionalLightTheta": 85.68809442578716,
+    "DirectionalLightIntensity": 0.5322566936677647,
     "totalPointLights": 0,
     "PointLightsRadius": null,
     "PointLightsPhi": null,

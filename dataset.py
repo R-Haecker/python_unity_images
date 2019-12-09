@@ -54,7 +54,8 @@ class dataset_cuboids():
         # Create dataset config for random parameter creation and set the default intervalls for all random generated parameters
         self.set_config()
         if dataset_name != None:
-            assert type(dataset_name) == str , "In dataset.py, __init__() function: dataset_name has to be a string."       
+            assert type(dataset_name) == str , "In dataset.py, __init__() function: dataset_name has to be a string." 
+            assert ' ' not in dataset_name,  "In dataset.py, __init__() function: dataset_name does contain white spaces, leads to problems in saving and loading data."
         self.dataset_name = dataset_name
         self.unique_folder = unique_data_folder
         self.init_time = time.strftime("%Y-%m-%d_%H:%M", time.gmtime())
@@ -708,7 +709,7 @@ class dataset_cuboids():
                     img_hstack[j] = dicts[i*numb_x+j]["image"]
             h_stacked[i] = np.hstack((img_hstack))
         # Stack all rows vertically together
-        final_img = np.vstack((h_stacked))
+        final_img = np.flip(np.vstack((h_stacked)),0)
         self.logger.debug("final_img.shape: " + str(final_img.shape))
         matplotlib.use('TkAgg')
         plt.imshow(final_img)
@@ -719,23 +720,23 @@ class dataset_cuboids():
             plt.axvline(x = dicts[0]["image"].shape[1]*i, color="k")
         # Plot the index of the images onto the images
         if show_index:
-            j = 0
+            j = numb_y+1
             for i in range(0,len(dicts)):
                 if "index" in dicts[i]:
-                    if i%numb_x==0:
-                        j += 1
-                    plt.text(dicts[0]["image"].shape[1]*((i%numb_x) + 0.05), dicts[0]["image"].shape[0]*(j - 0.05), "idx: " + str(dicts[i]["index"]) )
+                    if i%(numb_x)==0:
+                        j -= 1
+                    plt.text(dicts[0]["image"].shape[1]*((i%numb_x) + 0.03), dicts[0]["image"].shape[0]*(j - 0.1), "idx: " + str(dicts[i]["index"]) )
                 else:
                     self.logger.error("dicts[" + str(i) + "] has no index.")
         plt.axis('off')
-        #plt.xlim(0, images_per_row*dicts[0]["image"].shape[1])
-        #plt.ylim(0, numb_y*dicts[0]["image"].shape[0])
+        plt.xlim(0, (images_per_row)*dicts[0]["image"].shape[1])
+        plt.ylim(0, (numb_y)*dicts[0]["image"].shape[0])
         # Save figure if wanted.
         if save_fig:
             if self.dataset_name != None:
-                plt.savefig("data/figures/fig_" + self.dataset_name + "__from_index_" + str(dicts[0]["index"]) + "_to_index_" + str(dicts[len(dicts)-1]["index"]) + ".png")
+                plt.savefig("data/figures/fig_" + self.dataset_name + "__from_index_" + str(dicts[0]["index"]) + "_to_index_" + str(dicts[len(dicts)-1]["index"]) + ".png", bbox_inches='tight')
             else:
-                plt.savefig("data/figures/fig_from_index_" + str(dicts[0]["index"]) + "_to_index_" + str(dicts[len(dicts)-1]["index"]) + ".png")
+                plt.savefig("data/figures/fig_from_index_" + str(dicts[0]["index"]) + "_to_index_" + str(dicts[len(dicts)-1]["index"]) + ".png", bbox_inches='tight')
         plt.show()
 
     def change_app1_art2(self, para1, para2):

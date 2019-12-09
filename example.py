@@ -1,5 +1,5 @@
 import dataset
-data = dataset.dataset_cuboids(dataset_name = "advanced example", unique_data_folder = False)
+data = dataset.dataset_cuboids(dataset_name = "advanced_example", unique_data_folder = False)
 data.reset_index()
 dictionaries = []
 for i in range(10):
@@ -7,7 +7,7 @@ for i in range(10):
 data.exit()
 data.plot_images(dictionaries, images_per_row=5, save_fig=True)
 
-data2 = dataset.dataset_cuboids(dataset_name = "advanced example", unique_data_folder = False)
+data2 = dataset.dataset_cuboids(dataset_name = "advanced_example", unique_data_folder = False)
 data2.set_config(total_cuboids=[2,3],same_theta=False, DirectionalLightTheta=[80,90], totalPointLights=None, totalSpotLights=None)
 dictionaries2 = []
 for i in range(10):
