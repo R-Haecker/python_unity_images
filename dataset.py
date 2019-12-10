@@ -62,11 +62,11 @@ class dataset_cuboids():
         self.init_index = self.read_index() + 1
         self.logger.debug("Dataset initialised.\n")        
 
-    def set_config(self,same_scale=None, specify_scale=False, scale=[0.5,4], total_cuboids=[2,5], phi=[0,360], specify_branches=False, branches=[1,3], same_theta=None, specify_theta=False, theta=None, 
+    def set_config(self,same_scale=None, scale=[0.5,4], total_cuboids=[2,5], phi=[0,360], specify_branches=False, branches=[1,3], same_theta=None, theta=None, 
     same_material=None, specify_material=False, r=[0,1], g=[0,1], b=[0,1], a=[0.5,1], metallic=[0,1], smoothness=[0,1], CameraRadius = 10.0, CameraTheta = [60,100], CameraPhi = [0,360], CameraVerticalOffset = None,
     totalPointLights=[5,12], PointLightsRadius=[5,20], PointLightsPhi=[0,360], PointLightsTheta=[0,90], PointLightsIntensity=[7,17], PointLightsRange=[5,25], samePointLightColor=None, PointLightsColor_r=[0,1], PointLightsColor_g=[0,1], PointLightsColor_b=[0,1], PointLightsColor_a=[0.5,1],
     totalSpotLights=[3,7], SpotLightsRadius=[5,20], SpotLightsPhi=[0,360], SpotLightsTheta=[0,90], SpotLightsIntensity=[5,15], SpotLightsRange=[5,25], SpotLightsAngle=[5,120], sameSpotLightColor=None, SpotLightsColor_r=[0,1], SpotLightsColor_g=[0,1], SpotLightsColor_b=[0,1], SpotLightsColor_a=[0.5,1],
-    DirectionalLightTheta = [0,90], DirectionalLightIntensity = [1.0,6.0]):
+    DirectionalLightTheta = [0,90], DirectionalLightIntensity = [1.0,6.0], specify_scale=False, specify_theta=False):
         """Sets a config for this class instace which determines the interval for all random parameters created in the function :meth:`~dataset.dataset_cuboids.create_random_parameters`. The meaning of all the parameters are explained in this function: :meth:`~client.client_communicator_to_unity.write_json_crane`. 
         Here are only those parameters mentioned which deviate from the ``standard_parameter``.
         
@@ -74,22 +74,24 @@ class dataset_cuboids():
         :type "standard parameter": list, optional
         :param same_scale: If ``None`` the boolean will be set randomly in :meth:`~dataset.dataset_cuboids.create_random_parameters`. Otherwise it will be set to the given boolean, defaults to None
         :type same_scale: None or bool, optional
-        :param branches: If ``None`` there will be no branches which means one main branch. Else has to be a list with two integers. The amount of branches created in :meth:`~dataset.dataset_cuboids.create_random_parameters` at every cuboid will be chosen from a normal distribution where the second element of this list is interpreted als three sigma deviation, defaults to [1,3]
+        :param specify_branches: Mainly leave it at the default: False, but if you wish to set the parameter ``branches`` not randomly you can set it to ``True`` and specify them. 
+        :type specify_branches: bool, optional
+        :param branches: If ``None`` there will be no branches which means one main branch. Else has to be a list with two integers. The amount of branches created in :meth:`~dataset.dataset_cuboids.create_random_parameters` at every cuboid will be chosen from a normal distribution where the second element of this list is interpreted als three sigma deviation, there is also a thrid option to set this parameter to a fixed value: you can use ``specyfy_branches = True`` and input a list with your desired values with a length of ``total_cuboids - 1``, defaults to [1,3]
         :type branches: None or list, optional
         :param same_theta: If ``None`` the boolean will be set randomly in :meth:`~dataset.dataset_cuboids.create_random_parameters`. Otherwise it will be set to the given boolean, defaults to None
         :type same_theta: None or bool, optional
-        :param theta: If ``None`` the values for theta is set randomly between zero and ``360/total_cuboids``. Otherwise it has to be a list of length 2, defaults to None
-        :type theta: None or list, optional
+        :param theta: If ``None`` the values for theta is set randomly between zero and ``360/total_cuboids``. Otherwise it has to be a list of length 2. If you want fixed values you can input a float or an int if ``same_theta = True``, if you want fixed values with ``same_theta = False`` you have to set ``specify_theta = True``, defaults to None
+        :type theta: None, list, float or int, optional
         :param same_material: If ``None`` the boolean will be set randomly in :meth:`~dataset.dataset_cuboids.create_random_parameters`. Otherwise it will be set to the given boolean, defaults to None
         :type same_material: None or bool, optional
-        :param CameraRadius: If ``float`` then the value in :meth:`~dataset.dataset_cuboids.create_random_parameters` will not be random, instead set to the given ``float``. If it is a list it has to be a list of length two, defaults to 10.0
-        :type CameraRadius: float or list, optional
-        :param CameraTheta:  If ``float`` then the value in :meth:`~dataset.dataset_cuboids.create_random_parameters` will not be random, instead set to the given ``float``. If it is a list it has to be a list of length two, defaults to [30,100]
-        :type CameraTheta: float or list, optional
-        :param CameraPhi:  If ``float`` then the value in :meth:`~dataset.dataset_cuboids.create_random_parameters` will not be random, instead set to the given ``float``. If it is a list it has to be a list of length two, defaults to [0,360]
-        :type CameraPhi: float or list, optional
-        :param CameraVerticalOffset: If ``None`` it is set to zero. If ``float`` then the value in :meth:`~dataset.dataset_cuboids.create_random_parameters` will not be random, instead set to the given ``float``. If it is a list it has to be a list of length two, defaults to None
-        :type CameraVerticalOffset: None, float or list, optional
+        :param CameraRadius: If a ``float`` or ``int`` is entered then the value in :meth:`~dataset.dataset_cuboids.create_random_parameters` will not be random, instead set to the given value. If it is a list it has to be a list of length two, defaults to 10.0
+        :type CameraRadius: float, int or list, optional
+        :param CameraTheta:  If ``float`` or ``int`` then the value in :meth:`~dataset.dataset_cuboids.create_random_parameters` will not be random, instead set to the given value. If it is a list it has to be a list of length two, defaults to [30,100]
+        :type CameraTheta: float, int or list, optional
+        :param CameraPhi:  If input is ``float`` or ``int`` then the value in :meth:`~dataset.dataset_cuboids.create_random_parameters` will not be random, instead set to the given value. If it is a list it has to be a list of length two, defaults to [0,360]
+        :type CameraPhi: float, int or list, optional
+        :param CameraVerticalOffset: If ``None`` it is set to zero. If input is ``float`` or ``int`` then the value in :meth:`~dataset.dataset_cuboids.create_random_parameters` will not be random, instead set to the given ``float``. If it is a list it has to be a list of length two, defaults to None
+        :type CameraVerticalOffset: None, float, int or list, optional
         :param totalPointLights: If ``None`` there will be no Pointlights created in :meth:`~dataset.dataset_cuboids.create_random_parameters`. Else it has to be a list of integers with the length two, defaults to [5,12]
         :type totalPointLights: None or list, optional
         :param samePointLightColor: If ``None`` the boolean will be chosen randomly, else the given boolean is used, defaults to None
@@ -98,12 +100,15 @@ class dataset_cuboids():
         :type totalSpotLights: None or list, optional
         :param sameSpotLightColor: If ``None`` the boolean will be chosen randomly, else the given boolean is used, defaults to None
         :type sameSpotLightColor: None or bool, optional
-        :param DirectionalLightTheta: If ``None`` the ``DirectionalLightIntensity`` will be set to zero, else it has to be a list of floats with the length two, defaults to [0,90]
-        :type DirectionalLightTheta: None or list, optional
-        :param DirectionalLightIntensity: If ``None`` the ``DirectionalLightIntensity`` will be set to zero, else it has to be a list of floats with the length two, defaults to [0.1,1.8]
-        :type DirectionalLightIntensity: None or list, optional
+        :param DirectionalLightTheta: If ``None`` the ``DirectionalLightIntensity`` will be set to zero, elif has to be a list of floats with the length two, for a fixed value enter a ``float`` or ``int``, defaults to [0,90]
+        :type DirectionalLightTheta: None, float, int or list, optional
+        :param DirectionalLightIntensity: If ``None`` the ``DirectionalLightIntensity`` will be set to zero, elif has to be a list of floats with the length two, for a fixed value enter a ``float`` or ``int``, defaults to [0.1,1.8]
+        :type DirectionalLightIntensity: None, float, int or list, optional
+        :param specify_scale: If this is set ``True`` you can enter the fixed values for ``scale`` even if ``same_scale = False``, defaults to False
+        :type specify_scale: bool, optional
+        :param specify_theta: If this is set ``True`` you can enter the fixed values for ``theta`` even if ``same_theta = False``, defaults to False
+        :type specify_theta: bool, optional
         """        
-        print("same_theta",same_theta)
         
         config = {}
         # Create intervals for general properties
@@ -115,7 +120,6 @@ class dataset_cuboids():
         # Use the same_theta for every angle between two cubiods
         if same_theta!=None:
             assert type(same_theta)==bool, "Has to be bool or none. same_theta sets the bool of same_theta in getRandomJsonData. If it is None bool is set randomly." 
-        print("same_theta",same_theta)
         config["same_theta"]=same_theta
         
         if specify_theta:
@@ -125,7 +129,6 @@ class dataset_cuboids():
             else:
                 assert len(theta) == total_cuboids-1, "specify_theta is true and same_theta is false, theta has to be a list of length total_cuboids-1."
         else:
-            print("same_theta",same_theta)
             if same_theta == False:
                 assert type(theta)==list, "If same_theta is None e.i. randomly choosen, theta can not be specified exactly, has to be choosen randomly as well. This means theta has to be a list of length 2 with theta[0] is minimal limit and theta[1] is maximal limit for random generation theta."
                 assert len(theta)==2, "If same_theta is None e.i. randomly choosen, theta can not be specified exactly, has to be choosen randomly as well. This means theta has to be a list of length 2 with theta[0] is minimal limit and theta[1] is maximal limit for random generation theta."
@@ -187,7 +190,6 @@ class dataset_cuboids():
         config["CameraTheta"] = CameraTheta 
         if type(CameraPhi)== list:
             assert len(CameraPhi) == 2, "CameraPhi has to be a list len()==2 or a float for a fixed value."
-            print("Phi in create config is a list of 2.")
         else:
             type(CameraPhi)in [float, int], "CameraPhi has to be a list len()==2 or a float for a fixed value."
         config["CameraPhi"] = CameraPhi 
@@ -351,17 +353,10 @@ class dataset_cuboids():
         else:
             dictionary["CameraTheta"] = np.random.uniform(self.config["CameraTheta"][0],self.config["CameraTheta"][1])
         
-        print('self.config["CameraPhi"] =',self.config["CameraPhi"])
-        print('type self.config["CameraPhi"] =',type(self.config["CameraPhi"]))
         if type(self.config["CameraPhi"]) in [float, int]:
-            print("Phi in float int")
             dictionary["CameraPhi"] = self.config["CameraPhi"] 
         else:
-            print("Phi in random")
             dictionary["CameraPhi"] = np.random.uniform(self.config["CameraPhi"][0],self.config["CameraPhi"][1])
-        
-        print('self.config["CameraPhi"][0],self.config["CameraPhi"][1]',self.config["CameraPhi"][0],self.config["CameraPhi"][1])
-        print("parameter: CameraPhi=",dictionary["CameraPhi"])
         if type(self.config["CameraVerticalOffset"]) in [float, int]:
             dictionary["CameraVerticalOffset"] = self.config["CameraVerticalOffset"] 
         else:
@@ -545,8 +540,8 @@ class dataset_cuboids():
             G=self.config["g"]
             B=self.config["b"]
             A=self.config["a"]
-            Metallic=self.config["smoothness"]
-            Smoothness=self.config["same_material"]
+            Metallic=self.config["metallic"]
+            Smoothness=self.config["smoothness"]
         else:   
             if(Same_Material):
                 R=np.random.uniform(self.config["r"][0],self.config["r"][1])

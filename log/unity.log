@@ -18,14 +18,14 @@ provoking_vertex GL_ARB_query_buffer_object GL_ARB_robust_buffer_access_behavior
 B_texture_cube_map_array GL_ARB_texture_filter_anisotropic GL_ARB_texture_float GL_ARB_texture_gather GL_ARB_texture_mirror_clamp_to_edge GL_ARB_texture_multisample GL_ARB_texture_non_power_of_two GL_ARB_texture_query_levels GL_ARB_texture_query_lod GL_ARB_texture_rectangle GL_ARB_texture_rg GL_ARB_texture_rgb10_a2ui GL_ARB_texture_stencil8 GL_ARB_texture_storage GL_ARB_texture_storage_multisample GL_ARB_texture_swizzle GL_ARB_texture_view GL_ARB_timer_query GL_ARB_transform_feedback2 GL_ARB_transform_feedback3 GL_ARB_transform_feedback_instanced GL_ARB_transform_feedback_overflow_query GL_ARB_uniform_buffer_object GL_ARB_vertex_array_bgra GL_ARB_vertex_array_object GL_ARB_vertex_attrib_64bit GL_ARB_vertex_attrib_binding GL_ARB_vertex_buffer_object GL_ARB_vertex_shader GL_ARB_vertex_type_10f_11f_11f_rev GL_ARB_vertex_type_2_10_10_10_rev GL_ARB_viewport_array GL_ATI_blend_equation_separate GL_ATI_texture_float GL_EXT_abgr GL_EXT_blend_equation_separate GL_EXT_draw_buffers2 GL_EXT_draw_instanced GL_EXT_framebu
 ffer_blit GL_EXT_framebuffer_multisample GL_EXT_framebuffer_multisample_blit_scaled GL_EXT_framebuffer_object GL_EXT_framebuffer_sRGB GL_EXT_packed_depth_stencil GL_EXT_packed_float GL_EXT_pixel_buffer_object GL_EXT_polygon_offset_clamp GL_EXT_provoking_vertex GL_EXT_shader_framebuffer_fetch GL_EXT_shader_framebuffer_fetch_non_coherent GL_EXT_shader_integer_mix GL_EXT_shader_samples_identical GL_EXT_texture_array GL_EXT_texture_compression_dxt1 GL_EXT_texture_compression_rgtc GL_EXT_texture_compression_s3tc GL_EXT_texture_filter_anisotropic GL_EXT_texture_integer GL_EXT_texture_sRGB GL_EXT_texture_sRGB_decode GL_EXT_texture_shared_exponent GL_EXT_texture_snorm GL_EXT_texture_swizzle GL_EXT_timer_query GL_EXT_transform_feedback GL_EXT_vertex_array_bgra GL_EXT_vertex_attrib_64bit GL_IBM_multimode_draw_arrays GL_INTEL_conservative_rasterization GL_INTEL_performance_query GL_INTEL_shader_atomic_float_minmax GL_KHR_blend_equation_advanced GL_KHR_blend_equation_advanced_coherent GL_KHR_context_flush_control GL_KHR
 _debug GL_KHR_no_error GL_KHR_robust_buffer_access_behavior GL_KHR_robustness GL_KHR_texture_compression_astc_ldr GL_KHR_texture_compression_astc_sliced_3d GL_MESA_pack_invert GL_MESA_shader_integer_functions GL_MESA_texture_signed_rgba GL_NV_conditional_render GL_NV_depth_clamp GL_NV_fragment_shader_interlock GL_NV_packed_depth_stencil GL_NV_texture_barrier GL_OES_EGL_image GL_S3_s3tc
-OPENGL LOG: Creating OpenGL 4.5 graphics device ; Context level  <OpenGL 4.5> ; Context handle 63624720
+OPENGL LOG: Creating OpenGL 4.5 graphics device ; Context level  <OpenGL 4.5> ; Context handle 48577504
 Begin MonoManager ReloadAssembly
 - Completed reload, in  0.060 seconds
 Default vsync count 1
 requesting resize 1 x 1
 resizing window to 1 x 1
 Desktop is 1920 x 1080 @ 60 Hz
-UnloadTime: 2.782435 ms
+UnloadTime: 3.111991 ms
 TCP_Server in ListenForMessages: TCPconfig loaded
  
 (Filename: ./Runtime/Export/Debug/Debug.bindings.h Line: 35)
@@ -35,10 +35,10 @@ TCP_Server in ListenForMessages: IPAdress: 127.0.0.1; port: 50050
 (Filename: ./Runtime/Export/Debug/Debug.bindings.h Line: 35)
 
 Setting up 4 worker threads for Enlighten.
-  Thread -> id: 7f36f9a53700 -> priority: 1 
-  Thread -> id: 7f36f9252700 -> priority: 1 
-  Thread -> id: 7f36f8a51700 -> priority: 1 
-  Thread -> id: 7f36bffff700 -> priority: 1 
+  Thread -> id: 7f6c36072700 -> priority: 1 
+  Thread -> id: 7f6c35871700 -> priority: 1 
+  Thread -> id: 7f6c35070700 -> priority: 1 
+  Thread -> id: 7f6c3486f700 -> priority: 1 
 requesting resize 1 x 1
 resizing window to 1 x 1
 Desktop is 1920 x 1080 @ 60 Hz
@@ -66,7 +66,7 @@ TCP_Server in ListenForMessages: eod. detected
  
 (Filename: ./Runtime/Export/Debug/Debug.bindings.h Line: 35)
 
-TCP_Server in ListenForMessages: jsonparameters: {"total_cuboids": 2, "same_scale": true, "same_theta": true, "same_material": true, "phi": 0, "resolution_width": 520, "resolution_height": 520, "cuboids": [{"theta_deg": 20, "scale": 2, "material": {"color": {"x": 0.3, "y": 0, "z": 1, "w": 1}, "metallic": 0.5, "smoothness": true}}, {"theta_deg": 20, "scale": 2, "material": {"color": {"x": 0.3, "y": 0, "z": 1, "w": 1}, "metallic": 0.5, "smoothness": true}}], "total_branches": [1], "camera": {"radius": 5, "theta_deg": 90, "phi_deg": 70.38321520820722, "y_offset": 0, "resolution_width": 520, "resolution_height": 520, "FOV": 80}, "DirectionalLight": {"theta_deg": 80, "intensity": 2.131156354747663}, "totalPointLights": 0, "totalSpotLights": 0}
+TCP_Server in ListenForMessages: jsonparameters: {"total_cuboids": 2, "same_scale": false, "same_theta": false, "same_material": false, "phi": -76.52114011325514, "resolution_width": 520, "resolution_height": 520, "cuboids": [{"theta_deg": 0, "scale": 2, "material": {"color": {"x": 0.3, "y": 0, "z": 1, "w": 1}, "metallic": 0.5, "smoothness": 0.5}}, {"theta_deg": 30, "scale": 1.5, "material": {"color": {"x": 1, "y": 0.2, "z": 0, "w": 1}, "metallic": 0.5, "smoothness": 0.5}}], "total_branches": [4], "camera": {"radius": 5, "theta_deg": 90, "phi_deg": 0, "y_offset": 0, "resolution_width": 520, "resolution_height": 520, "FOV": 80}, "DirectionalLight": {"theta_deg": 70, "intensity": 10}, "totalPointLights": 0, "totalSpotLights": 0}
  
 (Filename: ./Runtime/Export/Debug/Debug.bindings.h Line: 35)
 
@@ -86,7 +86,7 @@ CreateCrane in Update: before Starter: import ready_to_build == true;
  
 (Filename: ./Runtime/Export/Debug/Debug.bindings.h Line: 35)
 
-CreateCrane in Starter; jsondata: {"total_cuboids":2,"total_branches":[1],"totalArms":0,"same_scale":true,"same_theta":true,"same_material":true,"phi":0.0,"del_phi":0.0,"camera":{"radius":5.0,"theta_deg":90.0,"phi_deg":70.38321685791016,"y_offset":0.0,"Object":{"m_FileID":0,"m_PathID":0},"resolution_width":520,"resolution_height":520,"FOV":80.0},"DirectionalLight":{"intensity":2.1311564445495607,"theta_deg":80.0},"totalPointLights":0,"point_lights":[],"totalSpotLights":0,"spot_lights":[],"cuboids":[{"theta_deg":20.0,"scale":2.0,"material":{"color":{"x":0.30000001192092898,"y":0.0,"z":1.0,"w":1.0},"metallic":0.5,"smoothness":0.0}},{"theta_deg":20.0,"scale":2.0,"material":{"color":{"x":0.30000001192092898,"y":0.0,"z":1.0,"w":1.0},"metallic":0.5,"smoothness":0.0}}]}
+CreateCrane in Starter; jsondata: {"total_cuboids":2,"total_branches":[4],"totalArms":0,"same_scale":false,"same_theta":false,"same_material":false,"phi":-76.5211410522461,"del_phi":0.0,"camera":{"radius":5.0,"theta_deg":90.0,"phi_deg":0.0,"y_offset":0.0,"Object":{"m_FileID":0,"m_PathID":0},"resolution_width":520,"resolution_height":520,"FOV":80.0},"DirectionalLight":{"intensity":10.0,"theta_deg":70.0},"totalPointLights":0,"point_lights":[],"totalSpotLights":0,"spot_lights":[],"cuboids":[{"theta_deg":0.0,"scale":2.0,"material":{"color":{"x":0.30000001192092898,"y":0.0,"z":1.0,"w":1.0},"metallic":0.5,"smoothness":0.5}},{"theta_deg":30.0,"scale":1.5,"material":{"color":{"x":1.0,"y":0.20000000298023225,"z":0.0,"w":1.0},"metallic":0.5,"smoothness":0.5}}]}
  
 (Filename: ./Runtime/Export/Debug/Debug.bindings.h Line: 35)
 
@@ -94,7 +94,7 @@ camera.radius: 5
  
 (Filename: ./Runtime/Export/Debug/Debug.bindings.h Line: 35)
 
-max_x: 0.7597654; max_y: 2.087438; min_y: 0
+max_x: 0.4298132; max_y: 1.899519; min_y: 0
  
 (Filename: ./Runtime/Export/Debug/Debug.bindings.h Line: 35)
 
@@ -106,7 +106,7 @@ TCP_Server in LateUpdate: before CapturePNGasBytes: import newCrane == true;
  
 (Filename: ./Runtime/Export/Debug/Debug.bindings.h Line: 35)
 
-TCP_Server in LateUpdate: before CapturePNGasBytes: Time: 2.832562
+TCP_Server in LateUpdate: before CapturePNGasBytes: Time: 9.153932
  
 (Filename: ./Runtime/Export/Debug/Debug.bindings.h Line: 35)
 
@@ -114,11 +114,11 @@ TCP_Server in LateUpdate: after CapturePNGasBytes:  ready_to_build==false; impor
  
 (Filename: ./Runtime/Export/Debug/Debug.bindings.h Line: 35)
 
-TCP_Server in LateUpdate: after CapturePNGasBytes: Time: 2.838058
+TCP_Server in LateUpdate: after CapturePNGasBytes: Time: 9.156299
  
 (Filename: ./Runtime/Export/Debug/Debug.bindings.h Line: 35)
 
-TCP_Server in CapturePNGasBytes: bytesPNG.Length: 67639
+TCP_Server in CapturePNGasBytes: bytesPNG.Length: 80943
  
 (Filename: ./Runtime/Export/Debug/Debug.bindings.h Line: 35)
 
@@ -146,7 +146,7 @@ TCP_Server in ListenForMessages: eod. detected
  
 (Filename: ./Runtime/Export/Debug/Debug.bindings.h Line: 35)
 
-TCP_Server in ListenForMessages: jsonparameters: {"total_cuboids": 2, "same_scale": true, "same_theta": true, "same_material": true, "phi": 0, "resolution_width": 520, "resolution_height": 520, "cuboids": [{"theta_deg": 20, "scale": 2, "material": {"color": {"x": 0.3, "y": 0, "z": 1, "w": 1}, "metallic": 0.5, "smoothness": true}}, {"theta_deg": 20, "scale": 2, "material": {"color": {"x": 0.3, "y": 0, "z": 1, "w": 1}, "metallic": 0.5, "smoothness": true}}], "total_branches": [1], "camera": {"radius": 5, "theta_deg": 90, "phi_deg": 125.13022096632322, "y_offset": 0, "resolution_width": 520, "resolution_height": 520, "FOV": 80}, "DirectionalLight": {"theta_deg": 80, "intensity": 3.6117294820531525}, "totalPointLights": 0, "totalSpotLights": 0}
+TCP_Server in ListenForMessages: jsonparameters: {"total_cuboids": 2, "same_scale": false, "same_theta": false, "same_material": false, "phi": -87.20872557064342, "resolution_width": 520, "resolution_height": 520, "cuboids": [{"theta_deg": 0, "scale": 2, "material": {"color": {"x": 0.3, "y": 0, "z": 1, "w": 1}, "metallic": 0.5, "smoothness": 0.5}}, {"theta_deg": 30, "scale": 1.5, "material": {"color": {"x": 1, "y": 0.2, "z": 0, "w": 1}, "metallic": 0.5, "smoothness": 0.5}}], "total_branches": [4], "camera": {"radius": 5, "theta_deg": 90, "phi_deg": 0, "y_offset": 0, "resolution_width": 520, "resolution_height": 520, "FOV": 80}, "DirectionalLight": {"theta_deg": 70, "intensity": 10}, "totalPointLights": 0, "totalSpotLights": 0}
  
 (Filename: ./Runtime/Export/Debug/Debug.bindings.h Line: 35)
 
@@ -166,7 +166,7 @@ CreateCrane in Update: before Starter: import ready_to_build == true;
  
 (Filename: ./Runtime/Export/Debug/Debug.bindings.h Line: 35)
 
-CreateCrane in Starter; jsondata: {"total_cuboids":2,"total_branches":[1],"totalArms":0,"same_scale":true,"same_theta":true,"same_material":true,"phi":0.0,"del_phi":0.0,"camera":{"radius":5.0,"theta_deg":90.0,"phi_deg":125.13021850585938,"y_offset":0.0,"Object":{"m_FileID":0,"m_PathID":0},"resolution_width":520,"resolution_height":520,"FOV":80.0},"DirectionalLight":{"intensity":3.611729383468628,"theta_deg":80.0},"totalPointLights":0,"point_lights":[],"totalSpotLights":0,"spot_lights":[],"cuboids":[{"theta_deg":20.0,"scale":2.0,"material":{"color":{"x":0.30000001192092898,"y":0.0,"z":1.0,"w":1.0},"metallic":0.5,"smoothness":0.0}},{"theta_deg":20.0,"scale":2.0,"material":{"color":{"x":0.30000001192092898,"y":0.0,"z":1.0,"w":1.0},"metallic":0.5,"smoothness":0.0}}]}
+CreateCrane in Starter; jsondata: {"total_cuboids":2,"total_branches":[4],"totalArms":0,"same_scale":false,"same_theta":false,"same_material":false,"phi":-87.20872497558594,"del_phi":0.0,"camera":{"radius":5.0,"theta_deg":90.0,"phi_deg":0.0,"y_offset":0.0,"Object":{"m_FileID":0,"m_PathID":0},"resolution_width":520,"resolution_height":520,"FOV":80.0},"DirectionalLight":{"intensity":10.0,"theta_deg":70.0},"totalPointLights":0,"point_lights":[],"totalSpotLights":0,"spot_lights":[],"cuboids":[{"theta_deg":0.0,"scale":2.0,"material":{"color":{"x":0.30000001192092898,"y":0.0,"z":1.0,"w":1.0},"metallic":0.5,"smoothness":0.5}},{"theta_deg":30.0,"scale":1.5,"material":{"color":{"x":1.0,"y":0.20000000298023225,"z":0.0,"w":1.0},"metallic":0.5,"smoothness":0.5}}]}
  
 (Filename: ./Runtime/Export/Debug/Debug.bindings.h Line: 35)
 
@@ -174,7 +174,7 @@ camera.radius: 5
  
 (Filename: ./Runtime/Export/Debug/Debug.bindings.h Line: 35)
 
-max_x: 0.7597654; max_y: 2.087438; min_y: 0
+max_x: 0.4414629; max_y: 1.899519; min_y: 0
  
 (Filename: ./Runtime/Export/Debug/Debug.bindings.h Line: 35)
 
@@ -186,7 +186,7 @@ TCP_Server in LateUpdate: before CapturePNGasBytes: import newCrane == true;
  
 (Filename: ./Runtime/Export/Debug/Debug.bindings.h Line: 35)
 
-TCP_Server in LateUpdate: before CapturePNGasBytes: Time: 3.188084
+TCP_Server in LateUpdate: before CapturePNGasBytes: Time: 9.480062
  
 (Filename: ./Runtime/Export/Debug/Debug.bindings.h Line: 35)
 
@@ -194,11 +194,11 @@ TCP_Server in LateUpdate: after CapturePNGasBytes:  ready_to_build==false; impor
  
 (Filename: ./Runtime/Export/Debug/Debug.bindings.h Line: 35)
 
-TCP_Server in LateUpdate: after CapturePNGasBytes: Time: 3.18827
+TCP_Server in LateUpdate: after CapturePNGasBytes: Time: 9.480103
  
 (Filename: ./Runtime/Export/Debug/Debug.bindings.h Line: 35)
 
-TCP_Server in CapturePNGasBytes: bytesPNG.Length: 62611
+TCP_Server in CapturePNGasBytes: bytesPNG.Length: 78376
  
 (Filename: ./Runtime/Export/Debug/Debug.bindings.h Line: 35)
 
@@ -226,7 +226,7 @@ TCP_Server in ListenForMessages: eod. detected
  
 (Filename: ./Runtime/Export/Debug/Debug.bindings.h Line: 35)
 
-TCP_Server in ListenForMessages: jsonparameters: {"total_cuboids": 2, "same_scale": true, "same_theta": true, "same_material": true, "phi": 0, "resolution_width": 520, "resolution_height": 520, "cuboids": [{"theta_deg": 20, "scale": 2, "material": {"color": {"x": 0.3, "y": 0, "z": 1, "w": 1}, "metallic": 0.5, "smoothness": true}}, {"theta_deg": 20, "scale": 2, "material": {"color": {"x": 0.3, "y": 0, "z": 1, "w": 1}, "metallic": 0.5, "smoothness": true}}], "total_branches": [1], "camera": {"radius": 5, "theta_deg": 90, "phi_deg": 65.99557253295546, "y_offset": 0, "resolution_width": 520, "resolution_height": 520, "FOV": 80}, "DirectionalLight": {"theta_deg": 80, "intensity": 1.6515106140424938}, "totalPointLights": 0, "totalSpotLights": 0}
+TCP_Server in ListenForMessages: jsonparameters: {"total_cuboids": 2, "same_scale": false, "same_theta": false, "same_material": false, "phi": 79.7365006574687, "resolution_width": 520, "resolution_height": 520, "cuboids": [{"theta_deg": 0, "scale": 2, "material": {"color": {"x": 0.3, "y": 0, "z": 1, "w": 1}, "metallic": 0.5, "smoothness": 0.5}}, {"theta_deg": 30, "scale": 1.5, "material": {"color": {"x": 1, "y": 0.2, "z": 0, "w": 1}, "metallic": 0.5, "smoothness": 0.5}}], "total_branches": [4], "camera": {"radius": 5, "theta_deg": 90, "phi_deg": 0, "y_offset": 0, "resolution_width": 520, "resolution_height": 520, "FOV": 80}, "DirectionalLight": {"theta_deg": 70, "intensity": 10}, "totalPointLights": 0, "totalSpotLights": 0}
  
 (Filename: ./Runtime/Export/Debug/Debug.bindings.h Line: 35)
 
@@ -246,7 +246,7 @@ CreateCrane in Update: before Starter: import ready_to_build == true;
  
 (Filename: ./Runtime/Export/Debug/Debug.bindings.h Line: 35)
 
-CreateCrane in Starter; jsondata: {"total_cuboids":2,"total_branches":[1],"totalArms":0,"same_scale":true,"same_theta":true,"same_material":true,"phi":0.0,"del_phi":0.0,"camera":{"radius":5.0,"theta_deg":90.0,"phi_deg":65.99557495117188,"y_offset":0.0,"Object":{"m_FileID":0,"m_PathID":0},"resolution_width":520,"resolution_height":520,"FOV":80.0},"DirectionalLight":{"intensity":1.6515105962753297,"theta_deg":80.0},"totalPointLights":0,"point_lights":[],"totalSpotLights":0,"spot_lights":[],"cuboids":[{"theta_deg":20.0,"scale":2.0,"material":{"color":{"x":0.30000001192092898,"y":0.0,"z":1.0,"w":1.0},"metallic":0.5,"smoothness":0.0}},{"theta_deg":20.0,"scale":2.0,"material":{"color":{"x":0.30000001192092898,"y":0.0,"z":1.0,"w":1.0},"metallic":0.5,"smoothness":0.0}}]}
+CreateCrane in Starter; jsondata: {"total_cuboids":2,"total_branches":[4],"totalArms":0,"same_scale":false,"same_theta":false,"same_material":false,"phi":79.73650360107422,"del_phi":0.0,"camera":{"radius":5.0,"theta_deg":90.0,"phi_deg":0.0,"y_offset":0.0,"Object":{"m_FileID":0,"m_PathID":0},"resolution_width":520,"resolution_height":520,"FOV":80.0},"DirectionalLight":{"intensity":10.0,"theta_deg":70.0},"totalPointLights":0,"point_lights":[],"totalSpotLights":0,"spot_lights":[],"cuboids":[{"theta_deg":0.0,"scale":2.0,"material":{"color":{"x":0.30000001192092898,"y":0.0,"z":1.0,"w":1.0},"metallic":0.5,"smoothness":0.5}},{"theta_deg":30.0,"scale":1.5,"material":{"color":{"x":1.0,"y":0.20000000298023225,"z":0.0,"w":1.0},"metallic":0.5,"smoothness":0.5}}]}
  
 (Filename: ./Runtime/Export/Debug/Debug.bindings.h Line: 35)
 
@@ -254,7 +254,7 @@ camera.radius: 5
  
 (Filename: ./Runtime/Export/Debug/Debug.bindings.h Line: 35)
 
-max_x: 0.7597654; max_y: 2.087438; min_y: 0
+max_x: 0.4349149; max_y: 1.899519; min_y: 0
  
 (Filename: ./Runtime/Export/Debug/Debug.bindings.h Line: 35)
 
@@ -266,7 +266,7 @@ TCP_Server in LateUpdate: before CapturePNGasBytes: import newCrane == true;
  
 (Filename: ./Runtime/Export/Debug/Debug.bindings.h Line: 35)
 
-TCP_Server in LateUpdate: before CapturePNGasBytes: Time: 3.580392
+TCP_Server in LateUpdate: before CapturePNGasBytes: Time: 9.763392
  
 (Filename: ./Runtime/Export/Debug/Debug.bindings.h Line: 35)
 
@@ -274,11 +274,11 @@ TCP_Server in LateUpdate: after CapturePNGasBytes:  ready_to_build==false; impor
  
 (Filename: ./Runtime/Export/Debug/Debug.bindings.h Line: 35)
 
-TCP_Server in LateUpdate: after CapturePNGasBytes: Time: 3.58042
+TCP_Server in LateUpdate: after CapturePNGasBytes: Time: 9.763414
  
 (Filename: ./Runtime/Export/Debug/Debug.bindings.h Line: 35)
 
-TCP_Server in CapturePNGasBytes: bytesPNG.Length: 70336
+TCP_Server in CapturePNGasBytes: bytesPNG.Length: 89453
  
 (Filename: ./Runtime/Export/Debug/Debug.bindings.h Line: 35)
 
@@ -306,7 +306,7 @@ TCP_Server in ListenForMessages: eod. detected
  
 (Filename: ./Runtime/Export/Debug/Debug.bindings.h Line: 35)
 
-TCP_Server in ListenForMessages: jsonparameters: {"total_cuboids": 2, "same_scale": true, "same_theta": true, "same_material": true, "phi": 0, "resolution_width": 520, "resolution_height": 520, "cuboids": [{"theta_deg": 20, "scale": 2, "material": {"color": {"x": 0.3, "y": 0, "z": 1, "w": 1}, "metallic": 0.5, "smoothness": true}}, {"theta_deg": 20, "scale": 2, "material": {"color": {"x": 0.3, "y": 0, "z": 1, "w": 1}, "metallic": 0.5, "smoothness": true}}], "total_branches": [1], "camera": {"radius": 5, "theta_deg": 90, "phi_deg": 101.25596392267073, "y_offset": 0, "resolution_width": 520, "resolution_height": 520, "FOV": 80}, "DirectionalLight": {"theta_deg": 80, "intensity": 5.371345376383149}, "totalPointLights": 0, "totalSpotLights": 0}
+TCP_Server in ListenForMessages: jsonparameters: {"total_cuboids": 2, "same_scale": false, "same_theta": false, "same_material": false, "phi": 27.762373056527053, "resolution_width": 520, "resolution_height": 520, "cuboids": [{"theta_deg": 0, "scale": 2, "material": {"color": {"x": 0.3, "y": 0, "z": 1, "w": 1}, "metallic": 0.5, "smoothness": 0.5}}, {"theta_deg": 30, "scale": 1.5, "material": {"color": {"x": 1, "y": 0.2, "z": 0, "w": 1}, "metallic": 0.5, "smoothness": 0.5}}], "total_branches": [4], "camera": {"radius": 5, "theta_deg": 90, "phi_deg": 0, "y_offset": 0, "resolution_width": 520, "resolution_height": 520, "FOV": 80}, "DirectionalLight": {"theta_deg": 70, "intensity": 10}, "totalPointLights": 0, "totalSpotLights": 0}
  
 (Filename: ./Runtime/Export/Debug/Debug.bindings.h Line: 35)
 
@@ -326,7 +326,7 @@ CreateCrane in Update: before Starter: import ready_to_build == true;
  
 (Filename: ./Runtime/Export/Debug/Debug.bindings.h Line: 35)
 
-CreateCrane in Starter; jsondata: {"total_cuboids":2,"total_branches":[1],"totalArms":0,"same_scale":true,"same_theta":true,"same_material":true,"phi":0.0,"del_phi":0.0,"camera":{"radius":5.0,"theta_deg":90.0,"phi_deg":101.25596618652344,"y_offset":0.0,"Object":{"m_FileID":0,"m_PathID":0},"resolution_width":520,"resolution_height":520,"FOV":80.0},"DirectionalLight":{"intensity":5.371345520019531,"theta_deg":80.0},"totalPointLights":0,"point_lights":[],"totalSpotLights":0,"spot_lights":[],"cuboids":[{"theta_deg":20.0,"scale":2.0,"material":{"color":{"x":0.30000001192092898,"y":0.0,"z":1.0,"w":1.0},"metallic":0.5,"smoothness":0.0}},{"theta_deg":20.0,"scale":2.0,"material":{"color":{"x":0.30000001192092898,"y":0.0,"z":1.0,"w":1.0},"metallic":0.5,"smoothness":0.0}}]}
+CreateCrane in Starter; jsondata: {"total_cuboids":2,"total_branches":[4],"totalArms":0,"same_scale":false,"same_theta":false,"same_material":false,"phi":27.762372970581056,"del_phi":0.0,"camera":{"radius":5.0,"theta_deg":90.0,"phi_deg":0.0,"y_offset":0.0,"Object":{"m_FileID":0,"m_PathID":0},"resolution_width":520,"resolution_height":520,"FOV":80.0},"DirectionalLight":{"intensity":10.0,"theta_deg":70.0},"totalPointLights":0,"point_lights":[],"totalSpotLights":0,"spot_lights":[],"cuboids":[{"theta_deg":0.0,"scale":2.0,"material":{"color":{"x":0.30000001192092898,"y":0.0,"z":1.0,"w":1.0},"metallic":0.5,"smoothness":0.5}},{"theta_deg":30.0,"scale":1.5,"material":{"color":{"x":1.0,"y":0.20000000298023225,"z":0.0,"w":1.0},"metallic":0.5,"smoothness":0.5}}]}
  
 (Filename: ./Runtime/Export/Debug/Debug.bindings.h Line: 35)
 
@@ -334,7 +334,7 @@ camera.radius: 5
  
 (Filename: ./Runtime/Export/Debug/Debug.bindings.h Line: 35)
 
-max_x: 0.7597654; max_y: 2.087438; min_y: 0
+max_x: 0.3911088; max_y: 1.899519; min_y: 0
  
 (Filename: ./Runtime/Export/Debug/Debug.bindings.h Line: 35)
 
@@ -346,7 +346,7 @@ TCP_Server in LateUpdate: before CapturePNGasBytes: import newCrane == true;
  
 (Filename: ./Runtime/Export/Debug/Debug.bindings.h Line: 35)
 
-TCP_Server in LateUpdate: before CapturePNGasBytes: Time: 3.880333
+TCP_Server in LateUpdate: before CapturePNGasBytes: Time: 10.09682
  
 (Filename: ./Runtime/Export/Debug/Debug.bindings.h Line: 35)
 
@@ -354,11 +354,11 @@ TCP_Server in LateUpdate: after CapturePNGasBytes:  ready_to_build==false; impor
  
 (Filename: ./Runtime/Export/Debug/Debug.bindings.h Line: 35)
 
-TCP_Server in LateUpdate: after CapturePNGasBytes: Time: 3.880374
+TCP_Server in LateUpdate: after CapturePNGasBytes: Time: 10.09688
  
 (Filename: ./Runtime/Export/Debug/Debug.bindings.h Line: 35)
 
-TCP_Server in CapturePNGasBytes: bytesPNG.Length: 46131
+TCP_Server in CapturePNGasBytes: bytesPNG.Length: 83151
  
 (Filename: ./Runtime/Export/Debug/Debug.bindings.h Line: 35)
 
@@ -386,7 +386,7 @@ TCP_Server in ListenForMessages: eod. detected
  
 (Filename: ./Runtime/Export/Debug/Debug.bindings.h Line: 35)
 
-TCP_Server in ListenForMessages: jsonparameters: {"total_cuboids": 2, "same_scale": true, "same_theta": true, "same_material": true, "phi": 0, "resolution_width": 520, "resolution_height": 520, "cuboids": [{"theta_deg": 20, "scale": 2, "material": {"color": {"x": 0.3, "y": 0, "z": 1, "w": 1}, "metallic": 0.5, "smoothness": true}}, {"theta_deg": 20, "scale": 2, "material": {"color": {"x": 0.3, "y": 0, "z": 1, "w": 1}, "metallic": 0.5, "smoothness": true}}], "total_branches": [1], "camera": {"radius": 5, "theta_deg": 90, "phi_deg": 109.89949417236254, "y_offset": 0, "resolution_width": 520, "resolution_height": 520, "FOV": 80}, "DirectionalLight": {"theta_deg": 80, "intensity": 5.846868042687032}, "totalPointLights": 0, "totalSpotLights": 0}
+TCP_Server in ListenForMessages: jsonparameters: {"total_cuboids": 2, "same_scale": false, "same_theta": false, "same_material": false, "phi": -46.54204019553475, "resolution_width": 520, "resolution_height": 520, "cuboids": [{"theta_deg": 0, "scale": 2, "material": {"color": {"x": 0.3, "y": 0, "z": 1, "w": 1}, "metallic": 0.5, "smoothness": 0.5}}, {"theta_deg": 30, "scale": 1.5, "material": {"color": {"x": 1, "y": 0.2, "z": 0, "w": 1}, "metallic": 0.5, "smoothness": 0.5}}], "total_branches": [4], "camera": {"radius": 5, "theta_deg": 90, "phi_deg": 0, "y_offset": 0, "resolution_width": 520, "resolution_height": 520, "FOV": 80}, "DirectionalLight": {"theta_deg": 70, "intensity": 10}, "totalPointLights": 0, "totalSpotLights": 0}
  
 (Filename: ./Runtime/Export/Debug/Debug.bindings.h Line: 35)
 
@@ -406,7 +406,7 @@ CreateCrane in Update: before Starter: import ready_to_build == true;
  
 (Filename: ./Runtime/Export/Debug/Debug.bindings.h Line: 35)
 
-CreateCrane in Starter; jsondata: {"total_cuboids":2,"total_branches":[1],"totalArms":0,"same_scale":true,"same_theta":true,"same_material":true,"phi":0.0,"del_phi":0.0,"camera":{"radius":5.0,"theta_deg":90.0,"phi_deg":109.89949798583985,"y_offset":0.0,"Object":{"m_FileID":0,"m_PathID":0},"resolution_width":520,"resolution_height":520,"FOV":80.0},"DirectionalLight":{"intensity":5.84686803817749,"theta_deg":80.0},"totalPointLights":0,"point_lights":[],"totalSpotLights":0,"spot_lights":[],"cuboids":[{"theta_deg":20.0,"scale":2.0,"material":{"color":{"x":0.30000001192092898,"y":0.0,"z":1.0,"w":1.0},"metallic":0.5,"smoothness":0.0}},{"theta_deg":20.0,"scale":2.0,"material":{"color":{"x":0.30000001192092898,"y":0.0,"z":1.0,"w":1.0},"metallic":0.5,"smoothness":0.0}}]}
+CreateCrane in Starter; jsondata: {"total_cuboids":2,"total_branches":[4],"totalArms":0,"same_scale":false,"same_theta":false,"same_material":false,"phi":-46.54204177856445,"del_phi":0.0,"camera":{"radius":5.0,"theta_deg":90.0,"phi_deg":0.0,"y_offset":0.0,"Object":{"m_FileID":0,"m_PathID":0},"resolution_width":520,"resolution_height":520,"FOV":80.0},"DirectionalLight":{"intensity":10.0,"theta_deg":70.0},"totalPointLights":0,"point_lights":[],"totalSpotLights":0,"spot_lights":[],"cuboids":[{"theta_deg":0.0,"scale":2.0,"material":{"color":{"x":0.30000001192092898,"y":0.0,"z":1.0,"w":1.0},"metallic":0.5,"smoothness":0.5}},{"theta_deg":30.0,"scale":1.5,"material":{"color":{"x":1.0,"y":0.20000000298023225,"z":0.0,"w":1.0},"metallic":0.5,"smoothness":0.5}}]}
  
 (Filename: ./Runtime/Export/Debug/Debug.bindings.h Line: 35)
 
@@ -414,7 +414,7 @@ camera.radius: 5
  
 (Filename: ./Runtime/Export/Debug/Debug.bindings.h Line: 35)
 
-max_x: 0.7597654; max_y: 2.087438; min_y: 0
+max_x: 0.3208294; max_y: 1.899519; min_y: 0
  
 (Filename: ./Runtime/Export/Debug/Debug.bindings.h Line: 35)
 
@@ -426,7 +426,7 @@ TCP_Server in LateUpdate: before CapturePNGasBytes: import newCrane == true;
  
 (Filename: ./Runtime/Export/Debug/Debug.bindings.h Line: 35)
 
-TCP_Server in LateUpdate: before CapturePNGasBytes: Time: 4.180474
+TCP_Server in LateUpdate: before CapturePNGasBytes: Time: 10.41307
  
 (Filename: ./Runtime/Export/Debug/Debug.bindings.h Line: 35)
 
@@ -434,11 +434,11 @@ TCP_Server in LateUpdate: after CapturePNGasBytes:  ready_to_build==false; impor
  
 (Filename: ./Runtime/Export/Debug/Debug.bindings.h Line: 35)
 
-TCP_Server in LateUpdate: after CapturePNGasBytes: Time: 4.180518
+TCP_Server in LateUpdate: after CapturePNGasBytes: Time: 10.4131
  
 (Filename: ./Runtime/Export/Debug/Debug.bindings.h Line: 35)
 
-TCP_Server in CapturePNGasBytes: bytesPNG.Length: 53247
+TCP_Server in CapturePNGasBytes: bytesPNG.Length: 87309
  
 (Filename: ./Runtime/Export/Debug/Debug.bindings.h Line: 35)
 
@@ -466,7 +466,7 @@ TCP_Server in ListenForMessages: eod. detected
  
 (Filename: ./Runtime/Export/Debug/Debug.bindings.h Line: 35)
 
-TCP_Server in ListenForMessages: jsonparameters: {"total_cuboids": 2, "same_scale": true, "same_theta": true, "same_material": true, "phi": 0, "resolution_width": 520, "resolution_height": 520, "cuboids": [{"theta_deg": 20, "scale": 2, "material": {"color": {"x": 0.3, "y": 0, "z": 1, "w": 1}, "metallic": 0.5, "smoothness": true}}, {"theta_deg": 20, "scale": 2, "material": {"color": {"x": 0.3, "y": 0, "z": 1, "w": 1}, "metallic": 0.5, "smoothness": true}}], "total_branches": [1], "camera": {"radius": 5, "theta_deg": 90, "phi_deg": 3.788618480182604, "y_offset": 0, "resolution_width": 520, "resolution_height": 520, "FOV": 80}, "DirectionalLight": {"theta_deg": 80, "intensity": 5.427430356622671}, "totalPointLights": 0, "totalSpotLights": 0}
+TCP_Server in ListenForMessages: jsonparameters: {"total_cuboids": 2, "same_scale": false, "same_theta": false, "same_material": false, "phi": 64.44446107348315, "resolution_width": 520, "resolution_height": 520, "cuboids": [{"theta_deg": 0, "scale": 2, "material": {"color": {"x": 0.3, "y": 0, "z": 1, "w": 1}, "metallic": 0.5, "smoothness": 0.5}}, {"theta_deg": 30, "scale": 1.5, "material": {"color": {"x": 1, "y": 0.2, "z": 0, "w": 1}, "metallic": 0.5, "smoothness": 0.5}}], "total_branches": [4], "camera": {"radius": 5, "theta_deg": 90, "phi_deg": 0, "y_offset": 0, "resolution_width": 520, "resolution_height": 520, "FOV": 80}, "DirectionalLight": {"theta_deg": 70, "intensity": 10}, "totalPointLights": 0, "totalSpotLights": 0}
  
 (Filename: ./Runtime/Export/Debug/Debug.bindings.h Line: 35)
 
@@ -486,7 +486,7 @@ CreateCrane in Update: before Starter: import ready_to_build == true;
  
 (Filename: ./Runtime/Export/Debug/Debug.bindings.h Line: 35)
 
-CreateCrane in Starter; jsondata: {"total_cuboids":2,"total_branches":[1],"totalArms":0,"same_scale":true,"same_theta":true,"same_material":true,"phi":0.0,"del_phi":0.0,"camera":{"radius":5.0,"theta_deg":90.0,"phi_deg":3.788618564605713,"y_offset":0.0,"Object":{"m_FileID":0,"m_PathID":0},"resolution_width":520,"resolution_height":520,"FOV":80.0},"DirectionalLight":{"intensity":5.427430152893066,"theta_deg":80.0},"totalPointLights":0,"point_lights":[],"totalSpotLights":0,"spot_lights":[],"cuboids":[{"theta_deg":20.0,"scale":2.0,"material":{"color":{"x":0.30000001192092898,"y":0.0,"z":1.0,"w":1.0},"metallic":0.5,"smoothness":0.0}},{"theta_deg":20.0,"scale":2.0,"material":{"color":{"x":0.30000001192092898,"y":0.0,"z":1.0,"w":1.0},"metallic":0.5,"smoothness":0.0}}]}
+CreateCrane in Starter; jsondata: {"total_cuboids":2,"total_branches":[4],"totalArms":0,"same_scale":false,"same_theta":false,"same_material":false,"phi":64.4444580078125,"del_phi":0.0,"camera":{"radius":5.0,"theta_deg":90.0,"phi_deg":0.0,"y_offset":0.0,"Object":{"m_FileID":0,"m_PathID":0},"resolution_width":520,"resolution_height":520,"FOV":80.0},"DirectionalLight":{"intensity":10.0,"theta_deg":70.0},"totalPointLights":0,"point_lights":[],"totalSpotLights":0,"spot_lights":[],"cuboids":[{"theta_deg":0.0,"scale":2.0,"material":{"color":{"x":0.30000001192092898,"y":0.0,"z":1.0,"w":1.0},"metallic":0.5,"smoothness":0.5}},{"theta_deg":30.0,"scale":1.5,"material":{"color":{"x":1.0,"y":0.20000000298023225,"z":0.0,"w":1.0},"metallic":0.5,"smoothness":0.5}}]}
  
 (Filename: ./Runtime/Export/Debug/Debug.bindings.h Line: 35)
 
@@ -494,7 +494,7 @@ camera.radius: 5
  
 (Filename: ./Runtime/Export/Debug/Debug.bindings.h Line: 35)
 
-max_x: 0.7597654; max_y: 2.087438; min_y: 0
+max_x: 0.3987466; max_y: 1.899519; min_y: 0
  
 (Filename: ./Runtime/Export/Debug/Debug.bindings.h Line: 35)
 
@@ -506,7 +506,7 @@ TCP_Server in LateUpdate: before CapturePNGasBytes: import newCrane == true;
  
 (Filename: ./Runtime/Export/Debug/Debug.bindings.h Line: 35)
 
-TCP_Server in LateUpdate: before CapturePNGasBytes: Time: 4.563455
+TCP_Server in LateUpdate: before CapturePNGasBytes: Time: 10.81268
  
 (Filename: ./Runtime/Export/Debug/Debug.bindings.h Line: 35)
 
@@ -514,11 +514,11 @@ TCP_Server in LateUpdate: after CapturePNGasBytes:  ready_to_build==false; impor
  
 (Filename: ./Runtime/Export/Debug/Debug.bindings.h Line: 35)
 
-TCP_Server in LateUpdate: after CapturePNGasBytes: Time: 4.563485
+TCP_Server in LateUpdate: after CapturePNGasBytes: Time: 10.81272
  
 (Filename: ./Runtime/Export/Debug/Debug.bindings.h Line: 35)
 
-TCP_Server in CapturePNGasBytes: bytesPNG.Length: 78293
+TCP_Server in CapturePNGasBytes: bytesPNG.Length: 93167
  
 (Filename: ./Runtime/Export/Debug/Debug.bindings.h Line: 35)
 
@@ -546,7 +546,7 @@ TCP_Server in ListenForMessages: eod. detected
  
 (Filename: ./Runtime/Export/Debug/Debug.bindings.h Line: 35)
 
-TCP_Server in ListenForMessages: jsonparameters: {"total_cuboids": 2, "same_scale": true, "same_theta": true, "same_material": true, "phi": 0, "resolution_width": 520, "resolution_height": 520, "cuboids": [{"theta_deg": 20, "scale": 2, "material": {"color": {"x": 0.3, "y": 0, "z": 1, "w": 1}, "metallic": 0.5, "smoothness": true}}, {"theta_deg": 20, "scale": 2, "material": {"color": {"x": 0.3, "y": 0, "z": 1, "w": 1}, "metallic": 0.5, "smoothness": true}}], "total_branches": [1], "camera": {"radius": 5, "theta_deg": 90, "phi_deg": 3.8392806244091604, "y_offset": 0, "resolution_width": 520, "resolution_height": 520, "FOV": 80}, "DirectionalLight": {"theta_deg": 80, "intensity": 1.2589889569796844}, "totalPointLights": 0, "totalSpotLights": 0}
+TCP_Server in ListenForMessages: jsonparameters: {"total_cuboids": 2, "same_scale": false, "same_theta": false, "same_material": false, "phi": -41.42924131302029, "resolution_width": 520, "resolution_height": 520, "cuboids": [{"theta_deg": 0, "scale": 2, "material": {"color": {"x": 0.3, "y": 0, "z": 1, "w": 1}, "metallic": 0.5, "smoothness": 0.5}}, {"theta_deg": 30, "scale": 1.5, "material": {"color": {"x": 1, "y": 0.2, "z": 0, "w": 1}, "metallic": 0.5, "smoothness": 0.5}}], "total_branches": [4], "camera": {"radius": 5, "theta_deg": 90, "phi_deg": 0, "y_offset": 0, "resolution_width": 520, "resolution_height": 520, "FOV": 80}, "DirectionalLight": {"theta_deg": 70, "intensity": 10}, "totalPointLights": 0, "totalSpotLights": 0}
  
 (Filename: ./Runtime/Export/Debug/Debug.bindings.h Line: 35)
 
@@ -566,7 +566,7 @@ CreateCrane in Update: before Starter: import ready_to_build == true;
  
 (Filename: ./Runtime/Export/Debug/Debug.bindings.h Line: 35)
 
-CreateCrane in Starter; jsondata: {"total_cuboids":2,"total_branches":[1],"totalArms":0,"same_scale":true,"same_theta":true,"same_material":true,"phi":0.0,"del_phi":0.0,"camera":{"radius":5.0,"theta_deg":90.0,"phi_deg":3.839280605316162,"y_offset":0.0,"Object":{"m_FileID":0,"m_PathID":0},"resolution_width":520,"resolution_height":520,"FOV":80.0},"DirectionalLight":{"intensity":1.2589889764785767,"theta_deg":80.0},"totalPointLights":0,"point_lights":[],"totalSpotLights":0,"spot_lights":[],"cuboids":[{"theta_deg":20.0,"scale":2.0,"material":{"color":{"x":0.30000001192092898,"y":0.0,"z":1.0,"w":1.0},"metallic":0.5,"smoothness":0.0}},{"theta_deg":20.0,"scale":2.0,"material":{"color":{"x":0.30000001192092898,"y":0.0,"z":1.0,"w":1.0},"metallic":0.5,"smoothness":0.0}}]}
+CreateCrane in Starter; jsondata: {"total_cuboids":2,"total_branches":[4],"totalArms":0,"same_scale":false,"same_theta":false,"same_material":false,"phi":-41.42924118041992,"del_phi":0.0,"camera":{"radius":5.0,"theta_deg":90.0,"phi_deg":0.0,"y_offset":0.0,"Object":{"m_FileID":0,"m_PathID":0},"resolution_width":520,"resolution_height":520,"FOV":80.0},"DirectionalLight":{"intensity":10.0,"theta_deg":70.0},"totalPointLights":0,"point_lights":[],"totalSpotLights":0,"spot_lights":[],"cuboids":[{"theta_deg":0.0,"scale":2.0,"material":{"color":{"x":0.30000001192092898,"y":0.0,"z":1.0,"w":1.0},"metallic":0.5,"smoothness":0.5}},{"theta_deg":30.0,"scale":1.5,"material":{"color":{"x":1.0,"y":0.20000000298023225,"z":0.0,"w":1.0},"metallic":0.5,"smoothness":0.5}}]}
  
 (Filename: ./Runtime/Export/Debug/Debug.bindings.h Line: 35)
 
@@ -574,7 +574,7 @@ camera.radius: 5
  
 (Filename: ./Runtime/Export/Debug/Debug.bindings.h Line: 35)
 
-max_x: 0.7597654; max_y: 2.087438; min_y: 0
+max_x: 0.3313904; max_y: 1.899519; min_y: 0
  
 (Filename: ./Runtime/Export/Debug/Debug.bindings.h Line: 35)
 
@@ -586,7 +586,7 @@ TCP_Server in LateUpdate: before CapturePNGasBytes: import newCrane == true;
  
 (Filename: ./Runtime/Export/Debug/Debug.bindings.h Line: 35)
 
-TCP_Server in LateUpdate: before CapturePNGasBytes: Time: 4.979861
+TCP_Server in LateUpdate: before CapturePNGasBytes: Time: 11.13
  
 (Filename: ./Runtime/Export/Debug/Debug.bindings.h Line: 35)
 
@@ -594,11 +594,11 @@ TCP_Server in LateUpdate: after CapturePNGasBytes:  ready_to_build==false; impor
  
 (Filename: ./Runtime/Export/Debug/Debug.bindings.h Line: 35)
 
-TCP_Server in LateUpdate: after CapturePNGasBytes: Time: 4.979897
+TCP_Server in LateUpdate: after CapturePNGasBytes: Time: 11.13004
  
 (Filename: ./Runtime/Export/Debug/Debug.bindings.h Line: 35)
 
-TCP_Server in CapturePNGasBytes: bytesPNG.Length: 77897
+TCP_Server in CapturePNGasBytes: bytesPNG.Length: 88058
  
 (Filename: ./Runtime/Export/Debug/Debug.bindings.h Line: 35)
 
@@ -626,7 +626,7 @@ TCP_Server in ListenForMessages: eod. detected
  
 (Filename: ./Runtime/Export/Debug/Debug.bindings.h Line: 35)
 
-TCP_Server in ListenForMessages: jsonparameters: {"total_cuboids": 2, "same_scale": true, "same_theta": true, "same_material": true, "phi": 0, "resolution_width": 520, "resolution_height": 520, "cuboids": [{"theta_deg": 20, "scale": 2, "material": {"color": {"x": 0.3, "y": 0, "z": 1, "w": 1}, "metallic": 0.5, "smoothness": true}}, {"theta_deg": 20, "scale": 2, "material": {"color": {"x": 0.3, "y": 0, "z": 1, "w": 1}, "metallic": 0.5, "smoothness": true}}], "total_branches": [1], "camera": {"radius": 5, "theta_deg": 90, "phi_deg": 147.8667399395343, "y_offset": 0, "resolution_width": 520, "resolution_height": 520, "FOV": 80}, "DirectionalLight": {"theta_deg": 80, "intensity": 4.345592806389941}, "totalPointLights": 0, "totalSpotLights": 0}
+TCP_Server in ListenForMessages: jsonparameters: {"total_cuboids": 2, "same_scale": false, "same_theta": false, "same_material": false, "phi": -35.004819497835676, "resolution_width": 520, "resolution_height": 520, "cuboids": [{"theta_deg": 0, "scale": 2, "material": {"color": {"x": 0.3, "y": 0, "z": 1, "w": 1}, "metallic": 0.5, "smoothness": 0.5}}, {"theta_deg": 30, "scale": 1.5, "material": {"color": {"x": 1, "y": 0.2, "z": 0, "w": 1}, "metallic": 0.5, "smoothness": 0.5}}], "total_branches": [4], "camera": {"radius": 5, "theta_deg": 90, "phi_deg": 0, "y_offset": 0, "resolution_width": 520, "resolution_height": 520, "FOV": 80}, "DirectionalLight": {"theta_deg": 70, "intensity": 10}, "totalPointLights": 0, "totalSpotLights": 0}
  
 (Filename: ./Runtime/Export/Debug/Debug.bindings.h Line: 35)
 
@@ -646,7 +646,7 @@ CreateCrane in Update: before Starter: import ready_to_build == true;
  
 (Filename: ./Runtime/Export/Debug/Debug.bindings.h Line: 35)
 
-CreateCrane in Starter; jsondata: {"total_cuboids":2,"total_branches":[1],"totalArms":0,"same_scale":true,"same_theta":true,"same_material":true,"phi":0.0,"del_phi":0.0,"camera":{"radius":5.0,"theta_deg":90.0,"phi_deg":147.8667449951172,"y_offset":0.0,"Object":{"m_FileID":0,"m_PathID":0},"resolution_width":520,"resolution_height":520,"FOV":80.0},"DirectionalLight":{"intensity":4.345592975616455,"theta_deg":80.0},"totalPointLights":0,"point_lights":[],"totalSpotLights":0,"spot_lights":[],"cuboids":[{"theta_deg":20.0,"scale":2.0,"material":{"color":{"x":0.30000001192092898,"y":0.0,"z":1.0,"w":1.0},"metallic":0.5,"smoothness":0.0}},{"theta_deg":20.0,"scale":2.0,"material":{"color":{"x":0.30000001192092898,"y":0.0,"z":1.0,"w":1.0},"metallic":0.5,"smoothness":0.0}}]}
+CreateCrane in Starter; jsondata: {"total_cuboids":2,"total_branches":[4],"totalArms":0,"same_scale":false,"same_theta":false,"same_material":false,"phi":-35.004817962646487,"del_phi":0.0,"camera":{"radius":5.0,"theta_deg":90.0,"phi_deg":0.0,"y_offset":0.0,"Object":{"m_FileID":0,"m_PathID":0},"resolution_width":520,"resolution_height":520,"FOV":80.0},"DirectionalLight":{"intensity":10.0,"theta_deg":70.0},"totalPointLights":0,"point_lights":[],"totalSpotLights":0,"spot_lights":[],"cuboids":[{"theta_deg":0.0,"scale":2.0,"material":{"color":{"x":0.30000001192092898,"y":0.0,"z":1.0,"w":1.0},"metallic":0.5,"smoothness":0.5}},{"theta_deg":30.0,"scale":1.5,"material":{"color":{"x":1.0,"y":0.20000000298023225,"z":0.0,"w":1.0},"metallic":0.5,"smoothness":0.5}}]}
  
 (Filename: ./Runtime/Export/Debug/Debug.bindings.h Line: 35)
 
@@ -654,7 +654,7 @@ camera.radius: 5
  
 (Filename: ./Runtime/Export/Debug/Debug.bindings.h Line: 35)
 
-max_x: 0.7597654; max_y: 2.087438; min_y: 0
+max_x: 0.3620335; max_y: 1.899519; min_y: 0
  
 (Filename: ./Runtime/Export/Debug/Debug.bindings.h Line: 35)
 
@@ -666,7 +666,7 @@ TCP_Server in LateUpdate: before CapturePNGasBytes: import newCrane == true;
  
 (Filename: ./Runtime/Export/Debug/Debug.bindings.h Line: 35)
 
-TCP_Server in LateUpdate: before CapturePNGasBytes: Time: 5.291333
+TCP_Server in LateUpdate: before CapturePNGasBytes: Time: 11.46285
  
 (Filename: ./Runtime/Export/Debug/Debug.bindings.h Line: 35)
 
@@ -674,11 +674,11 @@ TCP_Server in LateUpdate: after CapturePNGasBytes:  ready_to_build==false; impor
  
 (Filename: ./Runtime/Export/Debug/Debug.bindings.h Line: 35)
 
-TCP_Server in LateUpdate: after CapturePNGasBytes: Time: 5.291528
+TCP_Server in LateUpdate: after CapturePNGasBytes: Time: 11.46288
  
 (Filename: ./Runtime/Export/Debug/Debug.bindings.h Line: 35)
 
-TCP_Server in CapturePNGasBytes: bytesPNG.Length: 68721
+TCP_Server in CapturePNGasBytes: bytesPNG.Length: 91555
  
 (Filename: ./Runtime/Export/Debug/Debug.bindings.h Line: 35)
 
@@ -706,7 +706,7 @@ TCP_Server in ListenForMessages: eod. detected
  
 (Filename: ./Runtime/Export/Debug/Debug.bindings.h Line: 35)
 
-TCP_Server in ListenForMessages: jsonparameters: {"total_cuboids": 2, "same_scale": true, "same_theta": true, "same_material": true, "phi": 0, "resolution_width": 520, "resolution_height": 520, "cuboids": [{"theta_deg": 20, "scale": 2, "material": {"color": {"x": 0.3, "y": 0, "z": 1, "w": 1}, "metallic": 0.5, "smoothness": true}}, {"theta_deg": 20, "scale": 2, "material": {"color": {"x": 0.3, "y": 0, "z": 1, "w": 1}, "metallic": 0.5, "smoothness": true}}], "total_branches": [1], "camera": {"radius": 5, "theta_deg": 90, "phi_deg": 83.49435810892639, "y_offset": 0, "resolution_width": 520, "resolution_height": 520, "FOV": 80}, "DirectionalLight": {"theta_deg": 80, "intensity": 1.940623298372324}, "totalPointLights": 0, "totalSpotLights": 0}
+TCP_Server in ListenForMessages: jsonparameters: {"total_cuboids": 2, "same_scale": false, "same_theta": false, "same_material": false, "phi": 69.96462157317697, "resolution_width": 520, "resolution_height": 520, "cuboids": [{"theta_deg": 0, "scale": 2, "material": {"color": {"x": 0.3, "y": 0, "z": 1, "w": 1}, "metallic": 0.5, "smoothness": 0.5}}, {"theta_deg": 30, "scale": 1.5, "material": {"color": {"x": 1, "y": 0.2, "z": 0, "w": 1}, "metallic": 0.5, "smoothness": 0.5}}], "total_branches": [4], "camera": {"radius": 5, "theta_deg": 90, "phi_deg": 0, "y_offset": 0, "resolution_width": 520, "resolution_height": 520, "FOV": 80}, "DirectionalLight": {"theta_deg": 70, "intensity": 10}, "totalPointLights": 0, "totalSpotLights": 0}
  
 (Filename: ./Runtime/Export/Debug/Debug.bindings.h Line: 35)
 
@@ -726,7 +726,7 @@ CreateCrane in Update: before Starter: import ready_to_build == true;
  
 (Filename: ./Runtime/Export/Debug/Debug.bindings.h Line: 35)
 
-CreateCrane in Starter; jsondata: {"total_cuboids":2,"total_branches":[1],"totalArms":0,"same_scale":true,"same_theta":true,"same_material":true,"phi":0.0,"del_phi":0.0,"camera":{"radius":5.0,"theta_deg":90.0,"phi_deg":83.4943618774414,"y_offset":0.0,"Object":{"m_FileID":0,"m_PathID":0},"resolution_width":520,"resolution_height":520,"FOV":80.0},"DirectionalLight":{"intensity":1.9406232833862305,"theta_deg":80.0},"totalPointLights":0,"point_lights":[],"totalSpotLights":0,"spot_lights":[],"cuboids":[{"theta_deg":20.0,"scale":2.0,"material":{"color":{"x":0.30000001192092898,"y":0.0,"z":1.0,"w":1.0},"metallic":0.5,"smoothness":0.0}},{"theta_deg":20.0,"scale":2.0,"material":{"color":{"x":0.30000001192092898,"y":0.0,"z":1.0,"w":1.0},"metallic":0.5,"smoothness":0.0}}]}
+CreateCrane in Starter; jsondata: {"total_cuboids":2,"total_branches":[4],"totalArms":0,"same_scale":false,"same_theta":false,"same_material":false,"phi":69.9646224975586,"del_phi":0.0,"camera":{"radius":5.0,"theta_deg":90.0,"phi_deg":0.0,"y_offset":0.0,"Object":{"m_FileID":0,"m_PathID":0},"resolution_width":520,"resolution_height":520,"FOV":80.0},"DirectionalLight":{"intensity":10.0,"theta_deg":70.0},"totalPointLights":0,"point_lights":[],"totalSpotLights":0,"spot_lights":[],"cuboids":[{"theta_deg":0.0,"scale":2.0,"material":{"color":{"x":0.30000001192092898,"y":0.0,"z":1.0,"w":1.0},"metallic":0.5,"smoothness":0.5}},{"theta_deg":30.0,"scale":1.5,"material":{"color":{"x":1.0,"y":0.20000000298023225,"z":0.0,"w":1.0},"metallic":0.5,"smoothness":0.5}}]}
  
 (Filename: ./Runtime/Export/Debug/Debug.bindings.h Line: 35)
 
@@ -734,7 +734,7 @@ camera.radius: 5
  
 (Filename: ./Runtime/Export/Debug/Debug.bindings.h Line: 35)
 
-max_x: 0.7597654; max_y: 2.087438; min_y: 0
+max_x: 0.4152388; max_y: 1.899519; min_y: 0
  
 (Filename: ./Runtime/Export/Debug/Debug.bindings.h Line: 35)
 
@@ -746,7 +746,7 @@ TCP_Server in LateUpdate: before CapturePNGasBytes: import newCrane == true;
  
 (Filename: ./Runtime/Export/Debug/Debug.bindings.h Line: 35)
 
-TCP_Server in LateUpdate: before CapturePNGasBytes: Time: 5.662899
+TCP_Server in LateUpdate: before CapturePNGasBytes: Time: 11.77923
  
 (Filename: ./Runtime/Export/Debug/Debug.bindings.h Line: 35)
 
@@ -754,11 +754,11 @@ TCP_Server in LateUpdate: after CapturePNGasBytes:  ready_to_build==false; impor
  
 (Filename: ./Runtime/Export/Debug/Debug.bindings.h Line: 35)
 
-TCP_Server in LateUpdate: after CapturePNGasBytes: Time: 5.662935
+TCP_Server in LateUpdate: after CapturePNGasBytes: Time: 11.77928
  
 (Filename: ./Runtime/Export/Debug/Debug.bindings.h Line: 35)
 
-TCP_Server in CapturePNGasBytes: bytesPNG.Length: 52676
+TCP_Server in CapturePNGasBytes: bytesPNG.Length: 98238
  
 (Filename: ./Runtime/Export/Debug/Debug.bindings.h Line: 35)
 
@@ -786,7 +786,7 @@ TCP_Server in ListenForMessages: eod. detected
  
 (Filename: ./Runtime/Export/Debug/Debug.bindings.h Line: 35)
 
-TCP_Server in ListenForMessages: jsonparameters: {"total_cuboids": 2, "same_scale": true, "same_theta": true, "same_material": true, "phi": 0, "resolution_width": 520, "resolution_height": 520, "cuboids": [{"theta_deg": 20, "scale": 2, "material": {"color": {"x": 0.3, "y": 0, "z": 1, "w": 1}, "metallic": 0.5, "smoothness": true}}, {"theta_deg": 20, "scale": 2, "material": {"color": {"x": 0.3, "y": 0, "z": 1, "w": 1}, "metallic": 0.5, "smoothness": true}}], "total_branches": [1], "camera": {"radius": 5, "theta_deg": 90, "phi_deg": 29.234340803933584, "y_offset": 0, "resolution_width": 520, "resolution_height": 520, "FOV": 80}, "DirectionalLight": {"theta_deg": 80, "intensity": 3.6546845775903987}, "totalPointLights": 0, "totalSpotLights": 0}
+TCP_Server in ListenForMessages: jsonparameters: {"total_cuboids": 2, "same_scale": false, "same_theta": false, "same_material": false, "phi": -88.06819283967394, "resolution_width": 520, "resolution_height": 520, "cuboids": [{"theta_deg": 0, "scale": 2, "material": {"color": {"x": 0.3, "y": 0, "z": 1, "w": 1}, "metallic": 0.5, "smoothness": 0.5}}, {"theta_deg": 30, "scale": 1.5, "material": {"color": {"x": 1, "y": 0.2, "z": 0, "w": 1}, "metallic": 0.5, "smoothness": 0.5}}], "total_branches": [4], "camera": {"radius": 5, "theta_deg": 90, "phi_deg": 0, "y_offset": 0, "resolution_width": 520, "resolution_height": 520, "FOV": 80}, "DirectionalLight": {"theta_deg": 70, "intensity": 10}, "totalPointLights": 0, "totalSpotLights": 0}
  
 (Filename: ./Runtime/Export/Debug/Debug.bindings.h Line: 35)
 
@@ -806,7 +806,7 @@ CreateCrane in Update: before Starter: import ready_to_build == true;
  
 (Filename: ./Runtime/Export/Debug/Debug.bindings.h Line: 35)
 
-CreateCrane in Starter; jsondata: {"total_cuboids":2,"total_branches":[1],"totalArms":0,"same_scale":true,"same_theta":true,"same_material":true,"phi":0.0,"del_phi":0.0,"camera":{"radius":5.0,"theta_deg":90.0,"phi_deg":29.23434066772461,"y_offset":0.0,"Object":{"m_FileID":0,"m_PathID":0},"resolution_width":520,"resolution_height":520,"FOV":80.0},"DirectionalLight":{"intensity":3.654684543609619,"theta_deg":80.0},"totalPointLights":0,"point_lights":[],"totalSpotLights":0,"spot_lights":[],"cuboids":[{"theta_deg":20.0,"scale":2.0,"material":{"color":{"x":0.30000001192092898,"y":0.0,"z":1.0,"w":1.0},"metallic":0.5,"smoothness":0.0}},{"theta_deg":20.0,"scale":2.0,"material":{"color":{"x":0.30000001192092898,"y":0.0,"z":1.0,"w":1.0},"metallic":0.5,"smoothness":0.0}}]}
+CreateCrane in Starter; jsondata: {"total_cuboids":2,"total_branches":[4],"totalArms":0,"same_scale":false,"same_theta":false,"same_material":false,"phi":-88.06819152832031,"del_phi":0.0,"camera":{"radius":5.0,"theta_deg":90.0,"phi_deg":0.0,"y_offset":0.0,"Object":{"m_FileID":0,"m_PathID":0},"resolution_width":520,"resolution_height":520,"FOV":80.0},"DirectionalLight":{"intensity":10.0,"theta_deg":70.0},"totalPointLights":0,"point_lights":[],"totalSpotLights":0,"spot_lights":[],"cuboids":[{"theta_deg":0.0,"scale":2.0,"material":{"color":{"x":0.30000001192092898,"y":0.0,"z":1.0,"w":1.0},"metallic":0.5,"smoothness":0.5}},{"theta_deg":30.0,"scale":1.5,"material":{"color":{"x":1.0,"y":0.20000000298023225,"z":0.0,"w":1.0},"metallic":0.5,"smoothness":0.5}}]}
  
 (Filename: ./Runtime/Export/Debug/Debug.bindings.h Line: 35)
 
@@ -814,7 +814,7 @@ camera.radius: 5
  
 (Filename: ./Runtime/Export/Debug/Debug.bindings.h Line: 35)
 
-max_x: 0.7597654; max_y: 2.087438; min_y: 0
+max_x: 0.4417361; max_y: 1.899519; min_y: 0
  
 (Filename: ./Runtime/Export/Debug/Debug.bindings.h Line: 35)
 
@@ -826,7 +826,7 @@ TCP_Server in LateUpdate: before CapturePNGasBytes: import newCrane == true;
  
 (Filename: ./Runtime/Export/Debug/Debug.bindings.h Line: 35)
 
-TCP_Server in LateUpdate: before CapturePNGasBytes: Time: 6.012821
+TCP_Server in LateUpdate: before CapturePNGasBytes: Time: 12.17915
  
 (Filename: ./Runtime/Export/Debug/Debug.bindings.h Line: 35)
 
@@ -834,11 +834,11 @@ TCP_Server in LateUpdate: after CapturePNGasBytes:  ready_to_build==false; impor
  
 (Filename: ./Runtime/Export/Debug/Debug.bindings.h Line: 35)
 
-TCP_Server in LateUpdate: after CapturePNGasBytes: Time: 6.012854
+TCP_Server in LateUpdate: after CapturePNGasBytes: Time: 12.17918
  
 (Filename: ./Runtime/Export/Debug/Debug.bindings.h Line: 35)
 
-TCP_Server in CapturePNGasBytes: bytesPNG.Length: 72451
+TCP_Server in CapturePNGasBytes: bytesPNG.Length: 78659
  
 (Filename: ./Runtime/Export/Debug/Debug.bindings.h Line: 35)
 
