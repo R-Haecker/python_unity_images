@@ -62,11 +62,11 @@ class dataset_cuboids():
         self.init_index = self.read_index() + 1
         self.logger.debug("Dataset initialised.\n")        
 
-    def set_config(self,same_scale=None, scale=[0.5,4], total_cuboids=[2,5], phi=[0,360], branches=[1,3],same_theta=None, theta=None, 
-    same_material=None, r=[0,1], g=[0,1], b=[0,1], a=[0.5,1], metallic=[0,1], smoothness=[0,1], CameraRadius = 10.0, CameraTheta = [60,100], CameraPhi = [0,360], CameraVerticalOffset = None,
+    def set_config(self,same_scale=None, specify_scale=False, scale=[0.5,4], total_cuboids=[2,5], phi=[0,360], specify_branches=False, branches=[1,3], same_theta=None, specify_theta=False, theta=None, 
+    same_material=None, specify_material=False, r=[0,1], g=[0,1], b=[0,1], a=[0.5,1], metallic=[0,1], smoothness=[0,1], CameraRadius = 10.0, CameraTheta = [60,100], CameraPhi = [0,360], CameraVerticalOffset = None,
     totalPointLights=[5,12], PointLightsRadius=[5,20], PointLightsPhi=[0,360], PointLightsTheta=[0,90], PointLightsIntensity=[7,17], PointLightsRange=[5,25], samePointLightColor=None, PointLightsColor_r=[0,1], PointLightsColor_g=[0,1], PointLightsColor_b=[0,1], PointLightsColor_a=[0.5,1],
     totalSpotLights=[3,7], SpotLightsRadius=[5,20], SpotLightsPhi=[0,360], SpotLightsTheta=[0,90], SpotLightsIntensity=[5,15], SpotLightsRange=[5,25], SpotLightsAngle=[5,120], sameSpotLightColor=None, SpotLightsColor_r=[0,1], SpotLightsColor_g=[0,1], SpotLightsColor_b=[0,1], SpotLightsColor_a=[0.5,1],
-    DirectionalLightTheta = [0,90], DirectionalLightIntensity = [0.1,1.1]):
+    DirectionalLightTheta = [0,90], DirectionalLightIntensity = [1.0,6.0]):
         """Sets a config for this class instace which determines the interval for all random parameters created in the function :meth:`~dataset.dataset_cuboids.create_random_parameters`. The meaning of all the parameters are explained in this function: :meth:`~client.client_communicator_to_unity.write_json_crane`. 
         Here are only those parameters mentioned which deviate from the ``standard_parameter``.
         
@@ -103,76 +103,159 @@ class dataset_cuboids():
         :param DirectionalLightIntensity: If ``None`` the ``DirectionalLightIntensity`` will be set to zero, else it has to be a list of floats with the length two, defaults to [0.1,1.8]
         :type DirectionalLightIntensity: None or list, optional
         """        
+        print("same_theta",same_theta)
+        
         config = {}
         # Create intervals for general properties
-        assert len(total_cuboids) == 2, "total_cuboids[0] is minimal limit and total_cuboids[1] is maximal limit for random generation of total_cuboids"
-        config["total_cuboids"]=total_cuboids
+        if type(total_cuboids)==int:
+            config["total_cuboids"]=total_cuboids
+        else:    
+            assert len(total_cuboids) == 2, "total_cuboids either int or total_cuboids[0] is minimal limit and total_cuboids[1] is maximal limit for random generation of total_cuboids"
+            config["total_cuboids"]=total_cuboids
         # Use the same_theta for every angle between two cubiods
+        if same_theta!=None:
+            assert type(same_theta)==bool, "Has to be bool or none. same_theta sets the bool of same_theta in getRandomJsonData. If it is None bool is set randomly." 
+        print("same_theta",same_theta)
         config["same_theta"]=same_theta
-        if theta!=None:
-            assert len(theta) == 2, "theta != None is true; theta[0] is minimal limit and theta[1] is maximal limit for random generation theta"
+        
+        if specify_theta:
+            assert same_theta != None, "You can not specify theta if same_theta is not specified"    
+            if same_theta:
+                assert type(theta)in [float, int], "specify_theta and same_theta is true, theta has to be a float"
+            else:
+                assert len(theta) == total_cuboids-1, "specify_theta is true and same_theta is false, theta has to be a list of length total_cuboids-1."
+        else:
+            print("same_theta",same_theta)
+            if same_theta == False:
+                assert type(theta)==list, "If same_theta is None e.i. randomly choosen, theta can not be specified exactly, has to be choosen randomly as well. This means theta has to be a list of length 2 with theta[0] is minimal limit and theta[1] is maximal limit for random generation theta."
+                assert len(theta)==2, "If same_theta is None e.i. randomly choosen, theta can not be specified exactly, has to be choosen randomly as well. This means theta has to be a list of length 2 with theta[0] is minimal limit and theta[1] is maximal limit for random generation theta."
+        config["specify_theta"]=specify_theta
         config["theta"]=theta
-        assert len(phi) == 2, "phi[0] is minimal limit and phi[1] is maximal limit for random generation of phi."
-        # Phi describes by how much the crane is roteted
+        
+        # Phi describes by how much the crane is rotated
+        if type(phi)==list:
+            assert len(phi)==2, "Phi is a list, has to be of langth two. Or a float for not random generation."
+        else:
+            assert type(phi)in [float, int], "Phi is not a list then it hast to be a float."
         config["phi"]=phi
+        
         # Use the same scale for every cubiod
-        if same_scale!=None:
+        if same_scale==None:
+            assert specify_scale==False, "You can not specify the scale if you do not specify same_scale."
+            assert type(scale)==list, "If same_scale = None i.e. randomly generated then scale hast to be also randomly generated.Which means scale[0] is minimal limit and scale[1] is maximal limit for random generation of the scale of the cubiods or a float not a list."
+            assert len(scale) == 2, "If same_scale = None i.e. randomly generated then scale hast to be also randomly generated.Which means scale[0] is minimal limit and scale[1] is maximal limit for random generation of the scale of the cubiods or a float not a list."
+        else:
             assert type(same_scale)==bool, "Has to be bool or None; same_scale sets the bool of same_scale in getRandomJsonData. If it is None bool is set randomly." 
         config["same_scale"]=same_scale
-        assert len(scale) == 2, "scale[0] is minimal limit and scale[1] is maximal limit for random generation of the scale of the cubiods."
+        
         # Vertical Scale of the cubiods
+        if specify_scale:
+            if same_scale:
+                assert type(scale)in [float, int], "specify_scale and same_scale is true; scale has to be a float."
+            else:
+                assert len(scale) == total_cuboids, "specify_scale is true and same_scale is flase; if you want to specify the scale is has to be length total_cuboids"
+        else:    
+            if same_scale in [False,None]:
+                assert type(scale)==list, "If same_scale = None i.e. randomly generated then scale hast to be also randomly generated.Which means scale[0] is minimal limit and scale[1] is maximal limit for random generation of the scale of the cubiods or a float not a list."
+                assert len(scale) == 2, "If same_scale = None i.e. randomly generated then scale hast to be also randomly generated.Which means scale[0] is minimal limit and scale[1] is maximal limit for random generation of the scale of the cubiods or a float not a list."     
+        config["specify_scale"]=specify_scale    
         config["scale"]=scale    
+        
         # The upper limit for the arms is dicribing the three sigma variance of the guassion normal distribution for random generation of total_branches
-        if branches!=None:
-            assert len(branches) == 2, "Has to be list of length 2 or type None; branches defines boundaries for how many arms could be created in getRandomJsonData. This means that there is a chance that the crane splits up in the given range. If it is None then there will be only one arm." 
-            assert branches[0] > 0, "branches has to be 1 or greater to even create one Arm."
-            assert branches[1] > 0, "branches has to be 1 or greater to even create one Arm."
+        if specify_branches:
+            if branches!=None:
+                assert len(branches)==total_cuboids-1, "Has to be list of length 2 or length total_cuboids-1 or type None; branches defines boundaries for how many arms could be created in getRandomJsonData. This means that there is a chance that the crane splits up in the given range. If it is None then there will be only one arm." 
+        else:
+            if branches!=None:
+                assert type(branches) == list, "Has to be list of length 2 or length total_cuboids-1 or type None; branches defines boundaries for how many arms could be created in getRandomJsonData. This means that there is a chance that the crane splits up in the given range. If it is None then there will be only one arm." 
+                assert len(branches) == 2, "Has to be list of length 2 or length total_cuboids-1 or type None; branches defines boundaries for how many arms could be created in getRandomJsonData. This means that there is a chance that the crane splits up in the given range. If it is None then there will be only one arm." 
+                assert branches[0] > 0, "branches has to be 1 or greater to even create one Arm."
+                assert branches[1] > 0, "branches has to be 1 or greater to even create one Arm."
+        config["specify_branches"] = specify_branches
         config["branches"] = branches
         
         # Create intervals or fixed values for camera position
         if type(CameraRadius)== list:
             assert len(CameraRadius) == 2, "CameraRadius has to be a list len()==2 or a float for a fixed value."
+        else:
+            assert type(CameraRadius)in [float, int],"CameraRadius has to be a list len()==2 or a float for a fixed value."
         config["CameraRadius"] = CameraRadius 
         if type(CameraTheta)== list:
             assert len(CameraTheta) == 2, "CameraTheta has to be a list len()==2 or a float for a fixed value."
+        else:
+            assert type(CameraTheta)in [float, int], "CameraTheta has to be a list len()==2 or a float for a fixed value."
         config["CameraTheta"] = CameraTheta 
         if type(CameraPhi)== list:
             assert len(CameraPhi) == 2, "CameraPhi has to be a list len()==2 or a float for a fixed value."
+            print("Phi in create config is a list of 2.")
+        else:
+            type(CameraPhi)in [float, int], "CameraPhi has to be a list len()==2 or a float for a fixed value."
         config["CameraPhi"] = CameraPhi 
         if CameraVerticalOffset==None:
             config["CameraVerticalOffset"] = 0    
         else:
             if type(CameraVerticalOffset)== list:
                 assert len(CameraVerticalOffset) == 2, "CameraVerticalOffset has to be a list len()==2 or a float for a fixed value."
+            else:
+                assert type(CameraVerticalOffset)in [float, int], "CameraVerticalOffset has to be a list len()==2 or a float for a fixed value."
             config["CameraVerticalOffset"] = CameraVerticalOffset 
         
         # Create intervals for Material properties 
         if same_material!=None:
             assert type(same_material)==bool, "Has to be bool or None. same_material sets the bool of same_material in getRandomJsonData. If it is None bool is set randomly." 
-        config["same_material"] = same_material
-        assert len(r) == 2, "r[0] is minimal limit and r[1] is maximal limit for random generation of the cuboidscolor r (red)"
+            if specify_material:
+                if same_material:
+                    assert type(r)in [float, int], "specify_material and same_material is true, material prpoertie has to be a float."
+                    assert type(g)in [float, int], "specify_material and same_material is true, material prpoertie has to be a float."
+                    assert type(b)in [float, int], "specify_material and same_material is true, material prpoertie has to be a float."
+                    assert type(a)in [float, int], "specify_material and same_material is true, material prpoertie has to be a float."
+                    assert type(metallic)in [float, int], "specify_material and same_material is true, material prpoertie has to be a float."
+                    assert type(smoothness)in [float, int], "specify_material and same_material is true, material prpoertie has to be a float."
+                else:
+                    assert type(r)==list, "specify_material is true and same_material is false: material properie hast to be a list of lenght total_cuboids."
+                    assert len(r)==total_cuboids, "specify_material is true and same_material is false: material properie hast to be a list of lenght total_cuboids."
+                    assert type(g)==list, "specify_material is true and same_material is false: material properie hast to be a list of lenght total_cuboids."
+                    assert len(g)==total_cuboids, "specify_material is true and same_material is false: material properie hast to be a list of lenght total_cuboids."
+                    assert type(b)==list, "specify_material is true and same_material is false: material properie hast to be a list of lenght total_cuboids."
+                    assert len(b)==total_cuboids, "specify_material is true and same_material is false: material properie hast to be a list of lenght total_cuboids."
+                    assert type(a)==list, "specify_material is true and same_material is false: material properie hast to be a list of lenght total_cuboids."
+                    assert len(a)==total_cuboids, "specify_material is true and same_material is false: material properie hast to be a list of lenght total_cuboids."
+                    assert type(metallic)==list, "specify_material is true and same_material is false: material properie hast to be a list of lenght total_cuboids."
+                    assert len(metallic)==total_cuboids, "specify_material is true and same_material is false: material properie hast to be a list of lenght total_cuboids."
+                    assert type(smoothness)==list, "specify_material is true and same_material is false: material properie hast to be a list of lenght total_cuboids."
+                    assert len(smoothness)==total_cuboids, "specify_material is true and same_material is false: material properie hast to be a list of lenght total_cuboids."
+        else:
+            assert specify_material==False, "you can not specify the material when same_material is None." 
+            assert len(r) == 2, "r[0] is minimal limit and r[1] is maximal limit for random generation of the cuboidscolor r (red)"
+            assert len(g) == 2, "g[0] is minimal limit and g[1] is maximal limit for random generation of the cuboidscolor g"
+            assert len(b) == 2, "b[0] is minimal limit and b[1] is maximal limit for random generation of the cuboidscolor b"
+            assert len(a) == 2, "a[0] is minimal limit and a[1] is maximal limit for random generation of the cuboidscolor a (alpha/transparency)"
+            assert len(metallic) == 2, "metallic[0] is minimal limit and metallic[1] is maximal limit for random generation of the cuboidsmaterial property metallic"
+            assert len(smoothness) == 2, "smoothness[0] is minimal limit and smoothness[1] is maximal limit for random generation of the cuboidsmaterial property smoothness"
+
+        config["specify_material"] = specify_material
         config["r"]=r
-        assert len(g) == 2, "g[0] is minimal limit and g[1] is maximal limit for random generation of the cuboidscolor g"
         config["g"]=g
-        assert len(b) == 2, "b[0] is minimal limit and b[1] is maximal limit for random generation of the cuboidscolor b"
         config["b"]=b
-        assert len(a) == 2, "a[0] is minimal limit and a[1] is maximal limit for random generation of the cuboidscolor a (alpha/transparency)"
         config["a"]=a
-        assert len(metallic) == 2, "metallic[0] is minimal limit and metallic[1] is maximal limit for random generation of the cuboidsmaterial property metallic"
         config["metallic"]=metallic
-        assert len(smoothness) == 2, "smoothness[0] is minimal limit and smoothness[1] is maximal limit for random generation of the cuboidsmaterial property smoothness"
         config["smoothness"]=smoothness
-        if same_theta!=None:
-            assert type(same_theta)==bool, "Has to be bool or none. same_theta sets the bool of same_theta in getRandomJsonData. If it is None bool is set randomly." 
-        
+        config["same_material"] = same_material
+
         # Create intervals for DirectionalLight
         if DirectionalLightTheta==None or DirectionalLightIntensity==None:
             config["DirectionalLightTheta"] = None
             config["DirectionalLightIntensity"] = None
         else:
-            assert len(DirectionalLightTheta) == 2, "DirectionalLightTheta[0] is minimal limit and DirectionalLightTheta[1] is maximal limit for random generation of DirectionalLightTheta."
+            if type(DirectionalLightTheta)==list:
+                assert len(DirectionalLightTheta) == 2, "DirectionalLightTheta has to be a float or a list with DirectionalLightTheta[0] is minimal limit and DirectionalLightTheta[1] is maximal limit for random generation of DirectionalLightTheta."
+            else:
+                assert type(DirectionalLightTheta)in [float, int], "DirectionalLightTheta has to be a float or a list with DirectionalLightTheta[0] is minimal limit and DirectionalLightTheta[1] is maximal limit for random generation of DirectionalLightTheta."
             config["DirectionalLightTheta"] = DirectionalLightTheta
-            assert len(DirectionalLightIntensity) == 2, "DirectionalLightIntensity[0] is minimal limit and DirectionalLightIntensity[1] is maximal limit for random generation of DirectionalLightIntensity."
+            if type(DirectionalLightIntensity)==list:
+                assert len(DirectionalLightIntensity) == 2, "DirectionalLightIntensity has to be a float or a list with DirectionalLightIntensity[0] is minimal limit and DirectionalLightIntensity[1] is maximal limit for random generation of DirectionalLightIntensity."
+            else:
+                assert type(DirectionalLightIntensity)in [float, int], "DirectionalLightIntensity has to be a float or a list with DirectionalLightIntensity[0] is minimal limit and DirectionalLightIntensity[1] is maximal limit for random generation of DirectionalLightIntensity."
             config["DirectionalLightIntensity"] = DirectionalLightIntensity
 
         # Create intervals for PointLights
@@ -259,33 +342,50 @@ class dataset_cuboids():
         # Create all parameters randomly 
         
         # Camera position
-        if type(self.config["CameraRadius"]) == float:
+        if type(self.config["CameraRadius"]) in [float, int]:
             dictionary["CameraRadius"] = self.config["CameraRadius"]
         else:
             dictionary["CameraRadius"] = np.random.uniform(self.config["CameraRadius"][0],self.config["CameraRadius"][1])
-        if type(self.config["CameraTheta"]) == float:
+        if type(self.config["CameraTheta"]) in [float, int]:
             dictionary["CameraTheta"] = self.config["CameraTheta"]
         else:
             dictionary["CameraTheta"] = np.random.uniform(self.config["CameraTheta"][0],self.config["CameraTheta"][1])
-        if type(self.config["CameraPhi"]) == float:
+        
+        print('self.config["CameraPhi"] =',self.config["CameraPhi"])
+        print('type self.config["CameraPhi"] =',type(self.config["CameraPhi"]))
+        if type(self.config["CameraPhi"]) in [float, int]:
+            print("Phi in float int")
             dictionary["CameraPhi"] = self.config["CameraPhi"] 
         else:
+            print("Phi in random")
             dictionary["CameraPhi"] = np.random.uniform(self.config["CameraPhi"][0],self.config["CameraPhi"][1])
-        if type(self.config["CameraVerticalOffset"]) == float or type(self.config["CameraVerticalOffset"]) == int:
+        
+        print('self.config["CameraPhi"][0],self.config["CameraPhi"][1]',self.config["CameraPhi"][0],self.config["CameraPhi"][1])
+        print("parameter: CameraPhi=",dictionary["CameraPhi"])
+        if type(self.config["CameraVerticalOffset"]) in [float, int]:
             dictionary["CameraVerticalOffset"] = self.config["CameraVerticalOffset"] 
         else:
             dictionary["CameraVerticalOffset"] = np.random.uniform(self.config["CameraVerticalOffset"][0],self.config["CameraVerticalOffset"][1])
         
         # Create how many Cubiods are in one branch.
-        total_cuboids = np.random.randint(self.config["total_cuboids"][0],self.config["total_cuboids"][1])
+        if type(self.config["total_cuboids"])==int:
+            total_cuboids = self.config["total_cuboids"]
+        else:
+            total_cuboids = np.random.randint(self.config["total_cuboids"][0],self.config["total_cuboids"][1])
         # Create the angle and the intensity of the directional light
         if self.config["DirectionalLightIntensity"] == None:
             DirectionalLightIntensity = 0   
             DirectionalLightTheta = 0
-        else:        
-            DirectionalLightTheta = np.random.uniform(self.config["DirectionalLightTheta"][0], self.config["DirectionalLightTheta"][1])
-            DirectionalLightIntensity = np.random.uniform(self.config["DirectionalLightIntensity"][0], self.config["DirectionalLightIntensity"][1])
-        
+        else:
+            if type(self.config["DirectionalLightIntensity"])==list:        
+                DirectionalLightIntensity = np.random.uniform(self.config["DirectionalLightIntensity"][0], self.config["DirectionalLightIntensity"][1])
+            else:
+                DirectionalLightIntensity = self.config["DirectionalLightIntensity"]
+            if type(self.config["DirectionalLightTheta"]) ==list:
+                DirectionalLightTheta = np.random.uniform(self.config["DirectionalLightTheta"][0], self.config["DirectionalLightTheta"][1])
+            else:
+                DirectionalLightTheta = self.config["DirectionalLightTheta"]
+            
         # Create all properties of the point lights
         PointLightRadius = []
         PointLightPhi = []
@@ -383,32 +483,51 @@ class dataset_cuboids():
         if self.config["branches"]==None:
             total_branches = None
         else:
-            if self.config["branches"][0] < 1:
-                self.logger.info("config['branches'][0] is bigger than 1. This means you create at every segment new arms. Change the dataset config if you do not want this.")
-            # the upper limit for the arms is dicribing the three sigma variance of the guassion normal distribution
-            arms = np.random.normal(0,(self.config["branches"][1] - self.config["branches"][0])/3, total_cuboids-1)  
-            arms = np.absolute(arms) + self.config["branches"][0] 
-            for i in range(total_cuboids-1):
-                if arms[i]<=1 :
-                    total_branches.append(1)
-                else:
-                    total_branches.append(int(arms[i]))
+            if self.config["specify_branches"]:
+                total_branches = self.config["branches"] 
+            else:
+                if self.config["branches"][0] < 1:
+                    self.logger.info("config['branches'][0] is bigger than 1. This means you create at every segment new arms. Change the dataset config if you do not want this.")
+                # the upper limit for the arms is dicribing the three sigma variance of the guassion normal distribution
+                arms = np.random.normal(0,(self.config["branches"][1] - self.config["branches"][0])/3, total_cuboids-1)  
+                arms = np.absolute(arms) + self.config["branches"][0] 
+                for i in range(total_cuboids-1):
+                    if arms[i]<=1 :
+                        total_branches.append(1)
+                    else:
+                        total_branches.append(int(arms[i]))
             self.logger.debug("total_branches: "+str(total_branches)) 
+        
         # Decide if there should be only one theta angle for cubiods
         if(self.config["same_theta"]==None):
             Same_Theta = bool(np.random.randint(2))
         else:
             Same_Theta = self.config["same_theta"]
+        
         # Theta describes the angel between two cubiods next to each other
         Theta = []
         if(Same_Theta):
             if self.config["theta"]==None:
                 Theta.append(np.random.uniform(0,360/total_cuboids))
+            elif type(self.config["theta"])==list:
+                assert len(self.config["theta"]) == 2, "self.config['theta'] is a list and Same_theta = True which means it has to be of length two or a float."
+                Theta.append(np.random.uniform(self.config["theta"][0],self.config["theta"][1]))
+            elif type(self.config["theta"])in [float, int]:
+                Theta.append(self.config["theta"])
+            else:
+                self.logger.error("Bad input parameters in self.config['theta'] in combination with self.config['same_theta'].") 
+
         else:
             if self.config["theta"]==None:
                 Theta=np.random.uniform(0,360/total_cuboids,total_cuboids-1).tolist()
+            elif type(self.config["theta"])==list:
+                if self.config["specify_theta"]:
+                    Theta = self.config["theta"]
+                else:
+                    Theta=np.random.uniform(self.config["theta"][0],self.config["theta"][1],total_cuboids-1).tolist()    
             else:
-                Theta=np.random.uniform(self.config["theta"][0],self.config["theta"][1],total_cuboids-1).tolist()
+                self.logger.error("Bad input parameters in self.config['theta'] in combination with self.config['same_theta'].") 
+        
         # Decide if all cubiods use the same Material
         if(self.config["same_material"]==None):
             Same_Material = bool(np.random.randint(2))
@@ -421,21 +540,29 @@ class dataset_cuboids():
         Metallic=[]
         Smoothness=[]
         # Create the colors of the cubiods and the material property smoothness and metallic 
-        if(Same_Material):
-            R=np.random.uniform(self.config["r"][0],self.config["r"][1])
-            G=np.random.uniform(self.config["g"][0],self.config["g"][1])
-            B=np.random.uniform(self.config["b"][0],self.config["b"][1])
-            A=np.random.uniform(self.config["a"][0],self.config["a"][1])
-            Metallic=np.random.uniform(self.config["metallic"][0],self.config["metallic"][1])
-            Smoothness=np.random.uniform(self.config["smoothness"][0],self.config["smoothness"][1])
-            
-        else:
-            R=np.random.uniform(self.config["r"][0],self.config["r"][1],total_cuboids).tolist()
-            G=np.random.uniform(self.config["g"][0],self.config["g"][1],total_cuboids).tolist()
-            B=np.random.uniform(self.config["b"][0],self.config["b"][1],total_cuboids).tolist()
-            A=np.random.uniform(self.config["a"][0],self.config["a"][1],total_cuboids).tolist()
-            Metallic=np.random.uniform(self.config["metallic"][0],self.config["metallic"][1],total_cuboids).tolist()
-            Smoothness=np.random.uniform(self.config["smoothness"][0],self.config["smoothness"][1],total_cuboids).tolist()
+        if self.config["specify_material"]:
+            R=self.config["r"]
+            G=self.config["g"]
+            B=self.config["b"]
+            A=self.config["a"]
+            Metallic=self.config["smoothness"]
+            Smoothness=self.config["same_material"]
+        else:   
+            if(Same_Material):
+                R=np.random.uniform(self.config["r"][0],self.config["r"][1])
+                G=np.random.uniform(self.config["g"][0],self.config["g"][1])
+                B=np.random.uniform(self.config["b"][0],self.config["b"][1])
+                A=np.random.uniform(self.config["a"][0],self.config["a"][1])
+                Metallic=np.random.uniform(self.config["metallic"][0],self.config["metallic"][1])
+                Smoothness=np.random.uniform(self.config["smoothness"][0],self.config["smoothness"][1])
+                
+            else:
+                R=np.random.uniform(self.config["r"][0],self.config["r"][1],total_cuboids).tolist()
+                G=np.random.uniform(self.config["g"][0],self.config["g"][1],total_cuboids).tolist()
+                B=np.random.uniform(self.config["b"][0],self.config["b"][1],total_cuboids).tolist()
+                A=np.random.uniform(self.config["a"][0],self.config["a"][1],total_cuboids).tolist()
+                Metallic=np.random.uniform(self.config["metallic"][0],self.config["metallic"][1],total_cuboids).tolist()
+                Smoothness=np.random.uniform(self.config["smoothness"][0],self.config["smoothness"][1],total_cuboids).tolist()
         # Decide if all cubiods should have the same vertical scale
         if(self.config["same_scale"]==None):
             Same_Scale = bool(np.random.randint(2))
@@ -443,11 +570,21 @@ class dataset_cuboids():
             Same_Scale = self.config["same_scale"]
         # Create Scale
         if(Same_Scale):
-            Scale = np.random.uniform(self.config["scale"][0],self.config["scale"][1])
+            if type(self.config["scale"])==list:
+                Scale = np.random.uniform(self.config["scale"][0],self.config["scale"][1])
+            else:
+                Scale = self.config["scale"] 
         else:
-            Scale = np.random.uniform(self.config["scale"][0],self.config["scale"][1],total_cuboids).tolist()
+            if self.config["specify_scale"]:
+                Scale = self.config["scale"]
+            else:
+                Scale = np.random.uniform(self.config["scale"][0],self.config["scale"][1],total_cuboids).tolist()
+
         # Create Phi the rotation of the crane
-        Phi=np.random.uniform(self.config["phi"][0],self.config["phi"][1])
+        if type(self.config["phi"])in [float, int]:
+            Phi = self.config["phi"]
+        else:
+            Phi=np.random.uniform(self.config["phi"][0],self.config["phi"][1])
         
         # Add all parameters to a dictionary
         dictionary["total_cuboids"] = total_cuboids
@@ -523,7 +660,7 @@ class dataset_cuboids():
             dictionary["SpotAngle"] = SpotLightsAngle
         
         return dictionary
-        
+    
     def create_json_string_from_parameters(self, dictionary):
         """
         Inputs the parameters/dictionary into the function :meth:`~client.client_communicator_to_unity.write_json_crane`.
