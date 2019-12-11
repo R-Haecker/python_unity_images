@@ -71,7 +71,7 @@ class client_communicator_to_unity:
         self.connected = False
         # Set up Socket
         self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        self.socket.settimeout(0.1)
+        self.socket.settimeout(1)
                 
         if use_unity_build == True:
         # For execution with BUILD: start Unity build
@@ -210,6 +210,8 @@ class client_communicator_to_unity:
                 self.logger.debug("data_complete: type: %s, data_complete len: %s, data_complete [:10]: %s" %(type(data_complete),len(data_complete),data_complete[:10]))
                 break
             data_complete = data_complete + data
+            if data_complete[-8:] == bytearray([125, 99,255,255,255,255,255,255]):
+                break
             if not data:
                 self.logger.debug("No data anymore exit member function.")
                 self.logger.debug("data_complete: type: %s, data_complete len: %s, data_complete [:10]: %s" %(type(data_complete),len(data_complete),data_complete[:10]))
@@ -236,8 +238,10 @@ class client_communicator_to_unity:
         unity_resp_bytes = bytes()
         while True:
             # receive data from Unity until the whole image is transferred
+            # time.sleep(0.2)
             unity_resp_bytes = self.receive_data_as_bytes()
             self.logger.debug("Trying to receive data.")
+            
             if unity_resp_bytes[-8:] == bytearray([125, 99,255,255,255,255,255,255]):
                 # Check if the data contains the whole image by looking for the end tag
                 self.logger.info("Data from Unity received.")
@@ -255,7 +259,7 @@ class client_communicator_to_unity:
     
     def write_json_crane(self, total_cuboids=3, same_scale = True, scale=2.0, same_theta = True, theta=40.0, phi=0.0, total_branches=None,
     same_material = True, metallic=0.5, smoothness=0.5, r=1.0,g=1.0,b=1.0,a = 1.0,
-    CameraRes_width = 256, CameraRes_height = 256, Camera_FieldofView = 60.0, CameraRadius = 12.0, CameraTheta = 90.0, CameraPhi=0.0, CameraVerticalOffset = 0.0,
+    CameraRes_width = 256, CameraRes_height = 256, Camera_FieldofView = 60.0, CameraRadius = 12.0, CameraTheta = 90.0, CameraPhi=0.0, CameraVerticalOffset = 0.0, Camera_solid_background = True,   
     DirectionalLightTheta = 30.0, DirectionalLightIntensity = 0.8,
     totalPointLights=1, same_PointLightsColor = True, PointLightsColor_r = 1.0, PointLightsColor_g = 1.0, PointLightsColor_b = 1.0, PointLightsColor_a = 1.0, PointLightsRadius=[7.0], PointLightsTheta=[20.0], PointLightsPhi=[0.0], PointLightsIntensity=[1.0], PointLightsRange=[10.0], 
     totalSpotLights=1, same_SpotLightsColor = True, SpotLightsColor_r = 1.0, SpotLightsColor_g = 1.0, SpotLightsColor_b = 1.0, SpotLightsColor_a = 1.0, SpotLightsRadius=[10.0], SpotLightsTheta=[0.0], SpotLightsPhi=[0.0], SpotLightsIntensity=[1.0], SpotLightsRange=[10.0], SpotAngle=[30.0]):
@@ -461,7 +465,7 @@ class client_communicator_to_unity:
         if(CameraVerticalOffset!=0):
             self.logger.info("CameraVerticalOffset is not zero anymore, the origin of the spherical coordinates of the camera is now vertically offset.\n") 
         # Add all the information for the Camera into the dictonary
-        data['camera'] = {"radius":CameraRadius,"theta_deg":CameraTheta,"phi_deg":CameraPhi,"y_offset":CameraVerticalOffset,'resolution_width':CameraRes_width,'resolution_height':CameraRes_height,"FOV":Camera_FieldofView}
+        data['camera'] = {"radius":CameraRadius,"theta_deg":CameraTheta,"phi_deg":CameraPhi,"y_offset":CameraVerticalOffset,'resolution_width':CameraRes_width,'resolution_height':CameraRes_height,"FOV":Camera_FieldofView, "soild_background":Camera_solid_background}
         
         data["DirectionalLight"] = {"theta_deg":DirectionalLightTheta, "intensity":DirectionalLightIntensity}
 

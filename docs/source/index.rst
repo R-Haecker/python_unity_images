@@ -8,7 +8,7 @@ Python-Unity Images documentation!
    :caption: content:
 .. autoclass:: client.client_communicator_to_unity
     :members:
-    
+
     .. automethod:: __init__
 
 **dataset.py**

@@ -261,8 +261,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   create_crane_object: {fileID: 210739180}
   jsonCrane_here:
-    totalSegments: 0
-    totalArmsSegment: 
+    total_cuboids: 0
+    total_branches: 
     totalArms: 0
     same_scale: 0
     same_theta: 0
@@ -278,6 +278,7 @@ MonoBehaviour:
       resolution_width: 0
       resolution_height: 0
       FOV: 0
+      soild_background: 0
     DirectionalLight:
       intensity: 0
       theta_deg: 0
@@ -285,7 +286,7 @@ MonoBehaviour:
     point_lights: []
     totalSpotLights: 0
     spot_lights: []
-    segments: []
+    cuboids: []
   ready_to_build: 0
   timer: 0
 --- !u!81 &2004666681
@@ -306,7 +307,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0.8301887, g: 0.8301887, b: 0.8301887, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0

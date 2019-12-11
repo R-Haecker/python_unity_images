@@ -9,3 +9,6 @@ __pycache__
 debug_test.py
 /docs/build/
 .vscode
+*.bin
+*.ddl
+*.asset

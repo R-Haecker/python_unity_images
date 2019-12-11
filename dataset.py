@@ -63,12 +63,12 @@ class dataset_cuboids():
         self.logger.debug("Dataset initialised.\n")        
 
     def set_config(self,same_scale=None, scale=[0.5,4], total_cuboids=[2,5], phi=[0,360], specify_branches=False, branches=[1,3], same_theta=None, theta=None, 
-    same_material=None, specify_material=False, r=[0,1], g=[0,1], b=[0,1], a=[0.5,1], metallic=[0,1], smoothness=[0,1], CameraRadius = 10.0, CameraTheta = [60,100], CameraPhi = [0,360], CameraVerticalOffset = None,
-    totalPointLights=[5,12], PointLightsRadius=[5,20], PointLightsPhi=[0,360], PointLightsTheta=[0,90], PointLightsIntensity=[7,17], PointLightsRange=[5,25], samePointLightColor=None, PointLightsColor_r=[0,1], PointLightsColor_g=[0,1], PointLightsColor_b=[0,1], PointLightsColor_a=[0.5,1],
-    totalSpotLights=[3,7], SpotLightsRadius=[5,20], SpotLightsPhi=[0,360], SpotLightsTheta=[0,90], SpotLightsIntensity=[5,15], SpotLightsRange=[5,25], SpotLightsAngle=[5,120], sameSpotLightColor=None, SpotLightsColor_r=[0,1], SpotLightsColor_g=[0,1], SpotLightsColor_b=[0,1], SpotLightsColor_a=[0.5,1],
+    same_material=None, specify_material=False, r=[0,1], g=[0,1], b=[0,1], a=[0.5,1], metallic=[0,1], smoothness=[0,1], CameraRes_width= 1024, CameraRes_height=1024, Camera_FieldofView=90, CameraRadius = 10.0, CameraTheta = [60,100], CameraPhi = [0,360], CameraVerticalOffset = None, Camera_solid_background = False,
+    totalPointLights=[5,12], PointLightsRadius=[5,20], PointLightsPhi=[0,360], PointLightsTheta=[0,90], PointLightsIntensity=[7,17], PointLightsRange=[5,25], same_PointLightsColor=None, PointLightsColor_r=[0,1], PointLightsColor_g=[0,1], PointLightsColor_b=[0,1], PointLightsColor_a=[0.5,1],
+    totalSpotLights=[3,7], SpotLightsRadius=[5,20], SpotLightsPhi=[0,360], SpotLightsTheta=[0,90], SpotLightsIntensity=[5,15], SpotLightsRange=[5,25], SpotAngle=[5,120], same_SpotLightsColor=None, SpotLightsColor_r=[0,1], SpotLightsColor_g=[0,1], SpotLightsColor_b=[0,1], SpotLightsColor_a=[0.5,1],
     DirectionalLightTheta = [0,90], DirectionalLightIntensity = [1.0,6.0], specify_scale=False, specify_theta=False):
         """Sets a config for this class instace which determines the interval for all random parameters created in the function :meth:`~dataset.dataset_cuboids.create_random_parameters`. The meaning of all the parameters are explained in this function: :meth:`~client.client_communicator_to_unity.write_json_crane`. 
-        Here are only those parameters mentioned which deviate from the ``standard_parameter``.
+        Here are only those parameters mentioned which deviate from the ``standard_parameter``. You can also specify and set parameters which should not be generated randomly.
         
         :param "standard_parameter": Has to be a list with two floats. The first element describes the lower boundary and second element describes the upper boundary for the function :meth:`~dataset.dataset_cuboids.create_random_parameters` in which the variable is set randomly, defaults is a predefined list
         :type "standard parameter": list, optional
@@ -84,6 +84,12 @@ class dataset_cuboids():
         :type theta: None, list, float or int, optional
         :param same_material: If ``None`` the boolean will be set randomly in :meth:`~dataset.dataset_cuboids.create_random_parameters`. Otherwise it will be set to the given boolean, defaults to None
         :type same_material: None or bool, optional
+        :param CameraRes_width: The width Resolution of your image, default to 1024
+        :type CameraRes_width: int, optional
+        :param CameraRes_height: The height Resolution of your image, default to 1024
+        :type CameraRes_height: int, optional
+        :param Camera_FieldofView: The Fiel of View of the camera, default to 80
+        :type Camera_FieldofView: float or int, optional
         :param CameraRadius: If a ``float`` or ``int`` is entered then the value in :meth:`~dataset.dataset_cuboids.create_random_parameters` will not be random, instead set to the given value. If it is a list it has to be a list of length two, defaults to 10.0
         :type CameraRadius: float, int or list, optional
         :param CameraTheta:  If ``float`` or ``int`` then the value in :meth:`~dataset.dataset_cuboids.create_random_parameters` will not be random, instead set to the given value. If it is a list it has to be a list of length two, defaults to [30,100]
@@ -94,12 +100,12 @@ class dataset_cuboids():
         :type CameraVerticalOffset: None, float, int or list, optional
         :param totalPointLights: If ``None`` there will be no Pointlights created in :meth:`~dataset.dataset_cuboids.create_random_parameters`. Else it has to be a list of integers with the length two, defaults to [5,12]
         :type totalPointLights: None or list, optional
-        :param samePointLightColor: If ``None`` the boolean will be chosen randomly, else the given boolean is used, defaults to None
-        :type samePointLightColor: None or bool, optional
+        :param same_PointLightsColor: If ``None`` the boolean will be chosen randomly, else the given boolean is used, defaults to None
+        :type same_PointLightsColor: None or bool, optional
         :param totalSpotLights:  If ``None`` there will be no Spotlights created in :meth:`~dataset.dataset_cuboids.create_random_parameters`. Else it has to be a list of integers with the length two, defaults to None
         :type totalSpotLights: None or list, optional
-        :param sameSpotLightColor: If ``None`` the boolean will be chosen randomly, else the given boolean is used, defaults to None
-        :type sameSpotLightColor: None or bool, optional
+        :param same_SpotLightsColor: If ``None`` the boolean will be chosen randomly, else the given boolean is used, defaults to None
+        :type same_SpotLightsColor: None or bool, optional
         :param DirectionalLightTheta: If ``None`` the ``DirectionalLightIntensity`` will be set to zero, elif has to be a list of floats with the length two, for a fixed value enter a ``float`` or ``int``, defaults to [0,90]
         :type DirectionalLightTheta: None, float, int or list, optional
         :param DirectionalLightIntensity: If ``None`` the ``DirectionalLightIntensity`` will be set to zero, elif has to be a list of floats with the length two, for a fixed value enter a ``float`` or ``int``, defaults to [0.1,1.8]
@@ -178,6 +184,9 @@ class dataset_cuboids():
         config["branches"] = branches
         
         # Create intervals or fixed values for camera position
+        config["CameraRes_height"] = CameraRes_height
+        config["CameraRes_width"] = CameraRes_width
+        config["Camera_FieldofView"] = Camera_FieldofView
         if type(CameraRadius)== list:
             assert len(CameraRadius) == 2, "CameraRadius has to be a list len()==2 or a float for a fixed value."
         else:
@@ -201,7 +210,8 @@ class dataset_cuboids():
             else:
                 assert type(CameraVerticalOffset)in [float, int], "CameraVerticalOffset has to be a list len()==2 or a float for a fixed value."
             config["CameraVerticalOffset"] = CameraVerticalOffset 
-        
+        config["Camera_solid_background"] = Camera_solid_background
+
         # Create intervals for Material properties 
         if same_material!=None:
             assert type(same_material)==bool, "Has to be bool or None. same_material sets the bool of same_material in getRandomJsonData. If it is None bool is set randomly." 
@@ -276,9 +286,9 @@ class dataset_cuboids():
             config["PointLightsIntensity"]=PointLightsIntensity
             assert len(PointLightsRange) == 2, "PointLightsRange[0] is minimal limit and PointLightsRange[1] is maximal limit for random generation of PointLightsRange."
             config["PointLightsRange"]=PointLightsRange
-            if samePointLightColor!=None:
-                assert type(samePointLightColor)==bool, "Has to be bool or none. samePointLightColor sets the bool of samePointLightColor in getRandomJsonData. If its None bool is set randomly." 
-            config["samePointLightColor"]=samePointLightColor
+            if same_PointLightsColor!=None:
+                assert type(same_PointLightsColor)==bool, "Has to be bool or none. same_PointLightsColor sets the bool of same_PointLightsColor in getRandomJsonData. If its None bool is set randomly." 
+            config["same_PointLightsColor"]=same_PointLightsColor
             assert len(PointLightsColor_r) == 2, "PointLightsColor_r[0] is minimal limit and PointLightsColor_r[1] is maximal limit for random generation of PointLightsColor_r."
             config["PointLightsColor_r"]=PointLightsColor_r
             assert len(PointLightsColor_g) == 2, "PointLightsColor_g[0] is minimal limit and PointLightsColor_g[1] is maximal limit for random generation of PointLightsColor_g."
@@ -304,11 +314,11 @@ class dataset_cuboids():
             config["SpotLightsIntensity"]=SpotLightsIntensity
             assert len(SpotLightsRange) == 2, "SpotLightsRange[0] is minimal limit and SpotLightsRange[1] is maximal limit for random generation of SpotLightsRange."
             config["SpotLightsRange"]=SpotLightsRange
-            assert len(SpotLightsAngle) == 2, "SpotLightsAngle[0] is minimal limit and SpotLightsAngle[1] is maximal limit for random generation of SpotLightsAngle."
-            config["SpotLightsAngle"]=SpotLightsAngle
-            if sameSpotLightColor!=None:
-                assert type(sameSpotLightColor)==bool, "Has to be bool or None. sameSpotLightColor sets the bool of sameSpotLightColor in getRandomJsonData. If its None bool is set randomly." 
-            config["sameSpotLightColor"]=sameSpotLightColor
+            assert len(SpotAngle) == 2, "SpotAngle[0] is minimal limit and SpotAngle[1] is maximal limit for random generation of SpotAngle."
+            config["SpotAngle"]=SpotAngle
+            if same_SpotLightsColor!=None:
+                assert type(same_SpotLightsColor)==bool, "Has to be bool or None. same_SpotLightsColor sets the bool of same_SpotLightsColor in getRandomJsonData. If its None bool is set randomly." 
+            config["same_SpotLightsColor"]=same_SpotLightsColor
             assert len(SpotLightsColor_r) == 2, "SpotLightsColor_r[0] is minimal limit and SpotLightsColor_r[1] is maximal limit for random generation of SpotLightsColor_r."
             config["SpotLightsColor_r"]=SpotLightsColor_r
             assert len(SpotLightsColor_g) == 2, "SpotLightsColor_g[0] is minimal limit and SpotLightsColor_g[1] is maximal limit for random generation of SpotLightsColor_g."
@@ -320,7 +330,7 @@ class dataset_cuboids():
             
         self.config = config
     
-    def create_random_parameters(self , CameraRes_width= 520, CameraRes_height=520,):
+    def create_random_parameters(self):
         """Creates random input parameters depending on your config which defines the interval for the generated parameters, the camera parameters are not set randomly
     
         :param CameraRes_width: Image resolution width, defaults to 520
@@ -333,9 +343,9 @@ class dataset_cuboids():
         dictionary={}
 
         # not random set variables for the Camera
-        dictionary["CameraRes_width"] = CameraRes_width 
-        dictionary["CameraRes_height"] = CameraRes_height 
-        dictionary["Camera_FieldofView"] = 80
+        dictionary["CameraRes_width"] = self.config["CameraRes_width"] 
+        dictionary["CameraRes_height"] = self.config["CameraRes_height"] 
+        dictionary["Camera_FieldofView"] = self.config["Camera_FieldofView"]
         
         # If needed you could save the seed
         #np.random.seed(Seed)
@@ -361,6 +371,7 @@ class dataset_cuboids():
             dictionary["CameraVerticalOffset"] = self.config["CameraVerticalOffset"] 
         else:
             dictionary["CameraVerticalOffset"] = np.random.uniform(self.config["CameraVerticalOffset"][0],self.config["CameraVerticalOffset"][1])
+        dictionary["Camera_solid_background"] = self.config["Camera_solid_background"]
         
         # Create how many Cubiods are in one branch.
         if type(self.config["total_cuboids"])==int:
@@ -397,10 +408,10 @@ class dataset_cuboids():
         else:        
             TotalPointLights = np.random.randint(self.config["totalPointLights"][0],self.config["totalPointLights"][1])
             # If all Pointlights should have the same color
-            if(self.config["samePointLightColor"]==None):
+            if(self.config["same_PointLightsColor"]==None):
                 Same_PLcolor = bool(np.random.randint(2,dtype=int))
             else:
-                Same_PLcolor = self.config["samePointLightColor"]
+                Same_PLcolor = self.config["same_PointLightsColor"]
             # Create color for Pointlights
             if(Same_PLcolor):
                     pr=np.random.uniform(self.config["PointLightsColor_r"][0],self.config["PointLightsColor_r"][1])
@@ -431,7 +442,7 @@ class dataset_cuboids():
         SpotLightTheta = []
         SpotLightIntensity=[]
         SpotLightRange = []
-        SpotLightsAngle = []
+        SpotAngle = []
         S_R=[]
         S_G=[]
         S_B=[]
@@ -442,10 +453,10 @@ class dataset_cuboids():
         else:        
             TotalSpotLights = np.random.randint(self.config["totalSpotLights"][0],self.config["totalSpotLights"][1])
             # If all Spotlights should have the same color
-            if(self.config["sameSpotLightColor"]==None):
+            if(self.config["same_SpotLightsColor"]==None):
                 Same_SLcolor = bool(np.random.randint(2))
             else:
-                Same_SLcolor = self.config["sameSpotLightColor"]
+                Same_SLcolor = self.config["same_SpotLightsColor"]
             # Create color for Spotlights
             if(Same_SLcolor):
                 sr=np.random.uniform(self.config["SpotLightsColor_r"][0],self.config["SpotLightsColor_r"][1])
@@ -470,7 +481,7 @@ class dataset_cuboids():
             SpotLightIntensity=np.random.uniform(self.config["SpotLightsIntensity"][0],self.config["SpotLightsIntensity"][1],TotalSpotLights).tolist()
             SpotLightRange=np.random.uniform(self.config["SpotLightsRange"][0],self.config["SpotLightsRange"][1],TotalSpotLights).tolist()
             # The Angle specifies the "spread" of the lightcone created by the Spotlight
-            SpotLightsAngle=np.random.uniform(self.config["SpotLightsAngle"][0],self.config["SpotLightsAngle"][1],TotalSpotLights).tolist()
+            SpotAngle=np.random.uniform(self.config["SpotAngle"][0],self.config["SpotAngle"][1],TotalSpotLights).tolist()
         
         # Amount of branches (Arms) and at which cubiod to branch. The first element of the list total_branchess counts the amount of branches at the first cubiod and and so on...
         # if total_branches = [1,1,1,1,1] then there is only one "main" Branch and no splits  
@@ -652,10 +663,96 @@ class dataset_cuboids():
             dictionary["SpotLightsColor_a"] = S_A
             dictionary["same_SpotLightsColor"] = Same_SLcolor
             dictionary["SpotLightsRange"] = SpotLightRange
-            dictionary["SpotAngle"] = SpotLightsAngle
+            dictionary["SpotAngle"] = SpotAngle
         
         return dictionary
     
+    def create_parameters(self, same_scale=True, scale=2, total_cuboids=5, phi=90, total_branches=[1,2,1,4], same_theta=True, theta=20, 
+    same_material=True, r=1, g=0.1, b=0.2, a=1, metallic=1, smoothness=0.5, CameraRes_width= 1024, CameraRes_height=1024, Camera_FieldofView=100, CameraRadius = 10.0, CameraTheta = 90, CameraPhi = 0, CameraVerticalOffset = 0, Camera_solid_background = False,
+    totalPointLights=2, PointLightsRadius=[5,6], PointLightsPhi=[0,95], PointLightsTheta=[45,60], PointLightsIntensity=[10,12], PointLightsRange=[10,10], same_PointLightsColor=True, PointLightsColor_r=1, PointLightsColor_g=1, PointLightsColor_b=1, PointLightsColor_a=1,
+    totalSpotLights=None, SpotLightsRadius=[5,20], SpotLightsPhi=[0,360], SpotLightsTheta=[0,90], SpotLightsIntensity=[5,15], SpotLightsRange=[5,25], SpotAngle=[5,120], same_SpotLightsColor=None, SpotLightsColor_r=[0,1], SpotLightsColor_g=[0,1], SpotLightsColor_b=[0,1], SpotLightsColor_a=[0.5,1],
+    DirectionalLightTheta = 60, DirectionalLightIntensity = 3):
+        dictionary = {}
+        dictionary["total_cuboids"] =total_cuboids 
+        dictionary["same_scale"] = same_scale
+        dictionary["scale"] = scale
+        dictionary["same_theta"] = same_theta
+        dictionary["theta"] = theta
+        dictionary["phi"] = phi
+        dictionary["total_branches"] = total_branches
+        dictionary["same_material"] = same_material
+        dictionary["metallic"] = metallic
+        dictionary["smoothness"] = smoothness
+        dictionary["r"] = r
+        dictionary["g"] = g
+        dictionary["b"] = b
+        dictionary["a"] = a
+        dictionary["CameraRes_width"] = CameraRes_width
+        dictionary["CameraRes_height"] = CameraRes_height
+        dictionary["Camera_FieldofView"] = Camera_FieldofView
+        dictionary["CameraRadius"] = CameraRadius
+        dictionary["CameraTheta"] = CameraTheta
+        dictionary["CameraPhi"] = CameraPhi
+        dictionary["CameraVerticalOffset"] = CameraVerticalOffset 
+        dictionary["Camera_solid_background"] = Camera_solid_background
+        if totalPointLights in [0,None]:
+            dictionary["totalPointLights"] = 0 
+            dictionary["PointLightsRadius"] = None
+            dictionary["PointLightsPhi"] = None
+            dictionary["PointLightsTheta"] = None
+            dictionary["PointLightsIntensity"] = None
+            dictionary["PointLightsRange"] = None
+            dictionary["PointLightsColor_r"] = None
+            dictionary["PointLightsColor_g"] = None
+            dictionary["PointLightsColor_b"] = None
+            dictionary["PointLightsColor_a"] = None
+            dictionary["same_PointLightsColor"] = None
+        else:
+            dictionary["totalPointLights"] = totalPointLights
+            dictionary["same_PointLightsColor"] = same_PointLightsColor
+            dictionary["PointLightsColor_r"] = PointLightsColor_r
+            dictionary["PointLightsColor_g"] = PointLightsColor_g
+            dictionary["PointLightsColor_b"] = PointLightsColor_b
+            dictionary["PointLightsColor_a"] = PointLightsColor_a
+            dictionary["PointLightsRadius"] = PointLightsRadius
+            dictionary["PointLightsTheta"] = PointLightsTheta
+            dictionary["PointLightsPhi"] = PointLightsPhi
+            dictionary["PointLightsIntensity"] = PointLightsIntensity
+            dictionary["PointLightsRange"] = PointLightsRange
+        if totalSpotLights in [0,None]:    
+            dictionary["totalSpotLights"] = 0
+            dictionary["SpotLightsRadius"] = None
+            dictionary["SpotLightsPhi"] = None
+            dictionary["SpotLightsTheta"] = None
+            dictionary["SpotLightsIntensity"] = None
+            dictionary["SpotLightsRange"] = None
+            dictionary["SpotLightsColor_r"] = None
+            dictionary["SpotLightsColor_g"] = None
+            dictionary["SpotLightsColor_b"] = None
+            dictionary["SpotLightsColor_a"] = None
+            dictionary["same_SpotLightsColor"] = None
+            dictionary["SpotLightsRange"] = None
+            dictionary["SpotAngle"] = None
+        else:
+            dictionary["totalSpotLights"] = totalSpotLights
+            dictionary["same_SpotLightsColor"] = same_SpotLightsColor
+            dictionary["SpotLightsColor_r"] = SpotLightsColor_r
+            dictionary["SpotLightsColor_g"] = SpotLightsColor_g
+            dictionary["SpotLightsColor_b"] = SpotLightsColor_b
+            dictionary["SpotLightsColor_a"] = SpotLightsColor_a
+            dictionary["SpotLightsRadius"] = SpotLightsRadius
+            dictionary["SpotLightsTheta"] = SpotLightsTheta 
+            dictionary["SpotLightsPhi"] = SpotLightsPhi
+            dictionary["SpotLightsIntensity"] = SpotLightsIntensity
+            dictionary["SpotLightsRange"] = SpotLightsRange
+            dictionary["SpotAngle"] = SpotAngle
+            
+        dictionary["DirectionalLightTheta"] = DirectionalLightTheta 
+        dictionary["DirectionalLightIntensity"] = DirectionalLightIntensity
+
+        return dictionary 
+
+
     def create_json_string_from_parameters(self, dictionary):
         """
         Inputs the parameters/dictionary into the function :meth:`~client.client_communicator_to_unity.write_json_crane`.
@@ -665,7 +762,8 @@ class dataset_cuboids():
         :return: A string depending on your input parameters wich can be interpreted afterwards by the Unity script. 
         :rtype: string
         """        
-        return self.uc.write_json_crane(total_cuboids=dictionary["total_cuboids"], same_scale=dictionary["same_scale"], scale=dictionary["scale"], same_theta=dictionary["same_theta"], theta=dictionary["theta"], phi=dictionary["phi"], total_branches=dictionary["total_branches"], same_material=dictionary["same_material"], metallic=dictionary["metallic"], smoothness=dictionary["smoothness"], r=dictionary["r"], g=dictionary["g"], b=dictionary["b"], a=dictionary["a"], CameraRes_width=dictionary["CameraRes_width"], CameraRes_height=dictionary["CameraRes_height"], Camera_FieldofView=dictionary["Camera_FieldofView"], CameraRadius=dictionary["CameraRadius"], CameraTheta=dictionary["CameraTheta"], CameraPhi=dictionary["CameraPhi"], CameraVerticalOffset=dictionary["CameraVerticalOffset"], 
+        return self.uc.write_json_crane(total_cuboids=dictionary["total_cuboids"], same_scale=dictionary["same_scale"], scale=dictionary["scale"], same_theta=dictionary["same_theta"], theta=dictionary["theta"], phi=dictionary["phi"], total_branches=dictionary["total_branches"], same_material=dictionary["same_material"], metallic=dictionary["metallic"], smoothness=dictionary["smoothness"], r=dictionary["r"], g=dictionary["g"], b=dictionary["b"], a=dictionary["a"], 
+            CameraRes_width=dictionary["CameraRes_width"], CameraRes_height=dictionary["CameraRes_height"], Camera_FieldofView=dictionary["Camera_FieldofView"], CameraRadius=dictionary["CameraRadius"], CameraTheta=dictionary["CameraTheta"], CameraPhi=dictionary["CameraPhi"], CameraVerticalOffset=dictionary["CameraVerticalOffset"], Camera_solid_background=dictionary["Camera_solid_background"], 
             totalPointLights=dictionary["totalPointLights"], same_PointLightsColor=dictionary["same_PointLightsColor"], PointLightsColor_r=dictionary["PointLightsColor_r"], PointLightsColor_g=dictionary["PointLightsColor_g"], PointLightsColor_b=dictionary["PointLightsColor_b"], PointLightsColor_a=dictionary["PointLightsColor_a"], PointLightsRadius=dictionary["PointLightsRadius"], PointLightsTheta=dictionary["PointLightsTheta"], PointLightsPhi=dictionary["PointLightsPhi"], PointLightsIntensity=dictionary["PointLightsIntensity"], PointLightsRange=dictionary["PointLightsRange"], 
             totalSpotLights=dictionary["totalSpotLights"], same_SpotLightsColor=dictionary["same_SpotLightsColor"], SpotLightsColor_r=dictionary["SpotLightsColor_r"], SpotLightsColor_g=dictionary["SpotLightsColor_g"], SpotLightsColor_b=dictionary["SpotLightsColor_b"], SpotLightsColor_a=dictionary["SpotLightsColor_a"], SpotLightsRadius=dictionary["SpotLightsRadius"], SpotLightsTheta=dictionary["SpotLightsTheta"], SpotLightsPhi=dictionary["SpotLightsPhi"], SpotLightsIntensity=dictionary["SpotLightsIntensity"], SpotLightsRange=dictionary["SpotLightsRange"],SpotAngle=dictionary["SpotAngle"],
             DirectionalLightTheta=dictionary["DirectionalLightTheta"], DirectionalLightIntensity=dictionary["DirectionalLightIntensity"])
@@ -779,6 +877,7 @@ class dataset_cuboids():
         index = self.increment_index()
         # Put data in an dictionary.
         newDict = {"index":index,"parameters":parameters,"image":img}
+        self.logger.info("data completed: Image index: " + str(index))
         # Save parameters for later recreating and manipulating the image.
         self.save(newDict, save_para = save_para, save_image = save_image)
         return newDict  

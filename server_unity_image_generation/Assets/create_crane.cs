@@ -48,7 +48,7 @@ public class create_crane : MonoBehaviour
             vec.x*(norm.x*norm.y*(1-Mathf.Cos(phi))+norm.z*Mathf.Sin(phi))  +  vec.y*(norm.y*norm.y*(1-Mathf.Cos(phi))+Mathf.Cos(phi))  +  vec.z*(norm.y*norm.z*(1-Mathf.Cos(phi))-norm.x*Mathf.Sin(phi)),
             vec.x*(norm.x*norm.z*(1-Mathf.Cos(phi))-norm.y*Mathf.Sin(phi))  +  vec.y*(norm.y*norm.z*(1-Mathf.Cos(phi))+norm.x*Mathf.Sin(phi))  +  vec.z*(norm.z*norm.z*(1-Mathf.Cos(phi))+Mathf.Cos(phi)));
     }
-    void Starter()
+    void create_scene()
     {
         //Delete old crane 
         if(cubes!=null)
@@ -81,7 +81,7 @@ public class create_crane : MonoBehaviour
         PointLights = new SphericalGameObject[jsonCrane.totalPointLights];
         SpotLights = new SphericalGameObject[jsonCrane.totalSpotLights];
         string jsondata = JsonUtility.ToJson(jsonCrane);
-        Debug.Log("CreateCrane in Starter; jsondata: " + jsondata);
+        Debug.Log("CreateCrane in create_scene; jsondata: " + jsondata);
         UnityEngine.Assertions.Assert.IsTrue(jsonCrane.total_cuboids>0, "The variable total_cuboids from python has to be bigger than zero. total_cuboids: "+ jsonCrane.total_cuboids.ToString());
         if (jsonCrane.total_cuboids==0)
         {
@@ -341,10 +341,10 @@ public class create_crane : MonoBehaviour
     {
         if(TCP_server_object.GetComponent<TCP_server>().ready_to_build)
         {   
-            Debug.Log("CreateCrane in Update: before Starter: import ready_to_build == true;");
-            Starter();
+            Debug.Log("CreateCrane in Update: before create_scene: import ready_to_build == true;");
+            create_scene();
             newCrane=true;
-            Debug.Log("CreateCrane in Update: after Starter:  newCrane==true; import ready_to_build == true;");
+            Debug.Log("CreateCrane in Update: after create_scene:  newCrane==true; import ready_to_build == true;");
         }
         else
         {

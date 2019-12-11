@@ -18,19 +18,17 @@ public class JsonCrane
 {
     public int total_cuboids;
     public int[] total_branches;
-    public int totalArms;
     public bool same_scale;
     public bool same_theta;
     public bool same_material;
     public float phi;
-    public float del_phi;
     public JsonCamera camera;
     public DirectionalLight DirectionalLight;
     public int totalPointLights;
     public PointLights[] point_lights;
     public int totalSpotLights;
     public SpotLights[] spot_lights;
-    public JsonSegment[] cuboids;
+    public JsonCuboid[] cuboids;
 }
 
 [System.Serializable]
@@ -86,6 +84,7 @@ public class JsonCamera : SphericalGameObject
     public int resolution_width;
     public int resolution_height;
     public float FOV;
+    public bool soild_background;
 }
 
 [System.Serializable]
@@ -96,7 +95,7 @@ public class DirectionalLight
 }
 
 [System.Serializable]
-public class JsonSegment
+public class JsonCuboid
 {
     public float theta_deg;
     public float scale;

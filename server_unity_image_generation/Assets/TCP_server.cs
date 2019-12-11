@@ -63,6 +63,7 @@ public class TCP_server : MonoBehaviour
         {
             Debug.Log("TCP_Server in LateUpdate: before CapturePNGasBytes: import newCrane == true;");
             Debug.Log("TCP_Server in LateUpdate: before CapturePNGasBytes: Time: " + Time.realtimeSinceStartup.ToString());
+            timer =0;
             StartCoroutine(CapturePNGasBytes());
             ready_to_build=false;
             Debug.Log("TCP_Server in LateUpdate: after CapturePNGasBytes:  ready_to_build==false; import newCrane == true;");
@@ -73,6 +74,10 @@ public class TCP_server : MonoBehaviour
     {
         yield return new WaitForEndOfFrame();
         Camera currentCamera = GetComponent<Camera>();
+        if(jsonCrane_here.camera.soild_background)
+        {
+            currentCamera.clearFlags = CameraClearFlags.SolidColor;
+        } 
         //create RenderTexture and Texture2D
         RenderTexture rt = new RenderTexture(jsonCrane_here.camera.resolution_width, jsonCrane_here.camera.resolution_height, 24, RenderTextureFormat.ARGB32);
         Texture2D sceneTexture = new Texture2D(jsonCrane_here.camera.resolution_width, jsonCrane_here.camera.resolution_height, TextureFormat.RGB24, false);
@@ -153,7 +158,7 @@ public class TCP_server : MonoBehaviour
             data = null;
             int i=0;
             while ((i = stream.Read(bytes, 0, bytes.Length)) != 0)
-            {
+            {   
                 // Translate data bytes to a ASCII string.
                 data = System.Text.Encoding.ASCII.GetString(bytes, 0, i);
                 Debug.Log("TCP_Server in ListenforMessages: Received data");
