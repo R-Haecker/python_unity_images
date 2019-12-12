@@ -12,8 +12,8 @@ This repository was created in a project at the research group Computer Vision a
 <img src="https://github.com/R-Haecker/python_unity_images/raw/master/data/dataset/examples_to_show/ex2.png" height="210" width="410">
 
 ## Documentation
-This read me file is a part of a a detailed [report](report.pdf)
-and the used python code is commented in this [Documentation](https://python-unity-images.readthedocs.io/en/latest/).  
+This read me file contains parts of a a detailed [report](report.pdf)
+and the used python code is commented in this [Documentation](https://python-unity-images.readthedocs.io/en/latest/). If you are intrested in this project have a look at these links.
 
 
 ## Getting Started
@@ -25,8 +25,7 @@ and the used python code is commented in this [Documentation](https://python-uni
 * Try out the examples given in the next section and modify them as you desire to learn to work with this project.
     * You can have a look into the Documentation of the code and the meaning of all functions as well as their parameters [here](https://python-unity-images.readthedocs.io/en/latest/).
 
-## Examples
-### Prerequisites
+## Prerequisites
 You need all of the following packages installed:
 * Both Files:
     * PIL, numpy, json, logging, os, time
@@ -35,6 +34,12 @@ You need all of the following packages installed:
 * client.py:
     * socket, sys, io, subprocess, inspect,
 
+## Spherical Coordinate System
+The parameters used in this project are all specified in spherical coordinates and the angles are set in degrees. The coordinated system follows the standard convention as described [here](https://en.wikipedia.org/wiki/Spherical_coordinate_system). The only difference is that the y axis is named z in Uinty and the z axis
+is named y.
+
+
+## Examples
 ### 1) Simple Example 
 The following code represents a simple example how to use this project.
 This code creates and plots eight randomly generated images. 
