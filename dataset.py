@@ -13,7 +13,7 @@ import time
 import os
 
 class dataset_cuboids():
-    def __init__(self, dataset_name = None, unique_data_folder = True, debug_log = False, use_unity_build = True):
+    def __init__(self, dataset_name = None, unique_data_folder = True, root_dataset_folder=None, debug_log = False, use_unity_build = True):
         """Sets up logging, the config, necessary paths and a client instance form :class:`~client.client_communicator_to_unity`.
         
         :param dataset_name: If this is not default the created images and parameters are saved into a folder nested in ``data/dataset/`` containing the dataset_name, defaults to None
@@ -57,6 +57,7 @@ class dataset_cuboids():
             assert type(dataset_name) == str , "In dataset.py, __init__() function: dataset_name has to be a string." 
             assert ' ' not in dataset_name,  "In dataset.py, __init__() function: dataset_name does contain white spaces, leads to problems in saving and loading data."
         self.dataset_name = dataset_name
+        self.root_dataset_folder = root_dataset_folder
         self.unique_folder = unique_data_folder
         self.init_time = time.strftime("%Y-%m-%d_%H:%M", time.gmtime())
         self.init_index = self.read_index() + 1
@@ -786,11 +787,16 @@ class dataset_cuboids():
                 full_folder_name = self.dataset_name 
         else:
             full_folder_name = self.init_time + "__starting_from_index__" + str(self.init_index)
-        
+
+        if self.root_dataset_folder==None:
+            directory = "data/dataset/" + full_folder_name
+        else:
+            directory = self.root_dataset_folder + full_folder_name
+        self.logger.debug("Dataset directory:" + directory)
         # Save parameters.
         if save_para:
             # Check and if necessary create directory
-            directory_para = "data/dataset/" + full_folder_name + "/parameters"
+            directory_para = directory + "/parameters"
             if not os.path.exists(directory_para):
                 os.makedirs(directory_para)
             # Check if the parameters and the index is in the dictionary.
@@ -810,7 +816,7 @@ class dataset_cuboids():
         # Save the image as png.
         if save_image:
             # Check and if necessary create directory
-            directory_images = "data/dataset/" + full_folder_name + "/images"
+            directory_images = directory + "/images"
             if not os.path.exists(directory_images):
                 os.makedirs(directory_images)
             # Check if the image and the index is in the dictionary.

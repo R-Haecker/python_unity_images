@@ -43,6 +43,12 @@ is named y.
 ### 1) Simple Example 
 The following code represents a simple example how to use this project.
 This code creates and plots eight randomly generated images. 
+
+Here is the figure of the created images:
+
+![alt text](https://github.com/R-Haecker/python_unity_images/raw/master/data/figures/fig_simple_example__from_index_0_to_index_7.png)
+
+
 ```python
 import dataset
 data = dataset.dataset_cuboids(dataset_name = "simple_example")
@@ -68,11 +74,6 @@ data.plot_images(dictionaries, save_fig = True)
     * ``save_fig = True`` means that the resulting figure is saved at ``data/figures``.
 
 That is it we have successfully created and saved images with a ground truth. 
-
-
-Here is the figure of the plotted images:
-
-![alt text](https://github.com/R-Haecker/python_unity_images/raw/master/data/figures/fig_simple_example__from_index_0_to_index_7.png)
 
 
 ### 2) Advanced Example

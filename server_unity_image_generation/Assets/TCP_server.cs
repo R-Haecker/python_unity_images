@@ -41,10 +41,10 @@ public class TCP_server : MonoBehaviour
         {
             file_path_data_unity = System.Environment.CurrentDirectory.ToString() + "/data/unity/";        
         }
-        System.IO.File.WriteAllText(file_path_data_unity + "started.txt", "1");
+        System.IO.File.WriteAllText(file_path_data_unity + "started.txt", "1"); 
 	}
 	
-	// Update is called once per frame
+	// LateUpdate is called once per frame
 	void LateUpdate() 
     {
         timer += Time.deltaTime;

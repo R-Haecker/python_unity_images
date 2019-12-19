@@ -72,6 +72,7 @@ public class create_crane : MonoBehaviour
                 Destroy(SpotLights[i].Object);
             }
         }
+        
         //load json data from TCP_server script   
         jsonCrane = TCP_server_object.GetComponent<TCP_server>().jsonCrane_here;
         //create enough cubes and hinges

@@ -2,7 +2,6 @@ Mono path[0] = '/home/haecker/Documents/src/git/python_unity_images/build_linux/
 Mono config path = '/home/haecker/Documents/src/git/python_unity_images/build_linux/unity_server_rendering_images_Data/MonoBleedingEdge/etc'
 Preloaded 'ScreenSelector.so'
 Display 0 '0': 1920x1080 (primary device).
-Display 1 'DELL 1908FP 19"': 1024x1280 (secondary device).
 Desktop is 1920 x 1080 @ 60 Hz
 Invalid initial resolution 1 x 1 - forcing to 100 x 100
 Initialize engine version: 2019.2.11f1 (5f859a4cfee5)
@@ -18,14 +17,14 @@ provoking_vertex GL_ARB_query_buffer_object GL_ARB_robust_buffer_access_behavior
 B_texture_cube_map_array GL_ARB_texture_filter_anisotropic GL_ARB_texture_float GL_ARB_texture_gather GL_ARB_texture_mirror_clamp_to_edge GL_ARB_texture_multisample GL_ARB_texture_non_power_of_two GL_ARB_texture_query_levels GL_ARB_texture_query_lod GL_ARB_texture_rectangle GL_ARB_texture_rg GL_ARB_texture_rgb10_a2ui GL_ARB_texture_stencil8 GL_ARB_texture_storage GL_ARB_texture_storage_multisample GL_ARB_texture_swizzle GL_ARB_texture_view GL_ARB_timer_query GL_ARB_transform_feedback2 GL_ARB_transform_feedback3 GL_ARB_transform_feedback_instanced GL_ARB_transform_feedback_overflow_query GL_ARB_uniform_buffer_object GL_ARB_vertex_array_bgra GL_ARB_vertex_array_object GL_ARB_vertex_attrib_64bit GL_ARB_vertex_attrib_binding GL_ARB_vertex_buffer_object GL_ARB_vertex_shader GL_ARB_vertex_type_10f_11f_11f_rev GL_ARB_vertex_type_2_10_10_10_rev GL_ARB_viewport_array GL_ATI_blend_equation_separate GL_ATI_texture_float GL_EXT_abgr GL_EXT_blend_equation_separate GL_EXT_draw_buffers2 GL_EXT_draw_instanced GL_EXT_framebu
 ffer_blit GL_EXT_framebuffer_multisample GL_EXT_framebuffer_multisample_blit_scaled GL_EXT_framebuffer_object GL_EXT_framebuffer_sRGB GL_EXT_packed_depth_stencil GL_EXT_packed_float GL_EXT_pixel_buffer_object GL_EXT_polygon_offset_clamp GL_EXT_provoking_vertex GL_EXT_shader_framebuffer_fetch GL_EXT_shader_framebuffer_fetch_non_coherent GL_EXT_shader_integer_mix GL_EXT_shader_samples_identical GL_EXT_texture_array GL_EXT_texture_compression_dxt1 GL_EXT_texture_compression_rgtc GL_EXT_texture_compression_s3tc GL_EXT_texture_filter_anisotropic GL_EXT_texture_integer GL_EXT_texture_sRGB GL_EXT_texture_sRGB_decode GL_EXT_texture_shared_exponent GL_EXT_texture_snorm GL_EXT_texture_swizzle GL_EXT_timer_query GL_EXT_transform_feedback GL_EXT_vertex_array_bgra GL_EXT_vertex_attrib_64bit GL_IBM_multimode_draw_arrays GL_INTEL_conservative_rasterization GL_INTEL_performance_query GL_INTEL_shader_atomic_float_minmax GL_KHR_blend_equation_advanced GL_KHR_blend_equation_advanced_coherent GL_KHR_context_flush_control GL_KHR
 _debug GL_KHR_no_error GL_KHR_robust_buffer_access_behavior GL_KHR_robustness GL_KHR_texture_compression_astc_ldr GL_KHR_texture_compression_astc_sliced_3d GL_MESA_pack_invert GL_MESA_shader_integer_functions GL_MESA_texture_signed_rgba GL_NV_conditional_render GL_NV_depth_clamp GL_NV_fragment_shader_interlock GL_NV_packed_depth_stencil GL_NV_texture_barrier GL_OES_EGL_image GL_S3_s3tc
-OPENGL LOG: Creating OpenGL 4.5 graphics device ; Context level  <OpenGL 4.5> ; Context handle 70924496
+OPENGL LOG: Creating OpenGL 4.5 graphics device ; Context level  <OpenGL 4.5> ; Context handle 51553744
 Begin MonoManager ReloadAssembly
-- Completed reload, in  0.064 seconds
+- Completed reload, in  0.144 seconds
 Default vsync count 1
 requesting resize 1 x 1
 resizing window to 1 x 1
 Desktop is 1920 x 1080 @ 60 Hz
-UnloadTime: 0.586852 ms
+UnloadTime: 0.956889 ms
 TCP_Server in ListenForMessages: TCPconfig loaded
  
 (Filename: ./Runtime/Export/Debug/Debug.bindings.h Line: 35)
@@ -35,10 +34,10 @@ TCP_Server in ListenForMessages: IPAdress: 127.0.0.1; port: 50050
 (Filename: ./Runtime/Export/Debug/Debug.bindings.h Line: 35)
 
 Setting up 4 worker threads for Enlighten.
-  Thread -> id: 7f868b7fe700 -> priority: 1 
-  Thread -> id: 7f868affd700 -> priority: 1 
-  Thread -> id: 7f868a7fc700 -> priority: 1 
-  Thread -> id: 7f8689ffb700 -> priority: 1 
+  Thread -> id: 7f561e9f2700 -> priority: 1 
+  Thread -> id: 7f561e1f1700 -> priority: 1 
+  Thread -> id: 7f561d9f0700 -> priority: 1 
+  Thread -> id: 7f561d1ef700 -> priority: 1 
 requesting resize 1 x 1
 resizing window to 1 x 1
 Desktop is 1920 x 1080 @ 60 Hz
@@ -106,7 +105,7 @@ TCP_Server in LateUpdate: before CapturePNGasBytes: import newCrane == true;
  
 (Filename: ./Runtime/Export/Debug/Debug.bindings.h Line: 35)
 
-TCP_Server in LateUpdate: before CapturePNGasBytes: Time: 2.764685
+TCP_Server in LateUpdate: before CapturePNGasBytes: Time: 3.082046
  
 (Filename: ./Runtime/Export/Debug/Debug.bindings.h Line: 35)
 
@@ -114,7 +113,7 @@ TCP_Server in LateUpdate: after CapturePNGasBytes:  ready_to_build==false; impor
  
 (Filename: ./Runtime/Export/Debug/Debug.bindings.h Line: 35)
 
-TCP_Server in LateUpdate: after CapturePNGasBytes: Time: 2.766102
+TCP_Server in LateUpdate: after CapturePNGasBytes: Time: 3.084105
  
 (Filename: ./Runtime/Export/Debug/Debug.bindings.h Line: 35)
 
@@ -157,9 +156,4 @@ TCP_Server in ListenForMessages: set: server.Stop(); running_session==false
 TCP_Server in LateUpdate: running_session == false; now closing Unity.
  
 (Filename: ./Runtime/Export/Debug/Debug.bindings.h Line: 35)
-
-Curl error 42: Callback aborted
-
- 
-(Filename: ./Modules/UnityWebRequest/Implementations/TransportCurl.cpp Line: 734)
 

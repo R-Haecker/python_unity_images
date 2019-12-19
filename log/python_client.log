@@ -1,36 +1,38 @@
-2019-12-11 16:59:50,505; client.py - line: 58 -DEBUG: Starting python client.
-2019-12-11 16:59:50,505; client.py - line: 107 -INFO: Use with unity editor, editor should now be running.
+2019-12-12 18:08:21,539; client.py - line: 58 -DEBUG: Starting python client.
+2019-12-12 18:08:21,539; client.py - line: 78 -INFO: Starting Unity...
+2019-12-12 18:08:21,539; client.py - line: 79 -DEBUG: path to unity: /home/haecker/Documents/src/git/python_unity_images/build_linux/unity_server_rendering_images.x86_64
+2019-12-12 18:08:21,543; client.py - line: 92 -INFO: Waiting for unity...
+2019-12-12 18:08:25,050; client.py - line: 119 -INFO: Client now connecting to server.
+2019-12-12 18:08:25,050; client.py - line: 127 -DEBUG: Config data for TCP socket: host: 127.0.0.1; port: 50050
+2019-12-12 18:08:25,051; client.py - line: 136 -INFO: Socket connected.
+2019-12-12 18:08:25,051; client.py - line: 137 -DEBUG: Saving TCP config to self.relative_path_TCPsocket_config.
 
-2019-12-11 16:59:50,505; client.py - line: 119 -INFO: Client now connecting to server.
-2019-12-11 16:59:50,505; client.py - line: 127 -DEBUG: Config data for TCP socket: host: 127.0.0.1; port: 50050
-2019-12-11 16:59:50,505; client.py - line: 136 -INFO: Socket connected.
-2019-12-11 16:59:50,505; client.py - line: 137 -DEBUG: Saving TCP config to self.relative_path_TCPsocket_config.
+2019-12-12 18:08:25,051; dataset.py - line: 53 -DEBUG: Create config.
+2019-12-12 18:08:25,052; dataset.py - line: 64 -DEBUG: Dataset initialised.
 
-2019-12-11 16:59:50,506; dataset.py - line: 53 -DEBUG: Create config.
-2019-12-11 16:59:50,506; dataset.py - line: 63 -DEBUG: Dataset initialised.
+2019-12-12 18:08:25,052; client.py - line: 193 -DEBUG: Json string sent.
 
-2019-12-11 16:59:50,506; client.py - line: 193 -DEBUG: Json string sent.
+2019-12-12 18:08:25,052; client.py - line: 236 -DEBUG: Json string sent.
 
-2019-12-11 16:59:50,507; client.py - line: 236 -DEBUG: Json string sent.
+2019-12-12 18:08:25,400; client.py - line: 243 -DEBUG: Trying to receive data.
+2019-12-12 18:08:25,401; client.py - line: 247 -INFO: Data from Unity received.
+2019-12-12 18:08:25,401; client.py - line: 248 -DEBUG: End_tag detected, unity_resp_bytes[0:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2019-12-12 18:08:25,401; client.py - line: 252 -DEBUG: img_bytes type: <class 'bytearray'>, img_bytes len: 287401, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
+2019-12-12 18:08:25,429; client.py - line: 255 -DEBUG: PIL Img: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
+2019-12-12 18:08:25,547; client.py - line: 257 -DEBUG: Returning img: type: <class 'numpy.ndarray'> 
 
-2019-12-11 16:59:50,659; client.py - line: 243 -DEBUG: Trying to receive data.
-2019-12-11 16:59:50,660; client.py - line: 247 -INFO: Data from Unity received.
-2019-12-11 16:59:50,660; client.py - line: 248 -DEBUG: End_tag detected, unity_resp_bytes[0:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
-2019-12-11 16:59:50,660; client.py - line: 252 -DEBUG: img_bytes type: <class 'bytearray'>, img_bytes len: 293688, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
-2019-12-11 16:59:50,669; client.py - line: 255 -DEBUG: PIL Img: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
-2019-12-11 16:59:50,734; client.py - line: 257 -DEBUG: Returning img: type: <class 'numpy.ndarray'> 
+2019-12-12 18:08:25,550; dataset.py - line: 1158 -DEBUG: index: -1
+2019-12-12 18:08:25,550; dataset.py - line: 1160 -DEBUG: index: 0
+2019-12-12 18:08:25,551; dataset.py - line: 886 -INFO: data completed: Image index: 0
+2019-12-12 18:08:25,551; dataset.py - line: 795 -DEBUG: Dataset directory:~/Documents/2019-12-12_17:08__delete
+2019-12-12 18:08:25,775; client.py - line: 173 -INFO: Exit-message is sent. Unity build and socket now closing.
 
-2019-12-11 16:59:50,734; dataset.py - line: 1152 -DEBUG: index: -1
-2019-12-11 16:59:50,734; dataset.py - line: 1154 -DEBUG: index: 0
-2019-12-11 16:59:50,734; dataset.py - line: 880 -INFO: data completed: Image index: 0
-2019-12-11 16:59:50,937; client.py - line: 175 -INFO: Exit-message is sent. Unity editor can now exit play mode and socket is now closing.
+2019-12-12 18:08:25,776; client.py - line: 190 -DEBUG: Exit request sent.
 
-2019-12-11 16:59:50,937; client.py - line: 190 -DEBUG: Exit request sent.
-
-2019-12-11 16:59:50,937; dataset.py - line: 1195 -DEBUG: Exit socket connection to unity.
-2019-12-11 16:59:50,937; dataset.py - line: 926 -DEBUG: numb_y: 1
-2019-12-11 16:59:50,937; dataset.py - line: 927 -DEBUG: dicts[0]['image'].shape[0]: 1024
-2019-12-11 16:59:50,937; dataset.py - line: 928 -DEBUG: (images_per_row*dicts[0][image].shape[1]: 1024
-2019-12-11 16:59:50,937; dataset.py - line: 929 -DEBUG: dicts[0][image].shape[2]: 3
-2019-12-11 16:59:50,944; dataset.py - line: 931 -DEBUG: h_stacked.shape: (1, 1024, 1024, 3)
-2019-12-11 16:59:50,967; dataset.py - line: 944 -DEBUG: final_img.shape: (1024, 1024, 3)
+2019-12-12 18:08:25,776; dataset.py - line: 1201 -DEBUG: Exit socket connection to unity.
+2019-12-12 18:08:25,776; dataset.py - line: 932 -DEBUG: numb_y: 1
+2019-12-12 18:08:25,776; dataset.py - line: 933 -DEBUG: dicts[0]['image'].shape[0]: 1024
+2019-12-12 18:08:25,776; dataset.py - line: 934 -DEBUG: (images_per_row*dicts[0][image].shape[1]: 1024
+2019-12-12 18:08:25,776; dataset.py - line: 935 -DEBUG: dicts[0][image].shape[2]: 3
+2019-12-12 18:08:25,782; dataset.py - line: 937 -DEBUG: h_stacked.shape: (1, 1024, 1024, 3)
+2019-12-12 18:08:25,803; dataset.py - line: 950 -DEBUG: final_img.shape: (1024, 1024, 3)
