@@ -169,8 +169,8 @@ public class create_crane : MonoBehaviour
 
         theta_rad_sumed = new float [jsonCrane.total_cuboids];
         theta_deg_sumed = new float [jsonCrane.total_cuboids];    
-        theta_rad_sumed[0] = jsonCrane.cuboids[0].theta_deg/180 * Mathf.PI;    
-        theta_deg_sumed[0] = jsonCrane.cuboids[0].theta_deg;
+        theta_rad_sumed[0] = 0; //jsonCrane.cuboids[0].theta_deg/180 * Mathf.PI;    
+        theta_deg_sumed[0] = 0; //jsonCrane.cuboids[0].theta_deg;
         //put the first hinge and cube on the right position
         cubes[0].transform.position = new Vector3(0,0,0);        
         hinges[0] = new Vector3(cubes[0].transform.localScale.x/2,cubes[0].transform.localScale.y/2,0);

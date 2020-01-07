@@ -247,7 +247,7 @@ ScriptsOnlyBuild:
     className: SignalTrack
   - hash:
       serializedVersion: 2
-      Hash: 13f740e964d649eaf8f38a2becd59974
+      Hash: e999b5d33fee2a2ef4658d703ce4fe1c
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: TCP_server
@@ -470,4 +470,4 @@ ScriptsOnlyBuild:
   platform: 19
   scenePathNames:
   - Assets/Scenes/empty_scene_for_image_generation.unity
-  playerPath: /home/haecker/Documents/src/git/python_unity_images/build_windows/server_unity_image_generation.exe
+  playerPath: /home/haecker/Documents/src/git/python_unity_images/build_windows/MonoBleedingEdge/server_unity_image_generation.exe
