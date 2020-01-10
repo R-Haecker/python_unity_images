@@ -14,7 +14,7 @@ import os
 from os.path import expanduser
 
 class dataset_cuboids():
-    def __init__(self, dataset_name = None, unique_data_folder = True, from_home_dataset_folder=None, debug_log = False, use_unity_build = True):
+    def __init__(self, dataset_name = None, unique_data_folder = True, from_home_dataset_directory=None, debug_log = False, use_unity_build = True):
         """Sets up logging, the config, necessary paths and a client instance form :class:`~client.client_communicator_to_unity`.
         
         :param dataset_name: If this is not default the created images and parameters are saved into a folder nested in ``data/dataset/`` containing the dataset_name, defaults to None
@@ -51,20 +51,39 @@ class dataset_cuboids():
         with open(self.log_path, 'w'):
             pass
         
-        self.logger.debug("Create config.")
-        # Create dataset config for random parameter creation and set the default intervalls for all random generated parameters
-        self.set_config()
         if dataset_name != None:
             assert type(dataset_name) == str , "In dataset.py, __init__() function: dataset_name has to be a string." 
             assert ' ' not in dataset_name,  "In dataset.py, __init__() function: dataset_name does contain white spaces, leads to problems in saving and loading data."
-        self.dataset_name = dataset_name
-        self.from_home_dataset_folder = from_home_dataset_folder
-        self.unique_folder = unique_data_folder
+        
         self.init_time = time.strftime("%Y-%m-%d_%H:%M", time.gmtime())
         self.init_index = self.read_index() + 1
-        self.logger.debug("Dataset initialised.\n")        
 
-    def set_config(self,same_scale=None, scale=[0.5,4], total_cuboids=[2,5], phi=[0,360], specify_branches=False, branches=[1,3], same_theta=None, theta=None, 
+        # Create unique name for the folder where the dataset is saved
+        if dataset_name != None:
+            if unique_data_folder:
+                full_folder_name = self.init_time + "__" + dataset_name 
+            else:
+                full_folder_name = dataset_name 
+        else:
+            full_folder_name = self.init_time + "__starting_from_index__" + str(self.init_index)
+
+        if from_home_dataset_directory==None:
+            directory = "data/dataset/" + full_folder_name
+        else:
+            assert from_home_dataset_directory[-1] == "/" , "from_home_dataset_directory is string for a directory, has to end with '/'."
+            home = expanduser("~")
+            self.logger.debug("home directory: " + str(home))
+            directory = home + from_home_dataset_directory + full_folder_name
+        self.data_directory = directory
+        self.logger.debug("Dataset directory:" + directory)
+        
+        self.logger.debug("Create config.")
+        # Create dataset config for random parameter creation and set the default intervalls for all random generated parameters
+        self.set_config()
+
+        self.logger.debug("Dataset initialised.\n")     
+
+    def set_config(self, save_config = True, same_scale=None, scale=[0.5,4], total_cuboids=[2,5], phi=[0,360], specify_branches=False, branches=[1,3], same_theta=None, theta=None, 
     same_material=None, specify_material=False, r=[0,1], g=[0,1], b=[0,1], a=[0.5,1], metallic=[0,1], smoothness=[0,1], CameraRes_width= 1024, CameraRes_height=1024, Camera_FieldofView=90, CameraRadius = 10.0, CameraTheta = [60,100], CameraPhi = [0,360], CameraVerticalOffset = None, Camera_solid_background = False,
     totalPointLights=[5,12], PointLightsRadius=[5,20], PointLightsPhi=[0,360], PointLightsTheta=[0,90], PointLightsIntensity=[7,17], PointLightsRange=[5,25], same_PointLightsColor=None, PointLightsColor_r=[0,1], PointLightsColor_g=[0,1], PointLightsColor_b=[0,1], PointLightsColor_a=[0.5,1],
     totalSpotLights=[3,7], SpotLightsRadius=[5,20], SpotLightsPhi=[0,360], SpotLightsTheta=[0,90], SpotLightsIntensity=[5,15], SpotLightsRange=[5,25], SpotAngle=[5,120], same_SpotLightsColor=None, SpotLightsColor_r=[0,1], SpotLightsColor_g=[0,1], SpotLightsColor_b=[0,1], SpotLightsColor_a=[0.5,1],
@@ -72,6 +91,8 @@ class dataset_cuboids():
         """Sets a config for this class instace which determines the interval for all random parameters created in the function :meth:`~dataset.dataset_cuboids.create_random_parameters`. The meaning of all the parameters are explained in this function: :meth:`~client.client_communicator_to_unity.write_json_crane`. 
         Here are only those parameters mentioned which deviate from the ``standard_parameter``. You can also specify and set parameters which should not be generated randomly.
         
+        :param "save_config": This flag indicates if the config should be saved. It should be kept at the default: ``True``. 
+        :type "save_config": bool, optional
         :param "standard_parameter": Has to be a list with two floats. The first element describes the lower boundary and second element describes the upper boundary for the function :meth:`~dataset.dataset_cuboids.create_random_parameters` in which the variable is set randomly, defaults is a predefined list
         :type "standard parameter": list, optional
         :param same_scale: If ``None`` the boolean will be set randomly in :meth:`~dataset.dataset_cuboids.create_random_parameters`. Otherwise it will be set to the given boolean, defaults to None
@@ -329,8 +350,57 @@ class dataset_cuboids():
             config["SpotLightsColor_b"]=SpotLightsColor_b
             assert len(SpotLightsColor_a) == 2, "SpotLightsColor_a[0] is minimal limit and SpotLightsColor_a[1] is maximal limit for random generation of SpotLightsColor_a."
             config["SpotLightsColor_a"]=SpotLightsColor_a
-            
+        
+        config["seed"] = np.random.randint(np.iinfo(np.int32).max)
+        np.random.seed(config["seed"])
+        self.logger.debug("Config Seed: " + str(config["seed"]))
         self.config = config
+        
+        # Save the config for a dataset
+        if save_config:
+            if not os.path.exists(self.data_directory + "/config"):
+                os.makedirs(self.data_directory + "/config")
+            conf_path = self.data_directory + "/config/" + str(time.strftime("%Y-%m-%d_%H:%M:%S", time.gmtime())) + '_config.json'
+            i=0
+            while os.path.exists(conf_path):
+                i+=1
+                conf_path = self.data_directory + "/config/" + str(time.strftime("%Y-%m-%d_%H:%M:%S", time.gmtime())) + '_config(' + str(i) + ').json'
+            with open(conf_path, 'w') as f:
+                json.dump(config,f)
+                f.close()
+
+    def load_config(self, index_config=0, file_name=None):
+        """This enables you to load an old config to replicate a dataset.
+        
+        :param index_config: This will give you the latest config if set to zero, if set to one it will set the the second latest config and so on, defaults to ``0``
+        :type index_config: int, optional
+        :param file_name: This specifies the file name. If this is not default the specified file will be loaded, defaults to ``None``
+        :type file_name: string or None, optional
+        """        
+        if file_name!=None:
+            assert type(file_name)==str , "The file_name of the loading config has to be a string"
+            if file_name[-5:] != ".json":
+                file_name += ".json"
+            try:
+                with open(self.data_directory + "/config/" + file_name) as f:    
+                    self.config = json.load(f)
+                    f.close()
+            except FileNotFoundError:
+                self.logger.debug("this config could not be loaded:" + self.data_directory + "/config/" + file_name + ";  check for spelling mistakes for file_name: " + file_name + ", or if the file is in the right directory: " + self.data_directory + "/config/")
+        else:
+            files = os.listdir(self.data_directory + "/config/")
+            paths = [os.path.join(self.data_directory + "/config/", basename) for basename in files]
+            for i in range(1+index_config):
+                final = max(paths, key=os.path.getctime)
+                paths.remove(final)
+            try:
+                with open(final) as f:    
+                    self.config = json.load(f)
+                    f.close()
+            except FileNotFoundError:
+                self.logger.debug("config could not be loaded:" + final + ";  check that index_config is smaller than the amount of all config files -1; or if the file is in the right directory: " + self.data_directory + "/config/")
+        
+        np.random.seed(self.config["seed"])
     
     def create_random_parameters(self):
         """Creates random input parameters depending on your config which defines the interval for the generated parameters, the camera parameters are not set randomly
@@ -349,10 +419,6 @@ class dataset_cuboids():
         dictionary["CameraRes_height"] = self.config["CameraRes_height"] 
         dictionary["Camera_FieldofView"] = self.config["Camera_FieldofView"]
         
-        # If needed you could save the seed
-        #np.random.seed(Seed)
-        #dictionary["seed"] = np.random.get_state()
-
         # Create all parameters randomly 
         
         # Camera position
@@ -754,7 +820,6 @@ class dataset_cuboids():
 
         return dictionary 
 
-
     def create_json_string_from_parameters(self, dictionary):
         """
         Inputs the parameters/dictionary into the function :meth:`~client.client_communicator_to_unity.write_json_crane`.
@@ -770,36 +835,27 @@ class dataset_cuboids():
             totalSpotLights=dictionary["totalSpotLights"], same_SpotLightsColor=dictionary["same_SpotLightsColor"], SpotLightsColor_r=dictionary["SpotLightsColor_r"], SpotLightsColor_g=dictionary["SpotLightsColor_g"], SpotLightsColor_b=dictionary["SpotLightsColor_b"], SpotLightsColor_a=dictionary["SpotLightsColor_a"], SpotLightsRadius=dictionary["SpotLightsRadius"], SpotLightsTheta=dictionary["SpotLightsTheta"], SpotLightsPhi=dictionary["SpotLightsPhi"], SpotLightsIntensity=dictionary["SpotLightsIntensity"], SpotLightsRange=dictionary["SpotLightsRange"],SpotAngle=dictionary["SpotAngle"],
             DirectionalLightTheta=dictionary["DirectionalLightTheta"], DirectionalLightIntensity=dictionary["DirectionalLightIntensity"])
 
-    def save(self, dictionary, save_para = True, save_image = False):
+    def save(self, dictionary, save_image = False, save_para = None):
         """Save parameter data or/and an image of a dictionary in the ``data/parameters`` folder or the ``data/images`` folder. The saved parameters can be loaded with :meth:`~dataset.dataset_cuboids.load_parameters` and then manipulated to create an altered image.
         
         :param dictionary: A dictionary with keys as "index", "parameters" and if needed "image". For example a returned dictionary from :meth:`~dataset.dataset_cuboids.parameters_to_finished_data`.
         :type dictionary: dictionary
-        :param save_para: If the parameters should be saved to ``data/parameters`` labeled with the index if available, defaults to True
+        :param save_para: If the parameters should be saved to ``data/parameters`` labeled with the index if available, if ``None`` and there is no seed save in the config, defaults to ``None``
         :type save_para: bool, optional
-        :param save_image: If the image should be saved to ``data/images`` labeled with the index if available, defaults to False
+        :param save_image: If the image should be saved to ``data/images`` labeled with the index if available, defaults to ``False``
         :type save_image: bool, optional
         """ 
-        # Create unique name for the folder where the dataset is saved
-        if self.dataset_name != None:
-            if self.unique_folder:
-                full_folder_name = self.init_time + "__" + self.dataset_name 
-            else:
-                full_folder_name = self.dataset_name 
-        else:
-            full_folder_name = self.init_time + "__starting_from_index__" + str(self.init_index)
-
-        if self.from_home_dataset_folder==None:
-            directory = "data/dataset/" + full_folder_name
-        else:
-            home = expanduser("~")
-            self.logger.debug("home directory: " + str(home))
-            directory = home + self.from_home_dataset_folder + full_folder_name
-        self.logger.debug("Dataset directory:" + directory)
         # Save parameters.
+        if save_para==None:
+            if "seed" in self.config:
+                self.logger.debug("key: 'seed' is found in config")
+                save_para=False
+            else:
+                save_para=True
+                self.logger.debug("key: 'seed' is not found in config")
         if save_para:
             # Check and if necessary create directory
-            directory_para = directory + "/parameters"
+            directory_para = self.data_directory + "/parameters"
             if not os.path.exists(directory_para):
                 os.makedirs(directory_para)
             # Check if the parameters and the index is in the dictionary.
@@ -819,7 +875,7 @@ class dataset_cuboids():
         # Save the image as png.
         if save_image:
             # Check and if necessary create directory
-            directory_images = directory + "/images"
+            directory_images = self.data_directory + "/images"
             if not os.path.exists(directory_images):
                 os.makedirs(directory_images)
             # Check if the image and the index is in the dictionary.
@@ -866,14 +922,14 @@ class dataset_cuboids():
         else:
             return parameter_list    
    
-    def parameters_to_finished_data(self, parameters, save_para = True, save_image = False):
+    def parameters_to_finished_data(self, parameters, save_image = True, save_para = None):
         """Input parameters and get an corresponding image. 
         
         :param parameters: Parameters to use for :meth:`~dataset.dataset_cuboids.create_json_string_from_parameters`.
         :type parameters: dictionary
-        :param save_para: If the parameters should be saved at ``data/parameters``, defaults to True
-        :type save_para: bool, optional
-        :param save_image: If the image should be saved at ``data/images``, defaults to False
+        :param save_para: If the parameters should be saved at ``data/parameters``, if ``None`` they will not be created if a seed is available in the config, defaults to None
+        :type save_para: bool or None, optional
+        :param save_image: If the image should be saved at ``data/images``, defaults to True
         :type save_image: bool, optional
         :return: A dictionary with all relevant data in keys as "index","parameters" and "image". 
         :rtype: dictionary
@@ -891,11 +947,11 @@ class dataset_cuboids():
         self.save(newDict, save_para = save_para, save_image = save_image)
         return newDict  
 
-    def get_example(self, save_para = True, save_image = False, index = None):
+    def get_example(self, save_image = False, save_para = None, index = None):
         """Create an example of the dataset.
         
-        :param save_para: If the parameters should be saved at ``data/parameters``, defaults to True
-        :type save_para: bool, optional
+        :param save_para: If the parameters should be saved at ``data/parameters``, if set to ``None`` they will not be created if a seed is available in the config, defaults to None
+        :type save_para: bool or None, optional
         :param save_image: If the image should be saved at ``data/images``, defaults to False
         :type save_image: bool, optional
         :param index: Shoukd be default. If specified the the new data will overwrite the old data at the given index if available, defaults to None
@@ -973,10 +1029,9 @@ class dataset_cuboids():
         plt.ylim(0, (numb_y)*dicts[0]["image"].shape[0])
         # Save figure if wanted.
         if save_fig:
-            if self.dataset_name != None:
-                plt.savefig("data/figures/fig_" + self.dataset_name + "__from_index_" + str(dicts[0]["index"]) + "_to_index_" + str(dicts[len(dicts)-1]["index"]) + ".png", bbox_inches='tight')
-            else:
-                plt.savefig("data/figures/fig_from_index_" + str(dicts[0]["index"]) + "_to_index_" + str(dicts[len(dicts)-1]["index"]) + ".png", bbox_inches='tight')
+            if not os.path.exists(self.data_directory + "/figures/"):
+                os.makedirs(self.data_directory + "/figures/")
+            plt.savefig(self.data_directory + "/figures/fig_from_index_" + str(dicts[0]["index"]) + "_to_index_" + str(dicts[len(dicts)-1]["index"]) + ".png", bbox_inches='tight')
         plt.show()
 
     def change_app1_art2(self, para1, para2):

@@ -1,183 +1,628 @@
-2020-01-07 17:11:14,666; client.py - line: 58 -DEBUG: Starting python client.
-2020-01-07 17:11:14,667; client.py - line: 78 -INFO: Starting Unity...
-2020-01-07 17:11:14,667; client.py - line: 79 -DEBUG: path to unity: /home/haecker/Documents/src/git/python_unity_images/build_linux/unity_server_rendering_images.x86_64
-2020-01-07 17:11:14,670; client.py - line: 92 -INFO: Waiting for unity...
-2020-01-07 17:11:17,675; client.py - line: 119 -INFO: Client now connecting to server.
-2020-01-07 17:11:17,675; client.py - line: 127 -DEBUG: Config data for TCP socket: host: 127.0.0.1; port: 50050
-2020-01-07 17:11:17,676; client.py - line: 136 -INFO: Socket connected.
-2020-01-07 17:11:17,676; client.py - line: 137 -DEBUG: Saving TCP config to self.relative_path_TCPsocket_config.
+2020-01-10 16:56:17,048; client.py - line: 58 -DEBUG: Starting python client.
+2020-01-10 16:56:17,048; client.py - line: 78 -INFO: Starting Unity...
+2020-01-10 16:56:17,048; client.py - line: 79 -DEBUG: path to unity: /home/haecker/Documents/src/git/python_unity_images/build_linux/unity_server_rendering_images.x86_64
+2020-01-10 16:56:17,052; client.py - line: 92 -INFO: Waiting for unity...
+2020-01-10 16:56:20,058; client.py - line: 119 -INFO: Client now connecting to server.
+2020-01-10 16:56:20,059; client.py - line: 127 -DEBUG: Config data for TCP socket: host: 127.0.0.1; port: 50050
+2020-01-10 16:56:20,060; client.py - line: 136 -INFO: Socket connected.
+2020-01-10 16:56:20,060; client.py - line: 137 -DEBUG: Saving TCP config to self.relative_path_TCPsocket_config.
 
-2020-01-07 17:11:17,676; dataset.py - line: 54 -DEBUG: Create config.
-2020-01-07 17:11:17,677; dataset.py - line: 65 -DEBUG: Dataset initialised.
+2020-01-10 16:56:20,064; dataset.py - line: 75 -DEBUG: home directory: /home/haecker
+2020-01-10 16:56:20,065; dataset.py - line: 78 -DEBUG: Dataset directory:/home/haecker/Documents/auto_encoder/data/2020-01-10_15:56__first_ae
+2020-01-10 16:56:20,066; dataset.py - line: 80 -DEBUG: Create config.
+2020-01-10 16:56:20,068; dataset.py - line: 356 -DEBUG: Config Seed: 27436035
+2020-01-10 16:56:20,071; dataset.py - line: 84 -DEBUG: Dataset initialised.
 
-2020-01-07 17:11:17,678; client.py - line: 193 -DEBUG: Json string sent.
+2020-01-10 16:56:20,072; dataset.py - line: 356 -DEBUG: Config Seed: 393248680
+2020-01-10 16:56:20,075; client.py - line: 193 -DEBUG: Json string sent.
 
-2020-01-07 17:11:17,678; client.py - line: 236 -DEBUG: Json string sent.
+2020-01-10 16:56:20,076; client.py - line: 236 -DEBUG: Json string sent.
 
-2020-01-07 17:11:17,847; client.py - line: 243 -DEBUG: Trying to receive data.
-2020-01-07 17:11:17,848; client.py - line: 247 -INFO: Data from Unity received.
-2020-01-07 17:11:17,848; client.py - line: 248 -DEBUG: End_tag detected, unity_resp_bytes[0:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
-2020-01-07 17:11:17,848; client.py - line: 252 -DEBUG: img_bytes type: <class 'bytearray'>, img_bytes len: 24178, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
-2020-01-07 17:11:17,859; client.py - line: 255 -DEBUG: PIL Img: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
-2020-01-07 17:11:17,914; client.py - line: 257 -DEBUG: Returning img: type: <class 'numpy.ndarray'> 
+2020-01-10 16:56:20,245; client.py - line: 243 -DEBUG: Trying to receive data.
+2020-01-10 16:56:20,245; client.py - line: 247 -INFO: Data from Unity received.
+2020-01-10 16:56:20,245; client.py - line: 248 -DEBUG: End_tag detected, unity_resp_bytes[0:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2020-01-10 16:56:20,245; client.py - line: 252 -DEBUG: img_bytes type: <class 'bytearray'>, img_bytes len: 47358, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
+2020-01-10 16:56:20,258; client.py - line: 255 -DEBUG: PIL Img: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
+2020-01-10 16:56:20,310; client.py - line: 257 -DEBUG: Returning img: type: <class 'numpy.ndarray'> 
 
-2020-01-07 17:11:17,915; dataset.py - line: 1161 -DEBUG: index: -1
-2020-01-07 17:11:17,915; dataset.py - line: 1163 -DEBUG: index: 0
-2020-01-07 17:11:17,915; dataset.py - line: 889 -INFO: data completed: Image index: 0
-2020-01-07 17:11:17,915; dataset.py - line: 796 -DEBUG: home directory: /home/haecker
-2020-01-07 17:11:17,915; dataset.py - line: 798 -DEBUG: Dataset directory:/home/haecker/Documents/auto_encoder/data2020-01-07_16:11__first_ae
-2020-01-07 17:11:17,976; client.py - line: 193 -DEBUG: Json string sent.
+2020-01-10 16:56:20,311; dataset.py - line: 1216 -DEBUG: index: -1
+2020-01-10 16:56:20,311; dataset.py - line: 1218 -DEBUG: index: 0
+2020-01-10 16:56:20,312; dataset.py - line: 945 -INFO: data completed: Image index: 0
+2020-01-10 16:56:20,312; dataset.py - line: 851 -DEBUG: key: 'seed' is found in config
+2020-01-10 16:56:20,405; client.py - line: 193 -DEBUG: Json string sent.
 
-2020-01-07 17:11:17,977; client.py - line: 236 -DEBUG: Json string sent.
+2020-01-10 16:56:20,405; client.py - line: 236 -DEBUG: Json string sent.
 
-2020-01-07 17:11:18,099; client.py - line: 243 -DEBUG: Trying to receive data.
-2020-01-07 17:11:18,099; client.py - line: 247 -INFO: Data from Unity received.
-2020-01-07 17:11:18,100; client.py - line: 248 -DEBUG: End_tag detected, unity_resp_bytes[0:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
-2020-01-07 17:11:18,100; client.py - line: 252 -DEBUG: img_bytes type: <class 'bytearray'>, img_bytes len: 33196, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
-2020-01-07 17:11:18,100; client.py - line: 255 -DEBUG: PIL Img: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
-2020-01-07 17:11:18,129; client.py - line: 257 -DEBUG: Returning img: type: <class 'numpy.ndarray'> 
+2020-01-10 16:56:20,519; client.py - line: 243 -DEBUG: Trying to receive data.
+2020-01-10 16:56:20,520; client.py - line: 247 -INFO: Data from Unity received.
+2020-01-10 16:56:20,520; client.py - line: 248 -DEBUG: End_tag detected, unity_resp_bytes[0:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2020-01-10 16:56:20,520; client.py - line: 252 -DEBUG: img_bytes type: <class 'bytearray'>, img_bytes len: 27688, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
+2020-01-10 16:56:20,520; client.py - line: 255 -DEBUG: PIL Img: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
+2020-01-10 16:56:20,545; client.py - line: 257 -DEBUG: Returning img: type: <class 'numpy.ndarray'> 
 
-2020-01-07 17:11:18,130; dataset.py - line: 1161 -DEBUG: index: 0
-2020-01-07 17:11:18,130; dataset.py - line: 1163 -DEBUG: index: 1
-2020-01-07 17:11:18,130; dataset.py - line: 889 -INFO: data completed: Image index: 1
-2020-01-07 17:11:18,130; dataset.py - line: 796 -DEBUG: home directory: /home/haecker
-2020-01-07 17:11:18,130; dataset.py - line: 798 -DEBUG: Dataset directory:/home/haecker/Documents/auto_encoder/data2020-01-07_16:11__first_ae
-2020-01-07 17:11:18,206; client.py - line: 193 -DEBUG: Json string sent.
+2020-01-10 16:56:20,546; dataset.py - line: 1216 -DEBUG: index: 0
+2020-01-10 16:56:20,546; dataset.py - line: 1218 -DEBUG: index: 1
+2020-01-10 16:56:20,546; dataset.py - line: 945 -INFO: data completed: Image index: 1
+2020-01-10 16:56:20,547; dataset.py - line: 851 -DEBUG: key: 'seed' is found in config
+2020-01-10 16:56:20,623; client.py - line: 193 -DEBUG: Json string sent.
 
-2020-01-07 17:11:18,206; client.py - line: 236 -DEBUG: Json string sent.
+2020-01-10 16:56:20,623; client.py - line: 236 -DEBUG: Json string sent.
 
-2020-01-07 17:11:18,345; client.py - line: 243 -DEBUG: Trying to receive data.
-2020-01-07 17:11:18,345; client.py - line: 247 -INFO: Data from Unity received.
-2020-01-07 17:11:18,345; client.py - line: 248 -DEBUG: End_tag detected, unity_resp_bytes[0:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
-2020-01-07 17:11:18,346; client.py - line: 252 -DEBUG: img_bytes type: <class 'bytearray'>, img_bytes len: 18418, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
-2020-01-07 17:11:18,346; client.py - line: 255 -DEBUG: PIL Img: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
-2020-01-07 17:11:18,361; client.py - line: 257 -DEBUG: Returning img: type: <class 'numpy.ndarray'> 
+2020-01-10 16:56:20,770; client.py - line: 243 -DEBUG: Trying to receive data.
+2020-01-10 16:56:20,770; client.py - line: 247 -INFO: Data from Unity received.
+2020-01-10 16:56:20,771; client.py - line: 248 -DEBUG: End_tag detected, unity_resp_bytes[0:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2020-01-10 16:56:20,771; client.py - line: 252 -DEBUG: img_bytes type: <class 'bytearray'>, img_bytes len: 36345, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
+2020-01-10 16:56:20,771; client.py - line: 255 -DEBUG: PIL Img: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
+2020-01-10 16:56:20,795; client.py - line: 257 -DEBUG: Returning img: type: <class 'numpy.ndarray'> 
 
-2020-01-07 17:11:18,362; dataset.py - line: 1161 -DEBUG: index: 1
-2020-01-07 17:11:18,362; dataset.py - line: 1163 -DEBUG: index: 2
-2020-01-07 17:11:18,362; dataset.py - line: 889 -INFO: data completed: Image index: 2
-2020-01-07 17:11:18,363; dataset.py - line: 796 -DEBUG: home directory: /home/haecker
-2020-01-07 17:11:18,363; dataset.py - line: 798 -DEBUG: Dataset directory:/home/haecker/Documents/auto_encoder/data2020-01-07_16:11__first_ae
-2020-01-07 17:11:18,424; client.py - line: 193 -DEBUG: Json string sent.
+2020-01-10 16:56:20,795; dataset.py - line: 1216 -DEBUG: index: 1
+2020-01-10 16:56:20,795; dataset.py - line: 1218 -DEBUG: index: 2
+2020-01-10 16:56:20,796; dataset.py - line: 945 -INFO: data completed: Image index: 2
+2020-01-10 16:56:20,796; dataset.py - line: 851 -DEBUG: key: 'seed' is found in config
+2020-01-10 16:56:20,905; client.py - line: 193 -DEBUG: Json string sent.
 
-2020-01-07 17:11:18,424; client.py - line: 236 -DEBUG: Json string sent.
+2020-01-10 16:56:20,905; client.py - line: 236 -DEBUG: Json string sent.
 
-2020-01-07 17:11:18,563; client.py - line: 243 -DEBUG: Trying to receive data.
-2020-01-07 17:11:18,563; client.py - line: 247 -INFO: Data from Unity received.
-2020-01-07 17:11:18,564; client.py - line: 248 -DEBUG: End_tag detected, unity_resp_bytes[0:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
-2020-01-07 17:11:18,564; client.py - line: 252 -DEBUG: img_bytes type: <class 'bytearray'>, img_bytes len: 28460, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
-2020-01-07 17:11:18,564; client.py - line: 255 -DEBUG: PIL Img: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
-2020-01-07 17:11:18,583; client.py - line: 257 -DEBUG: Returning img: type: <class 'numpy.ndarray'> 
+2020-01-10 16:56:21,019; client.py - line: 243 -DEBUG: Trying to receive data.
+2020-01-10 16:56:21,020; client.py - line: 247 -INFO: Data from Unity received.
+2020-01-10 16:56:21,020; client.py - line: 248 -DEBUG: End_tag detected, unity_resp_bytes[0:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2020-01-10 16:56:21,020; client.py - line: 252 -DEBUG: img_bytes type: <class 'bytearray'>, img_bytes len: 46035, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
+2020-01-10 16:56:21,020; client.py - line: 255 -DEBUG: PIL Img: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
+2020-01-10 16:56:21,039; client.py - line: 257 -DEBUG: Returning img: type: <class 'numpy.ndarray'> 
 
-2020-01-07 17:11:18,584; dataset.py - line: 1161 -DEBUG: index: 2
-2020-01-07 17:11:18,584; dataset.py - line: 1163 -DEBUG: index: 3
-2020-01-07 17:11:18,584; dataset.py - line: 889 -INFO: data completed: Image index: 3
-2020-01-07 17:11:18,584; dataset.py - line: 796 -DEBUG: home directory: /home/haecker
-2020-01-07 17:11:18,584; dataset.py - line: 798 -DEBUG: Dataset directory:/home/haecker/Documents/auto_encoder/data2020-01-07_16:11__first_ae
-2020-01-07 17:11:18,657; client.py - line: 193 -DEBUG: Json string sent.
+2020-01-10 16:56:21,039; dataset.py - line: 1216 -DEBUG: index: 2
+2020-01-10 16:56:21,039; dataset.py - line: 1218 -DEBUG: index: 3
+2020-01-10 16:56:21,040; dataset.py - line: 945 -INFO: data completed: Image index: 3
+2020-01-10 16:56:21,040; dataset.py - line: 851 -DEBUG: key: 'seed' is found in config
+2020-01-10 16:56:21,123; client.py - line: 193 -DEBUG: Json string sent.
 
-2020-01-07 17:11:18,658; client.py - line: 236 -DEBUG: Json string sent.
+2020-01-10 16:56:21,123; client.py - line: 236 -DEBUG: Json string sent.
 
-2020-01-07 17:11:18,779; client.py - line: 243 -DEBUG: Trying to receive data.
-2020-01-07 17:11:18,779; client.py - line: 247 -INFO: Data from Unity received.
-2020-01-07 17:11:18,779; client.py - line: 248 -DEBUG: End_tag detected, unity_resp_bytes[0:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
-2020-01-07 17:11:18,779; client.py - line: 252 -DEBUG: img_bytes type: <class 'bytearray'>, img_bytes len: 26328, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
-2020-01-07 17:11:18,780; client.py - line: 255 -DEBUG: PIL Img: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
-2020-01-07 17:11:18,799; client.py - line: 257 -DEBUG: Returning img: type: <class 'numpy.ndarray'> 
+2020-01-10 16:56:21,238; client.py - line: 243 -DEBUG: Trying to receive data.
+2020-01-10 16:56:21,238; client.py - line: 247 -INFO: Data from Unity received.
+2020-01-10 16:56:21,238; client.py - line: 248 -DEBUG: End_tag detected, unity_resp_bytes[0:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2020-01-10 16:56:21,238; client.py - line: 252 -DEBUG: img_bytes type: <class 'bytearray'>, img_bytes len: 18069, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
+2020-01-10 16:56:21,239; client.py - line: 255 -DEBUG: PIL Img: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
+2020-01-10 16:56:21,256; client.py - line: 257 -DEBUG: Returning img: type: <class 'numpy.ndarray'> 
 
-2020-01-07 17:11:18,799; dataset.py - line: 1161 -DEBUG: index: 3
-2020-01-07 17:11:18,799; dataset.py - line: 1163 -DEBUG: index: 4
-2020-01-07 17:11:18,800; dataset.py - line: 889 -INFO: data completed: Image index: 4
-2020-01-07 17:11:18,800; dataset.py - line: 796 -DEBUG: home directory: /home/haecker
-2020-01-07 17:11:18,800; dataset.py - line: 798 -DEBUG: Dataset directory:/home/haecker/Documents/auto_encoder/data2020-01-07_16:11__first_ae
-2020-01-07 17:11:18,873; client.py - line: 193 -DEBUG: Json string sent.
+2020-01-10 16:56:21,256; dataset.py - line: 1216 -DEBUG: index: 3
+2020-01-10 16:56:21,256; dataset.py - line: 1218 -DEBUG: index: 4
+2020-01-10 16:56:21,256; dataset.py - line: 945 -INFO: data completed: Image index: 4
+2020-01-10 16:56:21,257; dataset.py - line: 851 -DEBUG: key: 'seed' is found in config
+2020-01-10 16:56:21,321; client.py - line: 193 -DEBUG: Json string sent.
 
-2020-01-07 17:11:18,874; client.py - line: 236 -DEBUG: Json string sent.
+2020-01-10 16:56:21,321; client.py - line: 236 -DEBUG: Json string sent.
 
-2020-01-07 17:11:19,009; client.py - line: 243 -DEBUG: Trying to receive data.
-2020-01-07 17:11:19,009; client.py - line: 247 -INFO: Data from Unity received.
-2020-01-07 17:11:19,009; client.py - line: 248 -DEBUG: End_tag detected, unity_resp_bytes[0:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
-2020-01-07 17:11:19,009; client.py - line: 252 -DEBUG: img_bytes type: <class 'bytearray'>, img_bytes len: 42775, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
-2020-01-07 17:11:19,009; client.py - line: 255 -DEBUG: PIL Img: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
-2020-01-07 17:11:19,028; client.py - line: 257 -DEBUG: Returning img: type: <class 'numpy.ndarray'> 
+2020-01-10 16:56:21,436; client.py - line: 243 -DEBUG: Trying to receive data.
+2020-01-10 16:56:21,436; client.py - line: 247 -INFO: Data from Unity received.
+2020-01-10 16:56:21,437; client.py - line: 248 -DEBUG: End_tag detected, unity_resp_bytes[0:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2020-01-10 16:56:21,437; client.py - line: 252 -DEBUG: img_bytes type: <class 'bytearray'>, img_bytes len: 38357, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
+2020-01-10 16:56:21,437; client.py - line: 255 -DEBUG: PIL Img: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
+2020-01-10 16:56:21,452; client.py - line: 257 -DEBUG: Returning img: type: <class 'numpy.ndarray'> 
 
-2020-01-07 17:11:19,029; dataset.py - line: 1161 -DEBUG: index: 4
-2020-01-07 17:11:19,029; dataset.py - line: 1163 -DEBUG: index: 5
-2020-01-07 17:11:19,029; dataset.py - line: 889 -INFO: data completed: Image index: 5
-2020-01-07 17:11:19,029; dataset.py - line: 796 -DEBUG: home directory: /home/haecker
-2020-01-07 17:11:19,029; dataset.py - line: 798 -DEBUG: Dataset directory:/home/haecker/Documents/auto_encoder/data2020-01-07_16:11__first_ae
-2020-01-07 17:11:19,096; client.py - line: 193 -DEBUG: Json string sent.
+2020-01-10 16:56:21,452; dataset.py - line: 1216 -DEBUG: index: 4
+2020-01-10 16:56:21,452; dataset.py - line: 1218 -DEBUG: index: 5
+2020-01-10 16:56:21,452; dataset.py - line: 945 -INFO: data completed: Image index: 5
+2020-01-10 16:56:21,452; dataset.py - line: 851 -DEBUG: key: 'seed' is found in config
+2020-01-10 16:56:21,510; client.py - line: 193 -DEBUG: Json string sent.
 
-2020-01-07 17:11:19,096; client.py - line: 236 -DEBUG: Json string sent.
+2020-01-10 16:56:21,510; client.py - line: 236 -DEBUG: Json string sent.
 
-2020-01-07 17:11:19,232; client.py - line: 243 -DEBUG: Trying to receive data.
-2020-01-07 17:11:19,232; client.py - line: 247 -INFO: Data from Unity received.
-2020-01-07 17:11:19,232; client.py - line: 248 -DEBUG: End_tag detected, unity_resp_bytes[0:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
-2020-01-07 17:11:19,232; client.py - line: 252 -DEBUG: img_bytes type: <class 'bytearray'>, img_bytes len: 20820, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
-2020-01-07 17:11:19,233; client.py - line: 255 -DEBUG: PIL Img: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
-2020-01-07 17:11:19,252; client.py - line: 257 -DEBUG: Returning img: type: <class 'numpy.ndarray'> 
+2020-01-10 16:56:21,619; client.py - line: 243 -DEBUG: Trying to receive data.
+2020-01-10 16:56:21,619; client.py - line: 247 -INFO: Data from Unity received.
+2020-01-10 16:56:21,620; client.py - line: 248 -DEBUG: End_tag detected, unity_resp_bytes[0:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2020-01-10 16:56:21,620; client.py - line: 252 -DEBUG: img_bytes type: <class 'bytearray'>, img_bytes len: 54911, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
+2020-01-10 16:56:21,620; client.py - line: 255 -DEBUG: PIL Img: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
+2020-01-10 16:56:21,642; client.py - line: 257 -DEBUG: Returning img: type: <class 'numpy.ndarray'> 
 
-2020-01-07 17:11:19,252; dataset.py - line: 1161 -DEBUG: index: 5
-2020-01-07 17:11:19,253; dataset.py - line: 1163 -DEBUG: index: 6
-2020-01-07 17:11:19,253; dataset.py - line: 889 -INFO: data completed: Image index: 6
-2020-01-07 17:11:19,254; dataset.py - line: 796 -DEBUG: home directory: /home/haecker
-2020-01-07 17:11:19,254; dataset.py - line: 798 -DEBUG: Dataset directory:/home/haecker/Documents/auto_encoder/data2020-01-07_16:11__first_ae
-2020-01-07 17:11:19,313; client.py - line: 193 -DEBUG: Json string sent.
+2020-01-10 16:56:21,642; dataset.py - line: 1216 -DEBUG: index: 5
+2020-01-10 16:56:21,642; dataset.py - line: 1218 -DEBUG: index: 6
+2020-01-10 16:56:21,643; dataset.py - line: 945 -INFO: data completed: Image index: 6
+2020-01-10 16:56:21,643; dataset.py - line: 851 -DEBUG: key: 'seed' is found in config
+2020-01-10 16:56:21,726; client.py - line: 193 -DEBUG: Json string sent.
 
-2020-01-07 17:11:19,313; client.py - line: 236 -DEBUG: Json string sent.
+2020-01-10 16:56:21,726; client.py - line: 236 -DEBUG: Json string sent.
 
-2020-01-07 17:11:19,430; client.py - line: 243 -DEBUG: Trying to receive data.
-2020-01-07 17:11:19,431; client.py - line: 247 -INFO: Data from Unity received.
-2020-01-07 17:11:19,431; client.py - line: 248 -DEBUG: End_tag detected, unity_resp_bytes[0:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
-2020-01-07 17:11:19,431; client.py - line: 252 -DEBUG: img_bytes type: <class 'bytearray'>, img_bytes len: 30526, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
-2020-01-07 17:11:19,431; client.py - line: 255 -DEBUG: PIL Img: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
-2020-01-07 17:11:19,451; client.py - line: 257 -DEBUG: Returning img: type: <class 'numpy.ndarray'> 
+2020-01-10 16:56:21,855; client.py - line: 243 -DEBUG: Trying to receive data.
+2020-01-10 16:56:21,855; client.py - line: 247 -INFO: Data from Unity received.
+2020-01-10 16:56:21,856; client.py - line: 248 -DEBUG: End_tag detected, unity_resp_bytes[0:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2020-01-10 16:56:21,856; client.py - line: 252 -DEBUG: img_bytes type: <class 'bytearray'>, img_bytes len: 36006, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
+2020-01-10 16:56:21,856; client.py - line: 255 -DEBUG: PIL Img: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
+2020-01-10 16:56:21,878; client.py - line: 257 -DEBUG: Returning img: type: <class 'numpy.ndarray'> 
 
-2020-01-07 17:11:19,452; dataset.py - line: 1161 -DEBUG: index: 6
-2020-01-07 17:11:19,452; dataset.py - line: 1163 -DEBUG: index: 7
-2020-01-07 17:11:19,452; dataset.py - line: 889 -INFO: data completed: Image index: 7
-2020-01-07 17:11:19,453; dataset.py - line: 796 -DEBUG: home directory: /home/haecker
-2020-01-07 17:11:19,453; dataset.py - line: 798 -DEBUG: Dataset directory:/home/haecker/Documents/auto_encoder/data2020-01-07_16:11__first_ae
-2020-01-07 17:11:19,513; client.py - line: 193 -DEBUG: Json string sent.
+2020-01-10 16:56:21,878; dataset.py - line: 1216 -DEBUG: index: 6
+2020-01-10 16:56:21,879; dataset.py - line: 1218 -DEBUG: index: 7
+2020-01-10 16:56:21,879; dataset.py - line: 945 -INFO: data completed: Image index: 7
+2020-01-10 16:56:21,879; dataset.py - line: 851 -DEBUG: key: 'seed' is found in config
+2020-01-10 16:56:21,961; client.py - line: 193 -DEBUG: Json string sent.
 
-2020-01-07 17:11:19,514; client.py - line: 236 -DEBUG: Json string sent.
+2020-01-10 16:56:21,961; client.py - line: 236 -DEBUG: Json string sent.
 
-2020-01-07 17:11:19,653; client.py - line: 243 -DEBUG: Trying to receive data.
-2020-01-07 17:11:19,654; client.py - line: 247 -INFO: Data from Unity received.
-2020-01-07 17:11:19,654; client.py - line: 248 -DEBUG: End_tag detected, unity_resp_bytes[0:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
-2020-01-07 17:11:19,654; client.py - line: 252 -DEBUG: img_bytes type: <class 'bytearray'>, img_bytes len: 36282, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
-2020-01-07 17:11:19,654; client.py - line: 255 -DEBUG: PIL Img: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
-2020-01-07 17:11:19,679; client.py - line: 257 -DEBUG: Returning img: type: <class 'numpy.ndarray'> 
+2020-01-10 16:56:22,076; client.py - line: 243 -DEBUG: Trying to receive data.
+2020-01-10 16:56:22,076; client.py - line: 247 -INFO: Data from Unity received.
+2020-01-10 16:56:22,076; client.py - line: 248 -DEBUG: End_tag detected, unity_resp_bytes[0:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2020-01-10 16:56:22,076; client.py - line: 252 -DEBUG: img_bytes type: <class 'bytearray'>, img_bytes len: 29537, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
+2020-01-10 16:56:22,077; client.py - line: 255 -DEBUG: PIL Img: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
+2020-01-10 16:56:22,095; client.py - line: 257 -DEBUG: Returning img: type: <class 'numpy.ndarray'> 
 
-2020-01-07 17:11:19,680; dataset.py - line: 1161 -DEBUG: index: 7
-2020-01-07 17:11:19,680; dataset.py - line: 1163 -DEBUG: index: 8
-2020-01-07 17:11:19,680; dataset.py - line: 889 -INFO: data completed: Image index: 8
-2020-01-07 17:11:19,680; dataset.py - line: 796 -DEBUG: home directory: /home/haecker
-2020-01-07 17:11:19,680; dataset.py - line: 798 -DEBUG: Dataset directory:/home/haecker/Documents/auto_encoder/data2020-01-07_16:11__first_ae
-2020-01-07 17:11:19,748; client.py - line: 193 -DEBUG: Json string sent.
+2020-01-10 16:56:22,095; dataset.py - line: 1216 -DEBUG: index: 7
+2020-01-10 16:56:22,096; dataset.py - line: 1218 -DEBUG: index: 8
+2020-01-10 16:56:22,097; dataset.py - line: 945 -INFO: data completed: Image index: 8
+2020-01-10 16:56:22,097; dataset.py - line: 851 -DEBUG: key: 'seed' is found in config
+2020-01-10 16:56:22,173; client.py - line: 193 -DEBUG: Json string sent.
 
-2020-01-07 17:11:19,749; client.py - line: 236 -DEBUG: Json string sent.
+2020-01-10 16:56:22,173; client.py - line: 236 -DEBUG: Json string sent.
 
-2020-01-07 17:11:19,865; client.py - line: 243 -DEBUG: Trying to receive data.
-2020-01-07 17:11:19,865; client.py - line: 247 -INFO: Data from Unity received.
-2020-01-07 17:11:19,865; client.py - line: 248 -DEBUG: End_tag detected, unity_resp_bytes[0:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
-2020-01-07 17:11:19,865; client.py - line: 252 -DEBUG: img_bytes type: <class 'bytearray'>, img_bytes len: 36768, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
-2020-01-07 17:11:19,865; client.py - line: 255 -DEBUG: PIL Img: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
-2020-01-07 17:11:19,884; client.py - line: 257 -DEBUG: Returning img: type: <class 'numpy.ndarray'> 
+2020-01-10 16:56:22,293; client.py - line: 243 -DEBUG: Trying to receive data.
+2020-01-10 16:56:22,293; client.py - line: 247 -INFO: Data from Unity received.
+2020-01-10 16:56:22,293; client.py - line: 248 -DEBUG: End_tag detected, unity_resp_bytes[0:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2020-01-10 16:56:22,293; client.py - line: 252 -DEBUG: img_bytes type: <class 'bytearray'>, img_bytes len: 36576, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
+2020-01-10 16:56:22,293; client.py - line: 255 -DEBUG: PIL Img: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
+2020-01-10 16:56:22,315; client.py - line: 257 -DEBUG: Returning img: type: <class 'numpy.ndarray'> 
 
-2020-01-07 17:11:19,885; dataset.py - line: 1161 -DEBUG: index: 8
-2020-01-07 17:11:19,885; dataset.py - line: 1163 -DEBUG: index: 9
-2020-01-07 17:11:19,885; dataset.py - line: 889 -INFO: data completed: Image index: 9
-2020-01-07 17:11:19,885; dataset.py - line: 796 -DEBUG: home directory: /home/haecker
-2020-01-07 17:11:19,885; dataset.py - line: 798 -DEBUG: Dataset directory:/home/haecker/Documents/auto_encoder/data2020-01-07_16:11__first_ae
-2020-01-07 17:11:19,964; client.py - line: 173 -INFO: Exit-message is sent. Unity build and socket now closing.
+2020-01-10 16:56:22,316; dataset.py - line: 1216 -DEBUG: index: 8
+2020-01-10 16:56:22,316; dataset.py - line: 1218 -DEBUG: index: 9
+2020-01-10 16:56:22,317; dataset.py - line: 945 -INFO: data completed: Image index: 9
+2020-01-10 16:56:22,317; dataset.py - line: 851 -DEBUG: key: 'seed' is found in config
+2020-01-10 16:56:22,384; dataset.py - line: 356 -DEBUG: Config Seed: 1887532457
+2020-01-10 16:56:22,386; client.py - line: 193 -DEBUG: Json string sent.
 
-2020-01-07 17:11:19,964; client.py - line: 190 -DEBUG: Exit request sent.
+2020-01-10 16:56:22,386; client.py - line: 236 -DEBUG: Json string sent.
 
-2020-01-07 17:11:19,964; dataset.py - line: 1204 -DEBUG: Exit socket connection to unity.
-2020-01-07 17:11:19,964; dataset.py - line: 935 -DEBUG: numb_y: 1
-2020-01-07 17:11:19,964; dataset.py - line: 936 -DEBUG: dicts[0]['image'].shape[0]: 1024
-2020-01-07 17:11:19,965; dataset.py - line: 937 -DEBUG: (images_per_row*dicts[0][image].shape[1]: 10240
-2020-01-07 17:11:19,965; dataset.py - line: 938 -DEBUG: dicts[0][image].shape[2]: 3
-2020-01-07 17:11:20,037; dataset.py - line: 940 -DEBUG: h_stacked.shape: (1, 1024, 10240, 3)
-2020-01-07 17:11:21,003; dataset.py - line: 953 -DEBUG: final_img.shape: (1024, 10240, 3)
+2020-01-10 16:56:22,513; client.py - line: 243 -DEBUG: Trying to receive data.
+2020-01-10 16:56:22,513; client.py - line: 247 -INFO: Data from Unity received.
+2020-01-10 16:56:22,513; client.py - line: 248 -DEBUG: End_tag detected, unity_resp_bytes[0:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2020-01-10 16:56:22,514; client.py - line: 252 -DEBUG: img_bytes type: <class 'bytearray'>, img_bytes len: 39533, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
+2020-01-10 16:56:22,514; client.py - line: 255 -DEBUG: PIL Img: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
+2020-01-10 16:56:22,536; client.py - line: 257 -DEBUG: Returning img: type: <class 'numpy.ndarray'> 
+
+2020-01-10 16:56:22,536; dataset.py - line: 1216 -DEBUG: index: 9
+2020-01-10 16:56:22,536; dataset.py - line: 1218 -DEBUG: index: 10
+2020-01-10 16:56:22,537; dataset.py - line: 945 -INFO: data completed: Image index: 10
+2020-01-10 16:56:22,537; dataset.py - line: 851 -DEBUG: key: 'seed' is found in config
+2020-01-10 16:56:22,617; client.py - line: 193 -DEBUG: Json string sent.
+
+2020-01-10 16:56:22,618; client.py - line: 236 -DEBUG: Json string sent.
+
+2020-01-10 16:56:22,740; client.py - line: 243 -DEBUG: Trying to receive data.
+2020-01-10 16:56:22,741; client.py - line: 247 -INFO: Data from Unity received.
+2020-01-10 16:56:22,741; client.py - line: 248 -DEBUG: End_tag detected, unity_resp_bytes[0:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2020-01-10 16:56:22,741; client.py - line: 252 -DEBUG: img_bytes type: <class 'bytearray'>, img_bytes len: 77215, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
+2020-01-10 16:56:22,741; client.py - line: 255 -DEBUG: PIL Img: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
+2020-01-10 16:56:22,764; client.py - line: 257 -DEBUG: Returning img: type: <class 'numpy.ndarray'> 
+
+2020-01-10 16:56:22,764; dataset.py - line: 1216 -DEBUG: index: 10
+2020-01-10 16:56:22,764; dataset.py - line: 1218 -DEBUG: index: 11
+2020-01-10 16:56:22,765; dataset.py - line: 945 -INFO: data completed: Image index: 11
+2020-01-10 16:56:22,765; dataset.py - line: 851 -DEBUG: key: 'seed' is found in config
+2020-01-10 16:56:22,867; client.py - line: 193 -DEBUG: Json string sent.
+
+2020-01-10 16:56:22,870; client.py - line: 236 -DEBUG: Json string sent.
+
+2020-01-10 16:56:22,987; client.py - line: 243 -DEBUG: Trying to receive data.
+2020-01-10 16:56:22,988; client.py - line: 247 -INFO: Data from Unity received.
+2020-01-10 16:56:22,988; client.py - line: 248 -DEBUG: End_tag detected, unity_resp_bytes[0:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2020-01-10 16:56:22,988; client.py - line: 252 -DEBUG: img_bytes type: <class 'bytearray'>, img_bytes len: 48168, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
+2020-01-10 16:56:22,988; client.py - line: 255 -DEBUG: PIL Img: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
+2020-01-10 16:56:23,006; client.py - line: 257 -DEBUG: Returning img: type: <class 'numpy.ndarray'> 
+
+2020-01-10 16:56:23,006; dataset.py - line: 1216 -DEBUG: index: 11
+2020-01-10 16:56:23,007; dataset.py - line: 1218 -DEBUG: index: 12
+2020-01-10 16:56:23,007; dataset.py - line: 945 -INFO: data completed: Image index: 12
+2020-01-10 16:56:23,007; dataset.py - line: 851 -DEBUG: key: 'seed' is found in config
+2020-01-10 16:56:23,089; client.py - line: 193 -DEBUG: Json string sent.
+
+2020-01-10 16:56:23,089; client.py - line: 236 -DEBUG: Json string sent.
+
+2020-01-10 16:56:23,213; client.py - line: 243 -DEBUG: Trying to receive data.
+2020-01-10 16:56:23,213; client.py - line: 247 -INFO: Data from Unity received.
+2020-01-10 16:56:23,214; client.py - line: 248 -DEBUG: End_tag detected, unity_resp_bytes[0:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2020-01-10 16:56:23,214; client.py - line: 252 -DEBUG: img_bytes type: <class 'bytearray'>, img_bytes len: 65607, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
+2020-01-10 16:56:23,214; client.py - line: 255 -DEBUG: PIL Img: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
+2020-01-10 16:56:23,238; client.py - line: 257 -DEBUG: Returning img: type: <class 'numpy.ndarray'> 
+
+2020-01-10 16:56:23,238; dataset.py - line: 1216 -DEBUG: index: 12
+2020-01-10 16:56:23,238; dataset.py - line: 1218 -DEBUG: index: 13
+2020-01-10 16:56:23,239; dataset.py - line: 945 -INFO: data completed: Image index: 13
+2020-01-10 16:56:23,239; dataset.py - line: 851 -DEBUG: key: 'seed' is found in config
+2020-01-10 16:56:23,332; client.py - line: 193 -DEBUG: Json string sent.
+
+2020-01-10 16:56:23,333; client.py - line: 236 -DEBUG: Json string sent.
+
+2020-01-10 16:56:23,461; client.py - line: 243 -DEBUG: Trying to receive data.
+2020-01-10 16:56:23,461; client.py - line: 247 -INFO: Data from Unity received.
+2020-01-10 16:56:23,461; client.py - line: 248 -DEBUG: End_tag detected, unity_resp_bytes[0:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2020-01-10 16:56:23,461; client.py - line: 252 -DEBUG: img_bytes type: <class 'bytearray'>, img_bytes len: 50134, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
+2020-01-10 16:56:23,461; client.py - line: 255 -DEBUG: PIL Img: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
+2020-01-10 16:56:23,492; client.py - line: 257 -DEBUG: Returning img: type: <class 'numpy.ndarray'> 
+
+2020-01-10 16:56:23,492; dataset.py - line: 1216 -DEBUG: index: 13
+2020-01-10 16:56:23,493; dataset.py - line: 1218 -DEBUG: index: 14
+2020-01-10 16:56:23,493; dataset.py - line: 945 -INFO: data completed: Image index: 14
+2020-01-10 16:56:23,493; dataset.py - line: 851 -DEBUG: key: 'seed' is found in config
+2020-01-10 16:56:23,589; client.py - line: 193 -DEBUG: Json string sent.
+
+2020-01-10 16:56:23,590; client.py - line: 236 -DEBUG: Json string sent.
+
+2020-01-10 16:56:23,706; client.py - line: 243 -DEBUG: Trying to receive data.
+2020-01-10 16:56:23,706; client.py - line: 247 -INFO: Data from Unity received.
+2020-01-10 16:56:23,706; client.py - line: 248 -DEBUG: End_tag detected, unity_resp_bytes[0:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2020-01-10 16:56:23,706; client.py - line: 252 -DEBUG: img_bytes type: <class 'bytearray'>, img_bytes len: 43787, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
+2020-01-10 16:56:23,706; client.py - line: 255 -DEBUG: PIL Img: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
+2020-01-10 16:56:23,726; client.py - line: 257 -DEBUG: Returning img: type: <class 'numpy.ndarray'> 
+
+2020-01-10 16:56:23,727; dataset.py - line: 1216 -DEBUG: index: 14
+2020-01-10 16:56:23,727; dataset.py - line: 1218 -DEBUG: index: 15
+2020-01-10 16:56:23,727; dataset.py - line: 945 -INFO: data completed: Image index: 15
+2020-01-10 16:56:23,727; dataset.py - line: 851 -DEBUG: key: 'seed' is found in config
+2020-01-10 16:56:23,818; client.py - line: 193 -DEBUG: Json string sent.
+
+2020-01-10 16:56:23,818; client.py - line: 236 -DEBUG: Json string sent.
+
+2020-01-10 16:56:23,939; client.py - line: 243 -DEBUG: Trying to receive data.
+2020-01-10 16:56:23,939; client.py - line: 247 -INFO: Data from Unity received.
+2020-01-10 16:56:23,939; client.py - line: 248 -DEBUG: End_tag detected, unity_resp_bytes[0:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2020-01-10 16:56:23,939; client.py - line: 252 -DEBUG: img_bytes type: <class 'bytearray'>, img_bytes len: 31847, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
+2020-01-10 16:56:23,939; client.py - line: 255 -DEBUG: PIL Img: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
+2020-01-10 16:56:23,959; client.py - line: 257 -DEBUG: Returning img: type: <class 'numpy.ndarray'> 
+
+2020-01-10 16:56:23,960; dataset.py - line: 1216 -DEBUG: index: 15
+2020-01-10 16:56:23,960; dataset.py - line: 1218 -DEBUG: index: 16
+2020-01-10 16:56:23,960; dataset.py - line: 945 -INFO: data completed: Image index: 16
+2020-01-10 16:56:23,960; dataset.py - line: 851 -DEBUG: key: 'seed' is found in config
+2020-01-10 16:56:24,042; client.py - line: 193 -DEBUG: Json string sent.
+
+2020-01-10 16:56:24,042; client.py - line: 236 -DEBUG: Json string sent.
+
+2020-01-10 16:56:24,165; client.py - line: 243 -DEBUG: Trying to receive data.
+2020-01-10 16:56:24,166; client.py - line: 247 -INFO: Data from Unity received.
+2020-01-10 16:56:24,166; client.py - line: 248 -DEBUG: End_tag detected, unity_resp_bytes[0:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2020-01-10 16:56:24,166; client.py - line: 252 -DEBUG: img_bytes type: <class 'bytearray'>, img_bytes len: 36212, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
+2020-01-10 16:56:24,166; client.py - line: 255 -DEBUG: PIL Img: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
+2020-01-10 16:56:24,187; client.py - line: 257 -DEBUG: Returning img: type: <class 'numpy.ndarray'> 
+
+2020-01-10 16:56:24,188; dataset.py - line: 1216 -DEBUG: index: 16
+2020-01-10 16:56:24,188; dataset.py - line: 1218 -DEBUG: index: 17
+2020-01-10 16:56:24,188; dataset.py - line: 945 -INFO: data completed: Image index: 17
+2020-01-10 16:56:24,188; dataset.py - line: 851 -DEBUG: key: 'seed' is found in config
+2020-01-10 16:56:24,265; client.py - line: 193 -DEBUG: Json string sent.
+
+2020-01-10 16:56:24,265; client.py - line: 236 -DEBUG: Json string sent.
+
+2020-01-10 16:56:24,386; client.py - line: 243 -DEBUG: Trying to receive data.
+2020-01-10 16:56:24,387; client.py - line: 247 -INFO: Data from Unity received.
+2020-01-10 16:56:24,387; client.py - line: 248 -DEBUG: End_tag detected, unity_resp_bytes[0:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2020-01-10 16:56:24,387; client.py - line: 252 -DEBUG: img_bytes type: <class 'bytearray'>, img_bytes len: 26748, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
+2020-01-10 16:56:24,387; client.py - line: 255 -DEBUG: PIL Img: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
+2020-01-10 16:56:24,409; client.py - line: 257 -DEBUG: Returning img: type: <class 'numpy.ndarray'> 
+
+2020-01-10 16:56:24,409; dataset.py - line: 1216 -DEBUG: index: 17
+2020-01-10 16:56:24,409; dataset.py - line: 1218 -DEBUG: index: 18
+2020-01-10 16:56:24,410; dataset.py - line: 945 -INFO: data completed: Image index: 18
+2020-01-10 16:56:24,410; dataset.py - line: 851 -DEBUG: key: 'seed' is found in config
+2020-01-10 16:56:24,491; client.py - line: 193 -DEBUG: Json string sent.
+
+2020-01-10 16:56:24,491; client.py - line: 236 -DEBUG: Json string sent.
+
+2020-01-10 16:56:24,613; client.py - line: 243 -DEBUG: Trying to receive data.
+2020-01-10 16:56:24,613; client.py - line: 247 -INFO: Data from Unity received.
+2020-01-10 16:56:24,613; client.py - line: 248 -DEBUG: End_tag detected, unity_resp_bytes[0:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2020-01-10 16:56:24,613; client.py - line: 252 -DEBUG: img_bytes type: <class 'bytearray'>, img_bytes len: 29705, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
+2020-01-10 16:56:24,614; client.py - line: 255 -DEBUG: PIL Img: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
+2020-01-10 16:56:24,635; client.py - line: 257 -DEBUG: Returning img: type: <class 'numpy.ndarray'> 
+
+2020-01-10 16:56:24,635; dataset.py - line: 1216 -DEBUG: index: 18
+2020-01-10 16:56:24,635; dataset.py - line: 1218 -DEBUG: index: 19
+2020-01-10 16:56:24,636; dataset.py - line: 945 -INFO: data completed: Image index: 19
+2020-01-10 16:56:24,636; dataset.py - line: 851 -DEBUG: key: 'seed' is found in config
+2020-01-10 16:56:24,721; client.py - line: 193 -DEBUG: Json string sent.
+
+2020-01-10 16:56:24,722; client.py - line: 236 -DEBUG: Json string sent.
+
+2020-01-10 16:56:24,837; client.py - line: 243 -DEBUG: Trying to receive data.
+2020-01-10 16:56:24,837; client.py - line: 247 -INFO: Data from Unity received.
+2020-01-10 16:56:24,837; client.py - line: 248 -DEBUG: End_tag detected, unity_resp_bytes[0:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2020-01-10 16:56:24,837; client.py - line: 252 -DEBUG: img_bytes type: <class 'bytearray'>, img_bytes len: 47358, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
+2020-01-10 16:56:24,838; client.py - line: 255 -DEBUG: PIL Img: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
+2020-01-10 16:56:24,855; client.py - line: 257 -DEBUG: Returning img: type: <class 'numpy.ndarray'> 
+
+2020-01-10 16:56:24,856; dataset.py - line: 1216 -DEBUG: index: 19
+2020-01-10 16:56:24,856; dataset.py - line: 1218 -DEBUG: index: 20
+2020-01-10 16:56:24,856; dataset.py - line: 945 -INFO: data completed: Image index: 20
+2020-01-10 16:56:24,856; dataset.py - line: 851 -DEBUG: key: 'seed' is found in config
+2020-01-10 16:56:24,943; client.py - line: 193 -DEBUG: Json string sent.
+
+2020-01-10 16:56:24,944; client.py - line: 236 -DEBUG: Json string sent.
+
+2020-01-10 16:56:25,051; client.py - line: 243 -DEBUG: Trying to receive data.
+2020-01-10 16:56:25,052; client.py - line: 247 -INFO: Data from Unity received.
+2020-01-10 16:56:25,052; client.py - line: 248 -DEBUG: End_tag detected, unity_resp_bytes[0:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2020-01-10 16:56:25,052; client.py - line: 252 -DEBUG: img_bytes type: <class 'bytearray'>, img_bytes len: 27688, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
+2020-01-10 16:56:25,052; client.py - line: 255 -DEBUG: PIL Img: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
+2020-01-10 16:56:25,071; client.py - line: 257 -DEBUG: Returning img: type: <class 'numpy.ndarray'> 
+
+2020-01-10 16:56:25,071; dataset.py - line: 1216 -DEBUG: index: 20
+2020-01-10 16:56:25,072; dataset.py - line: 1218 -DEBUG: index: 21
+2020-01-10 16:56:25,072; dataset.py - line: 945 -INFO: data completed: Image index: 21
+2020-01-10 16:56:25,072; dataset.py - line: 851 -DEBUG: key: 'seed' is found in config
+2020-01-10 16:56:25,138; client.py - line: 193 -DEBUG: Json string sent.
+
+2020-01-10 16:56:25,138; client.py - line: 236 -DEBUG: Json string sent.
+
+2020-01-10 16:56:25,272; client.py - line: 243 -DEBUG: Trying to receive data.
+2020-01-10 16:56:25,272; client.py - line: 247 -INFO: Data from Unity received.
+2020-01-10 16:56:25,272; client.py - line: 248 -DEBUG: End_tag detected, unity_resp_bytes[0:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2020-01-10 16:56:25,272; client.py - line: 252 -DEBUG: img_bytes type: <class 'bytearray'>, img_bytes len: 36345, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
+2020-01-10 16:56:25,272; client.py - line: 255 -DEBUG: PIL Img: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
+2020-01-10 16:56:25,298; client.py - line: 257 -DEBUG: Returning img: type: <class 'numpy.ndarray'> 
+
+2020-01-10 16:56:25,298; dataset.py - line: 1216 -DEBUG: index: 21
+2020-01-10 16:56:25,298; dataset.py - line: 1218 -DEBUG: index: 22
+2020-01-10 16:56:25,299; dataset.py - line: 945 -INFO: data completed: Image index: 22
+2020-01-10 16:56:25,299; dataset.py - line: 851 -DEBUG: key: 'seed' is found in config
+2020-01-10 16:56:25,386; client.py - line: 193 -DEBUG: Json string sent.
+
+2020-01-10 16:56:25,386; client.py - line: 236 -DEBUG: Json string sent.
+
+2020-01-10 16:56:25,501; client.py - line: 243 -DEBUG: Trying to receive data.
+2020-01-10 16:56:25,501; client.py - line: 247 -INFO: Data from Unity received.
+2020-01-10 16:56:25,501; client.py - line: 248 -DEBUG: End_tag detected, unity_resp_bytes[0:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2020-01-10 16:56:25,501; client.py - line: 252 -DEBUG: img_bytes type: <class 'bytearray'>, img_bytes len: 46035, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
+2020-01-10 16:56:25,502; client.py - line: 255 -DEBUG: PIL Img: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
+2020-01-10 16:56:25,523; client.py - line: 257 -DEBUG: Returning img: type: <class 'numpy.ndarray'> 
+
+2020-01-10 16:56:25,523; dataset.py - line: 1216 -DEBUG: index: 22
+2020-01-10 16:56:25,523; dataset.py - line: 1218 -DEBUG: index: 23
+2020-01-10 16:56:25,523; dataset.py - line: 945 -INFO: data completed: Image index: 23
+2020-01-10 16:56:25,523; dataset.py - line: 851 -DEBUG: key: 'seed' is found in config
+2020-01-10 16:56:25,598; client.py - line: 193 -DEBUG: Json string sent.
+
+2020-01-10 16:56:25,599; client.py - line: 236 -DEBUG: Json string sent.
+
+2020-01-10 16:56:25,725; client.py - line: 243 -DEBUG: Trying to receive data.
+2020-01-10 16:56:25,725; client.py - line: 247 -INFO: Data from Unity received.
+2020-01-10 16:56:25,725; client.py - line: 248 -DEBUG: End_tag detected, unity_resp_bytes[0:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2020-01-10 16:56:25,725; client.py - line: 252 -DEBUG: img_bytes type: <class 'bytearray'>, img_bytes len: 18069, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
+2020-01-10 16:56:25,725; client.py - line: 255 -DEBUG: PIL Img: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
+2020-01-10 16:56:25,741; client.py - line: 257 -DEBUG: Returning img: type: <class 'numpy.ndarray'> 
+
+2020-01-10 16:56:25,741; dataset.py - line: 1216 -DEBUG: index: 23
+2020-01-10 16:56:25,741; dataset.py - line: 1218 -DEBUG: index: 24
+2020-01-10 16:56:25,741; dataset.py - line: 945 -INFO: data completed: Image index: 24
+2020-01-10 16:56:25,742; dataset.py - line: 851 -DEBUG: key: 'seed' is found in config
+2020-01-10 16:56:25,797; client.py - line: 193 -DEBUG: Json string sent.
+
+2020-01-10 16:56:25,797; client.py - line: 236 -DEBUG: Json string sent.
+
+2020-01-10 16:56:25,917; client.py - line: 243 -DEBUG: Trying to receive data.
+2020-01-10 16:56:25,917; client.py - line: 247 -INFO: Data from Unity received.
+2020-01-10 16:56:25,918; client.py - line: 248 -DEBUG: End_tag detected, unity_resp_bytes[0:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2020-01-10 16:56:25,918; client.py - line: 252 -DEBUG: img_bytes type: <class 'bytearray'>, img_bytes len: 38357, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
+2020-01-10 16:56:25,918; client.py - line: 255 -DEBUG: PIL Img: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
+2020-01-10 16:56:25,933; client.py - line: 257 -DEBUG: Returning img: type: <class 'numpy.ndarray'> 
+
+2020-01-10 16:56:25,933; dataset.py - line: 1216 -DEBUG: index: 24
+2020-01-10 16:56:25,933; dataset.py - line: 1218 -DEBUG: index: 25
+2020-01-10 16:56:25,933; dataset.py - line: 945 -INFO: data completed: Image index: 25
+2020-01-10 16:56:25,933; dataset.py - line: 851 -DEBUG: key: 'seed' is found in config
+2020-01-10 16:56:25,984; client.py - line: 193 -DEBUG: Json string sent.
+
+2020-01-10 16:56:25,984; client.py - line: 236 -DEBUG: Json string sent.
+
+2020-01-10 16:56:26,118; client.py - line: 243 -DEBUG: Trying to receive data.
+2020-01-10 16:56:26,118; client.py - line: 247 -INFO: Data from Unity received.
+2020-01-10 16:56:26,118; client.py - line: 248 -DEBUG: End_tag detected, unity_resp_bytes[0:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2020-01-10 16:56:26,118; client.py - line: 252 -DEBUG: img_bytes type: <class 'bytearray'>, img_bytes len: 54911, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
+2020-01-10 16:56:26,118; client.py - line: 255 -DEBUG: PIL Img: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
+2020-01-10 16:56:26,139; client.py - line: 257 -DEBUG: Returning img: type: <class 'numpy.ndarray'> 
+
+2020-01-10 16:56:26,139; dataset.py - line: 1216 -DEBUG: index: 25
+2020-01-10 16:56:26,139; dataset.py - line: 1218 -DEBUG: index: 26
+2020-01-10 16:56:26,139; dataset.py - line: 945 -INFO: data completed: Image index: 26
+2020-01-10 16:56:26,139; dataset.py - line: 851 -DEBUG: key: 'seed' is found in config
+2020-01-10 16:56:26,226; client.py - line: 193 -DEBUG: Json string sent.
+
+2020-01-10 16:56:26,226; client.py - line: 236 -DEBUG: Json string sent.
+
+2020-01-10 16:56:26,349; client.py - line: 243 -DEBUG: Trying to receive data.
+2020-01-10 16:56:26,349; client.py - line: 247 -INFO: Data from Unity received.
+2020-01-10 16:56:26,349; client.py - line: 248 -DEBUG: End_tag detected, unity_resp_bytes[0:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2020-01-10 16:56:26,349; client.py - line: 252 -DEBUG: img_bytes type: <class 'bytearray'>, img_bytes len: 36006, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
+2020-01-10 16:56:26,349; client.py - line: 255 -DEBUG: PIL Img: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
+2020-01-10 16:56:26,371; client.py - line: 257 -DEBUG: Returning img: type: <class 'numpy.ndarray'> 
+
+2020-01-10 16:56:26,371; dataset.py - line: 1216 -DEBUG: index: 26
+2020-01-10 16:56:26,372; dataset.py - line: 1218 -DEBUG: index: 27
+2020-01-10 16:56:26,372; dataset.py - line: 945 -INFO: data completed: Image index: 27
+2020-01-10 16:56:26,372; dataset.py - line: 851 -DEBUG: key: 'seed' is found in config
+2020-01-10 16:56:26,463; client.py - line: 193 -DEBUG: Json string sent.
+
+2020-01-10 16:56:26,464; client.py - line: 236 -DEBUG: Json string sent.
+
+2020-01-10 16:56:26,589; client.py - line: 243 -DEBUG: Trying to receive data.
+2020-01-10 16:56:26,589; client.py - line: 247 -INFO: Data from Unity received.
+2020-01-10 16:56:26,589; client.py - line: 248 -DEBUG: End_tag detected, unity_resp_bytes[0:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2020-01-10 16:56:26,589; client.py - line: 252 -DEBUG: img_bytes type: <class 'bytearray'>, img_bytes len: 29537, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
+2020-01-10 16:56:26,589; client.py - line: 255 -DEBUG: PIL Img: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
+2020-01-10 16:56:26,609; client.py - line: 257 -DEBUG: Returning img: type: <class 'numpy.ndarray'> 
+
+2020-01-10 16:56:26,609; dataset.py - line: 1216 -DEBUG: index: 27
+2020-01-10 16:56:26,610; dataset.py - line: 1218 -DEBUG: index: 28
+2020-01-10 16:56:26,610; dataset.py - line: 945 -INFO: data completed: Image index: 28
+2020-01-10 16:56:26,610; dataset.py - line: 851 -DEBUG: key: 'seed' is found in config
+2020-01-10 16:56:26,686; client.py - line: 193 -DEBUG: Json string sent.
+
+2020-01-10 16:56:26,686; client.py - line: 236 -DEBUG: Json string sent.
+
+2020-01-10 16:56:26,816; client.py - line: 243 -DEBUG: Trying to receive data.
+2020-01-10 16:56:26,816; client.py - line: 247 -INFO: Data from Unity received.
+2020-01-10 16:56:26,817; client.py - line: 248 -DEBUG: End_tag detected, unity_resp_bytes[0:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2020-01-10 16:56:26,817; client.py - line: 252 -DEBUG: img_bytes type: <class 'bytearray'>, img_bytes len: 36576, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
+2020-01-10 16:56:26,817; client.py - line: 255 -DEBUG: PIL Img: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
+2020-01-10 16:56:26,841; client.py - line: 257 -DEBUG: Returning img: type: <class 'numpy.ndarray'> 
+
+2020-01-10 16:56:26,841; dataset.py - line: 1216 -DEBUG: index: 28
+2020-01-10 16:56:26,841; dataset.py - line: 1218 -DEBUG: index: 29
+2020-01-10 16:56:26,841; dataset.py - line: 945 -INFO: data completed: Image index: 29
+2020-01-10 16:56:26,842; dataset.py - line: 851 -DEBUG: key: 'seed' is found in config
+2020-01-10 16:56:26,924; client.py - line: 193 -DEBUG: Json string sent.
+
+2020-01-10 16:56:26,924; client.py - line: 236 -DEBUG: Json string sent.
+
+2020-01-10 16:56:27,047; client.py - line: 243 -DEBUG: Trying to receive data.
+2020-01-10 16:56:27,048; client.py - line: 247 -INFO: Data from Unity received.
+2020-01-10 16:56:27,048; client.py - line: 248 -DEBUG: End_tag detected, unity_resp_bytes[0:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2020-01-10 16:56:27,048; client.py - line: 252 -DEBUG: img_bytes type: <class 'bytearray'>, img_bytes len: 39533, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
+2020-01-10 16:56:27,048; client.py - line: 255 -DEBUG: PIL Img: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
+2020-01-10 16:56:27,068; client.py - line: 257 -DEBUG: Returning img: type: <class 'numpy.ndarray'> 
+
+2020-01-10 16:56:27,068; dataset.py - line: 1216 -DEBUG: index: 29
+2020-01-10 16:56:27,069; dataset.py - line: 1218 -DEBUG: index: 30
+2020-01-10 16:56:27,069; dataset.py - line: 945 -INFO: data completed: Image index: 30
+2020-01-10 16:56:27,069; dataset.py - line: 851 -DEBUG: key: 'seed' is found in config
+2020-01-10 16:56:27,149; client.py - line: 193 -DEBUG: Json string sent.
+
+2020-01-10 16:56:27,150; client.py - line: 236 -DEBUG: Json string sent.
+
+2020-01-10 16:56:27,275; client.py - line: 243 -DEBUG: Trying to receive data.
+2020-01-10 16:56:27,275; client.py - line: 247 -INFO: Data from Unity received.
+2020-01-10 16:56:27,276; client.py - line: 248 -DEBUG: End_tag detected, unity_resp_bytes[0:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2020-01-10 16:56:27,276; client.py - line: 252 -DEBUG: img_bytes type: <class 'bytearray'>, img_bytes len: 77215, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
+2020-01-10 16:56:27,276; client.py - line: 255 -DEBUG: PIL Img: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
+2020-01-10 16:56:27,296; client.py - line: 257 -DEBUG: Returning img: type: <class 'numpy.ndarray'> 
+
+2020-01-10 16:56:27,297; dataset.py - line: 1216 -DEBUG: index: 30
+2020-01-10 16:56:27,297; dataset.py - line: 1218 -DEBUG: index: 31
+2020-01-10 16:56:27,297; dataset.py - line: 945 -INFO: data completed: Image index: 31
+2020-01-10 16:56:27,297; dataset.py - line: 851 -DEBUG: key: 'seed' is found in config
+2020-01-10 16:56:27,398; client.py - line: 193 -DEBUG: Json string sent.
+
+2020-01-10 16:56:27,398; client.py - line: 236 -DEBUG: Json string sent.
+
+2020-01-10 16:56:27,513; client.py - line: 243 -DEBUG: Trying to receive data.
+2020-01-10 16:56:27,513; client.py - line: 247 -INFO: Data from Unity received.
+2020-01-10 16:56:27,514; client.py - line: 248 -DEBUG: End_tag detected, unity_resp_bytes[0:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2020-01-10 16:56:27,514; client.py - line: 252 -DEBUG: img_bytes type: <class 'bytearray'>, img_bytes len: 48168, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
+2020-01-10 16:56:27,514; client.py - line: 255 -DEBUG: PIL Img: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
+2020-01-10 16:56:27,534; client.py - line: 257 -DEBUG: Returning img: type: <class 'numpy.ndarray'> 
+
+2020-01-10 16:56:27,535; dataset.py - line: 1216 -DEBUG: index: 31
+2020-01-10 16:56:27,535; dataset.py - line: 1218 -DEBUG: index: 32
+2020-01-10 16:56:27,535; dataset.py - line: 945 -INFO: data completed: Image index: 32
+2020-01-10 16:56:27,535; dataset.py - line: 851 -DEBUG: key: 'seed' is found in config
+2020-01-10 16:56:27,630; client.py - line: 193 -DEBUG: Json string sent.
+
+2020-01-10 16:56:27,630; client.py - line: 236 -DEBUG: Json string sent.
+
+2020-01-10 16:56:27,754; client.py - line: 243 -DEBUG: Trying to receive data.
+2020-01-10 16:56:27,755; client.py - line: 247 -INFO: Data from Unity received.
+2020-01-10 16:56:27,755; client.py - line: 248 -DEBUG: End_tag detected, unity_resp_bytes[0:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2020-01-10 16:56:27,755; client.py - line: 252 -DEBUG: img_bytes type: <class 'bytearray'>, img_bytes len: 65607, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
+2020-01-10 16:56:27,755; client.py - line: 255 -DEBUG: PIL Img: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
+2020-01-10 16:56:27,785; client.py - line: 257 -DEBUG: Returning img: type: <class 'numpy.ndarray'> 
+
+2020-01-10 16:56:27,785; dataset.py - line: 1216 -DEBUG: index: 32
+2020-01-10 16:56:27,785; dataset.py - line: 1218 -DEBUG: index: 33
+2020-01-10 16:56:27,786; dataset.py - line: 945 -INFO: data completed: Image index: 33
+2020-01-10 16:56:27,786; dataset.py - line: 851 -DEBUG: key: 'seed' is found in config
+2020-01-10 16:56:27,891; client.py - line: 193 -DEBUG: Json string sent.
+
+2020-01-10 16:56:27,893; client.py - line: 236 -DEBUG: Json string sent.
+
+2020-01-10 16:56:27,992; client.py - line: 243 -DEBUG: Trying to receive data.
+2020-01-10 16:56:27,992; client.py - line: 247 -INFO: Data from Unity received.
+2020-01-10 16:56:27,992; client.py - line: 248 -DEBUG: End_tag detected, unity_resp_bytes[0:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2020-01-10 16:56:27,992; client.py - line: 252 -DEBUG: img_bytes type: <class 'bytearray'>, img_bytes len: 50134, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
+2020-01-10 16:56:27,993; client.py - line: 255 -DEBUG: PIL Img: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
+2020-01-10 16:56:28,012; client.py - line: 257 -DEBUG: Returning img: type: <class 'numpy.ndarray'> 
+
+2020-01-10 16:56:28,012; dataset.py - line: 1216 -DEBUG: index: 33
+2020-01-10 16:56:28,012; dataset.py - line: 1218 -DEBUG: index: 34
+2020-01-10 16:56:28,012; dataset.py - line: 945 -INFO: data completed: Image index: 34
+2020-01-10 16:56:28,012; dataset.py - line: 851 -DEBUG: key: 'seed' is found in config
+2020-01-10 16:56:28,088; client.py - line: 193 -DEBUG: Json string sent.
+
+2020-01-10 16:56:28,088; client.py - line: 236 -DEBUG: Json string sent.
+
+2020-01-10 16:56:28,220; client.py - line: 243 -DEBUG: Trying to receive data.
+2020-01-10 16:56:28,221; client.py - line: 247 -INFO: Data from Unity received.
+2020-01-10 16:56:28,221; client.py - line: 248 -DEBUG: End_tag detected, unity_resp_bytes[0:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2020-01-10 16:56:28,221; client.py - line: 252 -DEBUG: img_bytes type: <class 'bytearray'>, img_bytes len: 43787, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
+2020-01-10 16:56:28,221; client.py - line: 255 -DEBUG: PIL Img: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
+2020-01-10 16:56:28,254; client.py - line: 257 -DEBUG: Returning img: type: <class 'numpy.ndarray'> 
+
+2020-01-10 16:56:28,254; dataset.py - line: 1216 -DEBUG: index: 34
+2020-01-10 16:56:28,254; dataset.py - line: 1218 -DEBUG: index: 35
+2020-01-10 16:56:28,255; dataset.py - line: 945 -INFO: data completed: Image index: 35
+2020-01-10 16:56:28,255; dataset.py - line: 851 -DEBUG: key: 'seed' is found in config
+2020-01-10 16:56:28,375; client.py - line: 193 -DEBUG: Json string sent.
+
+2020-01-10 16:56:28,376; client.py - line: 236 -DEBUG: Json string sent.
+
+2020-01-10 16:56:28,485; client.py - line: 243 -DEBUG: Trying to receive data.
+2020-01-10 16:56:28,485; client.py - line: 247 -INFO: Data from Unity received.
+2020-01-10 16:56:28,485; client.py - line: 248 -DEBUG: End_tag detected, unity_resp_bytes[0:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2020-01-10 16:56:28,486; client.py - line: 252 -DEBUG: img_bytes type: <class 'bytearray'>, img_bytes len: 31847, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
+2020-01-10 16:56:28,486; client.py - line: 255 -DEBUG: PIL Img: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
+2020-01-10 16:56:28,511; client.py - line: 257 -DEBUG: Returning img: type: <class 'numpy.ndarray'> 
+
+2020-01-10 16:56:28,512; dataset.py - line: 1216 -DEBUG: index: 35
+2020-01-10 16:56:28,512; dataset.py - line: 1218 -DEBUG: index: 36
+2020-01-10 16:56:28,512; dataset.py - line: 945 -INFO: data completed: Image index: 36
+2020-01-10 16:56:28,512; dataset.py - line: 851 -DEBUG: key: 'seed' is found in config
+2020-01-10 16:56:28,605; client.py - line: 193 -DEBUG: Json string sent.
+
+2020-01-10 16:56:28,605; client.py - line: 236 -DEBUG: Json string sent.
+
+2020-01-10 16:56:28,716; client.py - line: 243 -DEBUG: Trying to receive data.
+2020-01-10 16:56:28,716; client.py - line: 247 -INFO: Data from Unity received.
+2020-01-10 16:56:28,717; client.py - line: 248 -DEBUG: End_tag detected, unity_resp_bytes[0:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2020-01-10 16:56:28,717; client.py - line: 252 -DEBUG: img_bytes type: <class 'bytearray'>, img_bytes len: 36212, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
+2020-01-10 16:56:28,717; client.py - line: 255 -DEBUG: PIL Img: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
+2020-01-10 16:56:28,730; client.py - line: 257 -DEBUG: Returning img: type: <class 'numpy.ndarray'> 
+
+2020-01-10 16:56:28,731; dataset.py - line: 1216 -DEBUG: index: 36
+2020-01-10 16:56:28,731; dataset.py - line: 1218 -DEBUG: index: 37
+2020-01-10 16:56:28,731; dataset.py - line: 945 -INFO: data completed: Image index: 37
+2020-01-10 16:56:28,731; dataset.py - line: 851 -DEBUG: key: 'seed' is found in config
+2020-01-10 16:56:28,785; client.py - line: 193 -DEBUG: Json string sent.
+
+2020-01-10 16:56:28,785; client.py - line: 236 -DEBUG: Json string sent.
+
+2020-01-10 16:56:28,901; client.py - line: 243 -DEBUG: Trying to receive data.
+2020-01-10 16:56:28,902; client.py - line: 247 -INFO: Data from Unity received.
+2020-01-10 16:56:28,902; client.py - line: 248 -DEBUG: End_tag detected, unity_resp_bytes[0:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2020-01-10 16:56:28,902; client.py - line: 252 -DEBUG: img_bytes type: <class 'bytearray'>, img_bytes len: 26748, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
+2020-01-10 16:56:28,903; client.py - line: 255 -DEBUG: PIL Img: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
+2020-01-10 16:56:28,929; client.py - line: 257 -DEBUG: Returning img: type: <class 'numpy.ndarray'> 
+
+2020-01-10 16:56:28,929; dataset.py - line: 1216 -DEBUG: index: 37
+2020-01-10 16:56:28,929; dataset.py - line: 1218 -DEBUG: index: 38
+2020-01-10 16:56:28,930; dataset.py - line: 945 -INFO: data completed: Image index: 38
+2020-01-10 16:56:28,930; dataset.py - line: 851 -DEBUG: key: 'seed' is found in config
+2020-01-10 16:56:29,003; client.py - line: 193 -DEBUG: Json string sent.
+
+2020-01-10 16:56:29,003; client.py - line: 236 -DEBUG: Json string sent.
+
+2020-01-10 16:56:29,117; client.py - line: 243 -DEBUG: Trying to receive data.
+2020-01-10 16:56:29,117; client.py - line: 247 -INFO: Data from Unity received.
+2020-01-10 16:56:29,118; client.py - line: 248 -DEBUG: End_tag detected, unity_resp_bytes[0:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2020-01-10 16:56:29,119; client.py - line: 252 -DEBUG: img_bytes type: <class 'bytearray'>, img_bytes len: 29705, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
+2020-01-10 16:56:29,120; client.py - line: 255 -DEBUG: PIL Img: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
+2020-01-10 16:56:29,140; client.py - line: 257 -DEBUG: Returning img: type: <class 'numpy.ndarray'> 
+
+2020-01-10 16:56:29,141; dataset.py - line: 1216 -DEBUG: index: 38
+2020-01-10 16:56:29,141; dataset.py - line: 1218 -DEBUG: index: 39
+2020-01-10 16:56:29,141; dataset.py - line: 945 -INFO: data completed: Image index: 39
+2020-01-10 16:56:29,141; dataset.py - line: 851 -DEBUG: key: 'seed' is found in config
+2020-01-10 16:56:29,209; dataset.py - line: 991 -DEBUG: numb_y: 4
+2020-01-10 16:56:29,209; dataset.py - line: 992 -DEBUG: dicts[0]['image'].shape[0]: 1024
+2020-01-10 16:56:29,209; dataset.py - line: 993 -DEBUG: (images_per_row*dicts[0][image].shape[1]: 10240
+2020-01-10 16:56:29,210; dataset.py - line: 994 -DEBUG: dicts[0][image].shape[2]: 3
+2020-01-10 16:56:29,356; dataset.py - line: 996 -DEBUG: h_stacked.shape: (4, 1024, 10240, 3)
+2020-01-10 16:56:30,028; dataset.py - line: 1009 -DEBUG: final_img.shape: (4096, 10240, 3)
+2020-01-10 16:57:04,309; client.py - line: 173 -INFO: Exit-message is sent. Unity build and socket now closing.
+
+2020-01-10 16:57:04,309; client.py - line: 190 -DEBUG: Exit request sent.
+
+2020-01-10 16:57:04,309; dataset.py - line: 1259 -DEBUG: Exit socket connection to unity.
