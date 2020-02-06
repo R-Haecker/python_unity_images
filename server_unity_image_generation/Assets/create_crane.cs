@@ -15,6 +15,7 @@ public class create_crane : MonoBehaviour
     float[] theta_deg_sumed;
     public GameObject TCP_server_object;
     [HideInInspector] public bool newCrane=false;
+    [HideInInspector] public bool newPose=false;
     Vector3 rotVec_yz(Vector3 vec,float theta)
     {
         return new Vector3(vec.x,vec.y*Mathf.Cos(theta)-vec.z*Mathf.Sin(theta),vec.y*Mathf.Sin(theta)+vec.z*Mathf.Cos(theta));
@@ -48,7 +49,7 @@ public class create_crane : MonoBehaviour
             vec.x*(norm.x*norm.y*(1-Mathf.Cos(phi))+norm.z*Mathf.Sin(phi))  +  vec.y*(norm.y*norm.y*(1-Mathf.Cos(phi))+Mathf.Cos(phi))  +  vec.z*(norm.y*norm.z*(1-Mathf.Cos(phi))-norm.x*Mathf.Sin(phi)),
             vec.x*(norm.x*norm.z*(1-Mathf.Cos(phi))-norm.y*Mathf.Sin(phi))  +  vec.y*(norm.y*norm.z*(1-Mathf.Cos(phi))+norm.x*Mathf.Sin(phi))  +  vec.z*(norm.z*norm.z*(1-Mathf.Cos(phi))+Mathf.Cos(phi)));
     }
-    void create_scene()
+    void delete_old_scene()
     {
         //Delete old crane 
         if(cubes!=null)
@@ -72,75 +73,35 @@ public class create_crane : MonoBehaviour
                 Destroy(SpotLights[i].Object);
             }
         }
-        
-        //load json data from TCP_server script   
-        jsonCrane = TCP_server_object.GetComponent<TCP_server>().jsonCrane_here;
+    }
+    void set_minimal_shader()
+    {
+        if(jsonCrane.request_pose)
+        {
+            //set shader to unlit i.e. the apperence to minimum
+            for (int i = 0; i<getTotalAmountofCuboids(jsonCrane.total_branches); i++)
+            {
+                Shader shader = Shader.Find("Particles/Standard Unlit");
+                cubes[i].GetComponent<Renderer>().material.shader = shader;
+            }
+        }
+    }
+    
+    void create_pose()
+    {   
         //create enough cubes and hinges
         cubes = new GameObject[getTotalAmountofCuboids(jsonCrane.total_branches)];
         hinges = new Vector3[getTotalAmountofCuboids(jsonCrane.total_branches)];
-        Jcamera = new JsonCamera();
-        PointLights = new SphericalGameObject[jsonCrane.totalPointLights];
-        SpotLights = new SphericalGameObject[jsonCrane.totalSpotLights];
         string jsondata = JsonUtility.ToJson(jsonCrane);
         Debug.Log("CreateCrane in create_scene; jsondata: " + jsondata);
         UnityEngine.Assertions.Assert.IsTrue(jsonCrane.total_cuboids>0, "The variable total_cuboids from python has to be bigger than zero. total_cuboids: "+ jsonCrane.total_cuboids.ToString());
         if (jsonCrane.total_cuboids==0)
         {
+            Debug.LogError("total_cuboids is zero crane can not be created! Check python client.");
             return;
         }
-        else
-        {
-            newCrane=true;
-        }
         
-        //adjust Directional Light
-        Transform DLight_Transform;
-        DLight_Transform = GetComponent<Transform>();
-        DLight_Transform.rotation = Quaternion.Euler(90 - jsonCrane.DirectionalLight.theta_deg,0,0);
-        Light lt;
-        lt = GetComponent<Light>();
-        lt.intensity = jsonCrane.DirectionalLight.intensity;
-
-        //create pointlights and set properties
-        for (int i = 0; i<jsonCrane.totalPointLights; i++)
-        {
-            PointLights[i] = new SphericalGameObject();
-            PointLights[i].radius = jsonCrane.point_lights[i].radius;
-            PointLights[i].theta_deg = jsonCrane.point_lights[i].theta_deg;
-            PointLights[i].phi_deg = jsonCrane.point_lights[i].phi_deg;
-            
-            GameObject lightGameObject = new GameObject();
-            lightGameObject.name = string.Format("PointLight_{0}",i);
-            Light lightComp = lightGameObject.AddComponent<Light>();
-            lightComp.shadows= LightShadows.Soft;
-            lightComp.type = LightType.Point;
-            lightComp.color = jsonCrane.point_lights[i].color;
-            lightComp.intensity =  jsonCrane.point_lights[i].intensity;
-            lightComp.range = jsonCrane.point_lights[i].range;
-            PointLights[i].Object = lightGameObject;
-            PointLights[i].Update();    
-        }
-        //create Spotlights and set properties
-        for (int i = 0; i<jsonCrane.totalSpotLights; i++)
-        {
-            SpotLights[i] = new SphericalGameObject();
-            SpotLights[i].radius = jsonCrane.spot_lights[i].radius;
-            SpotLights[i].theta_deg = jsonCrane.spot_lights[i].theta_deg;
-            SpotLights[i].phi_deg = jsonCrane.spot_lights[i].phi_deg;
-            
-            GameObject lightGameObject = new GameObject();
-            lightGameObject.name = string.Format("SpotLight_{0}",i);
-            Light lightComp = lightGameObject.AddComponent<Light>();
-            lightComp.shadows= LightShadows.Soft;
-            lightComp.type = LightType.Spot;
-            lightComp.color = jsonCrane.spot_lights[i].color;
-            lightComp.intensity =  jsonCrane.spot_lights[i].intensity;
-            lightComp.range = jsonCrane.spot_lights[i].range;
-            lightComp.spotAngle = jsonCrane.spot_lights[i].spot_angle;
-            SpotLights[i].Object = lightGameObject;
-            SpotLights[i].Update();    
-        }
-        //create Cube-GameObjects, names ans set scale of cubes
+        //create Cube-GameObjects, names and set scale of cubes
         for (int i=0; i<getTotalAmountofCuboids(jsonCrane.total_branches); i++)
         {
             Vector3 hinge = new Vector3(0,0,0);
@@ -153,16 +114,7 @@ public class create_crane : MonoBehaviour
             cubes[i] = cube;
             hinges[i] = hinge;
         }
-        //adjust Material color
-        for (int i = 0; i<jsonCrane.total_cuboids; i++)
-        {
-            Shader shader = Shader.Find("Custom/standard_shader");
-            cubes[i].GetComponent<Renderer>().material.shader = shader;
-            cubes[i].GetComponent<Renderer>().material.color = jsonCrane.cuboids[i%jsonCrane.total_cuboids].material.color;
-            cubes[i].GetComponent<Renderer>().material.SetFloat("_Metallic", jsonCrane.cuboids[i%jsonCrane.total_cuboids].material.metallic);
-            cubes[i].GetComponent<Renderer>().material.SetFloat("_Glossiness", jsonCrane.cuboids[i%jsonCrane.total_cuboids].material.smoothness);
-        }
-
+        
         float max_x = 0;
         float max_y = 0;
         float min_y = 0;
@@ -212,8 +164,10 @@ public class create_crane : MonoBehaviour
                 }
             }
         }
+    }
 
-
+        /* 
+        
         for(int i = 0; i<cubes.Length; i++)
         {
             if(max_x < cubes[i].transform.position.x)
@@ -229,13 +183,11 @@ public class create_crane : MonoBehaviour
                 min_y = cubes[i].transform.position.y;
             }
         }
+        Debug.Log("max_x: " + max_x.ToString() + "; max_y: " + max_y.ToString() + "; min_y: " + min_y.ToString());
 
         //set camera radius dependend on the dimensions of the crane 
         //still not perfect  
-        Jcamera.Object = Cam;
-        Debug.Log("camera.radius: " + jsonCrane.camera.radius.ToString());       
-        Debug.Log("max_x: " + max_x.ToString() + "; max_y: " + max_y.ToString() + "; min_y: " + min_y.ToString());
-             
+           
         if(jsonCrane.camera.radius==0)
         {
             // best try to get the right camera pos dependent on crane
@@ -287,18 +239,84 @@ public class create_crane : MonoBehaviour
         //Debug.Log("now done: view_pos: " + view_pos.ToString());
         Debug.Log("camera radius:" + Jcamera.radius.ToString());
         }
-        else
-        {
-            Jcamera.radius = jsonCrane.camera.radius;
-        }
+        */
+        
+
+    void create_camera()
+    {
+        Jcamera = new JsonCamera();
+        Jcamera.Object = Cam;
+        Debug.Log("camera.radius: " + jsonCrane.camera.radius.ToString());       
+        Jcamera.radius = jsonCrane.camera.radius;
         Jcamera.theta_deg = jsonCrane.camera.theta_deg;
         Jcamera.phi_deg = jsonCrane.camera.phi_deg;
         Camera.main.fieldOfView = jsonCrane.camera.FOV;
         Jcamera.Update();
-        newCrane=false;
     }
 
+    void create_apperence()
+    {
+        PointLights = new SphericalGameObject[jsonCrane.totalPointLights];
+        SpotLights = new SphericalGameObject[jsonCrane.totalSpotLights];
 
+        //adjust Directional Light
+        Transform DLight_Transform;
+        DLight_Transform = GetComponent<Transform>();
+        DLight_Transform.rotation = Quaternion.Euler(90 - jsonCrane.DirectionalLight.theta_deg,0,0);
+        Light lt;
+        lt = GetComponent<Light>();
+        lt.intensity = jsonCrane.DirectionalLight.intensity;
+
+        //create pointlights and set properties
+        for (int i = 0; i<jsonCrane.totalPointLights; i++)
+        {
+            PointLights[i] = new SphericalGameObject();
+            PointLights[i].radius = jsonCrane.point_lights[i].radius;
+            PointLights[i].theta_deg = jsonCrane.point_lights[i].theta_deg;
+            PointLights[i].phi_deg = jsonCrane.point_lights[i].phi_deg;
+            
+            GameObject lightGameObject = new GameObject();
+            lightGameObject.name = string.Format("PointLight_{0}",i);
+            Light lightComp = lightGameObject.AddComponent<Light>();
+            lightComp.shadows= LightShadows.Soft;
+            lightComp.type = LightType.Point;
+            lightComp.color = jsonCrane.point_lights[i].color;
+            lightComp.intensity =  jsonCrane.point_lights[i].intensity;
+            lightComp.range = jsonCrane.point_lights[i].range;
+            PointLights[i].Object = lightGameObject;
+            PointLights[i].Update();    
+        }
+        //create Spotlights and set properties
+        for (int i = 0; i<jsonCrane.totalSpotLights; i++)
+        {
+            SpotLights[i] = new SphericalGameObject();
+            SpotLights[i].radius = jsonCrane.spot_lights[i].radius;
+            SpotLights[i].theta_deg = jsonCrane.spot_lights[i].theta_deg;
+            SpotLights[i].phi_deg = jsonCrane.spot_lights[i].phi_deg;
+            
+            GameObject lightGameObject = new GameObject();
+            lightGameObject.name = string.Format("SpotLight_{0}",i);
+            Light lightComp = lightGameObject.AddComponent<Light>();
+            lightComp.shadows= LightShadows.Soft;
+            lightComp.type = LightType.Spot;
+            lightComp.color = jsonCrane.spot_lights[i].color;
+            lightComp.intensity =  jsonCrane.spot_lights[i].intensity;
+            lightComp.range = jsonCrane.spot_lights[i].range;
+            lightComp.spotAngle = jsonCrane.spot_lights[i].spot_angle;
+            SpotLights[i].Object = lightGameObject;
+            SpotLights[i].Update();    
+        }
+        
+        //adjust Material color
+        for (int i = 0; i<jsonCrane.total_cuboids; i++)
+        {
+            Shader shader = Shader.Find("Custom/standard_shader");
+            cubes[i].GetComponent<Renderer>().material.shader = shader;
+            cubes[i].GetComponent<Renderer>().material.color = jsonCrane.cuboids[i%jsonCrane.total_cuboids].material.color;
+            cubes[i].GetComponent<Renderer>().material.SetFloat("_Metallic", jsonCrane.cuboids[i%jsonCrane.total_cuboids].material.metallic);
+            cubes[i].GetComponent<Renderer>().material.SetFloat("_Glossiness", jsonCrane.cuboids[i%jsonCrane.total_cuboids].material.smoothness);
+        }
+    }
             /*
             if(((Mathf.Abs(max_y)+Mathf.Abs(min_y))/2)<max_x)
             {
@@ -343,15 +361,43 @@ public class create_crane : MonoBehaviour
         if(TCP_server_object.GetComponent<TCP_server>().ready_to_build)
         {   
             Debug.Log("CreateCrane in Update: before create_scene: import ready_to_build == true;");
-            create_scene();
-            newCrane=true;
-            Debug.Log("CreateCrane in Update: after create_scene:  newCrane==true; import ready_to_build == true;");
+            //load json data from TCP_server script   
+            jsonCrane = TCP_server_object.GetComponent<TCP_server>().jsonCrane_here;
+            if(jsonCrane.request_pose)
+            {
+                Debug.Log("CreateCrane in Update: request_pose == true;");
+                delete_old_scene();
+                create_pose();
+                create_camera();
+                create_apperence();
+                newCrane = true;
+                Debug.Log("CreateCrane in Update: Crane created");
+                if(TCP_server_object.GetComponent<TCP_server>().image_sent)
+                {
+                    Debug.Log("CreateCrane in Update: import image_sent == true;");
+                    set_minimal_shader();
+                    newPose=true;
+                    Debug.Log("CreateCrane in Update: Pose created;");
+                }
+            }
+            else
+            {
+                delete_old_scene();
+                create_pose();
+                create_camera();
+                create_apperence();
+                newCrane=true;   
+                Debug.Log("CreateCrane in Update: Crane created;");
+            }
+            Debug.Log("CreateCrane in Update: after create_scene: import ready_to_build == true;");
         }
         else
         {
-            //Debug.Log("CreateCrane in Update: import ready_to_build == false; newCrane==false");
+            newPose=false;
             newCrane=false;
         }
+            //Debug.Log("CreateCrane in Update: import ready_to_build == false; newCrane==false");
+            //newCrane=false;
     }
 
 }

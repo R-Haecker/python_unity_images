@@ -16,6 +16,7 @@ public class TcpConfigParameters
 [System.Serializable]
 public class JsonCrane
 {
+    public bool request_pose;
     public int total_cuboids;
     public int[] total_branches;
     public bool same_scale;

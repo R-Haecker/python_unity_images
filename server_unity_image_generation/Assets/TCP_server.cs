@@ -20,6 +20,7 @@ public class TCP_server : MonoBehaviour
     NetworkStream stream;
     [HideInInspector] public JsonCrane jsonCrane_here;
     [HideInInspector] public bool ready_to_build = false;
+    [HideInInspector] public bool image_sent = false;
     bool client_accepted = false;
     bool running_session = true;
     string file_path_data_unity;
@@ -48,7 +49,7 @@ public class TCP_server : MonoBehaviour
 	void LateUpdate() 
     {
         timer += Time.deltaTime;
-        if(client_accepted == false && timer > 30.0f)
+        if(client_accepted == false && timer > 20.0f)
         {
             Debug.Log("TCP_Server in LateUpdate: TIMEOUT reached now stopping server." + Time.realtimeSinceStartup.ToString());
             running_session = false;
@@ -59,25 +60,38 @@ public class TCP_server : MonoBehaviour
             System.IO.File.WriteAllText(file_path_data_unity + "started.txt", "0");
             Application.Quit();
         }
+        if(create_crane_object.GetComponent<create_crane>().newPose && jsonCrane_here.request_pose && image_sent)
+        {
+            Debug.Log("TCP_Server in LateUpdate: before CapturePNGasBytes: get Pose import newPose and request_pose == true;");
+            StartCoroutine(CapturePNGasBytes());
+            Debug.Log("TCP_Server in LateUpdate: after CapturePNGasBytes:  get Pose image_sent==true;");
+        }
         if(create_crane_object.GetComponent<create_crane>().newCrane)
         {
             Debug.Log("TCP_Server in LateUpdate: before CapturePNGasBytes: import newCrane == true;");
-            Debug.Log("TCP_Server in LateUpdate: before CapturePNGasBytes: Time: " + Time.realtimeSinceStartup.ToString());
-            timer =0;
             StartCoroutine(CapturePNGasBytes());
             ready_to_build=false;
             Debug.Log("TCP_Server in LateUpdate: after CapturePNGasBytes:  ready_to_build==false; import newCrane == true;");
-            Debug.Log("TCP_Server in LateUpdate: after CapturePNGasBytes: Time: " + Time.realtimeSinceStartup.ToString());
         }
     }
+    // TODO unity not sending 2 pictures get interuppted
     private IEnumerator CapturePNGasBytes()
     {
         yield return new WaitForEndOfFrame();
         Camera currentCamera = GetComponent<Camera>();
-        if(jsonCrane_here.camera.soild_background)
+        Debug.Log("TCP_Server in CapturePNGasBytes: Check if solid background.");
+        Debug.Log("TCP_Server in CapturePNGasBytes: import newPose == " + create_crane_object.GetComponent<create_crane>().newPose.ToString());
+        Debug.Log("TCP_Server in CapturePNGasBytes: import newCrane == " + create_crane_object.GetComponent<create_crane>().newCrane.ToString());
+        if(jsonCrane_here.camera.soild_background || ((create_crane_object.GetComponent<create_crane>().newPose)&&(image_sent)) )
         {
+            Debug.Log("TCP_Server in CapturePNGasBytes: solid background == true.");    
             currentCamera.clearFlags = CameraClearFlags.SolidColor;
         } 
+        else
+        {
+            Debug.Log("TCP_Server in CapturePNGasBytes: solid background == false.");
+            currentCamera.clearFlags = CameraClearFlags.Skybox;
+        }
         //create RenderTexture and Texture2D
         RenderTexture rt = new RenderTexture(jsonCrane_here.camera.resolution_width, jsonCrane_here.camera.resolution_height, 24, RenderTextureFormat.ARGB32);
         Texture2D sceneTexture = new Texture2D(jsonCrane_here.camera.resolution_width, jsonCrane_here.camera.resolution_height, TextureFormat.RGB24, false);
@@ -114,7 +128,13 @@ public class TCP_server : MonoBehaviour
         {
             Debug.Log("TCP_Server in CapturePNGasBytes: Socket exception: " + socketException);
         }
-        ready_to_build = false;
+        image_sent = true;
+        Debug.Log("TCP_Server in CapturePNGasBytes: image_sent is true");
+        if(create_crane_object.GetComponent<create_crane>().newPose)
+        {
+            image_sent = false;
+            ready_to_build=false;
+        }
     }
 
     public void ListenForMessages()
@@ -127,7 +147,6 @@ public class TCP_server : MonoBehaviour
         System.Net.IPAddress localAddr = System.Net.IPAddress.Parse(TcpConfig.host);
         Debug.Log("TCP_Server in ListenForMessages: IPAdress: " + localAddr.ToString() + "; port: " + TcpConfig.port);
         server = new TcpListener(localAddr, TcpConfig.port);
-
         // Start listening for client requests.
         server.Start();
 
@@ -141,19 +160,22 @@ public class TCP_server : MonoBehaviour
         Debug.Log("TCP_Server in ListenForMessages: Waiting for a connection... ");
         
         Debug.Log("TCP_Server in ListenForMessages: Connected at: "+client.ToString());
+        Debug.Log("running_session == " + running_session.ToString());
+        int break_counter = 0;
         while(running_session)
         {
             // if there is a change request it should come in the next 3 minutes
-            if(timer>=20.0f)
+            break_counter += 1;
+            if(timer>=20.0f || break_counter>10000)
             {
-                Debug.Log("TCP_Server in ListenForMessages: change_req was true but nothing came for 3 minutes; closing listening thread");
+                Debug.Log("TCP_Server in ListenForMessages: running_session was true but nothing happend; now closing listening thread");
                 running_session=false;
             }
             Debug.Log("TCP_Server in ListenForMessages: in nested while(true): Connected at: "+client.ToString());
             // Get a stream object for reading and writing
             stream = client.GetStream();
-
             Debug.Log("TCP_Server in ListenForMessages: waiting for stream.Read()");
+
             // Loop to receive all the data sent by the client.
             data = null;
             int i=0;

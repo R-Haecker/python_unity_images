@@ -3,6 +3,7 @@ import client
 #from edflow.data.dataset import DatasetMixin
 import numpy as np
 import matplotlib
+#matplotlib.use('TkAgg')
 import matplotlib.pyplot as plt
 import tkinter
 import json
@@ -83,7 +84,7 @@ class dataset_cuboids():
 
         self.logger.debug("Dataset initialised.\n")     
 
-    def set_config(self, save_config = True, same_scale=None, scale=[0.5,4], total_cuboids=[2,5], phi=[0,360], specify_branches=False, branches=[1,3], same_theta=None, theta=None, 
+    def set_config(self, save_config = True, request_pose = True, same_scale=None, scale=[0.5,4], total_cuboids=[2,5], phi=[0,360], specify_branches=False, branches=[1,3], same_theta=None, theta=None, 
     same_material=None, specify_material=False, r=[0,1], g=[0,1], b=[0,1], a=[0.5,1], metallic=[0,1], smoothness=[0,1], CameraRes_width= 1024, CameraRes_height=1024, Camera_FieldofView=90, CameraRadius = 10.0, CameraTheta = [60,100], CameraPhi = [0,360], CameraVerticalOffset = None, Camera_solid_background = False,
     totalPointLights=[5,12], PointLightsRadius=[5,20], PointLightsPhi=[0,360], PointLightsTheta=[0,90], PointLightsIntensity=[7,17], PointLightsRange=[5,25], same_PointLightsColor=None, PointLightsColor_r=[0,1], PointLightsColor_g=[0,1], PointLightsColor_b=[0,1], PointLightsColor_a=[0.5,1],
     totalSpotLights=[3,7], SpotLightsRadius=[5,20], SpotLightsPhi=[0,360], SpotLightsTheta=[0,90], SpotLightsIntensity=[5,15], SpotLightsRange=[5,25], SpotAngle=[5,120], same_SpotLightsColor=None, SpotLightsColor_r=[0,1], SpotLightsColor_g=[0,1], SpotLightsColor_b=[0,1], SpotLightsColor_a=[0.5,1],
@@ -93,6 +94,8 @@ class dataset_cuboids():
         
         :param "save_config": This flag indicates if the config should be saved. It should be kept at the default: ``True``. 
         :type "save_config": bool, optional
+        :param "request_pose": This flag indicates if a groundtruth of the pose in form of an image has to be created. 
+        :type "request_pose": bool, optional
         :param "standard_parameter": Has to be a list with two floats. The first element describes the lower boundary and second element describes the upper boundary for the function :meth:`~dataset.dataset_cuboids.create_random_parameters` in which the variable is set randomly, defaults is a predefined list
         :type "standard parameter": list, optional
         :param same_scale: If ``None`` the boolean will be set randomly in :meth:`~dataset.dataset_cuboids.create_random_parameters`. Otherwise it will be set to the given boolean, defaults to None
@@ -351,6 +354,7 @@ class dataset_cuboids():
             assert len(SpotLightsColor_a) == 2, "SpotLightsColor_a[0] is minimal limit and SpotLightsColor_a[1] is maximal limit for random generation of SpotLightsColor_a."
             config["SpotLightsColor_a"]=SpotLightsColor_a
         
+        config["request_pose"] = request_pose
         config["seed"] = np.random.randint(np.iinfo(np.int32).max)
         np.random.seed(config["seed"])
         self.logger.debug("Config Seed: " + str(config["seed"]))
@@ -419,6 +423,7 @@ class dataset_cuboids():
         dictionary["CameraRes_height"] = self.config["CameraRes_height"] 
         dictionary["Camera_FieldofView"] = self.config["Camera_FieldofView"]
         
+        dictionary["request_pose"] = self.config["request_pose"]
         # Create all parameters randomly 
         
         # Camera position
@@ -829,7 +834,7 @@ class dataset_cuboids():
         :return: A string depending on your input parameters wich can be interpreted afterwards by the Unity script. 
         :rtype: string
         """        
-        return self.uc.write_json_crane(total_cuboids=dictionary["total_cuboids"], same_scale=dictionary["same_scale"], scale=dictionary["scale"], same_theta=dictionary["same_theta"], theta=dictionary["theta"], phi=dictionary["phi"], total_branches=dictionary["total_branches"], same_material=dictionary["same_material"], metallic=dictionary["metallic"], smoothness=dictionary["smoothness"], r=dictionary["r"], g=dictionary["g"], b=dictionary["b"], a=dictionary["a"], 
+        return self.uc.write_json_crane(request_pose = dictionary["request_pose"], total_cuboids=dictionary["total_cuboids"], same_scale=dictionary["same_scale"], scale=dictionary["scale"], same_theta=dictionary["same_theta"], theta=dictionary["theta"], phi=dictionary["phi"], total_branches=dictionary["total_branches"], same_material=dictionary["same_material"], metallic=dictionary["metallic"], smoothness=dictionary["smoothness"], r=dictionary["r"], g=dictionary["g"], b=dictionary["b"], a=dictionary["a"], 
             CameraRes_width=dictionary["CameraRes_width"], CameraRes_height=dictionary["CameraRes_height"], Camera_FieldofView=dictionary["Camera_FieldofView"], CameraRadius=dictionary["CameraRadius"], CameraTheta=dictionary["CameraTheta"], CameraPhi=dictionary["CameraPhi"], CameraVerticalOffset=dictionary["CameraVerticalOffset"], Camera_solid_background=dictionary["Camera_solid_background"], 
             totalPointLights=dictionary["totalPointLights"], same_PointLightsColor=dictionary["same_PointLightsColor"], PointLightsColor_r=dictionary["PointLightsColor_r"], PointLightsColor_g=dictionary["PointLightsColor_g"], PointLightsColor_b=dictionary["PointLightsColor_b"], PointLightsColor_a=dictionary["PointLightsColor_a"], PointLightsRadius=dictionary["PointLightsRadius"], PointLightsTheta=dictionary["PointLightsTheta"], PointLightsPhi=dictionary["PointLightsPhi"], PointLightsIntensity=dictionary["PointLightsIntensity"], PointLightsRange=dictionary["PointLightsRange"], 
             totalSpotLights=dictionary["totalSpotLights"], same_SpotLightsColor=dictionary["same_SpotLightsColor"], SpotLightsColor_r=dictionary["SpotLightsColor_r"], SpotLightsColor_g=dictionary["SpotLightsColor_g"], SpotLightsColor_b=dictionary["SpotLightsColor_b"], SpotLightsColor_a=dictionary["SpotLightsColor_a"], SpotLightsRadius=dictionary["SpotLightsRadius"], SpotLightsTheta=dictionary["SpotLightsTheta"], SpotLightsPhi=dictionary["SpotLightsPhi"], SpotLightsIntensity=dictionary["SpotLightsIntensity"], SpotLightsRange=dictionary["SpotLightsRange"],SpotAngle=dictionary["SpotAngle"],
@@ -874,20 +879,41 @@ class dataset_cuboids():
                 self.logger.error("Image parameters could not be saved. No parameters found in dictionary.")
         # Save the image as png.
         if save_image:
-            # Check and if necessary create directory
-            directory_images = self.data_directory + "/images"
-            if not os.path.exists(directory_images):
-                os.makedirs(directory_images)
-            # Check if the image and the index is in the dictionary.
-            if "image" in dictionary:
-                if "index" in dictionary:
-                    Image.fromarray(dictionary["image"]).save(directory_images + "/image_index_" + str(dictionary["index"]) + '.png')
+            if "pose" in dictionary:   
+                # Check and if necessary create directory
+                directory_images = self.data_directory + "/images"
+                directory_images_poses = self.data_directory + "/images_poses"
+                if not os.path.exists(directory_images):
+                    os.makedirs(directory_images)
+                if not os.path.exists(directory_images_poses):
+                    os.makedirs(directory_images_poses)
+                # Check if the image and the index is in the dictionary.
+                if "image" in dictionary:
+                    if "index" in dictionary:
+                        Image.fromarray(dictionary["image"]).save(directory_images + "/image_index_" + str(dictionary["index"]) + '.png')
+                        Image.fromarray(dictionary["pose"]).save(directory_images_poses + "/image_index_" + str(dictionary["index"]) + '.png')
+                    else:
+                        # Change the name of the image if there is no index given.
+                        fake_index = np.random.randint(0,1000)
+                        Image.fromarray(dictionary["image"]).save(directory_images + "/image_NO_index_" + str(fake_index) + '.png')
+                        Image.fromarray(dictionary["pose"]).save(directory_images_poses + "/image_NO_index_" + str(fake_index) + '.png')
                 else:
-                    # Change the name of the image if there is no index given.
-                    fake_index = np.random.randint(0,1000)
-                    Image.fromarray(dictionary["image"]).save(directory_images + "/image_NO_index_" + str(fake_index) + '.png')
-            else:
-                self.logger.error("Image could not be saved. No image data not found in dictionary.")
+                    self.logger.error("Image could not be saved. No image data not found in dictionary.")
+            else:    
+                # Check and if necessary create directory
+                directory_images = self.data_directory + "/images"
+                if not os.path.exists(directory_images):
+                    os.makedirs(directory_images)
+                # Check if the image and the index is in the dictionary.
+                if "image" in dictionary:
+                    if "index" in dictionary:
+                        Image.fromarray(dictionary["image"]).save(directory_images + "/image_index_" + str(dictionary["index"]) + '.png')
+                    else:
+                        # Change the name of the image if there is no index given.
+                        fake_index = np.random.randint(0,1000)
+                        Image.fromarray(dictionary["image"]).save(directory_images + "/image_NO_index_" + str(fake_index) + '.png')
+                else:
+                    self.logger.error("Image could not be saved. No image data not found in dictionary.")
 
     def load_parameters(self,index = [-1], amount = 1):
         """Load and return a given amount of parameters as dictionaries in a list. If index is not specified the index will be chosen randomly.
@@ -908,7 +934,7 @@ class dataset_cuboids():
         for i in range(amount):
             while 1:
                 try:
-                    f = open("data/parameters/parameters_index_" + str(index[i]) + ".json")
+                    f = open(self.data_directory + "/parameters/parameters_index_" + str(index[i]) + ".json")
                     parameter_list.append(json.load(f))
                     f.close()
                     break
@@ -936,12 +962,18 @@ class dataset_cuboids():
         """        
         # Format the parameters to a jsonstring that can be sent and interpreted by Unity.
         jsonstring = self.create_json_string_from_parameters(parameters)
-        # receive an image depending on your parameters.
-        img = self.uc.receive_image(jsonstring)
         # Load and increment the extern saved index.
         index = self.increment_index()
+        # Send unity the data to create the crane
+        self.uc.send_to_unity(jsonstring)
+        # receive an image depending on your parameters.
+        img = self.uc.receive_image()
         # Put data in an dictionary.
-        newDict = {"index":index,"parameters":parameters,"image":img}
+        if self.config["request_pose"]:
+            img_pose = self.uc.receive_image()    
+            newDict = {"index":index,"parameters":parameters,"image":img,"pose":img_pose}
+        else:
+            newDict = {"index":index,"parameters":parameters,"image":img}
         self.logger.info("data completed: Image index: " + str(index))
         # Save parameters for later recreating and manipulating the image.
         self.save(newDict, save_para = save_para, save_image = save_image)
@@ -976,9 +1008,12 @@ class dataset_cuboids():
         :type save_fig: bool, optional
         :param show_index: If the corresponding index of every image is shown in the plot, defaults to True
         :type show_index: bool, optional
-        """         
+        """
         # How many images are there
         numb = len(dicts)
+        pose_av = all( "pose" in dicts[i] for i in range(numb))
+        self.logger.debug("Pose image is available is " + str(pose_av))
+
         if numb < images_per_row:
             images_per_row = numb
         numb_y = 0
@@ -992,23 +1027,48 @@ class dataset_cuboids():
         self.logger.debug("dicts[0]['image'].shape[0]: " + str(dicts[0]["image"].shape[0]))
         self.logger.debug("(images_per_row*dicts[0][image].shape[1]: " + str((images_per_row*dicts[0]["image"].shape[1])))
         self.logger.debug("dicts[0][image].shape[2]: " + str(dicts[0]["image"].shape[2]))
-        h_stacked = np.ones((numb_y, dicts[0]["image"].shape[0], (images_per_row*dicts[0]["image"].shape[1]), dicts[0]["image"].shape[2]), dtype=int)
-        self.logger.debug("h_stacked.shape: " + str(h_stacked.shape))
         # Stack all images in one row together with np.hstack() for all numb_y
-        for i in range(numb_y):
-            img_hstack = np.ones((numb_x, dicts[0]["image"].shape[0], dicts[0]["image"].shape[1], dicts[0]["image"].shape[2]), dtype=int)
-            if i == numb_y-1:
-                for j in range(numb):
-                    img_hstack[j] = dicts[i*numb_x+j]["image"]
-            else:    
-                for j in range(numb_x):
-                    img_hstack[j] = dicts[i*numb_x+j]["image"]
-            h_stacked[i] = np.hstack((img_hstack))
+        if pose_av:
+            self.logger.debug("Pose gt is available and will be plotted.")
+            h_stacked = np.zeros((numb_y*2, dicts[0]["image"].shape[0], (images_per_row*dicts[0]["image"].shape[1]), dicts[0]["image"].shape[2]), dtype=int)
+            for i in range(numb_y):
+                img_hstack = np.zeros((numb_x, dicts[0]["image"].shape[0], dicts[0]["image"].shape[1], dicts[0]["image"].shape[2]), dtype=int)
+                pose_img_hstack = np.ones((numb_x, dicts[0]["image"].shape[0], dicts[0]["image"].shape[1], dicts[0]["image"].shape[2]), dtype=int)
+                self.logger.debug("h_stacked.shape: " + str(h_stacked.shape))
+                if i == numb_y-1:
+                    for j in range(numb):
+                        img_hstack[j] = dicts[i*numb_x+j]["image"]
+                        pose_img_hstack[j] = dicts[i*numb_x+j]["pose"]
+                else:    
+                    for j in range(numb_x):
+                        img_hstack[j] = dicts[i*numb_x+j]["image"]
+                        pose_img_hstack[j] = dicts[i*numb_x+j]["pose"]
+                h_stacked[i*2] = np.hstack((img_hstack))
+                h_stacked[i*2+1] = np.hstack((pose_img_hstack))
+        else: 
+            h_stacked = np.ones((numb_y, dicts[0]["image"].shape[0], (images_per_row*dicts[0]["image"].shape[1]), dicts[0]["image"].shape[2]), dtype=int)
+            self.logger.debug("h_stacked.shape: " + str(h_stacked.shape))
+            for i in range(numb_y):
+                img_hstack = np.ones((numb_x, dicts[0]["image"].shape[0], dicts[0]["image"].shape[1], dicts[0]["image"].shape[2]), dtype=int)
+                if i == numb_y-1:
+                    for j in range(numb):
+                        img_hstack[j] = dicts[i*numb_x+j]["image"]
+                else:    
+                    for j in range(numb_x):
+                        img_hstack[j] = dicts[i*numb_x+j]["image"]
+                h_stacked[i] = np.hstack((img_hstack))
+            
         # Stack all rows vertically together
-        final_img = np.flip(np.vstack((h_stacked)),0)
-        self.logger.debug("final_img.shape: " + str(final_img.shape))
         matplotlib.use('TkAgg')
+        '''for i in range(len(h_stacked)):
+            plt.imshow(h_stacked[i])
+            plt.title("h_stacked["+str(i)+"]")
+            plt.show()
+        '''
+        final_img = np.vstack((h_stacked))
+        self.logger.debug("final_img.shape: " + str(final_img.shape))
         plt.imshow(final_img)
+        plt.show()
         # Plot lines between images to better see the borders of the images
         for i in range(1,numb_y):
             plt.axhline(y = dicts[0]["image"].shape[0]*i, color="k")
@@ -1032,7 +1092,7 @@ class dataset_cuboids():
             if not os.path.exists(self.data_directory + "/figures/"):
                 os.makedirs(self.data_directory + "/figures/")
             plt.savefig(self.data_directory + "/figures/fig_from_index_" + str(dicts[0]["index"]) + "_to_index_" + str(dicts[len(dicts)-1]["index"]) + ".png", bbox_inches='tight')
-        plt.show()
+        #plt.show()
 
     def change_app1_art2(self, para1, para2):
         """Combines the appearence and the articulation of two different parameters.  
@@ -1257,5 +1317,3 @@ class dataset_cuboids():
         """        
         self.uc.exit()
         self.logger.debug("Exit socket connection to unity.")
-
-#TODO renew the function load_parameters

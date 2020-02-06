@@ -185,7 +185,10 @@ class client_communicator_to_unity:
                     If this is True the Unity build will close.
         :type exit: bool, optional
         """
-        
+        while(self.connected==False):
+            # Socket must be connnected at this point
+            self.logger.critical("Socket is still not connected. Waiting...\n")
+            time.sleep(1)
         if exit:
             self.logger.debug("Exit request sent.\n")
             self.socket.sendall((json_string+"END.eod.").encode())
@@ -217,24 +220,15 @@ class client_communicator_to_unity:
                 self.logger.debug("data_complete: type: %s, data_complete len: %s, data_complete [:10]: %s" %(type(data_complete),len(data_complete),data_complete[:10]))
                 break
         return data_complete
-
-    def receive_image(self, json_string):
-        """Send string to Unity server and receive corresponding image.
+    
+    def receive_image(self):
+        """Receive corresponding image.
         
         :param json_string: This ``string`` has to be comprehensible for Unity which are strings returned by :meth:`~client.client_communicator_to_unity.write_json_crane`
         :type json_string: string
         :return: Image corresponding to the input string.
         :rtype: `PngImageFile-array`
         """        
-        
-        while(self.connected==False):
-            # Socket must be connnected at this point
-            self.logger.critical("Socket is still not connected. Waiting...\n")
-            time.sleep(1)
-        # Send unity the json_string with the formatted information to create the image 
-        self.send_to_unity(json_string)
-        self.logger.debug("Json string sent.\n")
-        
         unity_resp_bytes = bytes()
         while True:
             # receive data from Unity until the whole image is transferred
@@ -257,7 +251,7 @@ class client_communicator_to_unity:
         self.logger.debug("Returning img: type: %s \n" %type(img))
         return img
     
-    def write_json_crane(self, total_cuboids=3, same_scale = True, scale=2.0, same_theta = True, theta=40.0, phi=0.0, total_branches=None,
+    def write_json_crane(self, request_pose = False, total_cuboids=3, same_scale = True, scale=2.0, same_theta = True, theta=40.0, phi=0.0, total_branches=None,
     same_material = True, metallic=0.5, smoothness=0.5, r=1.0,g=1.0,b=1.0,a = 1.0,
     CameraRes_width = 256, CameraRes_height = 256, Camera_FieldofView = 60.0, CameraRadius = 12.0, CameraTheta = 90.0, CameraPhi=0.0, CameraVerticalOffset = 0.0, Camera_solid_background = True,   
     DirectionalLightTheta = 30.0, DirectionalLightIntensity = 0.8,
@@ -266,6 +260,8 @@ class client_communicator_to_unity:
         """
         Returns string according to input parameter which can be interpreted by the Unity server. Should be used in function :meth:`~client.client_communicator_to_unity.receive_image` to create an image.
         
+        :param "request_pose": This flag indicates if a groundtruth of the pose in form of an image has to be created. 
+        :type "request_pose": bool, optional
         :param total_cuboids:  The total amount of cubiods which will be "stacked" along one branch. Has to be bigger than zero, defaults to 3
         :type total_cuboids: int, optional
         :param same_scale: If the vertical scale of the cuboids should all be the same, defaults to True
@@ -370,6 +366,7 @@ class client_communicator_to_unity:
         """        
         # Create a Dictionary with all the given information which can be read by the Unity script
         data = {}
+        data['request_pose'] = request_pose
         data['total_cuboids'] = total_cuboids
         data['same_scale'] = same_scale
         data['same_theta'] = same_theta
