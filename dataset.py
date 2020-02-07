@@ -1060,15 +1060,9 @@ class dataset_cuboids():
             
         # Stack all rows vertically together
         matplotlib.use('TkAgg')
-        '''for i in range(len(h_stacked)):
-            plt.imshow(h_stacked[i])
-            plt.title("h_stacked["+str(i)+"]")
-            plt.show()
-        '''
-        final_img = np.vstack((h_stacked))
+        final_img = np.flip(np.vstack((h_stacked)),0)
         self.logger.debug("final_img.shape: " + str(final_img.shape))
         plt.imshow(final_img)
-        plt.show()
         # Plot lines between images to better see the borders of the images
         for i in range(1,numb_y):
             plt.axhline(y = dicts[0]["image"].shape[0]*i, color="k")
@@ -1076,23 +1070,39 @@ class dataset_cuboids():
             plt.axvline(x = dicts[0]["image"].shape[1]*i, color="k")
         # Plot the index of the images onto the images
         if show_index:
-            j = numb_y+1
-            for i in range(0,len(dicts)):
-                if "index" in dicts[i]:
-                    if i%(numb_x)==0:
-                        j -= 1
-                    plt.text(dicts[0]["image"].shape[1]*((i%numb_x) + 0.03), dicts[0]["image"].shape[0]*(j - 0.1), "idx: " + str(dicts[i]["index"]) )
-                else:
-                    self.logger.error("dicts[" + str(i) + "] has no index.")
+            if pose_av:
+                j = numb_y+1
+                for i in range(0,len(dicts)):
+                    l = 0
+                    if "index" in dicts[i]:
+                        if i%(numb_x)==0:
+                            l += 1
+                            j -= 1
+                        plt.text(dicts[0]["image"].shape[1]*((i%numb_x) + 0.03), dicts[0]["image"].shape[0]*(j*2 - 0.1), "idx: " + str(dicts[i]["index"]), color="white")
+                        plt.text(dicts[0]["image"].shape[1]*((i%numb_x) + 0.03), dicts[0]["image"].shape[0]*(j*2-1 - 0.1), "idx: " + str(dicts[i]["index"]), color="white")
+                    else:
+                        self.logger.error("dicts[" + str(i) + "] has no index.")
+            else:
+                j = numb_y+1
+                for i in range(0,len(dicts)):
+                    if "index" in dicts[i]:
+                        if i%(numb_x)==0:
+                            j -= 1
+                        plt.text(dicts[0]["image"].shape[1]*((i%numb_x) + 0.03), dicts[0]["image"].shape[0]*(j - 0.1), "idx: " + str(dicts[i]["index"]) )
+                    else:
+                        self.logger.error("dicts[" + str(i) + "] has no index.")
         plt.axis('off')
         plt.xlim(0, (images_per_row)*dicts[0]["image"].shape[1])
-        plt.ylim(0, (numb_y)*dicts[0]["image"].shape[0])
+        if pose_av:
+            plt.ylim(0, (numb_y)*2*dicts[0]["image"].shape[0])
+        else:
+            plt.ylim(0, (numb_y)*dicts[0]["image"].shape[0])
         # Save figure if wanted.
         if save_fig:
             if not os.path.exists(self.data_directory + "/figures/"):
                 os.makedirs(self.data_directory + "/figures/")
             plt.savefig(self.data_directory + "/figures/fig_from_index_" + str(dicts[0]["index"]) + "_to_index_" + str(dicts[len(dicts)-1]["index"]) + ".png", bbox_inches='tight')
-        #plt.show()
+        plt.show()
 
     def change_app1_art2(self, para1, para2):
         """Combines the appearence and the articulation of two different parameters.  

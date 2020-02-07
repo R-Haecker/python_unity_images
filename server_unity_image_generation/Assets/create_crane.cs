@@ -14,8 +14,10 @@ public class create_crane : MonoBehaviour
     float[] theta_rad_sumed;
     float[] theta_deg_sumed;
     public GameObject TCP_server_object;
-    [HideInInspector] public bool newCrane=false;
-    [HideInInspector] public bool newPose=false;
+    //[HideInInspector] public bool newCrane=false;
+    public bool newCrane=false;
+    //[HideInInspector] public bool newPose=false;
+    public bool newPose=false;
     Vector3 rotVec_yz(Vector3 vec,float theta)
     {
         return new Vector3(vec.x,vec.y*Mathf.Cos(theta)-vec.z*Mathf.Sin(theta),vec.y*Mathf.Sin(theta)+vec.z*Mathf.Cos(theta));
@@ -81,8 +83,12 @@ public class create_crane : MonoBehaviour
             //set shader to unlit i.e. the apperence to minimum
             for (int i = 0; i<getTotalAmountofCuboids(jsonCrane.total_branches); i++)
             {
-                Shader shader = Shader.Find("Particles/Standard Unlit");
+                Shader shader = Shader.Find("Unlit/Color");
                 cubes[i].GetComponent<Renderer>().material.shader = shader;
+                Vector4 white_color = new Vector4(1,1,1,1);
+                cubes[i].GetComponent<Renderer>().material.color = white_color;
+                cubes[i].GetComponent<Renderer>().material.SetFloat("_Metallic", 0);
+                cubes[i].GetComponent<Renderer>().material.SetFloat("_Glossiness", 0);
             }
         }
     }
@@ -360,28 +366,32 @@ public class create_crane : MonoBehaviour
     {
         if(TCP_server_object.GetComponent<TCP_server>().ready_to_build)
         {   
-            Debug.Log("CreateCrane in Update: before create_scene: import ready_to_build == true;");
+            Debug.Log("CreateCrane in Update: before creating any scene: import ready_to_build == true;");
             //load json data from TCP_server script   
             jsonCrane = TCP_server_object.GetComponent<TCP_server>().jsonCrane_here;
-            if(jsonCrane.request_pose)
+            if(jsonCrane.request_pose && (!TCP_server_object.GetComponent<TCP_server>().image_sent))
             {
-                Debug.Log("CreateCrane in Update: request_pose == true;");
+                Debug.Log("CreateCrane in Update: request_pose == true and import image_sent == false;");
+                Debug.Log("CreateCrane in Update: Now deleting old crane and creating new one;");
                 delete_old_scene();
                 create_pose();
                 create_camera();
                 create_apperence();
                 newCrane = true;
-                Debug.Log("CreateCrane in Update: Crane created");
-                if(TCP_server_object.GetComponent<TCP_server>().image_sent)
-                {
-                    Debug.Log("CreateCrane in Update: import image_sent == true;");
-                    set_minimal_shader();
-                    newPose=true;
-                    Debug.Log("CreateCrane in Update: Pose created;");
-                }
+                Debug.Log("CreateCrane in Update: Crane created; newCrane == true;");
             }
-            else
+            if(jsonCrane.request_pose && TCP_server_object.GetComponent<TCP_server>().image_sent)
             {
+                Debug.Log("CreateCrane in Update: request_pose == true and import image_sent == true;");
+                Debug.Log("CreateCrane in Update: Now creating pose;");
+                set_minimal_shader();
+                newPose=true;
+                Debug.Log("CreateCrane in Update: Pose created;");
+            }
+
+            if(!(jsonCrane.request_pose) && (!TCP_server_object.GetComponent<TCP_server>().image_sent))
+            {
+                Debug.Log("CreateCrane in Update: request_pose == false and import image_sent == false;");
                 delete_old_scene();
                 create_pose();
                 create_camera();
@@ -389,13 +399,14 @@ public class create_crane : MonoBehaviour
                 newCrane=true;   
                 Debug.Log("CreateCrane in Update: Crane created;");
             }
-            Debug.Log("CreateCrane in Update: after create_scene: import ready_to_build == true;");
         }
+        /*
         else
         {
             newPose=false;
             newCrane=false;
         }
+        */
             //Debug.Log("CreateCrane in Update: import ready_to_build == false; newCrane==false");
             //newCrane=false;
     }

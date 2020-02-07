@@ -18,6 +18,10 @@ public class TCP_server : MonoBehaviour
     string jsonparameters;
     TcpConfigParameters TcpConfig;
     NetworkStream stream;
+    int crane_index;
+    int max_crane_index;
+    [HideInInspector] public List<JsonCrane> jsonCrane_stack = new List<JsonCrane>();
+    //[HideInInspector] JsonCrane[] jsonCrane_stack;
     [HideInInspector] public JsonCrane jsonCrane_here;
     [HideInInspector] public bool ready_to_build = false;
     [HideInInspector] public bool image_sent = false;
@@ -33,6 +37,10 @@ public class TCP_server : MonoBehaviour
         Screen.SetResolution(1, 1, false);
         tcpListenerThread = new Thread(() => ListenForMessages());
         tcpListenerThread.Start();
+        
+        crane_index=-1;
+        max_crane_index=-1;
+
         if (Application.isEditor)
         {
             file_path_data_unity = System.IO.Directory.GetParent(System.Environment.CurrentDirectory).ToString() + "/data/unity/";        
@@ -44,10 +52,45 @@ public class TCP_server : MonoBehaviour
         }
         System.IO.File.WriteAllText(file_path_data_unity + "started.txt", "1"); 
 	}
+
+    IEnumerator increment_crane()
+    {
+        // Execute if the data for the first crane is received 
+        yield return new WaitForEndOfFrame(); 
+        if(max_crane_index > crane_index)
+        {
+            crane_index += 1;
+            this.jsonCrane_here = jsonCrane_stack[crane_index];
+            if(this.jsonCrane_here.total_cuboids!=0)
+            {
+                create_crane_object.GetComponent<create_crane>().newPose = false;
+                create_crane_object.GetComponent<create_crane>().newCrane = false;
+                image_sent = false;
+                ready_to_build = true;
+                Debug.Log("increment_crane: new crane found: crane_index = " + crane_index.ToString() + " --> ready_to_build == true");
+            }
+            else
+            {
+                Debug.LogError("ERROR: Loaded JsonCrane data but total_cuboids==0 aborting.");
+            }
+        }
+        else
+        {
+            create_crane_object.GetComponent<create_crane>().newPose = false;
+            create_crane_object.GetComponent<create_crane>().newCrane = false;
+            image_sent = false;
+            ready_to_build = false;    
+        }
+    }
 	
 	// LateUpdate is called once per frame
 	void LateUpdate() 
     {
+        if(!create_crane_object.GetComponent<create_crane>().newCrane)
+        {
+            StartCoroutine(increment_crane());
+        }         
+
         timer += Time.deltaTime;
         if(client_accepted == false && timer > 20.0f)
         {
@@ -62,34 +105,38 @@ public class TCP_server : MonoBehaviour
         }
         if(create_crane_object.GetComponent<create_crane>().newPose && jsonCrane_here.request_pose && image_sent)
         {
-            Debug.Log("TCP_Server in LateUpdate: before CapturePNGasBytes: get Pose import newPose and request_pose == true;");
+            Debug.Log("TCP_Server in LateUpdate: before CapturePNGasBytes: get Pose import newPose, request_pose and image_sent == true;");
             StartCoroutine(CapturePNGasBytes());
-            Debug.Log("TCP_Server in LateUpdate: after CapturePNGasBytes:  get Pose image_sent==true;");
+            ready_to_build = false;
+            create_crane_object.GetComponent<create_crane>().newCrane = false;
+            create_crane_object.GetComponent<create_crane>().newPose = false;
+            //StartCoroutine(increment_crane());
+            Debug.Log("TCP_Server in LateUpdate: after CapturePNGasBytes:  get Pose ready_to_build == false;");
         }
-        if(create_crane_object.GetComponent<create_crane>().newCrane)
+        if(create_crane_object.GetComponent<create_crane>().newCrane && (!image_sent))
         {
             Debug.Log("TCP_Server in LateUpdate: before CapturePNGasBytes: import newCrane == true;");
             StartCoroutine(CapturePNGasBytes());
-            ready_to_build=false;
-            Debug.Log("TCP_Server in LateUpdate: after CapturePNGasBytes:  ready_to_build==false; import newCrane == true;");
+            if(!(jsonCrane_here.request_pose))
+            {
+                create_crane_object.GetComponent<create_crane>().newCrane = false;
+                Debug.Log("TCP_Server in LateUpdate: after CapturePNGasBytes:  request_pose == false --> ready_to_build==false;");
+            }
         }
     }
-    // TODO unity not sending 2 pictures get interuppted
     private IEnumerator CapturePNGasBytes()
     {
         yield return new WaitForEndOfFrame();
         Camera currentCamera = GetComponent<Camera>();
-        Debug.Log("TCP_Server in CapturePNGasBytes: Check if solid background.");
-        Debug.Log("TCP_Server in CapturePNGasBytes: import newPose == " + create_crane_object.GetComponent<create_crane>().newPose.ToString());
-        Debug.Log("TCP_Server in CapturePNGasBytes: import newCrane == " + create_crane_object.GetComponent<create_crane>().newCrane.ToString());
-        if(jsonCrane_here.camera.soild_background || ((create_crane_object.GetComponent<create_crane>().newPose)&&(image_sent)) )
+        Debug.Log("TCP_Server in CapturePNGasBytes: image_sent == " + image_sent + ";   import newPose == " + create_crane_object.GetComponent<create_crane>().newPose.ToString() + ";  newCrane == " + create_crane_object.GetComponent<create_crane>().newCrane.ToString() + ";");
+        if(jsonCrane_here.camera.soild_background || (image_sent) )
         {
-            Debug.Log("TCP_Server in CapturePNGasBytes: solid background == true.");    
+            Debug.Log("TCP_Server in CapturePNGasBytes: Solid background == true.");    
             currentCamera.clearFlags = CameraClearFlags.SolidColor;
         } 
         else
         {
-            Debug.Log("TCP_Server in CapturePNGasBytes: solid background == false.");
+            Debug.Log("TCP_Server in CapturePNGasBytes: Solid background == false.");
             currentCamera.clearFlags = CameraClearFlags.Skybox;
         }
         //create RenderTexture and Texture2D
@@ -109,14 +156,14 @@ public class TCP_server : MonoBehaviour
         byte[] MessageEndTag = {125,99,255,255,255,255,255,255};
         Destroy(sceneTexture);
         Debug.Log("TCP_Server in CapturePNGasBytes: bytesPNG.Length: " + bytesPNG.Length.ToString());
-        Debug.Log("TCP_Server in CapturePNGasBytes: sending PNG bytes: ");
+        //Debug.Log("TCP_Server in CapturePNGasBytes: sending PNG bytes: ");
         try
         {
-            Debug.Log("TCP_Server in CapturePNGasBytes: try: stream.CanWrite");
+            //Debug.Log("TCP_Server in CapturePNGasBytes: try: stream.CanWrite");
             stream = client.GetStream();
             if (stream.CanWrite)
             {
-                Debug.Log("TCP_Server in CapturePNGasBytes: stream.CanWrite==true");
+                //Debug.Log("TCP_Server in CapturePNGasBytes: stream.CanWrite==true");
                 // Write byte array to socketConnection stream.
                 stream.Write(bytesPNG, 0, bytesPNG.Length);
                 // Write End Tag to stream
@@ -130,11 +177,6 @@ public class TCP_server : MonoBehaviour
         }
         image_sent = true;
         Debug.Log("TCP_Server in CapturePNGasBytes: image_sent is true");
-        if(create_crane_object.GetComponent<create_crane>().newPose)
-        {
-            image_sent = false;
-            ready_to_build=false;
-        }
     }
 
     public void ListenForMessages()
@@ -199,16 +241,12 @@ public class TCP_server : MonoBehaviour
                     {
                         jsonparameters = data.Substring(0,data.Length - 4);
                         Debug.Log("TCP_Server in ListenForMessages: jsonparameters: "+ jsonparameters);
-                        this.jsonCrane_here = JsonUtility.FromJson<JsonCrane>(jsonparameters);
-                        if(this.jsonCrane_here.total_cuboids!=0)
-                        {
-                            ready_to_build=true;
-                            Debug.Log("TCP_Server in ListenForMessages: ready_to_build == true");
-                        }
-                        else
-                        {
-                            Debug.Log("ERROR: Loaded JsonCrane data but total_cuboids==0 aborting.");
-                        }
+                        JsonCrane new_crane = new JsonCrane();
+                        new_crane = JsonUtility.FromJson<JsonCrane>(jsonparameters);
+                        jsonCrane_stack.Add(new_crane);
+                        max_crane_index += 1;
+                        new_crane = null;
+                        Debug.Log("TCP_Server in ListenForMessages: jasonparameters found, incrementing max_crane_index = " + max_crane_index.ToString());
                         break;
                     }
             
