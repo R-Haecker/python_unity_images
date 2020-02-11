@@ -1,284 +1,674 @@
-2020-02-07 16:54:25,713; client.py - line: 58 -DEBUG: Starting python client.
-2020-02-07 16:54:25,713; client.py - line: 78 -INFO: Starting Unity...
-2020-02-07 16:54:25,713; client.py - line: 79 -DEBUG: path to unity: /home/haecker/Documents/src/git/python_unity_images/build_linux/unity_server_rendering_images.x86_64
-2020-02-07 16:54:25,716; client.py - line: 92 -INFO: Waiting for unity...
-2020-02-07 16:54:28,721; client.py - line: 119 -INFO: Client now connecting to server.
-2020-02-07 16:54:28,722; client.py - line: 127 -DEBUG: Config data for TCP socket: host: 127.0.0.1; port: 50050
-2020-02-07 16:54:28,722; client.py - line: 136 -INFO: Socket connected.
-2020-02-07 16:54:28,722; client.py - line: 137 -DEBUG: Saving TCP config to self.relative_path_TCPsocket_config.
+2020-02-11 14:41:01,497; client.py - line: 58 -DEBUG: Starting python client.
+2020-02-11 14:41:01,497; client.py - line: 78 -INFO: Starting Unity...
+2020-02-11 14:41:01,497; client.py - line: 79 -DEBUG: path to unity: /home/haecker/Documents/src/git/python_unity_images/build_linux/unity_server_rendering_images.x86_64
+2020-02-11 14:41:01,500; client.py - line: 92 -INFO: Waiting for unity...
+2020-02-11 14:41:04,505; client.py - line: 119 -INFO: Client now connecting to server.
+2020-02-11 14:41:04,506; client.py - line: 127 -DEBUG: Config data for TCP socket: host: 127.0.0.1; port: 50050
+2020-02-11 14:41:04,506; client.py - line: 140 -DEBUG: Socket can not connect. Make sure that the tcp_server from unity is already running.
+2020-02-11 14:41:04,506; client.py - line: 141 -DEBUG: [Errno 111] Connection refused
+2020-02-11 14:41:04,556; client.py - line: 149 -DEBUG: Try next port: 49990
+2020-02-11 14:41:04,557; client.py - line: 140 -DEBUG: Socket can not connect. Make sure that the tcp_server from unity is already running.
+2020-02-11 14:41:04,559; client.py - line: 141 -DEBUG: [Errno 103] Software caused connection abort
+2020-02-11 14:41:04,610; client.py - line: 149 -DEBUG: Try next port: 49991
+2020-02-11 14:41:04,611; client.py - line: 140 -DEBUG: Socket can not connect. Make sure that the tcp_server from unity is already running.
+2020-02-11 14:41:04,611; client.py - line: 141 -DEBUG: [Errno 111] Connection refused
+2020-02-11 14:41:04,662; client.py - line: 149 -DEBUG: Try next port: 49992
+2020-02-11 14:41:04,662; client.py - line: 140 -DEBUG: Socket can not connect. Make sure that the tcp_server from unity is already running.
+2020-02-11 14:41:04,663; client.py - line: 141 -DEBUG: [Errno 103] Software caused connection abort
+2020-02-11 14:41:04,714; client.py - line: 149 -DEBUG: Try next port: 49993
+2020-02-11 14:41:04,714; client.py - line: 140 -DEBUG: Socket can not connect. Make sure that the tcp_server from unity is already running.
+2020-02-11 14:41:04,715; client.py - line: 141 -DEBUG: [Errno 111] Connection refused
+2020-02-11 14:41:04,765; client.py - line: 149 -DEBUG: Try next port: 49994
+2020-02-11 14:41:04,766; client.py - line: 140 -DEBUG: Socket can not connect. Make sure that the tcp_server from unity is already running.
+2020-02-11 14:41:04,767; client.py - line: 141 -DEBUG: [Errno 103] Software caused connection abort
+2020-02-11 14:41:04,818; client.py - line: 149 -DEBUG: Try next port: 49995
+2020-02-11 14:41:04,818; client.py - line: 140 -DEBUG: Socket can not connect. Make sure that the tcp_server from unity is already running.
+2020-02-11 14:41:04,819; client.py - line: 141 -DEBUG: [Errno 111] Connection refused
+2020-02-11 14:41:04,870; client.py - line: 149 -DEBUG: Try next port: 49996
+2020-02-11 14:41:04,870; client.py - line: 140 -DEBUG: Socket can not connect. Make sure that the tcp_server from unity is already running.
+2020-02-11 14:41:04,871; client.py - line: 141 -DEBUG: [Errno 103] Software caused connection abort
+2020-02-11 14:41:04,921; client.py - line: 149 -DEBUG: Try next port: 49997
+2020-02-11 14:41:04,922; client.py - line: 140 -DEBUG: Socket can not connect. Make sure that the tcp_server from unity is already running.
+2020-02-11 14:41:04,922; client.py - line: 141 -DEBUG: [Errno 111] Connection refused
+2020-02-11 14:41:04,973; client.py - line: 149 -DEBUG: Try next port: 49998
+2020-02-11 14:41:04,973; client.py - line: 140 -DEBUG: Socket can not connect. Make sure that the tcp_server from unity is already running.
+2020-02-11 14:41:04,973; client.py - line: 141 -DEBUG: [Errno 103] Software caused connection abort
+2020-02-11 14:41:05,023; client.py - line: 149 -DEBUG: Try next port: 49999
+2020-02-11 14:41:05,023; client.py - line: 140 -DEBUG: Socket can not connect. Make sure that the tcp_server from unity is already running.
+2020-02-11 14:41:05,023; client.py - line: 141 -DEBUG: [Errno 111] Connection refused
+2020-02-11 14:41:05,074; client.py - line: 149 -DEBUG: Try next port: 50000
+2020-02-11 14:41:05,075; client.py - line: 140 -DEBUG: Socket can not connect. Make sure that the tcp_server from unity is already running.
+2020-02-11 14:41:05,076; client.py - line: 141 -DEBUG: [Errno 103] Software caused connection abort
+2020-02-11 14:41:05,126; client.py - line: 149 -DEBUG: Try next port: 50001
+2020-02-11 14:41:05,128; client.py - line: 140 -DEBUG: Socket can not connect. Make sure that the tcp_server from unity is already running.
+2020-02-11 14:41:05,129; client.py - line: 141 -DEBUG: [Errno 111] Connection refused
+2020-02-11 14:41:05,179; client.py - line: 149 -DEBUG: Try next port: 50002
+2020-02-11 14:41:05,180; client.py - line: 140 -DEBUG: Socket can not connect. Make sure that the tcp_server from unity is already running.
+2020-02-11 14:41:05,180; client.py - line: 141 -DEBUG: [Errno 103] Software caused connection abort
+2020-02-11 14:41:05,231; client.py - line: 149 -DEBUG: Try next port: 50003
+2020-02-11 14:41:05,232; client.py - line: 140 -DEBUG: Socket can not connect. Make sure that the tcp_server from unity is already running.
+2020-02-11 14:41:05,232; client.py - line: 141 -DEBUG: [Errno 111] Connection refused
+2020-02-11 14:41:05,283; client.py - line: 149 -DEBUG: Try next port: 50004
+2020-02-11 14:41:05,284; client.py - line: 140 -DEBUG: Socket can not connect. Make sure that the tcp_server from unity is already running.
+2020-02-11 14:41:05,284; client.py - line: 141 -DEBUG: [Errno 103] Software caused connection abort
+2020-02-11 14:41:05,335; client.py - line: 149 -DEBUG: Try next port: 50005
+2020-02-11 14:41:05,336; client.py - line: 140 -DEBUG: Socket can not connect. Make sure that the tcp_server from unity is already running.
+2020-02-11 14:41:05,336; client.py - line: 141 -DEBUG: [Errno 111] Connection refused
+2020-02-11 14:41:05,387; client.py - line: 149 -DEBUG: Try next port: 50006
+2020-02-11 14:41:05,387; client.py - line: 140 -DEBUG: Socket can not connect. Make sure that the tcp_server from unity is already running.
+2020-02-11 14:41:05,388; client.py - line: 141 -DEBUG: [Errno 103] Software caused connection abort
+2020-02-11 14:41:05,438; client.py - line: 149 -DEBUG: Try next port: 50007
+2020-02-11 14:41:05,439; client.py - line: 140 -DEBUG: Socket can not connect. Make sure that the tcp_server from unity is already running.
+2020-02-11 14:41:05,440; client.py - line: 141 -DEBUG: [Errno 111] Connection refused
+2020-02-11 14:41:05,491; client.py - line: 149 -DEBUG: Try next port: 50008
+2020-02-11 14:41:05,492; client.py - line: 140 -DEBUG: Socket can not connect. Make sure that the tcp_server from unity is already running.
+2020-02-11 14:41:05,493; client.py - line: 141 -DEBUG: [Errno 103] Software caused connection abort
+2020-02-11 14:41:05,544; client.py - line: 149 -DEBUG: Try next port: 50009
+2020-02-11 14:41:05,544; client.py - line: 140 -DEBUG: Socket can not connect. Make sure that the tcp_server from unity is already running.
+2020-02-11 14:41:05,545; client.py - line: 141 -DEBUG: [Errno 111] Connection refused
+2020-02-11 14:41:05,596; client.py - line: 149 -DEBUG: Try next port: 50010
+2020-02-11 14:41:05,596; client.py - line: 140 -DEBUG: Socket can not connect. Make sure that the tcp_server from unity is already running.
+2020-02-11 14:41:05,597; client.py - line: 141 -DEBUG: [Errno 103] Software caused connection abort
+2020-02-11 14:41:05,648; client.py - line: 149 -DEBUG: Try next port: 50011
+2020-02-11 14:41:05,649; client.py - line: 140 -DEBUG: Socket can not connect. Make sure that the tcp_server from unity is already running.
+2020-02-11 14:41:05,649; client.py - line: 141 -DEBUG: [Errno 111] Connection refused
+2020-02-11 14:41:05,700; client.py - line: 149 -DEBUG: Try next port: 50012
+2020-02-11 14:41:05,700; client.py - line: 140 -DEBUG: Socket can not connect. Make sure that the tcp_server from unity is already running.
+2020-02-11 14:41:05,701; client.py - line: 141 -DEBUG: [Errno 103] Software caused connection abort
+2020-02-11 14:41:05,752; client.py - line: 149 -DEBUG: Try next port: 50013
+2020-02-11 14:41:05,753; client.py - line: 140 -DEBUG: Socket can not connect. Make sure that the tcp_server from unity is already running.
+2020-02-11 14:41:05,753; client.py - line: 141 -DEBUG: [Errno 111] Connection refused
+2020-02-11 14:41:05,804; client.py - line: 149 -DEBUG: Try next port: 50014
+2020-02-11 14:41:05,805; client.py - line: 140 -DEBUG: Socket can not connect. Make sure that the tcp_server from unity is already running.
+2020-02-11 14:41:05,805; client.py - line: 141 -DEBUG: [Errno 103] Software caused connection abort
+2020-02-11 14:41:05,856; client.py - line: 149 -DEBUG: Try next port: 50015
+2020-02-11 14:41:05,857; client.py - line: 140 -DEBUG: Socket can not connect. Make sure that the tcp_server from unity is already running.
+2020-02-11 14:41:05,858; client.py - line: 141 -DEBUG: [Errno 111] Connection refused
+2020-02-11 14:41:05,909; client.py - line: 149 -DEBUG: Try next port: 50016
+2020-02-11 14:41:05,910; client.py - line: 140 -DEBUG: Socket can not connect. Make sure that the tcp_server from unity is already running.
+2020-02-11 14:41:05,910; client.py - line: 141 -DEBUG: [Errno 103] Software caused connection abort
+2020-02-11 14:41:05,961; client.py - line: 149 -DEBUG: Try next port: 50017
+2020-02-11 14:41:05,962; client.py - line: 140 -DEBUG: Socket can not connect. Make sure that the tcp_server from unity is already running.
+2020-02-11 14:41:05,963; client.py - line: 141 -DEBUG: [Errno 111] Connection refused
+2020-02-11 14:41:06,014; client.py - line: 149 -DEBUG: Try next port: 50018
+2020-02-11 14:41:06,014; client.py - line: 140 -DEBUG: Socket can not connect. Make sure that the tcp_server from unity is already running.
+2020-02-11 14:41:06,015; client.py - line: 141 -DEBUG: [Errno 103] Software caused connection abort
+2020-02-11 14:41:06,065; client.py - line: 149 -DEBUG: Try next port: 50019
+2020-02-11 14:41:06,067; client.py - line: 140 -DEBUG: Socket can not connect. Make sure that the tcp_server from unity is already running.
+2020-02-11 14:41:06,067; client.py - line: 141 -DEBUG: [Errno 111] Connection refused
+2020-02-11 14:41:06,118; client.py - line: 149 -DEBUG: Try next port: 50020
+2020-02-11 14:41:06,119; client.py - line: 140 -DEBUG: Socket can not connect. Make sure that the tcp_server from unity is already running.
+2020-02-11 14:41:06,119; client.py - line: 141 -DEBUG: [Errno 103] Software caused connection abort
+2020-02-11 14:41:06,170; client.py - line: 149 -DEBUG: Try next port: 50021
+2020-02-11 14:41:06,171; client.py - line: 140 -DEBUG: Socket can not connect. Make sure that the tcp_server from unity is already running.
+2020-02-11 14:41:06,171; client.py - line: 141 -DEBUG: [Errno 111] Connection refused
+2020-02-11 14:41:06,222; client.py - line: 149 -DEBUG: Try next port: 50022
+2020-02-11 14:41:06,223; client.py - line: 140 -DEBUG: Socket can not connect. Make sure that the tcp_server from unity is already running.
+2020-02-11 14:41:06,223; client.py - line: 141 -DEBUG: [Errno 103] Software caused connection abort
+2020-02-11 14:41:06,274; client.py - line: 149 -DEBUG: Try next port: 50023
+2020-02-11 14:41:06,275; client.py - line: 140 -DEBUG: Socket can not connect. Make sure that the tcp_server from unity is already running.
+2020-02-11 14:41:06,276; client.py - line: 141 -DEBUG: [Errno 111] Connection refused
+2020-02-11 14:41:06,326; client.py - line: 149 -DEBUG: Try next port: 50024
+2020-02-11 14:41:06,328; client.py - line: 140 -DEBUG: Socket can not connect. Make sure that the tcp_server from unity is already running.
+2020-02-11 14:41:06,328; client.py - line: 141 -DEBUG: [Errno 103] Software caused connection abort
+2020-02-11 14:41:06,379; client.py - line: 149 -DEBUG: Try next port: 50025
+2020-02-11 14:41:06,380; client.py - line: 140 -DEBUG: Socket can not connect. Make sure that the tcp_server from unity is already running.
+2020-02-11 14:41:06,380; client.py - line: 141 -DEBUG: [Errno 111] Connection refused
+2020-02-11 14:41:06,431; client.py - line: 149 -DEBUG: Try next port: 50026
+2020-02-11 14:41:06,432; client.py - line: 140 -DEBUG: Socket can not connect. Make sure that the tcp_server from unity is already running.
+2020-02-11 14:41:06,432; client.py - line: 141 -DEBUG: [Errno 103] Software caused connection abort
+2020-02-11 14:41:06,483; client.py - line: 149 -DEBUG: Try next port: 50027
+2020-02-11 14:41:06,484; client.py - line: 140 -DEBUG: Socket can not connect. Make sure that the tcp_server from unity is already running.
+2020-02-11 14:41:06,484; client.py - line: 141 -DEBUG: [Errno 111] Connection refused
+2020-02-11 14:41:06,535; client.py - line: 149 -DEBUG: Try next port: 50028
+2020-02-11 14:41:06,535; client.py - line: 140 -DEBUG: Socket can not connect. Make sure that the tcp_server from unity is already running.
+2020-02-11 14:41:06,536; client.py - line: 141 -DEBUG: [Errno 103] Software caused connection abort
+2020-02-11 14:41:06,587; client.py - line: 149 -DEBUG: Try next port: 50029
+2020-02-11 14:41:06,588; client.py - line: 140 -DEBUG: Socket can not connect. Make sure that the tcp_server from unity is already running.
+2020-02-11 14:41:06,588; client.py - line: 141 -DEBUG: [Errno 111] Connection refused
+2020-02-11 14:41:06,639; client.py - line: 149 -DEBUG: Try next port: 50030
+2020-02-11 14:41:06,640; client.py - line: 140 -DEBUG: Socket can not connect. Make sure that the tcp_server from unity is already running.
+2020-02-11 14:41:06,640; client.py - line: 141 -DEBUG: [Errno 103] Software caused connection abort
+2020-02-11 14:41:06,691; client.py - line: 149 -DEBUG: Try next port: 50031
+2020-02-11 14:41:06,693; client.py - line: 140 -DEBUG: Socket can not connect. Make sure that the tcp_server from unity is already running.
+2020-02-11 14:41:06,693; client.py - line: 141 -DEBUG: [Errno 111] Connection refused
+2020-02-11 14:41:06,744; client.py - line: 149 -DEBUG: Try next port: 50032
+2020-02-11 14:41:06,745; client.py - line: 140 -DEBUG: Socket can not connect. Make sure that the tcp_server from unity is already running.
+2020-02-11 14:41:06,745; client.py - line: 141 -DEBUG: [Errno 103] Software caused connection abort
+2020-02-11 14:41:06,796; client.py - line: 149 -DEBUG: Try next port: 50033
+2020-02-11 14:41:06,797; client.py - line: 140 -DEBUG: Socket can not connect. Make sure that the tcp_server from unity is already running.
+2020-02-11 14:41:06,797; client.py - line: 141 -DEBUG: [Errno 111] Connection refused
+2020-02-11 14:41:06,848; client.py - line: 149 -DEBUG: Try next port: 50034
+2020-02-11 14:41:06,849; client.py - line: 140 -DEBUG: Socket can not connect. Make sure that the tcp_server from unity is already running.
+2020-02-11 14:41:06,850; client.py - line: 141 -DEBUG: [Errno 103] Software caused connection abort
+2020-02-11 14:41:06,900; client.py - line: 149 -DEBUG: Try next port: 50035
+2020-02-11 14:41:06,902; client.py - line: 140 -DEBUG: Socket can not connect. Make sure that the tcp_server from unity is already running.
+2020-02-11 14:41:06,902; client.py - line: 141 -DEBUG: [Errno 111] Connection refused
+2020-02-11 14:41:06,953; client.py - line: 149 -DEBUG: Try next port: 50036
+2020-02-11 14:41:06,954; client.py - line: 140 -DEBUG: Socket can not connect. Make sure that the tcp_server from unity is already running.
+2020-02-11 14:41:06,955; client.py - line: 141 -DEBUG: [Errno 103] Software caused connection abort
+2020-02-11 14:41:07,005; client.py - line: 149 -DEBUG: Try next port: 50037
+2020-02-11 14:41:07,006; client.py - line: 140 -DEBUG: Socket can not connect. Make sure that the tcp_server from unity is already running.
+2020-02-11 14:41:07,007; client.py - line: 141 -DEBUG: [Errno 111] Connection refused
+2020-02-11 14:41:07,058; client.py - line: 149 -DEBUG: Try next port: 50038
+2020-02-11 14:41:07,059; client.py - line: 140 -DEBUG: Socket can not connect. Make sure that the tcp_server from unity is already running.
+2020-02-11 14:41:07,060; client.py - line: 141 -DEBUG: [Errno 103] Software caused connection abort
+2020-02-11 14:41:07,110; client.py - line: 149 -DEBUG: Try next port: 50039
+2020-02-11 14:41:07,111; client.py - line: 140 -DEBUG: Socket can not connect. Make sure that the tcp_server from unity is already running.
+2020-02-11 14:41:07,111; client.py - line: 141 -DEBUG: [Errno 111] Connection refused
+2020-02-11 14:41:07,161; client.py - line: 149 -DEBUG: Try next port: 50040
+2020-02-11 14:41:07,161; client.py - line: 140 -DEBUG: Socket can not connect. Make sure that the tcp_server from unity is already running.
+2020-02-11 14:41:07,161; client.py - line: 141 -DEBUG: [Errno 103] Software caused connection abort
+2020-02-11 14:41:07,211; client.py - line: 149 -DEBUG: Try next port: 50041
+2020-02-11 14:41:07,212; client.py - line: 140 -DEBUG: Socket can not connect. Make sure that the tcp_server from unity is already running.
+2020-02-11 14:41:07,212; client.py - line: 141 -DEBUG: [Errno 111] Connection refused
+2020-02-11 14:41:07,262; client.py - line: 149 -DEBUG: Try next port: 50042
+2020-02-11 14:41:07,262; client.py - line: 140 -DEBUG: Socket can not connect. Make sure that the tcp_server from unity is already running.
+2020-02-11 14:41:07,262; client.py - line: 141 -DEBUG: [Errno 103] Software caused connection abort
+2020-02-11 14:41:07,312; client.py - line: 149 -DEBUG: Try next port: 50043
+2020-02-11 14:41:07,313; client.py - line: 140 -DEBUG: Socket can not connect. Make sure that the tcp_server from unity is already running.
+2020-02-11 14:41:07,314; client.py - line: 141 -DEBUG: [Errno 111] Connection refused
+2020-02-11 14:41:07,364; client.py - line: 149 -DEBUG: Try next port: 50044
+2020-02-11 14:41:07,365; client.py - line: 140 -DEBUG: Socket can not connect. Make sure that the tcp_server from unity is already running.
+2020-02-11 14:41:07,365; client.py - line: 141 -DEBUG: [Errno 103] Software caused connection abort
+2020-02-11 14:41:07,416; client.py - line: 149 -DEBUG: Try next port: 50045
+2020-02-11 14:41:07,416; client.py - line: 140 -DEBUG: Socket can not connect. Make sure that the tcp_server from unity is already running.
+2020-02-11 14:41:07,417; client.py - line: 141 -DEBUG: [Errno 111] Connection refused
+2020-02-11 14:41:07,467; client.py - line: 149 -DEBUG: Try next port: 50046
+2020-02-11 14:41:07,467; client.py - line: 140 -DEBUG: Socket can not connect. Make sure that the tcp_server from unity is already running.
+2020-02-11 14:41:07,467; client.py - line: 141 -DEBUG: [Errno 103] Software caused connection abort
+2020-02-11 14:41:07,517; client.py - line: 149 -DEBUG: Try next port: 50047
+2020-02-11 14:41:07,518; client.py - line: 140 -DEBUG: Socket can not connect. Make sure that the tcp_server from unity is already running.
+2020-02-11 14:41:07,518; client.py - line: 141 -DEBUG: [Errno 111] Connection refused
+2020-02-11 14:41:07,568; client.py - line: 149 -DEBUG: Try next port: 50048
+2020-02-11 14:41:07,569; client.py - line: 140 -DEBUG: Socket can not connect. Make sure that the tcp_server from unity is already running.
+2020-02-11 14:41:07,570; client.py - line: 141 -DEBUG: [Errno 103] Software caused connection abort
+2020-02-11 14:41:07,620; client.py - line: 149 -DEBUG: Try next port: 50049
+2020-02-11 14:41:07,621; client.py - line: 140 -DEBUG: Socket can not connect. Make sure that the tcp_server from unity is already running.
+2020-02-11 14:41:07,622; client.py - line: 141 -DEBUG: [Errno 111] Connection refused
+2020-02-11 14:41:07,673; client.py - line: 149 -DEBUG: Try next port: 50050
+2020-02-11 14:41:07,673; client.py - line: 140 -DEBUG: Socket can not connect. Make sure that the tcp_server from unity is already running.
+2020-02-11 14:41:07,674; client.py - line: 141 -DEBUG: [Errno 103] Software caused connection abort
+2020-02-11 14:41:07,725; client.py - line: 149 -DEBUG: Try next port: 49990
+2020-02-11 14:41:07,726; client.py - line: 140 -DEBUG: Socket can not connect. Make sure that the tcp_server from unity is already running.
+2020-02-11 14:41:07,727; client.py - line: 141 -DEBUG: [Errno 111] Connection refused
+2020-02-11 14:41:07,778; client.py - line: 149 -DEBUG: Try next port: 49991
+2020-02-11 14:41:07,778; client.py - line: 140 -DEBUG: Socket can not connect. Make sure that the tcp_server from unity is already running.
+2020-02-11 14:41:07,779; client.py - line: 141 -DEBUG: [Errno 103] Software caused connection abort
+2020-02-11 14:41:07,830; client.py - line: 149 -DEBUG: Try next port: 49992
+2020-02-11 14:41:07,831; client.py - line: 140 -DEBUG: Socket can not connect. Make sure that the tcp_server from unity is already running.
+2020-02-11 14:41:07,834; client.py - line: 141 -DEBUG: [Errno 111] Connection refused
+2020-02-11 14:41:07,885; client.py - line: 149 -DEBUG: Try next port: 49993
+2020-02-11 14:41:07,886; client.py - line: 140 -DEBUG: Socket can not connect. Make sure that the tcp_server from unity is already running.
+2020-02-11 14:41:07,886; client.py - line: 141 -DEBUG: [Errno 103] Software caused connection abort
+2020-02-11 14:41:07,937; client.py - line: 149 -DEBUG: Try next port: 49994
+2020-02-11 14:41:07,938; client.py - line: 140 -DEBUG: Socket can not connect. Make sure that the tcp_server from unity is already running.
+2020-02-11 14:41:07,938; client.py - line: 141 -DEBUG: [Errno 111] Connection refused
+2020-02-11 14:41:07,989; client.py - line: 149 -DEBUG: Try next port: 49995
+2020-02-11 14:41:07,990; client.py - line: 140 -DEBUG: Socket can not connect. Make sure that the tcp_server from unity is already running.
+2020-02-11 14:41:07,990; client.py - line: 141 -DEBUG: [Errno 103] Software caused connection abort
+2020-02-11 14:41:08,041; client.py - line: 149 -DEBUG: Try next port: 49996
+2020-02-11 14:41:08,042; client.py - line: 140 -DEBUG: Socket can not connect. Make sure that the tcp_server from unity is already running.
+2020-02-11 14:41:08,042; client.py - line: 141 -DEBUG: [Errno 111] Connection refused
+2020-02-11 14:41:08,093; client.py - line: 149 -DEBUG: Try next port: 49997
+2020-02-11 14:41:08,094; client.py - line: 140 -DEBUG: Socket can not connect. Make sure that the tcp_server from unity is already running.
+2020-02-11 14:41:08,095; client.py - line: 141 -DEBUG: [Errno 103] Software caused connection abort
+2020-02-11 14:41:08,145; client.py - line: 149 -DEBUG: Try next port: 49998
+2020-02-11 14:41:08,146; client.py - line: 140 -DEBUG: Socket can not connect. Make sure that the tcp_server from unity is already running.
+2020-02-11 14:41:08,147; client.py - line: 141 -DEBUG: [Errno 111] Connection refused
+2020-02-11 14:41:08,197; client.py - line: 149 -DEBUG: Try next port: 49999
+2020-02-11 14:41:08,198; client.py - line: 140 -DEBUG: Socket can not connect. Make sure that the tcp_server from unity is already running.
+2020-02-11 14:41:08,198; client.py - line: 141 -DEBUG: [Errno 103] Software caused connection abort
+2020-02-11 14:41:08,249; client.py - line: 149 -DEBUG: Try next port: 50000
+2020-02-11 14:41:08,250; client.py - line: 140 -DEBUG: Socket can not connect. Make sure that the tcp_server from unity is already running.
+2020-02-11 14:41:08,251; client.py - line: 141 -DEBUG: [Errno 111] Connection refused
+2020-02-11 14:41:08,302; client.py - line: 149 -DEBUG: Try next port: 50001
+2020-02-11 14:41:08,303; client.py - line: 140 -DEBUG: Socket can not connect. Make sure that the tcp_server from unity is already running.
+2020-02-11 14:41:08,303; client.py - line: 141 -DEBUG: [Errno 103] Software caused connection abort
+2020-02-11 14:41:08,354; client.py - line: 149 -DEBUG: Try next port: 50002
+2020-02-11 14:41:08,355; client.py - line: 140 -DEBUG: Socket can not connect. Make sure that the tcp_server from unity is already running.
+2020-02-11 14:41:08,355; client.py - line: 141 -DEBUG: [Errno 111] Connection refused
+2020-02-11 14:41:08,406; client.py - line: 149 -DEBUG: Try next port: 50003
+2020-02-11 14:41:08,407; client.py - line: 140 -DEBUG: Socket can not connect. Make sure that the tcp_server from unity is already running.
+2020-02-11 14:41:08,407; client.py - line: 141 -DEBUG: [Errno 103] Software caused connection abort
+2020-02-11 14:41:08,457; client.py - line: 149 -DEBUG: Try next port: 50004
+2020-02-11 14:41:08,458; client.py - line: 140 -DEBUG: Socket can not connect. Make sure that the tcp_server from unity is already running.
+2020-02-11 14:41:08,458; client.py - line: 141 -DEBUG: [Errno 111] Connection refused
+2020-02-11 14:41:08,508; client.py - line: 149 -DEBUG: Try next port: 50005
+2020-02-11 14:41:08,509; client.py - line: 140 -DEBUG: Socket can not connect. Make sure that the tcp_server from unity is already running.
+2020-02-11 14:41:08,509; client.py - line: 141 -DEBUG: [Errno 103] Software caused connection abort
+2020-02-11 14:41:08,560; client.py - line: 149 -DEBUG: Try next port: 50006
+2020-02-11 14:41:08,561; client.py - line: 140 -DEBUG: Socket can not connect. Make sure that the tcp_server from unity is already running.
+2020-02-11 14:41:08,562; client.py - line: 141 -DEBUG: [Errno 111] Connection refused
+2020-02-11 14:41:08,612; client.py - line: 149 -DEBUG: Try next port: 50007
+2020-02-11 14:41:08,613; client.py - line: 140 -DEBUG: Socket can not connect. Make sure that the tcp_server from unity is already running.
+2020-02-11 14:41:08,614; client.py - line: 141 -DEBUG: [Errno 103] Software caused connection abort
+2020-02-11 14:41:08,665; client.py - line: 149 -DEBUG: Try next port: 50008
+2020-02-11 14:41:08,666; client.py - line: 140 -DEBUG: Socket can not connect. Make sure that the tcp_server from unity is already running.
+2020-02-11 14:41:08,666; client.py - line: 141 -DEBUG: [Errno 111] Connection refused
+2020-02-11 14:41:08,717; client.py - line: 149 -DEBUG: Try next port: 50009
+2020-02-11 14:41:08,718; client.py - line: 140 -DEBUG: Socket can not connect. Make sure that the tcp_server from unity is already running.
+2020-02-11 14:41:08,718; client.py - line: 141 -DEBUG: [Errno 103] Software caused connection abort
+2020-02-11 14:41:08,769; client.py - line: 149 -DEBUG: Try next port: 50010
+2020-02-11 14:41:08,770; client.py - line: 140 -DEBUG: Socket can not connect. Make sure that the tcp_server from unity is already running.
+2020-02-11 14:41:08,770; client.py - line: 141 -DEBUG: [Errno 111] Connection refused
+2020-02-11 14:41:08,821; client.py - line: 149 -DEBUG: Try next port: 50011
+2020-02-11 14:41:08,822; client.py - line: 140 -DEBUG: Socket can not connect. Make sure that the tcp_server from unity is already running.
+2020-02-11 14:41:08,822; client.py - line: 141 -DEBUG: [Errno 103] Software caused connection abort
+2020-02-11 14:41:08,873; client.py - line: 149 -DEBUG: Try next port: 50012
+2020-02-11 14:41:08,874; client.py - line: 140 -DEBUG: Socket can not connect. Make sure that the tcp_server from unity is already running.
+2020-02-11 14:41:08,875; client.py - line: 141 -DEBUG: [Errno 111] Connection refused
+2020-02-11 14:41:08,925; client.py - line: 149 -DEBUG: Try next port: 50013
+2020-02-11 14:41:08,926; client.py - line: 140 -DEBUG: Socket can not connect. Make sure that the tcp_server from unity is already running.
+2020-02-11 14:41:08,927; client.py - line: 141 -DEBUG: [Errno 103] Software caused connection abort
+2020-02-11 14:41:08,978; client.py - line: 149 -DEBUG: Try next port: 50014
+2020-02-11 14:41:08,979; client.py - line: 140 -DEBUG: Socket can not connect. Make sure that the tcp_server from unity is already running.
+2020-02-11 14:41:08,979; client.py - line: 141 -DEBUG: [Errno 111] Connection refused
+2020-02-11 14:41:09,030; client.py - line: 149 -DEBUG: Try next port: 50015
+2020-02-11 14:41:09,031; client.py - line: 140 -DEBUG: Socket can not connect. Make sure that the tcp_server from unity is already running.
+2020-02-11 14:41:09,031; client.py - line: 141 -DEBUG: [Errno 103] Software caused connection abort
+2020-02-11 14:41:09,082; client.py - line: 149 -DEBUG: Try next port: 50016
+2020-02-11 14:41:09,083; client.py - line: 140 -DEBUG: Socket can not connect. Make sure that the tcp_server from unity is already running.
+2020-02-11 14:41:09,083; client.py - line: 141 -DEBUG: [Errno 111] Connection refused
+2020-02-11 14:41:09,134; client.py - line: 149 -DEBUG: Try next port: 50017
+2020-02-11 14:41:09,135; client.py - line: 140 -DEBUG: Socket can not connect. Make sure that the tcp_server from unity is already running.
+2020-02-11 14:41:09,136; client.py - line: 141 -DEBUG: [Errno 103] Software caused connection abort
+2020-02-11 14:41:09,186; client.py - line: 149 -DEBUG: Try next port: 50018
+2020-02-11 14:41:09,187; client.py - line: 140 -DEBUG: Socket can not connect. Make sure that the tcp_server from unity is already running.
+2020-02-11 14:41:09,188; client.py - line: 141 -DEBUG: [Errno 111] Connection refused
+2020-02-11 14:41:09,239; client.py - line: 149 -DEBUG: Try next port: 50019
+2020-02-11 14:41:09,239; client.py - line: 140 -DEBUG: Socket can not connect. Make sure that the tcp_server from unity is already running.
+2020-02-11 14:41:09,240; client.py - line: 141 -DEBUG: [Errno 103] Software caused connection abort
+2020-02-11 14:41:09,291; client.py - line: 149 -DEBUG: Try next port: 50020
+2020-02-11 14:41:09,293; client.py - line: 140 -DEBUG: Socket can not connect. Make sure that the tcp_server from unity is already running.
+2020-02-11 14:41:09,293; client.py - line: 141 -DEBUG: [Errno 111] Connection refused
+2020-02-11 14:41:09,344; client.py - line: 149 -DEBUG: Try next port: 50021
+2020-02-11 14:41:09,345; client.py - line: 140 -DEBUG: Socket can not connect. Make sure that the tcp_server from unity is already running.
+2020-02-11 14:41:09,345; client.py - line: 141 -DEBUG: [Errno 103] Software caused connection abort
+2020-02-11 14:41:09,396; client.py - line: 149 -DEBUG: Try next port: 50022
+2020-02-11 14:41:09,397; client.py - line: 140 -DEBUG: Socket can not connect. Make sure that the tcp_server from unity is already running.
+2020-02-11 14:41:09,398; client.py - line: 141 -DEBUG: [Errno 111] Connection refused
+2020-02-11 14:41:09,449; client.py - line: 149 -DEBUG: Try next port: 50023
+2020-02-11 14:41:09,450; client.py - line: 140 -DEBUG: Socket can not connect. Make sure that the tcp_server from unity is already running.
+2020-02-11 14:41:09,450; client.py - line: 141 -DEBUG: [Errno 103] Software caused connection abort
+2020-02-11 14:41:09,501; client.py - line: 149 -DEBUG: Try next port: 50024
+2020-02-11 14:41:09,502; client.py - line: 140 -DEBUG: Socket can not connect. Make sure that the tcp_server from unity is already running.
+2020-02-11 14:41:09,503; client.py - line: 141 -DEBUG: [Errno 111] Connection refused
+2020-02-11 14:41:09,554; client.py - line: 149 -DEBUG: Try next port: 50025
+2020-02-11 14:41:09,554; client.py - line: 140 -DEBUG: Socket can not connect. Make sure that the tcp_server from unity is already running.
+2020-02-11 14:41:09,555; client.py - line: 141 -DEBUG: [Errno 103] Software caused connection abort
+2020-02-11 14:41:09,605; client.py - line: 149 -DEBUG: Try next port: 50026
+2020-02-11 14:41:09,607; client.py - line: 140 -DEBUG: Socket can not connect. Make sure that the tcp_server from unity is already running.
+2020-02-11 14:41:09,607; client.py - line: 141 -DEBUG: [Errno 111] Connection refused
+2020-02-11 14:41:09,659; client.py - line: 149 -DEBUG: Try next port: 50027
+2020-02-11 14:41:09,660; client.py - line: 140 -DEBUG: Socket can not connect. Make sure that the tcp_server from unity is already running.
+2020-02-11 14:41:09,660; client.py - line: 141 -DEBUG: [Errno 103] Software caused connection abort
+2020-02-11 14:41:09,711; client.py - line: 149 -DEBUG: Try next port: 50028
+2020-02-11 14:41:09,712; client.py - line: 140 -DEBUG: Socket can not connect. Make sure that the tcp_server from unity is already running.
+2020-02-11 14:41:09,712; client.py - line: 141 -DEBUG: [Errno 111] Connection refused
+2020-02-11 14:41:09,763; client.py - line: 149 -DEBUG: Try next port: 50029
+2020-02-11 14:41:09,763; client.py - line: 140 -DEBUG: Socket can not connect. Make sure that the tcp_server from unity is already running.
+2020-02-11 14:41:09,764; client.py - line: 141 -DEBUG: [Errno 103] Software caused connection abort
+2020-02-11 14:41:09,815; client.py - line: 149 -DEBUG: Try next port: 50030
+2020-02-11 14:41:09,816; client.py - line: 140 -DEBUG: Socket can not connect. Make sure that the tcp_server from unity is already running.
+2020-02-11 14:41:09,817; client.py - line: 141 -DEBUG: [Errno 111] Connection refused
+2020-02-11 14:41:09,867; client.py - line: 149 -DEBUG: Try next port: 50031
+2020-02-11 14:41:09,868; client.py - line: 140 -DEBUG: Socket can not connect. Make sure that the tcp_server from unity is already running.
+2020-02-11 14:41:09,869; client.py - line: 141 -DEBUG: [Errno 103] Software caused connection abort
+2020-02-11 14:41:09,920; client.py - line: 149 -DEBUG: Try next port: 50032
+2020-02-11 14:41:09,921; client.py - line: 140 -DEBUG: Socket can not connect. Make sure that the tcp_server from unity is already running.
+2020-02-11 14:41:09,921; client.py - line: 141 -DEBUG: [Errno 111] Connection refused
+2020-02-11 14:41:09,972; client.py - line: 149 -DEBUG: Try next port: 50033
+2020-02-11 14:41:09,972; client.py - line: 140 -DEBUG: Socket can not connect. Make sure that the tcp_server from unity is already running.
+2020-02-11 14:41:09,973; client.py - line: 141 -DEBUG: [Errno 103] Software caused connection abort
+2020-02-11 14:41:10,024; client.py - line: 149 -DEBUG: Try next port: 50034
+2020-02-11 14:41:10,025; client.py - line: 140 -DEBUG: Socket can not connect. Make sure that the tcp_server from unity is already running.
+2020-02-11 14:41:10,026; client.py - line: 141 -DEBUG: [Errno 111] Connection refused
+2020-02-11 14:41:10,076; client.py - line: 149 -DEBUG: Try next port: 50035
+2020-02-11 14:41:10,077; client.py - line: 140 -DEBUG: Socket can not connect. Make sure that the tcp_server from unity is already running.
+2020-02-11 14:41:10,077; client.py - line: 141 -DEBUG: [Errno 103] Software caused connection abort
+2020-02-11 14:41:10,128; client.py - line: 149 -DEBUG: Try next port: 50036
+2020-02-11 14:41:10,129; client.py - line: 140 -DEBUG: Socket can not connect. Make sure that the tcp_server from unity is already running.
+2020-02-11 14:41:10,130; client.py - line: 141 -DEBUG: [Errno 111] Connection refused
+2020-02-11 14:41:10,181; client.py - line: 149 -DEBUG: Try next port: 50037
+2020-02-11 14:41:10,181; client.py - line: 140 -DEBUG: Socket can not connect. Make sure that the tcp_server from unity is already running.
+2020-02-11 14:41:10,182; client.py - line: 141 -DEBUG: [Errno 103] Software caused connection abort
+2020-02-11 14:41:10,232; client.py - line: 149 -DEBUG: Try next port: 50038
+2020-02-11 14:41:10,233; client.py - line: 140 -DEBUG: Socket can not connect. Make sure that the tcp_server from unity is already running.
+2020-02-11 14:41:10,234; client.py - line: 141 -DEBUG: [Errno 111] Connection refused
+2020-02-11 14:41:10,285; client.py - line: 149 -DEBUG: Try next port: 50039
+2020-02-11 14:41:10,285; client.py - line: 140 -DEBUG: Socket can not connect. Make sure that the tcp_server from unity is already running.
+2020-02-11 14:41:10,286; client.py - line: 141 -DEBUG: [Errno 103] Software caused connection abort
+2020-02-11 14:41:10,337; client.py - line: 149 -DEBUG: Try next port: 50040
+2020-02-11 14:41:10,338; client.py - line: 140 -DEBUG: Socket can not connect. Make sure that the tcp_server from unity is already running.
+2020-02-11 14:41:10,338; client.py - line: 141 -DEBUG: [Errno 111] Connection refused
+2020-02-11 14:41:10,389; client.py - line: 149 -DEBUG: Try next port: 50041
+2020-02-11 14:41:10,390; client.py - line: 140 -DEBUG: Socket can not connect. Make sure that the tcp_server from unity is already running.
+2020-02-11 14:41:10,391; client.py - line: 141 -DEBUG: [Errno 103] Software caused connection abort
+2020-02-11 14:41:10,441; client.py - line: 149 -DEBUG: Try next port: 50042
+2020-02-11 14:41:10,443; client.py - line: 140 -DEBUG: Socket can not connect. Make sure that the tcp_server from unity is already running.
+2020-02-11 14:41:10,443; client.py - line: 141 -DEBUG: [Errno 111] Connection refused
+2020-02-11 14:41:10,494; client.py - line: 149 -DEBUG: Try next port: 50043
+2020-02-11 14:41:10,495; client.py - line: 140 -DEBUG: Socket can not connect. Make sure that the tcp_server from unity is already running.
+2020-02-11 14:41:10,495; client.py - line: 141 -DEBUG: [Errno 103] Software caused connection abort
+2020-02-11 14:41:10,546; client.py - line: 149 -DEBUG: Try next port: 50044
+2020-02-11 14:41:10,547; client.py - line: 140 -DEBUG: Socket can not connect. Make sure that the tcp_server from unity is already running.
+2020-02-11 14:41:10,547; client.py - line: 141 -DEBUG: [Errno 111] Connection refused
+2020-02-11 14:41:10,598; client.py - line: 149 -DEBUG: Try next port: 50045
+2020-02-11 14:41:10,599; client.py - line: 140 -DEBUG: Socket can not connect. Make sure that the tcp_server from unity is already running.
+2020-02-11 14:41:10,599; client.py - line: 141 -DEBUG: [Errno 103] Software caused connection abort
+2020-02-11 14:41:10,650; client.py - line: 149 -DEBUG: Try next port: 50046
+2020-02-11 14:41:10,651; client.py - line: 140 -DEBUG: Socket can not connect. Make sure that the tcp_server from unity is already running.
+2020-02-11 14:41:10,652; client.py - line: 141 -DEBUG: [Errno 111] Connection refused
+2020-02-11 14:41:10,702; client.py - line: 149 -DEBUG: Try next port: 50047
+2020-02-11 14:41:10,703; client.py - line: 140 -DEBUG: Socket can not connect. Make sure that the tcp_server from unity is already running.
+2020-02-11 14:41:10,703; client.py - line: 141 -DEBUG: [Errno 103] Software caused connection abort
+2020-02-11 14:41:10,754; client.py - line: 149 -DEBUG: Try next port: 50048
+2020-02-11 14:41:10,755; client.py - line: 140 -DEBUG: Socket can not connect. Make sure that the tcp_server from unity is already running.
+2020-02-11 14:41:10,756; client.py - line: 141 -DEBUG: [Errno 111] Connection refused
+2020-02-11 14:41:10,807; client.py - line: 149 -DEBUG: Try next port: 50049
+2020-02-11 14:41:10,808; client.py - line: 140 -DEBUG: Socket can not connect. Make sure that the tcp_server from unity is already running.
+2020-02-11 14:41:10,808; client.py - line: 141 -DEBUG: [Errno 103] Software caused connection abort
+2020-02-11 14:41:10,859; client.py - line: 149 -DEBUG: Try next port: 50050
+2020-02-11 14:41:10,860; client.py - line: 136 -INFO: Socket connected.
+2020-02-11 14:41:10,860; client.py - line: 137 -DEBUG: Saving TCP config to self.relative_path_TCPsocket_config.
 
-2020-02-07 16:54:28,724; dataset.py - line: 76 -DEBUG: home directory: /home/haecker
-2020-02-07 16:54:28,724; dataset.py - line: 79 -DEBUG: Dataset directory:/home/haecker/Desktop/data_set/datase_vae_max_random
-2020-02-07 16:54:28,725; dataset.py - line: 81 -DEBUG: Create config.
-2020-02-07 16:54:28,726; dataset.py - line: 360 -DEBUG: Config Seed: 495643657
-2020-02-07 16:54:28,727; dataset.py - line: 85 -DEBUG: Dataset initialised.
+2020-02-11 14:41:10,865; dataset.py - line: 76 -DEBUG: home directory: /home/haecker
+2020-02-11 14:41:10,866; dataset.py - line: 79 -DEBUG: Dataset directory:/home/haecker/Desktop/data_set/datase_vae_max_random
+2020-02-11 14:41:10,867; dataset.py - line: 81 -DEBUG: Create config.
+2020-02-11 14:41:10,869; dataset.py - line: 362 -DEBUG: Config Seed: 1751217164
+2020-02-11 14:41:10,874; dataset.py - line: 85 -DEBUG: Dataset initialised.
 
-2020-02-07 16:54:28,727; dataset.py - line: 360 -DEBUG: Config Seed: 1364555411
-2020-02-07 16:54:28,728; dataset.py - line: 578 -DEBUG: total_branches: [1, 1, 2]
-2020-02-07 16:54:28,730; dataset.py - line: 1291 -DEBUG: index: 356
-2020-02-07 16:54:28,730; dataset.py - line: 1293 -DEBUG: index: 357
-2020-02-07 16:54:28,730; client.py - line: 196 -DEBUG: Json string sent.
+2020-02-11 14:41:10,876; dataset.py - line: 362 -DEBUG: Config Seed: 1833266442
+2020-02-11 14:41:10,882; dataset.py - line: 580 -DEBUG: total_branches: [1, 1, 1, 2, 1, 1, 2, 1, 1, 2]
+2020-02-11 14:41:10,888; dataset.py - line: 1289 -DEBUG: index: 654
+2020-02-11 14:41:10,888; dataset.py - line: 1291 -DEBUG: index: 655
+2020-02-11 14:41:10,889; client.py - line: 196 -DEBUG: Json string sent.
 
-2020-02-07 16:54:28,918; client.py - line: 237 -DEBUG: Trying to receive data.
-2020-02-07 16:54:28,918; client.py - line: 241 -INFO: Data from Unity received.
-2020-02-07 16:54:28,918; client.py - line: 242 -DEBUG: End_tag detected, unity_resp_bytes[0:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
-2020-02-07 16:54:28,919; client.py - line: 246 -DEBUG: img_bytes type: <class 'bytearray'>, img_bytes len: 176587, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
-2020-02-07 16:54:28,927; client.py - line: 249 -DEBUG: PIL Img: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
-2020-02-07 16:54:29,000; client.py - line: 251 -DEBUG: Returning img: type: <class 'numpy.ndarray'> 
+2020-02-11 14:41:11,160; client.py - line: 237 -DEBUG: Trying to receive data.
+2020-02-11 14:41:11,160; client.py - line: 241 -INFO: Data from Unity received.
+2020-02-11 14:41:11,160; client.py - line: 242 -DEBUG: End_tag detected, unity_resp_bytes[0:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2020-02-11 14:41:11,160; client.py - line: 246 -DEBUG: img_bytes type: <class 'bytearray'>, img_bytes len: 220858, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
+2020-02-11 14:41:11,171; client.py - line: 249 -DEBUG: PIL Img: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
+2020-02-11 14:41:11,227; client.py - line: 251 -DEBUG: Returning img: type: <class 'numpy.ndarray'> 
 
-2020-02-07 16:54:29,066; client.py - line: 237 -DEBUG: Trying to receive data.
-2020-02-07 16:54:29,066; client.py - line: 241 -INFO: Data from Unity received.
-2020-02-07 16:54:29,066; client.py - line: 242 -DEBUG: End_tag detected, unity_resp_bytes[0:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
-2020-02-07 16:54:29,067; client.py - line: 246 -DEBUG: img_bytes type: <class 'bytearray'>, img_bytes len: 19176, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
-2020-02-07 16:54:29,067; client.py - line: 249 -DEBUG: PIL Img: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
-2020-02-07 16:54:29,085; client.py - line: 251 -DEBUG: Returning img: type: <class 'numpy.ndarray'> 
+2020-02-11 14:41:11,228; dataset.py - line: 979 -INFO: data completed: Image index: 655
+2020-02-11 14:41:11,228; dataset.py - line: 858 -DEBUG: key: 'seed' is found in config
+2020-02-11 14:41:11,376; dataset.py - line: 580 -DEBUG: total_branches: [1, 1, 2, 3]
+2020-02-11 14:41:11,377; dataset.py - line: 1289 -DEBUG: index: 655
+2020-02-11 14:41:11,377; dataset.py - line: 1291 -DEBUG: index: 656
+2020-02-11 14:41:11,377; client.py - line: 196 -DEBUG: Json string sent.
 
-2020-02-07 16:54:29,086; dataset.py - line: 977 -INFO: data completed: Image index: 357
-2020-02-07 16:54:29,086; dataset.py - line: 856 -DEBUG: key: 'seed' is found in config
-2020-02-07 16:54:29,243; dataset.py - line: 578 -DEBUG: total_branches: [1, 2, 1]
-2020-02-07 16:54:29,243; dataset.py - line: 1291 -DEBUG: index: 357
-2020-02-07 16:54:29,243; dataset.py - line: 1293 -DEBUG: index: 358
-2020-02-07 16:54:29,244; client.py - line: 196 -DEBUG: Json string sent.
+2020-02-11 14:41:11,523; client.py - line: 237 -DEBUG: Trying to receive data.
+2020-02-11 14:41:11,523; client.py - line: 241 -INFO: Data from Unity received.
+2020-02-11 14:41:11,523; client.py - line: 242 -DEBUG: End_tag detected, unity_resp_bytes[0:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2020-02-11 14:41:11,523; client.py - line: 246 -DEBUG: img_bytes type: <class 'bytearray'>, img_bytes len: 170760, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
+2020-02-11 14:41:11,524; client.py - line: 249 -DEBUG: PIL Img: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
+2020-02-11 14:41:11,564; client.py - line: 251 -DEBUG: Returning img: type: <class 'numpy.ndarray'> 
 
-2020-02-07 16:54:29,375; client.py - line: 237 -DEBUG: Trying to receive data.
-2020-02-07 16:54:29,375; client.py - line: 241 -INFO: Data from Unity received.
-2020-02-07 16:54:29,375; client.py - line: 242 -DEBUG: End_tag detected, unity_resp_bytes[0:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
-2020-02-07 16:54:29,375; client.py - line: 246 -DEBUG: img_bytes type: <class 'bytearray'>, img_bytes len: 176077, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
-2020-02-07 16:54:29,375; client.py - line: 249 -DEBUG: PIL Img: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
-2020-02-07 16:54:29,407; client.py - line: 251 -DEBUG: Returning img: type: <class 'numpy.ndarray'> 
+2020-02-11 14:41:11,565; dataset.py - line: 979 -INFO: data completed: Image index: 656
+2020-02-11 14:41:11,565; dataset.py - line: 858 -DEBUG: key: 'seed' is found in config
+2020-02-11 14:41:11,721; dataset.py - line: 580 -DEBUG: total_branches: [2, 2, 1, 1, 1, 1, 2, 1, 1, 2, 2, 1, 1]
+2020-02-11 14:41:11,722; dataset.py - line: 1289 -DEBUG: index: 656
+2020-02-11 14:41:11,723; dataset.py - line: 1291 -DEBUG: index: 657
+2020-02-11 14:41:11,723; client.py - line: 196 -DEBUG: Json string sent.
 
-2020-02-07 16:54:29,457; client.py - line: 237 -DEBUG: Trying to receive data.
-2020-02-07 16:54:29,457; client.py - line: 241 -INFO: Data from Unity received.
-2020-02-07 16:54:29,457; client.py - line: 242 -DEBUG: End_tag detected, unity_resp_bytes[0:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
-2020-02-07 16:54:29,457; client.py - line: 246 -DEBUG: img_bytes type: <class 'bytearray'>, img_bytes len: 19745, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
-2020-02-07 16:54:29,457; client.py - line: 249 -DEBUG: PIL Img: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
-2020-02-07 16:54:29,473; client.py - line: 251 -DEBUG: Returning img: type: <class 'numpy.ndarray'> 
+2020-02-11 14:41:11,965; client.py - line: 237 -DEBUG: Trying to receive data.
+2020-02-11 14:41:11,965; client.py - line: 241 -INFO: Data from Unity received.
+2020-02-11 14:41:11,966; client.py - line: 242 -DEBUG: End_tag detected, unity_resp_bytes[0:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2020-02-11 14:41:11,966; client.py - line: 246 -DEBUG: img_bytes type: <class 'bytearray'>, img_bytes len: 276056, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
+2020-02-11 14:41:11,966; client.py - line: 249 -DEBUG: PIL Img: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
+2020-02-11 14:41:12,000; client.py - line: 251 -DEBUG: Returning img: type: <class 'numpy.ndarray'> 
 
-2020-02-07 16:54:29,473; dataset.py - line: 977 -INFO: data completed: Image index: 358
-2020-02-07 16:54:29,473; dataset.py - line: 856 -DEBUG: key: 'seed' is found in config
-2020-02-07 16:54:29,671; dataset.py - line: 578 -DEBUG: total_branches: [1]
-2020-02-07 16:54:29,672; dataset.py - line: 1291 -DEBUG: index: 358
-2020-02-07 16:54:29,672; dataset.py - line: 1293 -DEBUG: index: 359
-2020-02-07 16:54:29,672; client.py - line: 196 -DEBUG: Json string sent.
+2020-02-11 14:41:12,000; dataset.py - line: 979 -INFO: data completed: Image index: 657
+2020-02-11 14:41:12,001; dataset.py - line: 858 -DEBUG: key: 'seed' is found in config
+2020-02-11 14:41:12,177; dataset.py - line: 580 -DEBUG: total_branches: [2, 2, 2, 2, 1, 2, 2, 1]
+2020-02-11 14:41:12,177; dataset.py - line: 1289 -DEBUG: index: 657
+2020-02-11 14:41:12,178; dataset.py - line: 1291 -DEBUG: index: 658
+2020-02-11 14:41:12,178; client.py - line: 196 -DEBUG: Json string sent.
 
-2020-02-07 16:54:29,805; client.py - line: 237 -DEBUG: Trying to receive data.
-2020-02-07 16:54:29,805; client.py - line: 241 -INFO: Data from Unity received.
-2020-02-07 16:54:29,805; client.py - line: 242 -DEBUG: End_tag detected, unity_resp_bytes[0:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
-2020-02-07 16:54:29,805; client.py - line: 246 -DEBUG: img_bytes type: <class 'bytearray'>, img_bytes len: 138662, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
-2020-02-07 16:54:29,806; client.py - line: 249 -DEBUG: PIL Img: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
-2020-02-07 16:54:29,850; client.py - line: 251 -DEBUG: Returning img: type: <class 'numpy.ndarray'> 
+2020-02-11 14:41:12,423; client.py - line: 237 -DEBUG: Trying to receive data.
+2020-02-11 14:41:12,423; client.py - line: 241 -INFO: Data from Unity received.
+2020-02-11 14:41:12,424; client.py - line: 242 -DEBUG: End_tag detected, unity_resp_bytes[0:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2020-02-11 14:41:12,424; client.py - line: 246 -DEBUG: img_bytes type: <class 'bytearray'>, img_bytes len: 218888, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
+2020-02-11 14:41:12,424; client.py - line: 249 -DEBUG: PIL Img: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
+2020-02-11 14:41:12,453; client.py - line: 251 -DEBUG: Returning img: type: <class 'numpy.ndarray'> 
 
-2020-02-07 16:54:29,906; client.py - line: 237 -DEBUG: Trying to receive data.
-2020-02-07 16:54:29,906; client.py - line: 241 -INFO: Data from Unity received.
-2020-02-07 16:54:29,907; client.py - line: 242 -DEBUG: End_tag detected, unity_resp_bytes[0:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
-2020-02-07 16:54:29,907; client.py - line: 246 -DEBUG: img_bytes type: <class 'bytearray'>, img_bytes len: 18334, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
-2020-02-07 16:54:29,907; client.py - line: 249 -DEBUG: PIL Img: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
-2020-02-07 16:54:29,925; client.py - line: 251 -DEBUG: Returning img: type: <class 'numpy.ndarray'> 
+2020-02-11 14:41:12,453; dataset.py - line: 979 -INFO: data completed: Image index: 658
+2020-02-11 14:41:12,453; dataset.py - line: 858 -DEBUG: key: 'seed' is found in config
+2020-02-11 14:41:12,596; dataset.py - line: 580 -DEBUG: total_branches: [2, 1, 2, 1, 2, 1, 2, 2, 2, 2, 1, 2]
+2020-02-11 14:41:12,597; dataset.py - line: 1289 -DEBUG: index: 658
+2020-02-11 14:41:12,598; dataset.py - line: 1291 -DEBUG: index: 659
+2020-02-11 14:41:12,598; client.py - line: 196 -DEBUG: Json string sent.
 
-2020-02-07 16:54:29,925; dataset.py - line: 977 -INFO: data completed: Image index: 359
-2020-02-07 16:54:29,925; dataset.py - line: 856 -DEBUG: key: 'seed' is found in config
-2020-02-07 16:54:30,078; dataset.py - line: 578 -DEBUG: total_branches: [1]
-2020-02-07 16:54:30,079; dataset.py - line: 1291 -DEBUG: index: 359
-2020-02-07 16:54:30,079; dataset.py - line: 1293 -DEBUG: index: 360
-2020-02-07 16:54:30,079; client.py - line: 196 -DEBUG: Json string sent.
+2020-02-11 14:41:13,034; client.py - line: 237 -DEBUG: Trying to receive data.
+2020-02-11 14:41:13,034; client.py - line: 241 -INFO: Data from Unity received.
+2020-02-11 14:41:13,034; client.py - line: 242 -DEBUG: End_tag detected, unity_resp_bytes[0:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2020-02-11 14:41:13,034; client.py - line: 246 -DEBUG: img_bytes type: <class 'bytearray'>, img_bytes len: 280100, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
+2020-02-11 14:41:13,035; client.py - line: 249 -DEBUG: PIL Img: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
+2020-02-11 14:41:13,061; client.py - line: 251 -DEBUG: Returning img: type: <class 'numpy.ndarray'> 
 
-2020-02-07 16:54:30,229; client.py - line: 237 -DEBUG: Trying to receive data.
-2020-02-07 16:54:30,230; client.py - line: 241 -INFO: Data from Unity received.
-2020-02-07 16:54:30,230; client.py - line: 242 -DEBUG: End_tag detected, unity_resp_bytes[0:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
-2020-02-07 16:54:30,230; client.py - line: 246 -DEBUG: img_bytes type: <class 'bytearray'>, img_bytes len: 135310, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
-2020-02-07 16:54:30,230; client.py - line: 249 -DEBUG: PIL Img: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
-2020-02-07 16:54:30,265; client.py - line: 251 -DEBUG: Returning img: type: <class 'numpy.ndarray'> 
+2020-02-11 14:41:13,061; dataset.py - line: 979 -INFO: data completed: Image index: 659
+2020-02-11 14:41:13,061; dataset.py - line: 858 -DEBUG: key: 'seed' is found in config
+2020-02-11 14:41:13,190; dataset.py - line: 580 -DEBUG: total_branches: [2, 1, 2, 1, 2, 1, 2, 1, 1]
+2020-02-11 14:41:13,190; dataset.py - line: 1289 -DEBUG: index: 659
+2020-02-11 14:41:13,191; dataset.py - line: 1291 -DEBUG: index: 660
+2020-02-11 14:41:13,191; client.py - line: 196 -DEBUG: Json string sent.
 
-2020-02-07 16:54:30,343; client.py - line: 237 -DEBUG: Trying to receive data.
-2020-02-07 16:54:30,343; client.py - line: 241 -INFO: Data from Unity received.
-2020-02-07 16:54:30,343; client.py - line: 242 -DEBUG: End_tag detected, unity_resp_bytes[0:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
-2020-02-07 16:54:30,343; client.py - line: 246 -DEBUG: img_bytes type: <class 'bytearray'>, img_bytes len: 20965, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
-2020-02-07 16:54:30,344; client.py - line: 249 -DEBUG: PIL Img: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
-2020-02-07 16:54:30,359; client.py - line: 251 -DEBUG: Returning img: type: <class 'numpy.ndarray'> 
+2020-02-11 14:41:13,414; client.py - line: 237 -DEBUG: Trying to receive data.
+2020-02-11 14:41:13,414; client.py - line: 241 -INFO: Data from Unity received.
+2020-02-11 14:41:13,414; client.py - line: 242 -DEBUG: End_tag detected, unity_resp_bytes[0:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2020-02-11 14:41:13,414; client.py - line: 246 -DEBUG: img_bytes type: <class 'bytearray'>, img_bytes len: 222257, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
+2020-02-11 14:41:13,415; client.py - line: 249 -DEBUG: PIL Img: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
+2020-02-11 14:41:13,445; client.py - line: 251 -DEBUG: Returning img: type: <class 'numpy.ndarray'> 
 
-2020-02-07 16:54:30,360; dataset.py - line: 977 -INFO: data completed: Image index: 360
-2020-02-07 16:54:30,360; dataset.py - line: 856 -DEBUG: key: 'seed' is found in config
-2020-02-07 16:54:30,525; dataset.py - line: 578 -DEBUG: total_branches: [1, 1]
-2020-02-07 16:54:30,526; dataset.py - line: 1291 -DEBUG: index: 360
-2020-02-07 16:54:30,526; dataset.py - line: 1293 -DEBUG: index: 361
-2020-02-07 16:54:30,526; client.py - line: 196 -DEBUG: Json string sent.
+2020-02-11 14:41:13,445; dataset.py - line: 979 -INFO: data completed: Image index: 660
+2020-02-11 14:41:13,445; dataset.py - line: 858 -DEBUG: key: 'seed' is found in config
+2020-02-11 14:41:13,607; dataset.py - line: 580 -DEBUG: total_branches: [1, 2, 1, 1, 2, 2]
+2020-02-11 14:41:13,608; dataset.py - line: 1289 -DEBUG: index: 660
+2020-02-11 14:41:13,608; dataset.py - line: 1291 -DEBUG: index: 661
+2020-02-11 14:41:13,608; client.py - line: 196 -DEBUG: Json string sent.
 
-2020-02-07 16:54:30,754; client.py - line: 237 -DEBUG: Trying to receive data.
-2020-02-07 16:54:30,754; client.py - line: 241 -INFO: Data from Unity received.
-2020-02-07 16:54:30,754; client.py - line: 242 -DEBUG: End_tag detected, unity_resp_bytes[0:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
-2020-02-07 16:54:30,755; client.py - line: 246 -DEBUG: img_bytes type: <class 'bytearray'>, img_bytes len: 224518, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
-2020-02-07 16:54:30,755; client.py - line: 249 -DEBUG: PIL Img: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
-2020-02-07 16:54:30,787; client.py - line: 251 -DEBUG: Returning img: type: <class 'numpy.ndarray'> 
+2020-02-11 14:41:13,772; client.py - line: 237 -DEBUG: Trying to receive data.
+2020-02-11 14:41:13,773; client.py - line: 241 -INFO: Data from Unity received.
+2020-02-11 14:41:13,773; client.py - line: 242 -DEBUG: End_tag detected, unity_resp_bytes[0:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2020-02-11 14:41:13,773; client.py - line: 246 -DEBUG: img_bytes type: <class 'bytearray'>, img_bytes len: 269644, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
+2020-02-11 14:41:13,774; client.py - line: 249 -DEBUG: PIL Img: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
+2020-02-11 14:41:13,820; client.py - line: 251 -DEBUG: Returning img: type: <class 'numpy.ndarray'> 
 
-2020-02-07 16:54:30,840; client.py - line: 237 -DEBUG: Trying to receive data.
-2020-02-07 16:54:30,840; client.py - line: 241 -INFO: Data from Unity received.
-2020-02-07 16:54:30,840; client.py - line: 242 -DEBUG: End_tag detected, unity_resp_bytes[0:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
-2020-02-07 16:54:30,841; client.py - line: 246 -DEBUG: img_bytes type: <class 'bytearray'>, img_bytes len: 19677, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
-2020-02-07 16:54:30,841; client.py - line: 249 -DEBUG: PIL Img: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
-2020-02-07 16:54:30,858; client.py - line: 251 -DEBUG: Returning img: type: <class 'numpy.ndarray'> 
+2020-02-11 14:41:13,820; dataset.py - line: 979 -INFO: data completed: Image index: 661
+2020-02-11 14:41:13,820; dataset.py - line: 858 -DEBUG: key: 'seed' is found in config
+2020-02-11 14:41:14,016; dataset.py - line: 580 -DEBUG: total_branches: [1, 1, 1, 1, 1, 1]
+2020-02-11 14:41:14,017; dataset.py - line: 1289 -DEBUG: index: 661
+2020-02-11 14:41:14,017; dataset.py - line: 1291 -DEBUG: index: 662
+2020-02-11 14:41:14,018; client.py - line: 196 -DEBUG: Json string sent.
 
-2020-02-07 16:54:30,858; dataset.py - line: 977 -INFO: data completed: Image index: 361
-2020-02-07 16:54:30,858; dataset.py - line: 856 -DEBUG: key: 'seed' is found in config
-2020-02-07 16:54:31,066; dataset.py - line: 578 -DEBUG: total_branches: [1]
-2020-02-07 16:54:31,067; dataset.py - line: 1291 -DEBUG: index: 361
-2020-02-07 16:54:31,067; dataset.py - line: 1293 -DEBUG: index: 362
-2020-02-07 16:54:31,067; client.py - line: 196 -DEBUG: Json string sent.
+2020-02-11 14:41:14,258; client.py - line: 237 -DEBUG: Trying to receive data.
+2020-02-11 14:41:14,258; client.py - line: 241 -INFO: Data from Unity received.
+2020-02-11 14:41:14,258; client.py - line: 242 -DEBUG: End_tag detected, unity_resp_bytes[0:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2020-02-11 14:41:14,258; client.py - line: 246 -DEBUG: img_bytes type: <class 'bytearray'>, img_bytes len: 265562, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
+2020-02-11 14:41:14,258; client.py - line: 249 -DEBUG: PIL Img: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
+2020-02-11 14:41:14,298; client.py - line: 251 -DEBUG: Returning img: type: <class 'numpy.ndarray'> 
 
-2020-02-07 16:54:31,229; client.py - line: 237 -DEBUG: Trying to receive data.
-2020-02-07 16:54:31,229; client.py - line: 241 -INFO: Data from Unity received.
-2020-02-07 16:54:31,230; client.py - line: 242 -DEBUG: End_tag detected, unity_resp_bytes[0:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
-2020-02-07 16:54:31,230; client.py - line: 246 -DEBUG: img_bytes type: <class 'bytearray'>, img_bytes len: 275813, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
-2020-02-07 16:54:31,230; client.py - line: 249 -DEBUG: PIL Img: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
-2020-02-07 16:54:31,264; client.py - line: 251 -DEBUG: Returning img: type: <class 'numpy.ndarray'> 
+2020-02-11 14:41:14,298; dataset.py - line: 979 -INFO: data completed: Image index: 662
+2020-02-11 14:41:14,298; dataset.py - line: 858 -DEBUG: key: 'seed' is found in config
+2020-02-11 14:41:14,492; dataset.py - line: 580 -DEBUG: total_branches: [1, 1, 1, 1, 1, 2, 1, 1, 1, 2, 1, 2, 1]
+2020-02-11 14:41:14,493; dataset.py - line: 1289 -DEBUG: index: 662
+2020-02-11 14:41:14,493; dataset.py - line: 1291 -DEBUG: index: 663
+2020-02-11 14:41:14,493; client.py - line: 196 -DEBUG: Json string sent.
 
-2020-02-07 16:54:31,317; client.py - line: 237 -DEBUG: Trying to receive data.
-2020-02-07 16:54:31,317; client.py - line: 241 -INFO: Data from Unity received.
-2020-02-07 16:54:31,317; client.py - line: 242 -DEBUG: End_tag detected, unity_resp_bytes[0:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
-2020-02-07 16:54:31,317; client.py - line: 246 -DEBUG: img_bytes type: <class 'bytearray'>, img_bytes len: 23757, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
-2020-02-07 16:54:31,318; client.py - line: 249 -DEBUG: PIL Img: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
-2020-02-07 16:54:31,336; client.py - line: 251 -DEBUG: Returning img: type: <class 'numpy.ndarray'> 
+2020-02-11 14:41:14,636; client.py - line: 237 -DEBUG: Trying to receive data.
+2020-02-11 14:41:14,637; client.py - line: 241 -INFO: Data from Unity received.
+2020-02-11 14:41:14,637; client.py - line: 242 -DEBUG: End_tag detected, unity_resp_bytes[0:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2020-02-11 14:41:14,637; client.py - line: 246 -DEBUG: img_bytes type: <class 'bytearray'>, img_bytes len: 165014, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
+2020-02-11 14:41:14,637; client.py - line: 249 -DEBUG: PIL Img: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
+2020-02-11 14:41:14,670; client.py - line: 251 -DEBUG: Returning img: type: <class 'numpy.ndarray'> 
 
-2020-02-07 16:54:31,336; dataset.py - line: 977 -INFO: data completed: Image index: 362
-2020-02-07 16:54:31,336; dataset.py - line: 856 -DEBUG: key: 'seed' is found in config
-2020-02-07 16:54:31,572; dataset.py - line: 578 -DEBUG: total_branches: [1, 2, 1]
-2020-02-07 16:54:31,573; dataset.py - line: 1291 -DEBUG: index: 362
-2020-02-07 16:54:31,573; dataset.py - line: 1293 -DEBUG: index: 363
-2020-02-07 16:54:31,574; client.py - line: 196 -DEBUG: Json string sent.
+2020-02-11 14:41:14,671; dataset.py - line: 979 -INFO: data completed: Image index: 663
+2020-02-11 14:41:14,671; dataset.py - line: 858 -DEBUG: key: 'seed' is found in config
+2020-02-11 14:41:14,797; dataset.py - line: 580 -DEBUG: total_branches: [2, 1, 2, 1, 1, 1, 1, 1, 1, 2, 1, 2, 1]
+2020-02-11 14:41:14,799; dataset.py - line: 1289 -DEBUG: index: 663
+2020-02-11 14:41:14,799; dataset.py - line: 1291 -DEBUG: index: 664
+2020-02-11 14:41:14,799; client.py - line: 196 -DEBUG: Json string sent.
 
-2020-02-07 16:54:31,768; client.py - line: 237 -DEBUG: Trying to receive data.
-2020-02-07 16:54:31,768; client.py - line: 241 -INFO: Data from Unity received.
-2020-02-07 16:54:31,768; client.py - line: 242 -DEBUG: End_tag detected, unity_resp_bytes[0:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
-2020-02-07 16:54:31,768; client.py - line: 246 -DEBUG: img_bytes type: <class 'bytearray'>, img_bytes len: 179638, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
-2020-02-07 16:54:31,768; client.py - line: 249 -DEBUG: PIL Img: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
-2020-02-07 16:54:31,799; client.py - line: 251 -DEBUG: Returning img: type: <class 'numpy.ndarray'> 
+2020-02-11 14:41:14,934; client.py - line: 237 -DEBUG: Trying to receive data.
+2020-02-11 14:41:14,935; client.py - line: 241 -INFO: Data from Unity received.
+2020-02-11 14:41:14,935; client.py - line: 242 -DEBUG: End_tag detected, unity_resp_bytes[0:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2020-02-11 14:41:14,935; client.py - line: 246 -DEBUG: img_bytes type: <class 'bytearray'>, img_bytes len: 89291, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
+2020-02-11 14:41:14,935; client.py - line: 249 -DEBUG: PIL Img: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
+2020-02-11 14:41:14,960; client.py - line: 251 -DEBUG: Returning img: type: <class 'numpy.ndarray'> 
 
-2020-02-07 16:54:31,853; client.py - line: 237 -DEBUG: Trying to receive data.
-2020-02-07 16:54:31,853; client.py - line: 241 -INFO: Data from Unity received.
-2020-02-07 16:54:31,853; client.py - line: 242 -DEBUG: End_tag detected, unity_resp_bytes[0:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
-2020-02-07 16:54:31,853; client.py - line: 246 -DEBUG: img_bytes type: <class 'bytearray'>, img_bytes len: 18319, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
-2020-02-07 16:54:31,853; client.py - line: 249 -DEBUG: PIL Img: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
-2020-02-07 16:54:31,868; client.py - line: 251 -DEBUG: Returning img: type: <class 'numpy.ndarray'> 
+2020-02-11 14:41:14,960; dataset.py - line: 979 -INFO: data completed: Image index: 664
+2020-02-11 14:41:14,960; dataset.py - line: 858 -DEBUG: key: 'seed' is found in config
+2020-02-11 14:41:15,050; dataset.py - line: 580 -DEBUG: total_branches: [2, 1, 2, 3, 1, 1, 2]
+2020-02-11 14:41:15,051; dataset.py - line: 1289 -DEBUG: index: 664
+2020-02-11 14:41:15,052; dataset.py - line: 1291 -DEBUG: index: 665
+2020-02-11 14:41:15,052; client.py - line: 196 -DEBUG: Json string sent.
 
-2020-02-07 16:54:31,869; dataset.py - line: 977 -INFO: data completed: Image index: 363
-2020-02-07 16:54:31,869; dataset.py - line: 856 -DEBUG: key: 'seed' is found in config
-2020-02-07 16:54:32,059; dataset.py - line: 578 -DEBUG: total_branches: [1, 1, 1]
-2020-02-07 16:54:32,059; dataset.py - line: 1291 -DEBUG: index: 363
-2020-02-07 16:54:32,060; dataset.py - line: 1293 -DEBUG: index: 364
-2020-02-07 16:54:32,060; client.py - line: 196 -DEBUG: Json string sent.
+2020-02-11 14:41:15,185; client.py - line: 237 -DEBUG: Trying to receive data.
+2020-02-11 14:41:15,185; client.py - line: 241 -INFO: Data from Unity received.
+2020-02-11 14:41:15,186; client.py - line: 242 -DEBUG: End_tag detected, unity_resp_bytes[0:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2020-02-11 14:41:15,186; client.py - line: 246 -DEBUG: img_bytes type: <class 'bytearray'>, img_bytes len: 150193, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
+2020-02-11 14:41:15,186; client.py - line: 249 -DEBUG: PIL Img: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
+2020-02-11 14:41:15,213; client.py - line: 251 -DEBUG: Returning img: type: <class 'numpy.ndarray'> 
 
-2020-02-07 16:54:32,208; client.py - line: 237 -DEBUG: Trying to receive data.
-2020-02-07 16:54:32,208; client.py - line: 241 -INFO: Data from Unity received.
-2020-02-07 16:54:32,208; client.py - line: 242 -DEBUG: End_tag detected, unity_resp_bytes[0:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
-2020-02-07 16:54:32,208; client.py - line: 246 -DEBUG: img_bytes type: <class 'bytearray'>, img_bytes len: 121457, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
-2020-02-07 16:54:32,209; client.py - line: 249 -DEBUG: PIL Img: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
-2020-02-07 16:54:32,251; client.py - line: 251 -DEBUG: Returning img: type: <class 'numpy.ndarray'> 
+2020-02-11 14:41:15,214; dataset.py - line: 979 -INFO: data completed: Image index: 665
+2020-02-11 14:41:15,214; dataset.py - line: 858 -DEBUG: key: 'seed' is found in config
+2020-02-11 14:41:15,342; dataset.py - line: 580 -DEBUG: total_branches: [1, 1, 1, 2, 1, 1, 1, 1, 1, 1]
+2020-02-11 14:41:15,343; dataset.py - line: 1289 -DEBUG: index: 665
+2020-02-11 14:41:15,343; dataset.py - line: 1291 -DEBUG: index: 666
+2020-02-11 14:41:15,344; client.py - line: 196 -DEBUG: Json string sent.
 
-2020-02-07 16:54:32,326; client.py - line: 237 -DEBUG: Trying to receive data.
-2020-02-07 16:54:32,327; client.py - line: 241 -INFO: Data from Unity received.
-2020-02-07 16:54:32,327; client.py - line: 242 -DEBUG: End_tag detected, unity_resp_bytes[0:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
-2020-02-07 16:54:32,327; client.py - line: 246 -DEBUG: img_bytes type: <class 'bytearray'>, img_bytes len: 18245, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
-2020-02-07 16:54:32,327; client.py - line: 249 -DEBUG: PIL Img: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
-2020-02-07 16:54:32,342; client.py - line: 251 -DEBUG: Returning img: type: <class 'numpy.ndarray'> 
+2020-02-11 14:41:15,468; client.py - line: 237 -DEBUG: Trying to receive data.
+2020-02-11 14:41:15,469; client.py - line: 241 -INFO: Data from Unity received.
+2020-02-11 14:41:15,469; client.py - line: 242 -DEBUG: End_tag detected, unity_resp_bytes[0:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2020-02-11 14:41:15,469; client.py - line: 246 -DEBUG: img_bytes type: <class 'bytearray'>, img_bytes len: 132381, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
+2020-02-11 14:41:15,469; client.py - line: 249 -DEBUG: PIL Img: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
+2020-02-11 14:41:15,498; client.py - line: 251 -DEBUG: Returning img: type: <class 'numpy.ndarray'> 
 
-2020-02-07 16:54:32,343; dataset.py - line: 977 -INFO: data completed: Image index: 364
-2020-02-07 16:54:32,343; dataset.py - line: 856 -DEBUG: key: 'seed' is found in config
-2020-02-07 16:54:32,515; dataset.py - line: 578 -DEBUG: total_branches: [1, 1]
-2020-02-07 16:54:32,516; dataset.py - line: 1291 -DEBUG: index: 364
-2020-02-07 16:54:32,516; dataset.py - line: 1293 -DEBUG: index: 365
-2020-02-07 16:54:32,516; client.py - line: 196 -DEBUG: Json string sent.
+2020-02-11 14:41:15,498; dataset.py - line: 979 -INFO: data completed: Image index: 666
+2020-02-11 14:41:15,498; dataset.py - line: 858 -DEBUG: key: 'seed' is found in config
+2020-02-11 14:41:15,613; dataset.py - line: 580 -DEBUG: total_branches: [2, 1, 1, 1, 1]
+2020-02-11 14:41:15,614; dataset.py - line: 1289 -DEBUG: index: 666
+2020-02-11 14:41:15,614; dataset.py - line: 1291 -DEBUG: index: 667
+2020-02-11 14:41:15,614; client.py - line: 196 -DEBUG: Json string sent.
 
-2020-02-07 16:54:32,658; client.py - line: 237 -DEBUG: Trying to receive data.
-2020-02-07 16:54:32,658; client.py - line: 241 -INFO: Data from Unity received.
-2020-02-07 16:54:32,658; client.py - line: 242 -DEBUG: End_tag detected, unity_resp_bytes[0:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
-2020-02-07 16:54:32,659; client.py - line: 246 -DEBUG: img_bytes type: <class 'bytearray'>, img_bytes len: 213327, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
-2020-02-07 16:54:32,659; client.py - line: 249 -DEBUG: PIL Img: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
-2020-02-07 16:54:32,695; client.py - line: 251 -DEBUG: Returning img: type: <class 'numpy.ndarray'> 
+2020-02-11 14:41:15,758; client.py - line: 237 -DEBUG: Trying to receive data.
+2020-02-11 14:41:15,758; client.py - line: 241 -INFO: Data from Unity received.
+2020-02-11 14:41:15,758; client.py - line: 242 -DEBUG: End_tag detected, unity_resp_bytes[0:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2020-02-11 14:41:15,758; client.py - line: 246 -DEBUG: img_bytes type: <class 'bytearray'>, img_bytes len: 199881, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
+2020-02-11 14:41:15,758; client.py - line: 249 -DEBUG: PIL Img: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
+2020-02-11 14:41:15,798; client.py - line: 251 -DEBUG: Returning img: type: <class 'numpy.ndarray'> 
 
-2020-02-07 16:54:32,769; client.py - line: 237 -DEBUG: Trying to receive data.
-2020-02-07 16:54:32,770; client.py - line: 241 -INFO: Data from Unity received.
-2020-02-07 16:54:32,770; client.py - line: 242 -DEBUG: End_tag detected, unity_resp_bytes[0:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
-2020-02-07 16:54:32,770; client.py - line: 246 -DEBUG: img_bytes type: <class 'bytearray'>, img_bytes len: 19435, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
-2020-02-07 16:54:32,771; client.py - line: 249 -DEBUG: PIL Img: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
-2020-02-07 16:54:32,792; client.py - line: 251 -DEBUG: Returning img: type: <class 'numpy.ndarray'> 
+2020-02-11 14:41:15,799; dataset.py - line: 979 -INFO: data completed: Image index: 667
+2020-02-11 14:41:15,799; dataset.py - line: 858 -DEBUG: key: 'seed' is found in config
+2020-02-11 14:41:15,967; dataset.py - line: 580 -DEBUG: total_branches: [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+2020-02-11 14:41:15,968; dataset.py - line: 1289 -DEBUG: index: 667
+2020-02-11 14:41:15,968; dataset.py - line: 1291 -DEBUG: index: 668
+2020-02-11 14:41:15,968; client.py - line: 196 -DEBUG: Json string sent.
 
-2020-02-07 16:54:32,793; dataset.py - line: 977 -INFO: data completed: Image index: 365
-2020-02-07 16:54:32,793; dataset.py - line: 856 -DEBUG: key: 'seed' is found in config
-2020-02-07 16:54:32,992; dataset.py - line: 578 -DEBUG: total_branches: [1, 1, 1]
-2020-02-07 16:54:32,993; dataset.py - line: 1291 -DEBUG: index: 365
-2020-02-07 16:54:32,993; dataset.py - line: 1293 -DEBUG: index: 366
-2020-02-07 16:54:32,993; client.py - line: 196 -DEBUG: Json string sent.
+2020-02-11 14:41:16,143; client.py - line: 237 -DEBUG: Trying to receive data.
+2020-02-11 14:41:16,143; client.py - line: 241 -INFO: Data from Unity received.
+2020-02-11 14:41:16,143; client.py - line: 242 -DEBUG: End_tag detected, unity_resp_bytes[0:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2020-02-11 14:41:16,143; client.py - line: 246 -DEBUG: img_bytes type: <class 'bytearray'>, img_bytes len: 239169, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
+2020-02-11 14:41:16,144; client.py - line: 249 -DEBUG: PIL Img: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
+2020-02-11 14:41:16,174; client.py - line: 251 -DEBUG: Returning img: type: <class 'numpy.ndarray'> 
 
-2020-02-07 16:54:33,142; client.py - line: 237 -DEBUG: Trying to receive data.
-2020-02-07 16:54:33,142; client.py - line: 241 -INFO: Data from Unity received.
-2020-02-07 16:54:33,142; client.py - line: 242 -DEBUG: End_tag detected, unity_resp_bytes[0:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
-2020-02-07 16:54:33,143; client.py - line: 246 -DEBUG: img_bytes type: <class 'bytearray'>, img_bytes len: 149359, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
-2020-02-07 16:54:33,143; client.py - line: 249 -DEBUG: PIL Img: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
-2020-02-07 16:54:33,185; client.py - line: 251 -DEBUG: Returning img: type: <class 'numpy.ndarray'> 
+2020-02-11 14:41:16,174; dataset.py - line: 979 -INFO: data completed: Image index: 668
+2020-02-11 14:41:16,174; dataset.py - line: 858 -DEBUG: key: 'seed' is found in config
+2020-02-11 14:41:16,324; dataset.py - line: 580 -DEBUG: total_branches: [2, 1, 1, 1, 1]
+2020-02-11 14:41:16,325; dataset.py - line: 1289 -DEBUG: index: 668
+2020-02-11 14:41:16,325; dataset.py - line: 1291 -DEBUG: index: 669
+2020-02-11 14:41:16,325; client.py - line: 196 -DEBUG: Json string sent.
 
-2020-02-07 16:54:33,258; client.py - line: 237 -DEBUG: Trying to receive data.
-2020-02-07 16:54:33,258; client.py - line: 241 -INFO: Data from Unity received.
-2020-02-07 16:54:33,258; client.py - line: 242 -DEBUG: End_tag detected, unity_resp_bytes[0:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
-2020-02-07 16:54:33,258; client.py - line: 246 -DEBUG: img_bytes type: <class 'bytearray'>, img_bytes len: 23788, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
-2020-02-07 16:54:33,259; client.py - line: 249 -DEBUG: PIL Img: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
-2020-02-07 16:54:33,286; client.py - line: 251 -DEBUG: Returning img: type: <class 'numpy.ndarray'> 
+2020-02-11 14:41:16,467; client.py - line: 237 -DEBUG: Trying to receive data.
+2020-02-11 14:41:16,468; client.py - line: 241 -INFO: Data from Unity received.
+2020-02-11 14:41:16,468; client.py - line: 242 -DEBUG: End_tag detected, unity_resp_bytes[0:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2020-02-11 14:41:16,468; client.py - line: 246 -DEBUG: img_bytes type: <class 'bytearray'>, img_bytes len: 153891, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
+2020-02-11 14:41:16,469; client.py - line: 249 -DEBUG: PIL Img: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
+2020-02-11 14:41:16,510; client.py - line: 251 -DEBUG: Returning img: type: <class 'numpy.ndarray'> 
 
-2020-02-07 16:54:33,287; dataset.py - line: 977 -INFO: data completed: Image index: 366
-2020-02-07 16:54:33,287; dataset.py - line: 856 -DEBUG: key: 'seed' is found in config
-2020-02-07 16:54:33,457; dataset.py - line: 578 -DEBUG: total_branches: [1, 2]
-2020-02-07 16:54:33,458; dataset.py - line: 1291 -DEBUG: index: 366
-2020-02-07 16:54:33,458; dataset.py - line: 1293 -DEBUG: index: 367
-2020-02-07 16:54:33,458; client.py - line: 196 -DEBUG: Json string sent.
+2020-02-11 14:41:16,511; dataset.py - line: 979 -INFO: data completed: Image index: 669
+2020-02-11 14:41:16,511; dataset.py - line: 858 -DEBUG: key: 'seed' is found in config
+2020-02-11 14:41:16,626; dataset.py - line: 580 -DEBUG: total_branches: [1, 1, 1, 3, 1, 2]
+2020-02-11 14:41:16,627; dataset.py - line: 1289 -DEBUG: index: 669
+2020-02-11 14:41:16,627; dataset.py - line: 1291 -DEBUG: index: 670
+2020-02-11 14:41:16,627; client.py - line: 196 -DEBUG: Json string sent.
 
-2020-02-07 16:54:33,585; client.py - line: 237 -DEBUG: Trying to receive data.
-2020-02-07 16:54:33,585; client.py - line: 241 -INFO: Data from Unity received.
-2020-02-07 16:54:33,585; client.py - line: 242 -DEBUG: End_tag detected, unity_resp_bytes[0:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
-2020-02-07 16:54:33,586; client.py - line: 246 -DEBUG: img_bytes type: <class 'bytearray'>, img_bytes len: 110318, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
-2020-02-07 16:54:33,586; client.py - line: 249 -DEBUG: PIL Img: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
-2020-02-07 16:54:33,621; client.py - line: 251 -DEBUG: Returning img: type: <class 'numpy.ndarray'> 
+2020-02-11 14:41:16,762; client.py - line: 237 -DEBUG: Trying to receive data.
+2020-02-11 14:41:16,762; client.py - line: 241 -INFO: Data from Unity received.
+2020-02-11 14:41:16,762; client.py - line: 242 -DEBUG: End_tag detected, unity_resp_bytes[0:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2020-02-11 14:41:16,763; client.py - line: 246 -DEBUG: img_bytes type: <class 'bytearray'>, img_bytes len: 182904, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
+2020-02-11 14:41:16,763; client.py - line: 249 -DEBUG: PIL Img: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
+2020-02-11 14:41:16,793; client.py - line: 251 -DEBUG: Returning img: type: <class 'numpy.ndarray'> 
 
-2020-02-07 16:54:33,697; client.py - line: 237 -DEBUG: Trying to receive data.
-2020-02-07 16:54:33,697; client.py - line: 241 -INFO: Data from Unity received.
-2020-02-07 16:54:33,697; client.py - line: 242 -DEBUG: End_tag detected, unity_resp_bytes[0:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
-2020-02-07 16:54:33,697; client.py - line: 246 -DEBUG: img_bytes type: <class 'bytearray'>, img_bytes len: 21013, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
-2020-02-07 16:54:33,697; client.py - line: 249 -DEBUG: PIL Img: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
-2020-02-07 16:54:33,714; client.py - line: 251 -DEBUG: Returning img: type: <class 'numpy.ndarray'> 
+2020-02-11 14:41:16,794; dataset.py - line: 979 -INFO: data completed: Image index: 670
+2020-02-11 14:41:16,794; dataset.py - line: 858 -DEBUG: key: 'seed' is found in config
+2020-02-11 14:41:16,923; dataset.py - line: 580 -DEBUG: total_branches: [2, 2, 2, 1, 1, 1]
+2020-02-11 14:41:16,924; dataset.py - line: 1289 -DEBUG: index: 670
+2020-02-11 14:41:16,925; dataset.py - line: 1291 -DEBUG: index: 671
+2020-02-11 14:41:16,925; client.py - line: 196 -DEBUG: Json string sent.
 
-2020-02-07 16:54:33,714; dataset.py - line: 977 -INFO: data completed: Image index: 367
-2020-02-07 16:54:33,715; dataset.py - line: 856 -DEBUG: key: 'seed' is found in config
-2020-02-07 16:54:33,864; dataset.py - line: 578 -DEBUG: total_branches: [2, 2]
-2020-02-07 16:54:33,865; dataset.py - line: 1291 -DEBUG: index: 367
-2020-02-07 16:54:33,865; dataset.py - line: 1293 -DEBUG: index: 368
-2020-02-07 16:54:33,865; client.py - line: 196 -DEBUG: Json string sent.
+2020-02-11 14:41:17,053; client.py - line: 237 -DEBUG: Trying to receive data.
+2020-02-11 14:41:17,053; client.py - line: 241 -INFO: Data from Unity received.
+2020-02-11 14:41:17,054; client.py - line: 242 -DEBUG: End_tag detected, unity_resp_bytes[0:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2020-02-11 14:41:17,054; client.py - line: 246 -DEBUG: img_bytes type: <class 'bytearray'>, img_bytes len: 109003, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
+2020-02-11 14:41:17,054; client.py - line: 249 -DEBUG: PIL Img: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
+2020-02-11 14:41:17,080; client.py - line: 251 -DEBUG: Returning img: type: <class 'numpy.ndarray'> 
 
-2020-02-07 16:54:33,989; client.py - line: 237 -DEBUG: Trying to receive data.
-2020-02-07 16:54:33,989; client.py - line: 241 -INFO: Data from Unity received.
-2020-02-07 16:54:33,989; client.py - line: 242 -DEBUG: End_tag detected, unity_resp_bytes[0:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
-2020-02-07 16:54:33,990; client.py - line: 246 -DEBUG: img_bytes type: <class 'bytearray'>, img_bytes len: 128709, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
-2020-02-07 16:54:33,990; client.py - line: 249 -DEBUG: PIL Img: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
-2020-02-07 16:54:34,033; client.py - line: 251 -DEBUG: Returning img: type: <class 'numpy.ndarray'> 
+2020-02-11 14:41:17,080; dataset.py - line: 979 -INFO: data completed: Image index: 671
+2020-02-11 14:41:17,080; dataset.py - line: 858 -DEBUG: key: 'seed' is found in config
+2020-02-11 14:41:17,199; dataset.py - line: 580 -DEBUG: total_branches: [1, 1, 1, 1]
+2020-02-11 14:41:17,201; dataset.py - line: 1289 -DEBUG: index: 671
+2020-02-11 14:41:17,201; dataset.py - line: 1291 -DEBUG: index: 672
+2020-02-11 14:41:17,201; client.py - line: 196 -DEBUG: Json string sent.
 
-2020-02-07 16:54:34,078; client.py - line: 237 -DEBUG: Trying to receive data.
-2020-02-07 16:54:34,078; client.py - line: 241 -INFO: Data from Unity received.
-2020-02-07 16:54:34,079; client.py - line: 242 -DEBUG: End_tag detected, unity_resp_bytes[0:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
-2020-02-07 16:54:34,079; client.py - line: 246 -DEBUG: img_bytes type: <class 'bytearray'>, img_bytes len: 17794, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
-2020-02-07 16:54:34,079; client.py - line: 249 -DEBUG: PIL Img: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
-2020-02-07 16:54:34,094; client.py - line: 251 -DEBUG: Returning img: type: <class 'numpy.ndarray'> 
+2020-02-11 14:41:17,329; client.py - line: 237 -DEBUG: Trying to receive data.
+2020-02-11 14:41:17,329; client.py - line: 241 -INFO: Data from Unity received.
+2020-02-11 14:41:17,329; client.py - line: 242 -DEBUG: End_tag detected, unity_resp_bytes[0:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2020-02-11 14:41:17,329; client.py - line: 246 -DEBUG: img_bytes type: <class 'bytearray'>, img_bytes len: 238426, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
+2020-02-11 14:41:17,330; client.py - line: 249 -DEBUG: PIL Img: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
+2020-02-11 14:41:17,361; client.py - line: 251 -DEBUG: Returning img: type: <class 'numpy.ndarray'> 
 
-2020-02-07 16:54:34,094; dataset.py - line: 977 -INFO: data completed: Image index: 368
-2020-02-07 16:54:34,094; dataset.py - line: 856 -DEBUG: key: 'seed' is found in config
-2020-02-07 16:54:34,238; dataset.py - line: 1015 -DEBUG: Pose image is available is True
-2020-02-07 16:54:34,239; dataset.py - line: 1026 -DEBUG: numb_y: 4
-2020-02-07 16:54:34,239; dataset.py - line: 1027 -DEBUG: dicts[0]['image'].shape[0]: 1024
-2020-02-07 16:54:34,239; dataset.py - line: 1028 -DEBUG: (images_per_row*dicts[0][image].shape[1]: 3072
-2020-02-07 16:54:34,239; dataset.py - line: 1029 -DEBUG: dicts[0][image].shape[2]: 3
-2020-02-07 16:54:34,239; dataset.py - line: 1032 -DEBUG: Pose gt is available and will be plotted.
-2020-02-07 16:54:34,255; dataset.py - line: 1037 -DEBUG: h_stacked.shape: (8, 1024, 3072, 3)
-2020-02-07 16:54:34,390; dataset.py - line: 1037 -DEBUG: h_stacked.shape: (8, 1024, 3072, 3)
-2020-02-07 16:54:34,520; dataset.py - line: 1037 -DEBUG: h_stacked.shape: (8, 1024, 3072, 3)
-2020-02-07 16:54:34,647; dataset.py - line: 1037 -DEBUG: h_stacked.shape: (8, 1024, 3072, 3)
-2020-02-07 16:54:34,852; dataset.py - line: 1069 -DEBUG: final_img.shape: (8192, 3072, 3)
-2020-02-07 16:55:15,304; client.py - line: 173 -INFO: Exit-message is sent. Unity build and socket now closing.
+2020-02-11 14:41:17,361; dataset.py - line: 979 -INFO: data completed: Image index: 672
+2020-02-11 14:41:17,361; dataset.py - line: 858 -DEBUG: key: 'seed' is found in config
+2020-02-11 14:41:17,512; dataset.py - line: 580 -DEBUG: total_branches: [3, 2, 2, 1, 1, 1, 1, 2, 2]
+2020-02-11 14:41:17,513; dataset.py - line: 1289 -DEBUG: index: 672
+2020-02-11 14:41:17,513; dataset.py - line: 1291 -DEBUG: index: 673
+2020-02-11 14:41:17,514; client.py - line: 196 -DEBUG: Json string sent.
 
-2020-02-07 16:55:15,304; client.py - line: 193 -DEBUG: Exit request sent.
+2020-02-11 14:41:17,717; client.py - line: 237 -DEBUG: Trying to receive data.
+2020-02-11 14:41:17,717; client.py - line: 241 -INFO: Data from Unity received.
+2020-02-11 14:41:17,718; client.py - line: 242 -DEBUG: End_tag detected, unity_resp_bytes[0:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2020-02-11 14:41:17,718; client.py - line: 246 -DEBUG: img_bytes type: <class 'bytearray'>, img_bytes len: 256555, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
+2020-02-11 14:41:17,718; client.py - line: 249 -DEBUG: PIL Img: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
+2020-02-11 14:41:17,765; client.py - line: 251 -DEBUG: Returning img: type: <class 'numpy.ndarray'> 
 
-2020-02-07 16:55:15,304; dataset.py - line: 1334 -DEBUG: Exit socket connection to unity.
+2020-02-11 14:41:17,766; dataset.py - line: 979 -INFO: data completed: Image index: 673
+2020-02-11 14:41:17,766; dataset.py - line: 858 -DEBUG: key: 'seed' is found in config
+2020-02-11 14:41:17,966; dataset.py - line: 580 -DEBUG: total_branches: [1, 1, 1, 2, 1, 2]
+2020-02-11 14:41:17,970; dataset.py - line: 1289 -DEBUG: index: 673
+2020-02-11 14:41:17,970; dataset.py - line: 1291 -DEBUG: index: 674
+2020-02-11 14:41:17,970; client.py - line: 196 -DEBUG: Json string sent.
+
+2020-02-11 14:41:18,106; client.py - line: 237 -DEBUG: Trying to receive data.
+2020-02-11 14:41:18,106; client.py - line: 241 -INFO: Data from Unity received.
+2020-02-11 14:41:18,106; client.py - line: 242 -DEBUG: End_tag detected, unity_resp_bytes[0:10]: bytearray(b'\x00\x89PNG\r\n\x1a\n\x00')
+2020-02-11 14:41:18,106; client.py - line: 246 -DEBUG: img_bytes type: <class 'bytearray'>, img_bytes len: 169723, img_bytes[:10]: bytearray(b'\x89PNG\r\n\x1a\n\x00\x00')
+2020-02-11 14:41:18,107; client.py - line: 249 -DEBUG: PIL Img: type: <class 'PIL.PngImagePlugin.PngImageFile'> 
+2020-02-11 14:41:18,146; client.py - line: 251 -DEBUG: Returning img: type: <class 'numpy.ndarray'> 
+
+2020-02-11 14:41:18,146; dataset.py - line: 979 -INFO: data completed: Image index: 674
+2020-02-11 14:41:18,146; dataset.py - line: 858 -DEBUG: key: 'seed' is found in config
+2020-02-11 14:41:18,277; dataset.py - line: 1017 -DEBUG: Pose image is available is False
+2020-02-11 14:41:18,277; dataset.py - line: 1028 -DEBUG: numb_y: 4
+2020-02-11 14:41:18,277; dataset.py - line: 1029 -DEBUG: dicts[0]['image'].shape[0]: 1024
+2020-02-11 14:41:18,277; dataset.py - line: 1030 -DEBUG: (images_per_row*dicts[0][image].shape[1]: 5120
+2020-02-11 14:41:18,277; dataset.py - line: 1031 -DEBUG: dicts[0][image].shape[2]: 3
+2020-02-11 14:41:18,384; dataset.py - line: 1052 -DEBUG: h_stacked.shape: (4, 1024, 5120, 3)
+2020-02-11 14:41:18,801; dataset.py - line: 1066 -DEBUG: final_img.shape: (4096, 5120, 3)
+2020-02-11 14:41:26,673; client.py - line: 173 -INFO: Exit-message is sent. Unity build and socket now closing.
+
+2020-02-11 14:41:26,673; client.py - line: 193 -DEBUG: Exit request sent.
+
+2020-02-11 14:41:26,673; dataset.py - line: 1332 -DEBUG: Exit socket connection to unity.

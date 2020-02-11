@@ -14,10 +14,8 @@ public class create_crane : MonoBehaviour
     float[] theta_rad_sumed;
     float[] theta_deg_sumed;
     public GameObject TCP_server_object;
-    //[HideInInspector] public bool newCrane=false;
-    public bool newCrane=false;
-    //[HideInInspector] public bool newPose=false;
-    public bool newPose=false;
+    [HideInInspector] public bool newCrane=false;
+    [HideInInspector] public bool newPose=false;
     Vector3 rotVec_yz(Vector3 vec,float theta)
     {
         return new Vector3(vec.x,vec.y*Mathf.Cos(theta)-vec.z*Mathf.Sin(theta),vec.y*Mathf.Sin(theta)+vec.z*Mathf.Cos(theta));
@@ -145,7 +143,9 @@ public class create_crane : MonoBehaviour
             cubes[i].transform.rotation = Quaternion.Euler(0,-jsonCrane.phi,-theta_deg_sumed[i]);
         }   
         cubes[0].transform.rotation = Quaternion.Euler(0,-jsonCrane.phi,0);
-
+    }
+    void create_branches()
+    {
         Vector3 rotAxis = new Vector3();
         int counter = jsonCrane.total_cuboids;
         for (int i = jsonCrane.total_cuboids-2; i>=0;i--)
@@ -172,92 +172,45 @@ public class create_crane : MonoBehaviour
         }
     }
 
-        /* 
-        
-        for(int i = 0; i<cubes.Length; i++)
+    bool is_visible(Camera cam, GameObject[] cubes)
+    {
+
+        Plane[] planes = GeometryUtility.CalculateFrustumPlanes(cam);
+        foreach (Plane plane in planes) 
         {
-            if(max_x < cubes[i].transform.position.x)
+            foreach (GameObject cube in cubes)
             {
-                max_x = cubes[i].transform.position.x;
-            }
-            if(max_y < cubes[i].transform.position.y)
-            {
-                max_y = cubes[i].transform.position.y;
-            }
-            if(min_y > cubes[i].transform.position.y)
-            {
-                min_y = cubes[i].transform.position.y;
+                foreach (Vector3 vertice in cube.GetComponent<MeshFilter>().mesh.vertices) 
+                {
+                    if(plane.GetDistanceToPoint(cube.transform.position + vertice) < 1)
+                    {
+                        return false;
+                    }
+                }
             }
         }
-        Debug.Log("max_x: " + max_x.ToString() + "; max_y: " + max_y.ToString() + "; min_y: " + min_y.ToString());
-
-        //set camera radius dependend on the dimensions of the crane 
-        //still not perfect  
-           
-        if(jsonCrane.camera.radius==0)
-        {
-            // best try to get the right camera pos dependent on crane
-            // does not work perfect
-            if(max_y>max_x && max_y>Mathf.Abs(min_y))
-            {
-                Debug.Log("max_y is biggest");   
-                Jcamera.Update();
-                Vector3 view_pos = Camera.main.WorldToViewportPoint(new Vector3(0,max_y,0));
-                while(view_pos.y > 0.75 | view_pos.z<0)
-                {
-                    view_pos = Camera.main.WorldToViewportPoint(new Vector3(0,max_y,0));
-                    Debug.Log("going away");
-                    Jcamera.radius += 1;
-                    Jcamera.Update();
-                    view_pos = Camera.main.WorldToViewportPoint(new Vector3(0,max_y,0));
-                }
-            }
-            if(Mathf.Abs(min_y)>max_x && Mathf.Abs(min_y)>max_y)
-            {
-                Debug.Log("min_y is biggest");   
-                Jcamera.Update();
-                Vector3 view_pos = Camera.main.WorldToViewportPoint(new Vector3(0,min_y,0));
-                while(view_pos.y < 0.10 | view_pos.z<0)
-                {
-                    view_pos = Camera.main.WorldToViewportPoint(new Vector3(0,min_y,0));
-                    Debug.Log("view_pos: " + view_pos.ToString());
-                    Debug.Log("going away");
-                    Jcamera.radius += 1;
-                    Jcamera.Update();
-                    view_pos = Camera.main.WorldToViewportPoint(new Vector3(0,min_y,0));
-                }
-            }
-            if(max_x > Mathf.Abs(min_y) && max_x > max_y)
-            {
-                Debug.Log("max_x is biggest");  
-                Jcamera.radius = 2;
-                Jcamera.Update();
-                Vector3 view_pos = Camera.main.WorldToViewportPoint(new Vector3(0,0,max_x));
-                while( view_pos.x > 0.9 | view_pos.z<0)
-                {
-                    view_pos = Camera.main.WorldToViewportPoint(new Vector3(0,0,max_x));
-                    Debug.Log("NOW view_pos: " + view_pos.ToString());
-                    Debug.Log("going away");
-                    Jcamera.radius += 1;
-                    Jcamera.Update();
-                }
-            }
-        //Debug.Log("now done: view_pos: " + view_pos.ToString());
-        Debug.Log("camera radius:" + Jcamera.radius.ToString());
-        }
-        */
-        
-
-    void create_camera()
+        return true;
+    }
+    bool create_camera()
     {
         Jcamera = new JsonCamera();
         Jcamera.Object = Cam;
-        Debug.Log("camera.radius: " + jsonCrane.camera.radius.ToString());       
-        Jcamera.radius = jsonCrane.camera.radius;
+        Debug.Log("camera.radius: " + jsonCrane.camera.radius.ToString());    
         Jcamera.theta_deg = jsonCrane.camera.theta_deg;
         Jcamera.phi_deg = jsonCrane.camera.phi_deg;
         Camera.main.fieldOfView = jsonCrane.camera.FOV;
         Jcamera.Update();
+        if(jsonCrane.camera.radius==-1)
+        {
+            return false;
+        }
+        else
+        {
+            Jcamera.radius = jsonCrane.camera.radius;
+            Jcamera.Update();
+            return true;
+        }
+        
     }
 
     void create_apperence()
@@ -323,44 +276,6 @@ public class create_crane : MonoBehaviour
             cubes[i].GetComponent<Renderer>().material.SetFloat("_Glossiness", jsonCrane.cuboids[i%jsonCrane.total_cuboids].material.smoothness);
         }
     }
-            /*
-            if(((Mathf.Abs(max_y)+Mathf.Abs(min_y))/2)<max_x)
-            {
-                if(jsonCrane.camera.y_offset==null)
-                {
-                    Debug.Log("camera vertical offset is set to null; offset is calculated depending on the height of the crane.");
-                    Debug.Log("offset");
-                    Debug.Log((max_y+min_y)/2);
-                    Jcamera.y_offset = (max_y+min_y)/2;
-                    Debug.Log("max_x is choosen");
-                    Jcamera.radius = (max_x)/Mathf.Sin(Mathf.PI*jsonCrane.camera.FOV/360);
-                }    
-                else
-                {
-                    Debug.Log("max_x is choosen");
-                    Jcamera.radius = (max_x)/Mathf.Sin(Mathf.PI*jsonCrane.camera.FOV/360);
-                    Jcamera.y_offset = jsonCrane.camera.y_offset;
-                }
-            
-            }
-            else
-            {
-                if(jsonCrane.camera.y_offset==null)
-                {
-                    Debug.Log("camera vertical offset is set to null; offset is calculated depending on the height of the crane.");
-                    Debug.Log("offset");
-                    Debug.Log((max_y+min_y)/2);
-                    Jcamera.y_offset = (max_y+min_y)/2;
-                    Debug.Log("y is choosen");
-                    Jcamera.radius = ((Mathf.Abs(max_y)+Mathf.Abs(min_y))/2 + jsonCrane.cuboids[jsonCrane.total_cuboids-1].scale)/Mathf.Sin(Mathf.PI*jsonCrane.camera.FOV/360);
-                }    
-                else
-                {
-                    Jcamera.radius = (Mathf.Abs(max_y)+Mathf.Abs(min_y));
-                    Jcamera.y_offset = jsonCrane.camera.y_offset;
-                }
-            } */
-
 
     void Update()
     {
@@ -375,8 +290,18 @@ public class create_crane : MonoBehaviour
                 Debug.Log("CreateCrane in Update: Now deleting old crane and creating new one;");
                 delete_old_scene();
                 create_pose();
-                create_camera();
                 create_apperence();
+                create_branches();
+                if(!create_camera())
+                {
+                    Debug.Log("Calculating radius for the camera;");
+                    while(!is_visible(Cam.GetComponent<Camera>(), cubes))
+                    {
+                        Jcamera.radius = Jcamera.radius + 1;
+                        Jcamera.Update();
+                    }
+                    Debug.Log("Radius set to: " + Jcamera.radius.ToString());        
+                }
                 newCrane = true;
                 Debug.Log("CreateCrane in Update: Crane created; newCrane == true;");
             }
@@ -394,21 +319,24 @@ public class create_crane : MonoBehaviour
                 Debug.Log("CreateCrane in Update: request_pose == false and import image_sent == false;");
                 delete_old_scene();
                 create_pose();
-                create_camera();
                 create_apperence();
-                newCrane=true;   
+                create_branches();
+                if(!create_camera())
+                {
+                    Debug.Log("Calculating radius for the camera;");
+                    //Jcamera.Update();
+                    while(!is_visible(Cam.GetComponent<Camera>(), cubes))
+                    {
+                        Debug.Log("Update Radius:");
+                        Jcamera.radius = Jcamera.radius + 1;
+                        Jcamera.Update();
+                    }
+                    Debug.Log("Radius set to: " + Jcamera.radius.ToString());
+                }
+                newCrane = true;
                 Debug.Log("CreateCrane in Update: Crane created;");
             }
         }
-        /*
-        else
-        {
-            newPose=false;
-            newCrane=false;
-        }
-        */
-            //Debug.Log("CreateCrane in Update: import ready_to_build == false; newCrane==false");
-            //newCrane=false;
     }
 
 }

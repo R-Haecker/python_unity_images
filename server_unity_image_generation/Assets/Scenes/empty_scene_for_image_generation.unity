@@ -261,7 +261,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   create_crane_object: {fileID: 210739180}
+  jsonCrane_stack: []
   jsonCrane_here:
+    request_pose: 0
     total_cuboids: 0
     total_branches: 
     same_scale: 0
@@ -287,6 +289,7 @@ MonoBehaviour:
     spot_lights: []
     cuboids: []
   ready_to_build: 0
+  image_sent: 0
   timer: 0
 --- !u!81 &2004666681
 AudioListener:

@@ -85,7 +85,7 @@ class dataset_cuboids():
         self.logger.debug("Dataset initialised.\n")     
 
     def set_config(self, save_config = True, request_pose = True, same_scale=None, scale=[0.5,4], total_cuboids=[2,5], phi=[0,360], specify_branches=False, branches=[1,3], same_theta=None, theta=None, 
-    same_material=None, specify_material=False, r=[0,1], g=[0,1], b=[0,1], a=[0.5,1], metallic=[0,1], smoothness=[0,1], CameraRes_width= 1024, CameraRes_height=1024, Camera_FieldofView=90, CameraRadius = 10.0, CameraTheta = [60,100], CameraPhi = [0,360], CameraVerticalOffset = None, Camera_solid_background = False,
+    same_material=None, specify_material=False, r=[0,1], g=[0,1], b=[0,1], a=[0.5,1], metallic=[0,1], smoothness=[0,1], CameraRes_width= 1024, CameraRes_height=1024, Camera_FieldofView=90, CameraRadius = None, CameraTheta = [60,100], CameraPhi = [0,360], CameraVerticalOffset = None, Camera_solid_background = False,
     totalPointLights=[5,12], PointLightsRadius=[5,20], PointLightsPhi=[0,360], PointLightsTheta=[0,90], PointLightsIntensity=[7,17], PointLightsRange=[5,25], same_PointLightsColor=None, PointLightsColor_r=[0,1], PointLightsColor_g=[0,1], PointLightsColor_b=[0,1], PointLightsColor_a=[0.5,1],
     totalSpotLights=[3,7], SpotLightsRadius=[5,20], SpotLightsPhi=[0,360], SpotLightsTheta=[0,90], SpotLightsIntensity=[5,15], SpotLightsRange=[5,25], SpotAngle=[5,120], same_SpotLightsColor=None, SpotLightsColor_r=[0,1], SpotLightsColor_g=[0,1], SpotLightsColor_b=[0,1], SpotLightsColor_a=[0.5,1],
     DirectionalLightTheta = [0,90], DirectionalLightIntensity = [1.0,6.0], specify_scale=False, specify_theta=False):
@@ -116,8 +116,8 @@ class dataset_cuboids():
         :type CameraRes_height: int, optional
         :param Camera_FieldofView: The Fiel of View of the camera, default to 80
         :type Camera_FieldofView: float or int, optional
-        :param CameraRadius: If a ``float`` or ``int`` is entered then the value in :meth:`~dataset.dataset_cuboids.create_random_parameters` will not be random, instead set to the given value. If it is a list it has to be a list of length two, defaults to 10.0
-        :type CameraRadius: float, int or list, optional
+        :param CameraRadius: If a ``float`` or ``int`` is entered then the value in :meth:`~dataset.dataset_cuboids.create_random_parameters` will not be random, instead set to the given value. If it is a list it has to be a list of length two. If it is set to `None`it will be calculated to fit the enire crane in the picture, defaults to 10.0
+        :type CameraRadius: float, int, None or list, optional
         :param CameraTheta:  If ``float`` or ``int`` then the value in :meth:`~dataset.dataset_cuboids.create_random_parameters` will not be random, instead set to the given value. If it is a list it has to be a list of length two, defaults to [30,100]
         :type CameraTheta: float, int or list, optional
         :param CameraPhi:  If input is ``float`` or ``int`` then the value in :meth:`~dataset.dataset_cuboids.create_random_parameters` will not be random, instead set to the given value. If it is a list it has to be a list of length two, defaults to [0,360]
@@ -160,10 +160,10 @@ class dataset_cuboids():
                 assert type(theta)in [float, int], "specify_theta and same_theta is true, theta has to be a float"
             else:
                 assert len(theta) == total_cuboids-1, "specify_theta is true and same_theta is false, theta has to be a list of length total_cuboids-1."
-        else:
-            if same_theta == False:
-                assert type(theta)==list, "If same_theta is None e.i. randomly choosen, theta can not be specified exactly, has to be choosen randomly as well. This means theta has to be a list of length 2 with theta[0] is minimal limit and theta[1] is maximal limit for random generation theta."
-                assert len(theta)==2, "If same_theta is None e.i. randomly choosen, theta can not be specified exactly, has to be choosen randomly as well. This means theta has to be a list of length 2 with theta[0] is minimal limit and theta[1] is maximal limit for random generation theta."
+        #else:
+        #    if same_theta == False:
+                #assert type(theta)==list, "If same_theta is None i.e. randomly choosen, theta can not be specified exactly, has to be choosen randomly as well. This means theta has to be a list of length 2 with theta[0] is minimal limit and theta[1] is maximal limit for random generation theta."
+                #assert len(theta)==2, "If same_theta is None i.e. randomly choosen, theta can not be specified exactly, has to be choosen randomly as well. This means theta has to be a list of length 2 with theta[0] is minimal limit and theta[1] is maximal limit for random generation theta."
         config["specify_theta"]=specify_theta
         config["theta"]=theta
         
@@ -215,6 +215,8 @@ class dataset_cuboids():
         config["Camera_FieldofView"] = Camera_FieldofView
         if type(CameraRadius)== list:
             assert len(CameraRadius) == 2, "CameraRadius has to be a list len()==2 or a float for a fixed value."
+        elif CameraRadius == None:
+            CameraRadius = -1
         else:
             assert type(CameraRadius)in [float, int],"CameraRadius has to be a list len()==2 or a float for a fixed value."
         config["CameraRadius"] = CameraRadius 
@@ -1062,6 +1064,7 @@ class dataset_cuboids():
         matplotlib.use('TkAgg')
         final_img = np.flip(np.vstack((h_stacked)),0)
         self.logger.debug("final_img.shape: " + str(final_img.shape))
+        plt.figure(figsize=(numb_x*2, numb_y*2))
         plt.imshow(final_img)
         # Plot lines between images to better see the borders of the images
         for i in range(1,numb_y):
@@ -1101,7 +1104,7 @@ class dataset_cuboids():
         if save_fig:
             if not os.path.exists(self.data_directory + "/figures/"):
                 os.makedirs(self.data_directory + "/figures/")
-            plt.savefig(self.data_directory + "/figures/fig_from_index_" + str(dicts[0]["index"]) + "_to_index_" + str(dicts[len(dicts)-1]["index"]) + ".png", bbox_inches='tight')
+            plt.savefig(self.data_directory + "/figures/fig_from_index_" + str(dicts[0]["index"]) + "_to_index_" + str(dicts[len(dicts)-1]["index"]) + ".png", bbox_inches='tight')#, dpi= max([50 * numb_y, 50 * numb_x]))
         plt.show()
 
     def change_app1_art2(self, para1, para2):
