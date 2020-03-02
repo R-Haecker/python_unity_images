@@ -59,7 +59,16 @@ public class TCP_server : MonoBehaviour
         yield return new WaitForEndOfFrame(); 
         if(max_crane_index > crane_index)
         {
-            crane_index += 1;
+            Debug.Log("crane_index = " + crane_index.ToString());
+            if( crane_index>=0){
+                jsonCrane_stack.RemoveAt(0);
+                crane_index += -1;
+                max_crane_index += -1;
+            }
+            else{
+                crane_index += 1;
+            }
+            Debug.Log("crane_index = " + crane_index.ToString());
             this.jsonCrane_here = jsonCrane_stack[crane_index];
             if(this.jsonCrane_here.total_cuboids!=0)
             {
@@ -176,6 +185,7 @@ public class TCP_server : MonoBehaviour
             Debug.Log("TCP_Server in CapturePNGasBytes: Socket exception: " + socketException);
         }
         image_sent = true;
+        bytesPNG = null;
         Debug.Log("TCP_Server in CapturePNGasBytes: image_sent is true");
     }
 
@@ -208,7 +218,7 @@ public class TCP_server : MonoBehaviour
         {
             // if there is a change request it should come in the next 3 minutes
             break_counter += 1;
-            if(timer>=20.0f || break_counter>10000)
+            if(break_counter>10000)
             {
                 Debug.Log("TCP_Server in ListenForMessages: running_session was true but nothing happend; now closing listening thread");
                 running_session=false;
@@ -239,6 +249,7 @@ public class TCP_server : MonoBehaviour
                     }
                     else
                     {
+                        break_counter = 0;
                         jsonparameters = data.Substring(0,data.Length - 4);
                         Debug.Log("TCP_Server in ListenForMessages: jsonparameters: "+ jsonparameters);
                         JsonCrane new_crane = new JsonCrane();

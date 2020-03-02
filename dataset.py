@@ -950,7 +950,7 @@ class dataset_cuboids():
         else:
             return parameter_list    
    
-    def parameters_to_finished_data(self, parameters, save_image = True, save_para = None):
+    def parameters_to_finished_data(self, parameters, save_image = True, save_para = None, return_dict = True):
         """Input parameters and get an corresponding image. 
         
         :param parameters: Parameters to use for :meth:`~dataset.dataset_cuboids.create_json_string_from_parameters`.
@@ -968,6 +968,7 @@ class dataset_cuboids():
         index = self.increment_index()
         # Send unity the data to create the crane
         self.uc.send_to_unity(jsonstring)
+        del jsonstring
         # receive an image depending on your parameters.
         img = self.uc.receive_image()
         # Put data in an dictionary.
@@ -979,9 +980,12 @@ class dataset_cuboids():
         self.logger.info("data completed: Image index: " + str(index))
         # Save parameters for later recreating and manipulating the image.
         self.save(newDict, save_para = save_para, save_image = save_image)
-        return newDict  
+        if return_dict:
+            return newDict  
+        else:
+            newDict.clear()
 
-    def get_example(self, save_image = False, save_para = None, index = None):
+    def get_example(self, save_image = False, save_para = None, return_dict = True, index = None):
         """Create an example of the dataset.
         
         :param save_para: If the parameters should be saved at ``data/parameters``, if set to ``None`` they will not be created if a seed is available in the config, defaults to None
@@ -996,8 +1000,13 @@ class dataset_cuboids():
         # Create random parameters depending o your config.  
         random_parameters = self.create_random_parameters()
         # Get data with image in dictionary.
-        newDict = self.parameters_to_finished_data(random_parameters, save_para = save_para, save_image = save_image)
-        return newDict
+        if return_dict:
+            newDict = self.parameters_to_finished_data(random_parameters, save_para = save_para, save_image = save_image, return_dict = return_dict)
+            random_parameters.clear()
+            return newDict
+        else:
+            self.parameters_to_finished_data(random_parameters, save_para = save_para, save_image = save_image, return_dict = return_dict)
+            random_parameters.clear()
 
     def plot_images(self, dicts, images_per_row = 4, save_fig = True, show_index = True):
         """Plot and show all images contained in the list dicts of dictionaries and label them with their corresponding index.
