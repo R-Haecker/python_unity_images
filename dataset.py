@@ -15,7 +15,7 @@ import os
 from os.path import expanduser
 
 class dataset_cuboids():
-    def __init__(self, dataset_name = None, unique_data_folder = True, from_home_dataset_directory=None, debug_log = False, use_unity_build = True):
+    def __init__(self, dataset_name = None, unique_data_folder = True, debug_log = False, use_unity_build = True,  dataset_directory=None, absolute_path=False, port_range = [49990,50050]):
         """Sets up logging, the config, necessary paths and a client instance form :class:`~client.client_communicator_to_unity`.
         
         :param dataset_name: If this is not default the created images and parameters are saved into a folder nested in ``data/dataset/`` containing the dataset_name, defaults to None
@@ -34,7 +34,7 @@ class dataset_cuboids():
             log_level = logging.INFO
         # Set up a client and start unity 
         print("before client")
-        self.uc = client.client_communicator_to_unity(use_unity_build=use_unity_build, log_level = log_level)
+        self.uc = client.client_communicator_to_unity(use_unity_build=use_unity_build, log_level = log_level, port_range = port_range)
         print("after client")
         self.file_directory =  os.path.dirname(os.path.realpath(__file__)) #os.path.split(os.path.abspath(__file__)) 
         # Use already existing logger from pthon for dataset as well
@@ -67,13 +67,17 @@ class dataset_cuboids():
             else:
                 full_folder_name = dataset_name 
     
-        if from_home_dataset_directory==None:
+        if dataset_directory==None:
             directory = "data/dataset/" + full_folder_name
         else:
-            assert from_home_dataset_directory[-1] == "/" , "from_home_dataset_directory is string for a directory, has to end with '/'."
-            home = expanduser("~")
-            self.logger.debug("home directory: " + str(home))
-            directory = home + from_home_dataset_directory + full_folder_name
+            assert dataset_directory[-1] == "/" , "dataset_directory is string for a directory, has to end with '/'."
+            if absolute_path:
+                assert dataset_directory[0] == "/" , "dataset_directory is string for a directory, absolute_path is true --> has to start with '/'."
+                directory = dataset_directory + full_folder_name
+            else:
+                home = expanduser("~")
+                self.logger.debug("home directory: " + str(home))
+                directory = home + dataset_directory + full_folder_name
         self.data_directory = directory
         self.logger.debug("Dataset directory:" + directory)
         self.logger.debug("Create config.")
@@ -1505,7 +1509,7 @@ class dataset_cuboids():
         dict_list = []
         for i in range(len(all_parameters)):
             changes = all_parameters[i]
-            self.printProgressBar(i, len(all_parameters), prefix = '  Index ' + str(i) + " ", suffix = 'Complete', length = 200)
+            self.printProgressBar(i, len(all_parameters)-1, prefix = '  Index ' + str(i) + " ", suffix = 'Complete', length = 200)
             current_para = change_parameters(alpha_parameter,changes)
             if return_dict:
                 newDict = self.parameters_to_finished_data(current_para, save_para = save_para, save_image = save_image, return_dict = return_dict)
@@ -1519,6 +1523,23 @@ class dataset_cuboids():
 
 
         #TODO saving and loading parameters and images correctly        
+    
+    def create_dataset(self, dataset_size, test = True, images_per_row = 10, show_index = False):
+        if test:
+            dictionaries = []
+            for i in range(dataset_size):
+                self.printProgressBar(i, dataset_size-1, prefix = '  Index ' + str(i) + " ", suffix = 'Complete', length = 200)
+                dictionaries.append(self.get_example(save_image = True, save_para = True, return_dict = True))
+            self.plot_images(dictionaries, images_per_row=images_per_row, show_index=show_index)
+        else:
+            self.reset_index()
+            for i in range(dataset_size):
+                self.printProgressBar(i, dataset_size-1, prefix = '  Index ' + str(i) + " ", suffix = 'Complete', length = 200)
+                self.get_example(save_image = True, save_para = True, return_dict = False)
+        self.exit()
+
+
+
     def printProgressBar (self, iteration, total, prefix = '', suffix = '', decimals = 1, length = 100, fill = '█', printEnd = "\r"):
         """
         Call in a loop to create terminal progress bar

@@ -12,7 +12,7 @@ import logging
 
 class client_communicator_to_unity:
 
-    def __init__(self,use_unity_build = True, log_level = logging.INFO):
+    def __init__(self,use_unity_build = True, log_level = logging.INFO, port_range = [49990,50050]):
         """Creates a socket and a logger for the console and saves a log file at: ``log/python_client.log``.
         Starts Unity if ``use_unity_build == True`` and waits until Unity is fully started to then call the function ``connect_to_server()``.
         
@@ -29,6 +29,7 @@ class client_communicator_to_unity:
         self.relative_path_TCPsocket_config = "data/python/client_tcp_config.json"
         self.use_unity_build = use_unity_build
         self.file_directory = os.path.dirname(os.path.realpath("client.py")) #sys.argv[0] #sys.path[0] # # os.path.split(os.path.abspath(__file__))
+        self.port_range = port_range
         # Create logger
         self.log_path = self.file_directory + "/log/python_client.log"
         self.logger = logging.getLogger("python_client_log")
@@ -142,8 +143,8 @@ class client_communicator_to_unity:
                 #sleep for 0.05 secounds
                 time.sleep(0.05)
                 # If port is in use or not working, try next port
-                if self.port >= 50050:
-                    self.port = 49990
+                if self.port >= self.port_range[1]:
+                    self.port = self.port_range[0]
                 else:
                     self.port += 1
                 self.logger.debug("Try next port: %s" %self.port)
@@ -151,8 +152,8 @@ class client_communicator_to_unity:
                 # If port is in use, try next port
                 self.logger.debug("Socket.Timeout: socket can not connect")
                 self.logger.debug("Make sure that the tcp_server from unity is already running. You could modify the TCPsocket_config.")
-                if self.port >= 50050:
-                    self.port = 49990
+                if self.port >= self.port_range[0]:
+                    self.port = self.port_range[1]
                 else:
                     self.port += 0
                 self.logger.debug("Try next port: %s" %self.port)
