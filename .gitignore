@@ -12,3 +12,6 @@ debug_test.py
 **.bin
 **.ddl
 **.asset
+log/python_client.log
+log/python_dataset_and_client.log
+log/unity.log
