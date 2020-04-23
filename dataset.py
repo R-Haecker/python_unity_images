@@ -33,8 +33,9 @@ class dataset_cuboids():
         else:
             log_level = logging.INFO
         # Set up a client and start unity 
+        print("before client")
         self.uc = client.client_communicator_to_unity(use_unity_build=use_unity_build, log_level = log_level)
-        
+        print("after client")
         self.file_directory =  os.path.dirname(os.path.realpath(__file__)) #os.path.split(os.path.abspath(__file__)) 
         # Use already existing logger from pthon for dataset as well
         self.log_path = self.file_directory + "/log/python_dataset_and_client.log"
@@ -57,7 +58,7 @@ class dataset_cuboids():
             assert ' ' not in dataset_name,  "In dataset.py, __init__() function: dataset_name does contain white spaces, leads to problems in saving and loading data."
         
         self.init_time = time.strftime("%Y-%m-%d_%H:%M", time.gmtime())
-        self.init_index = self.read_index() + 1
+        #self.init_index = self.read_index()
 
         # Create unique name for the folder where the dataset is saved
         if dataset_name != None:
@@ -65,9 +66,7 @@ class dataset_cuboids():
                 full_folder_name = self.init_time + "__" + dataset_name 
             else:
                 full_folder_name = dataset_name 
-        else:
-            full_folder_name = self.init_time + "__starting_from_index__" + str(self.init_index)
-
+    
         if from_home_dataset_directory==None:
             directory = "data/dataset/" + full_folder_name
         else:
@@ -77,18 +76,17 @@ class dataset_cuboids():
             directory = home + from_home_dataset_directory + full_folder_name
         self.data_directory = directory
         self.logger.debug("Dataset directory:" + directory)
-        
         self.logger.debug("Create config.")
         # Create dataset config for random parameter creation and set the default intervalls for all random generated parameters
         self.set_config()
-
+        
         self.logger.debug("Dataset initialised.\n")     
 
-    def set_config(self, save_config = True, request_pose = True, same_scale=None, scale=[0.5,4], total_cuboids=[2,5], phi=[0,360], specify_branches=False, branches=[1,3], same_theta=None, theta=None, 
-    same_material=None, specify_material=False, r=[0,1], g=[0,1], b=[0,1], a=[0.5,1], metallic=[0,1], smoothness=[0,1], CameraRes_width= 1024, CameraRes_height=1024, Camera_FieldofView=90, CameraRadius = None, CameraTheta = [60,100], CameraPhi = [0,360], CameraVerticalOffset = None, Camera_solid_background = False,
+    def set_config(self, save_config = True, request_pose = False, request_three = False, same_scale=None, scale=[0.5,4], total_cuboids=[2,5], phi=[0,360], specify_branches=False, branches=[1,3], same_theta=None, theta=None, 
+    same_material=None, specify_material=False, r=[0,1], g=[0,1], b=[0,1], a=1, metallic=[0,1], smoothness=[0,1], CameraRes_width= 1024, CameraRes_height=1024, Camera_FieldofView=90, CameraRadius = None, CameraTheta = [60,100], CameraPhi = [0,360], CameraVerticalOffset = None, Camera_solid_background = False,
     totalPointLights=[5,12], PointLightsRadius=[5,20], PointLightsPhi=[0,360], PointLightsTheta=[0,90], PointLightsIntensity=[7,17], PointLightsRange=[5,25], same_PointLightsColor=None, PointLightsColor_r=[0,1], PointLightsColor_g=[0,1], PointLightsColor_b=[0,1], PointLightsColor_a=[0.5,1],
     totalSpotLights=[3,7], SpotLightsRadius=[5,20], SpotLightsPhi=[0,360], SpotLightsTheta=[0,90], SpotLightsIntensity=[5,15], SpotLightsRange=[5,25], SpotAngle=[5,120], same_SpotLightsColor=None, SpotLightsColor_r=[0,1], SpotLightsColor_g=[0,1], SpotLightsColor_b=[0,1], SpotLightsColor_a=[0.5,1],
-    DirectionalLightTheta = [0,90], DirectionalLightIntensity = [1.0,6.0], specify_scale=False, specify_theta=False):
+    DirectionalLightTheta = [0,90], DirectionalLightIntensity = [1.0,5.0], specify_scale=False, specify_theta=False):
         """Sets a config for this class instace which determines the interval for all random parameters created in the function :meth:`~dataset.dataset_cuboids.create_random_parameters`. The meaning of all the parameters are explained in this function: :meth:`~client.client_communicator_to_unity.write_json_crane`. 
         Here are only those parameters mentioned which deviate from the ``standard_parameter``. You can also specify and set parameters which should not be generated randomly.
         
@@ -269,7 +267,7 @@ class dataset_cuboids():
             assert len(r) == 2, "r[0] is minimal limit and r[1] is maximal limit for random generation of the cuboidscolor r (red)"
             assert len(g) == 2, "g[0] is minimal limit and g[1] is maximal limit for random generation of the cuboidscolor g"
             assert len(b) == 2, "b[0] is minimal limit and b[1] is maximal limit for random generation of the cuboidscolor b"
-            assert len(a) == 2, "a[0] is minimal limit and a[1] is maximal limit for random generation of the cuboidscolor a (alpha/transparency)"
+            #assert len(a) == 2, "a[0] is minimal limit and a[1] is maximal limit for random generation of the cuboidscolor a (alpha/transparency)"
             assert len(metallic) == 2, "metallic[0] is minimal limit and metallic[1] is maximal limit for random generation of the cuboidsmaterial property metallic"
             assert len(smoothness) == 2, "smoothness[0] is minimal limit and smoothness[1] is maximal limit for random generation of the cuboidsmaterial property smoothness"
 
@@ -355,8 +353,11 @@ class dataset_cuboids():
             config["SpotLightsColor_b"]=SpotLightsColor_b
             assert len(SpotLightsColor_a) == 2, "SpotLightsColor_a[0] is minimal limit and SpotLightsColor_a[1] is maximal limit for random generation of SpotLightsColor_a."
             config["SpotLightsColor_a"]=SpotLightsColor_a
-        
+        if request_three == True and request_pose == True:
+            assert 1==0, "request_three and request_pose can currently not be true at the same time." 
         config["request_pose"] = request_pose
+        config["request_three"] = request_three
+
         config["seed"] = np.random.randint(np.iinfo(np.int32).max)
         np.random.seed(config["seed"])
         self.logger.debug("Config Seed: " + str(config["seed"]))
@@ -453,7 +454,7 @@ class dataset_cuboids():
             total_cuboids = self.config["total_cuboids"]
         else:
             total_cuboids = np.random.randint(self.config["total_cuboids"][0],self.config["total_cuboids"][1])
-        # Create the angle and the intensity of the directional light
+        # Create the angle and the intsaveensity of the directional light
         if self.config["DirectionalLightIntensity"] == None:
             DirectionalLightIntensity = 0   
             DirectionalLightTheta = 0
@@ -567,7 +568,7 @@ class dataset_cuboids():
             if self.config["specify_branches"]:
                 total_branches = self.config["branches"] 
             else:
-                if self.config["branches"][0] < 1:
+                if self.config["branches"][0] > 1:
                     self.logger.info("config['branches'][0] is bigger than 1. This means you create at every segment new arms. Change the dataset config if you do not want this.")
                 # the upper limit for the arms is dicribing the three sigma variance of the guassion normal distribution
                 arms = np.random.normal(0,(self.config["branches"][1] - self.config["branches"][0])/3, total_cuboids-1)  
@@ -633,7 +634,10 @@ class dataset_cuboids():
                 R=np.random.uniform(self.config["r"][0],self.config["r"][1])
                 G=np.random.uniform(self.config["g"][0],self.config["g"][1])
                 B=np.random.uniform(self.config["b"][0],self.config["b"][1])
-                A=np.random.uniform(self.config["a"][0],self.config["a"][1])
+                if type(self.config["a"]) in [int,float]:
+                    A=self.config["a"]
+                else:
+                    A=np.random.uniform(self.config["a"][0],self.config["a"][1])
                 Metallic=np.random.uniform(self.config["metallic"][0],self.config["metallic"][1])
                 Smoothness=np.random.uniform(self.config["smoothness"][0],self.config["smoothness"][1])
                 
@@ -641,7 +645,11 @@ class dataset_cuboids():
                 R=np.random.uniform(self.config["r"][0],self.config["r"][1],total_cuboids).tolist()
                 G=np.random.uniform(self.config["g"][0],self.config["g"][1],total_cuboids).tolist()
                 B=np.random.uniform(self.config["b"][0],self.config["b"][1],total_cuboids).tolist()
-                A=np.random.uniform(self.config["a"][0],self.config["a"][1],total_cuboids).tolist()
+                if type(self.config["a"]) in [int,float]:
+                    for i in range(total_cuboids):
+                        A.append(self.config["a"])
+                else:
+                    A=np.random.uniform(self.config["a"][0],self.config["a"][1],total_cuboids).tolist()
                 Metallic=np.random.uniform(self.config["metallic"][0],self.config["metallic"][1],total_cuboids).tolist()
                 Smoothness=np.random.uniform(self.config["smoothness"][0],self.config["smoothness"][1],total_cuboids).tolist()
         # Decide if all cubiods should have the same vertical scale
@@ -835,7 +843,8 @@ class dataset_cuboids():
         :type dictionary: dictionary
         :return: A string depending on your input parameters wich can be interpreted afterwards by the Unity script. 
         :rtype: string
-        """        
+        """
+
         return self.uc.write_json_crane(request_pose = dictionary["request_pose"], total_cuboids=dictionary["total_cuboids"], same_scale=dictionary["same_scale"], scale=dictionary["scale"], same_theta=dictionary["same_theta"], theta=dictionary["theta"], phi=dictionary["phi"], total_branches=dictionary["total_branches"], same_material=dictionary["same_material"], metallic=dictionary["metallic"], smoothness=dictionary["smoothness"], r=dictionary["r"], g=dictionary["g"], b=dictionary["b"], a=dictionary["a"], 
             CameraRes_width=dictionary["CameraRes_width"], CameraRes_height=dictionary["CameraRes_height"], Camera_FieldofView=dictionary["Camera_FieldofView"], CameraRadius=dictionary["CameraRadius"], CameraTheta=dictionary["CameraTheta"], CameraPhi=dictionary["CameraPhi"], CameraVerticalOffset=dictionary["CameraVerticalOffset"], Camera_solid_background=dictionary["Camera_solid_background"], 
             totalPointLights=dictionary["totalPointLights"], same_PointLightsColor=dictionary["same_PointLightsColor"], PointLightsColor_r=dictionary["PointLightsColor_r"], PointLightsColor_g=dictionary["PointLightsColor_g"], PointLightsColor_b=dictionary["PointLightsColor_b"], PointLightsColor_a=dictionary["PointLightsColor_a"], PointLightsRadius=dictionary["PointLightsRadius"], PointLightsTheta=dictionary["PointLightsTheta"], PointLightsPhi=dictionary["PointLightsPhi"], PointLightsIntensity=dictionary["PointLightsIntensity"], PointLightsRange=dictionary["PointLightsRange"], 
@@ -868,17 +877,27 @@ class dataset_cuboids():
             # Check if the parameters and the index is in the dictionary.
             if "parameters" in dictionary:
                 if "index" in dictionary:
-                    with open(directory_para + "/parameters_index_" + str(dictionary["index"]) + '.json', 'w') as f:
-                        json.dump(dictionary["parameters"],f)
-                        f.close()
+                    if "request_three" in self.config and self.config["request_three"]:
+                        for i in range(3):
+                            with open(directory_para + "/parameters_index_" + str(dictionary["index"]) + "_" + str(i) + '.json', 'w') as f:
+                                json.dump(dictionary["parameters"][i],f)
+                                f.close()
+                    else:
+                        with open(directory_para + "/parameters_index_" + str(dictionary["index"]) + '.json', 'w') as f:
+                            json.dump(dictionary["parameters"],f)
+                            f.close()
                 else:
+                    assert 1==0, "no index in dictionary"
+                    '''
                     # Change the name of the json file if there is no index given.
                     fake_index = np.random.randint(0,1000)
                     with open(directory_para + "/parameters_NO_index_" + str(fake_index) + '.json', 'w') as f:
                         json.dump(dictionary["parameters"],f)
                         f.close()
+                    '''
             else:
                 self.logger.error("Image parameters could not be saved. No parameters found in dictionary.")
+                assert 1==0, "no parameters in dictionary"
         # Save the image as png.
         if save_image:
             if "pose" in dictionary:   
@@ -892,15 +911,22 @@ class dataset_cuboids():
                 # Check if the image and the index is in the dictionary.
                 if "image" in dictionary:
                     if "index" in dictionary:
-                        Image.fromarray(dictionary["image"]).save(directory_images + "/image_index_" + str(dictionary["index"]) + '.png')
-                        Image.fromarray(dictionary["pose"]).save(directory_images_poses + "/image_index_" + str(dictionary["index"]) + '.png')
+                        if "request_three" in self.config and self.config["request_three"]:
+                            assert 1==0, "Pose images are not permitted with request_three images."
+                        else:
+                            Image.fromarray(dictionary["image"]).save(directory_images + "/image_index_" + str(dictionary["index"]) + '.png')
+                            Image.fromarray(dictionary["pose"]).save(directory_images_poses + "/image_index_" + str(dictionary["index"]) + '.png')
                     else:
+                        assert 1==0, "No index in dictionary."
+                        '''
                         # Change the name of the image if there is no index given.
                         fake_index = np.random.randint(0,1000)
                         Image.fromarray(dictionary["image"]).save(directory_images + "/image_NO_index_" + str(fake_index) + '.png')
                         Image.fromarray(dictionary["pose"]).save(directory_images_poses + "/image_NO_index_" + str(fake_index) + '.png')
+                        '''    
                 else:
                     self.logger.error("Image could not be saved. No image data not found in dictionary.")
+                    assert 1==0, "No index in dictionary."
             else:    
                 # Check and if necessary create directory
                 directory_images = self.data_directory + "/images"
@@ -909,13 +935,21 @@ class dataset_cuboids():
                 # Check if the image and the index is in the dictionary.
                 if "image" in dictionary:
                     if "index" in dictionary:
-                        Image.fromarray(dictionary["image"]).save(directory_images + "/image_index_" + str(dictionary["index"]) + '.png')
+                        if "request_three" in self.config and self.config["request_three"]:
+                            for i in range(3):
+                                Image.fromarray(dictionary["image"][i]).save(directory_images + "/image_index_" + str(dictionary["index"]) + "_" + str(i) + '.png')
+                        else:
+                            Image.fromarray(dictionary["image"]).save(directory_images + "/image_index_" + str(dictionary["index"]) + '.png')
                     else:
+                        assert 1==0, "No index in dictionary."
+                        '''
                         # Change the name of the image if there is no index given.
                         fake_index = np.random.randint(0,1000)
                         Image.fromarray(dictionary["image"]).save(directory_images + "/image_NO_index_" + str(fake_index) + '.png')
+                        '''
                 else:
                     self.logger.error("Image could not be saved. No image data not found in dictionary.")
+                    assert 1==0, "No image in dictionary."
 
     def load_parameters(self,index = [-1], amount = 1):
         """Load and return a given amount of parameters as dictionaries in a list. If index is not specified the index will be chosen randomly.
@@ -964,19 +998,54 @@ class dataset_cuboids():
         """        
         # Format the parameters to a jsonstring that can be sent and interpreted by Unity.
         jsonstring = self.create_json_string_from_parameters(parameters)
-        # Load and increment the extern saved index.
-        index = self.increment_index()
         # Send unity the data to create the crane
         self.uc.send_to_unity(jsonstring)
         del jsonstring
         # receive an image depending on your parameters.
         img = self.uc.receive_image()
+        # Load and increment the extern saved index.
+        index = self.increment_index()
         # Put data in an dictionary.
         if self.config["request_pose"]:
             img_pose = self.uc.receive_image()    
             newDict = {"index":index,"parameters":parameters,"image":img,"pose":img_pose}
         else:
             newDict = {"index":index,"parameters":parameters,"image":img}
+        self.logger.debug("data completed: Image index: " + str(index))
+        # Save parameters for later recreating and manipulating the image.
+        self.save(newDict, save_para = save_para, save_image = save_image)
+        if return_dict:
+            return newDict  
+        else:
+            newDict.clear()
+
+    def three_parameters_to_finished_data(self, parameter_list, save_image = True, save_para = None, return_dict = True):
+        """Input parameters and get an corresponding image. 
+        
+        :param parameters: Parameters to use for :meth:`~dataset.dataset_cuboids.create_json_string_from_parameters`.
+        :type parameters: dictionary
+        :param save_para: If the parameters should be saved at ``data/parameters``, if ``None`` they will not be created if a seed is available in the config, defaults to None
+        :type save_para: bool or None, optional
+        :param save_image: If the image should be saved at ``data/images``, defaults to True
+        :type save_image: bool, optional
+        :return: A dictionary with all relevant data in keys as "index","parameters" and "image". 
+        :rtype: dictionary
+        """
+        img_list = []  
+        img_pose_list = []      
+        for i in range(3):
+            # Format the parameters to a jsonstring that can be sent and interpreted by Unity.
+            jsonstring = self.create_json_string_from_parameters(parameter_list[i])
+            # Send unity the data to create the crane
+            self.uc.send_to_unity(jsonstring)
+            del jsonstring
+            # receive an image depending on your parameters.
+            img_list.append(self.uc.receive_image())
+
+        # Load and increment the extern saved index.
+        index = self.increment_index()
+        # Put data in an dictionary.
+        newDict = {"index":index,"parameters":parameter_list,"image":img_list}
         self.logger.info("data completed: Image index: " + str(index))
         # Save parameters for later recreating and manipulating the image.
         self.save(newDict, save_para = save_para, save_image = save_image)
@@ -999,14 +1068,29 @@ class dataset_cuboids():
         """        
         # Create random parameters depending o your config.  
         random_parameters = self.create_random_parameters()
-        # Get data with image in dictionary.
-        if return_dict:
-            newDict = self.parameters_to_finished_data(random_parameters, save_para = save_para, save_image = save_image, return_dict = return_dict)
-            random_parameters.clear()
-            return newDict
+        if "request_three" in self.config and self.config["request_three"]:
+            random_parameters_1 = self.create_random_parameters()
+            random_parameters_2 = self.change_app1_art2(random_parameters, random_parameters_1)
+            if return_dict:
+                newDict = self.three_parameters_to_finished_data(parameter_list = [random_parameters, random_parameters_1, random_parameters_2], save_para = save_para, save_image = save_image, return_dict = return_dict)
+                random_parameters.clear()
+                random_parameters_1.clear()
+                random_parameters_2.clear()
+                return newDict
+            else:
+                self.three_parameters_to_finished_data(parameter_list = [random_parameters, random_parameters_1, random_parameters_2], save_para = save_para, save_image = save_image, return_dict = return_dict)
+                random_parameters.clear()
+                random_parameters_1.clear()
+                random_parameters_2.clear()
         else:
-            self.parameters_to_finished_data(random_parameters, save_para = save_para, save_image = save_image, return_dict = return_dict)
-            random_parameters.clear()
+            # Get data with image in dictionary.
+            if return_dict:
+                newDict = self.parameters_to_finished_data(random_parameters, save_para = save_para, save_image = save_image, return_dict = return_dict)
+                random_parameters.clear()
+                return newDict
+            else:
+                self.parameters_to_finished_data(random_parameters, save_para = save_para, save_image = save_image, return_dict = return_dict)
+                random_parameters.clear()
 
     def plot_images(self, dicts, images_per_row = 4, save_fig = True, show_index = True):
         """Plot and show all images contained in the list dicts of dictionaries and label them with their corresponding index.
@@ -1034,12 +1118,19 @@ class dataset_cuboids():
             numb_y += 1
             numb -= images_per_row
         numb_y += 1
-        self.logger.debug("numb_y: " + str(numb_y))
-        self.logger.debug("dicts[0]['image'].shape[0]: " + str(dicts[0]["image"].shape[0]))
-        self.logger.debug("(images_per_row*dicts[0][image].shape[1]: " + str((images_per_row*dicts[0]["image"].shape[1])))
-        self.logger.debug("dicts[0][image].shape[2]: " + str(dicts[0]["image"].shape[2]))
+        
+        if "request_three" in self.config and self.config["request_three"]:
+            numb_x = len(dicts)
+            numb_y = 3
+            final_img = []
+            for j in range(numb_x):
+                v_img = []
+                for i in range(numb_y):
+                    v_img.append(dicts[j]["image"][i])
+                final_img.append(np.vstack(v_img))
+            final_img = np.flip(np.hstack(final_img),0)
         # Stack all images in one row together with np.hstack() for all numb_y
-        if pose_av:
+        elif pose_av:
             self.logger.debug("Pose gt is available and will be plotted.")
             h_stacked = np.zeros((numb_y*2, dicts[0]["image"].shape[0], (images_per_row*dicts[0]["image"].shape[1]), dicts[0]["image"].shape[2]), dtype=int)
             for i in range(numb_y):
@@ -1056,7 +1147,12 @@ class dataset_cuboids():
                         pose_img_hstack[j] = dicts[i*numb_x+j]["pose"]
                 h_stacked[i*2] = np.hstack((img_hstack))
                 h_stacked[i*2+1] = np.hstack((pose_img_hstack))
+            final_img = np.flip(np.vstack((h_stacked)),0)
         else: 
+            self.logger.debug("numb_y: " + str(numb_y))
+            self.logger.debug("dicts[0]['image'].shape[0]: " + str(dicts[0]["image"].shape[0]))
+            self.logger.debug("(images_per_row*dicts[0][image].shape[1]: " + str((images_per_row*dicts[0]["image"].shape[1])))
+            self.logger.debug("dicts[0][image].shape[2]: " + str(dicts[0]["image"].shape[2]))
             h_stacked = np.ones((numb_y, dicts[0]["image"].shape[0], (images_per_row*dicts[0]["image"].shape[1]), dicts[0]["image"].shape[2]), dtype=int)
             self.logger.debug("h_stacked.shape: " + str(h_stacked.shape))
             for i in range(numb_y):
@@ -1068,47 +1164,63 @@ class dataset_cuboids():
                     for j in range(numb_x):
                         img_hstack[j] = dicts[i*numb_x+j]["image"]
                 h_stacked[i] = np.hstack((img_hstack))
-            
+            final_img = np.flip(np.vstack((h_stacked)),0)
         # Stack all rows vertically together
         matplotlib.use('TkAgg')
-        final_img = np.flip(np.vstack((h_stacked)),0)
         self.logger.debug("final_img.shape: " + str(final_img.shape))
         plt.figure(figsize=(numb_x*2, numb_y*2))
         plt.imshow(final_img)
-        # Plot lines between images to better see the borders of the images
-        for i in range(1,numb_y):
-            plt.axhline(y = dicts[0]["image"].shape[0]*i, color="k")
-        for i in range(1,numb_x):
-            plt.axvline(x = dicts[0]["image"].shape[1]*i, color="k")
-        # Plot the index of the images onto the images
-        if show_index:
-            if pose_av:
-                j = numb_y+1
-                for i in range(0,len(dicts)):
-                    l = 0
-                    if "index" in dicts[i]:
-                        if i%(numb_x)==0:
-                            l += 1
-                            j -= 1
-                        plt.text(dicts[0]["image"].shape[1]*((i%numb_x) + 0.03), dicts[0]["image"].shape[0]*(j*2 - 0.1), "idx: " + str(dicts[i]["index"]), color="white")
-                        plt.text(dicts[0]["image"].shape[1]*((i%numb_x) + 0.03), dicts[0]["image"].shape[0]*(j*2-1 - 0.1), "idx: " + str(dicts[i]["index"]), color="white")
-                    else:
-                        self.logger.error("dicts[" + str(i) + "] has no index.")
-            else:
-                j = numb_y+1
-                for i in range(0,len(dicts)):
-                    if "index" in dicts[i]:
-                        if i%(numb_x)==0:
-                            j -= 1
-                        plt.text(dicts[0]["image"].shape[1]*((i%numb_x) + 0.03), dicts[0]["image"].shape[0]*(j - 0.1), "idx: " + str(dicts[i]["index"]) )
-                    else:
-                        self.logger.error("dicts[" + str(i) + "] has no index.")
-        plt.axis('off')
-        plt.xlim(0, (images_per_row)*dicts[0]["image"].shape[1])
-        if pose_av:
-            plt.ylim(0, (numb_y)*2*dicts[0]["image"].shape[0])
+        if "request_three" in self.config and self.config["request_three"]:
+            x_lab_pos = np.arange(dicts[0]["image"][0].shape[1]/2, dicts[0]["image"][0].shape[1]*numb_x, dicts[0]["image"][0].shape[1])
+            x_lab = []
+            y_lab_pos = np.arange(dicts[0]["image"][0].shape[1]/2, dicts[0]["image"][0].shape[1]*3, dicts[0]["image"][0].shape[1])
+            y_lab = [r"$(\alpha_1, \pi_2)$",r"$(\alpha_2, \pi_2)$",r"$(\alpha_1, \pi_1)$"]
+            for i in range(numb_x):
+                x_lab.append(dicts[i]["index"])
+            plt.xticks(x_lab_pos,x_lab)
+            plt.yticks(y_lab_pos,y_lab)
+            plt.xlabel("index of example")
+            plt.xlim(0, dicts[0]["image"][0].shape[1]*numb_x)
+            plt.ylim(0,dicts[0]["image"][0].shape[1]*3)
+            for i in range(3):
+                plt.axhline(y = dicts[0]["image"][0].shape[0]*i, color="k")
+            for i in range(numb_x):
+                plt.axvline(x = dicts[0]["image"][0].shape[0]*i, lw=2.5, color="k")
         else:
-            plt.ylim(0, (numb_y)*dicts[0]["image"].shape[0])
+            plt.axis('off')
+            # Plot lines between images to better see the borders of the images
+            for i in range(1,numb_y):
+                plt.axhline(y = dicts[0]["image"].shape[0]*i, color="k")
+            for i in range(1,numb_x):
+                plt.axvline(x = dicts[0]["image"].shape[1]*i, color="k")
+            # Plot the index of the images onto the images
+            if show_index:
+                if pose_av:
+                    j = numb_y+1
+                    for i in range(0,len(dicts)):
+                        l = 0
+                        if "index" in dicts[i]:
+                            if i%(numb_x)==0:
+                                l += 1
+                                j -= 1
+                            plt.text(dicts[0]["image"].shape[1]*((i%numb_x) + 0.03), dicts[0]["image"].shape[0]*(j*2 - 0.15), "idx: " + str(dicts[i]["index"]))
+                            plt.text(dicts[0]["image"].shape[1]*((i%numb_x) + 0.03), dicts[0]["image"].shape[0]*(j*2-1 - 0.15), "idx: " + str(dicts[i]["index"]))
+                        else:
+                            self.logger.error("dicts[" + str(i) + "] has no index.")
+                else:
+                    j = numb_y+1
+                    for i in range(0,len(dicts)):
+                        if "index" in dicts[i]:
+                            if i%(numb_x)==0:
+                                j -= 1
+                            plt.text(dicts[0]["image"].shape[1]*((i%numb_x) + 0.03), dicts[0]["image"].shape[0]*(j - 0.1), "idx: " + str(dicts[i]["index"]) )
+                        else:
+                            self.logger.error("dicts[" + str(i) + "] has no index.")
+            plt.xlim(0, (images_per_row)*dicts[0]["image"].shape[1])
+            if pose_av:
+                plt.ylim(0, (numb_y)*2*dicts[0]["image"].shape[0])
+            else:
+                plt.ylim(0, (numb_y)*dicts[0]["image"].shape[0])
         # Save figure if wanted.
         if save_fig:
             if not os.path.exists(self.data_directory + "/figures/"):
@@ -1299,7 +1411,7 @@ class dataset_cuboids():
         index = index + 1
         self.logger.debug("index: " + str(index))
         try:
-            with open("data/python/index.txt","w") as f:
+            with open(self.data_directory + "/config/index.txt","w") as f:
                 f.write(str(index))
                 f.close()
         except FileNotFoundError as e:
@@ -1315,12 +1427,13 @@ class dataset_cuboids():
         :rtype: int
         """        
         try:
-            with open("data/python/index.txt","r") as f:
+            with open(self.data_directory + "/config/index.txt","r") as f:
                 index = f.read()
                 f.close()
         except FileNotFoundError as e:
-            self.logger.error("Indexfile not found.")
-            raise e
+            self.logger.error("Indexfile not found. Initialising index.")
+            self.reset_index()
+            index = self.read_index()
         return int(index)
 
     def reset_index(self, set_index = -1):
@@ -1330,7 +1443,7 @@ class dataset_cuboids():
         :type set_index: int, optional
         """        
         # Use this function if your data folder takes up too much space 
-        with open("data/python/index.txt","w") as f:
+        with open(self.data_directory + "/config/index.txt","w") as f:
             f.write(str(set_index))
             f.close()
 
@@ -1339,3 +1452,156 @@ class dataset_cuboids():
         """        
         self.uc.exit()
         self.logger.debug("Exit socket connection to unity.")
+    
+    def create_image_sequnces(self, key_list, num_list, alpha_parameter = None, return_dict = False, save_para = True, save_image = True):
+        # one alpha tree which will be manipulated
+        alpha_parameter = self.create_random_parameters() if alpha_parameter==None else alpha_parameter
+        #TODO if total cuboids should change change the alpha crane total_cuboid
+
+        # the range of a sequence parameter is specified in the config
+        def amount_of_images(num_list):
+            number = num_list[0]
+            for i in range(1,len(num_list)):
+                number = number * num_list[i]
+            return number
+        # calculate the amount of images that will be created
+        amount_sequence_img = amount_of_images(num_list)
+        # specify the amount of values for a sequnce paramter
+        sequence_parameters = self.set_sequence_length(key_list = key_list, num_list = num_list)
+        # create parameter set for all possibilities
+        def recursive_parameter_creation(sequence_parameters, key_list, k = 0, current_para = {}, parameter_list = []):
+            key = key_list[k]
+            for i in range(len(sequence_parameters[key])):
+                current_para[key] = sequence_parameters[key][i]
+                if k < (len(sequence_parameters)-1):
+                    recursive_parameter_creation(sequence_parameters, key_list, k = k + 1, current_para = current_para, parameter_list = parameter_list)
+                else:
+                    save_para = current_para.copy()
+                    parameter_list.append(save_para)
+                    save_para = {}
+            if k == 0:
+                return parameter_list
+
+        all_parameters = recursive_parameter_creation(sequence_parameters, key_list)
+        
+        assert len(all_parameters) == amount_sequence_img
+        self.logger.info("length of sequence data set will be: " + str(amount_sequence_img))
+
+        # manipulate alpha paramters acording to sequences
+        def change_parameters(alpha, changes):
+            new_para = alpha.copy()
+            mat_key = ["r", "g", "b", "a", "metallic", "smoothness"]    
+            scal_key = ["theta", "scale"]
+            for key in changes:
+                if key in scal_key:
+                    s_k = "same_" + key
+                    assert alpha[s_k] == True
+                elif key in mat_key:
+                    assert alpha["same_scale"] == True
+                new_para[key] = changes[key] 
+            
+            return new_para
+        
+        dict_list = []
+        for i in range(len(all_parameters)):
+            changes = all_parameters[i]
+            self.printProgressBar(i, len(all_parameters), prefix = '  Index ' + str(i) + " ", suffix = 'Complete', length = 200)
+            current_para = change_parameters(alpha_parameter,changes)
+            if return_dict:
+                newDict = self.parameters_to_finished_data(current_para, save_para = save_para, save_image = save_image, return_dict = return_dict)
+                current_para.clear()
+                dict_list.append(newDict)
+            else:
+                self.parameters_to_finished_data(current_para, save_para = save_para, save_image = save_image, return_dict = return_dict)
+                current_para.clear()
+            
+        if return_dict: return dict_list
+
+
+        #TODO saving and loading parameters and images correctly        
+    def printProgressBar (self, iteration, total, prefix = '', suffix = '', decimals = 1, length = 100, fill = '█', printEnd = "\r"):
+        """
+        Call in a loop to create terminal progress bar
+        @params:
+            iteration   - Required  : current iteration (Int)
+            total       - Required  : total iterations (Int)
+            prefix      - Optional  : prefix string (Str)
+            suffix      - Optional  : suffix string (Str)
+            decimals    - Optional  : positive number of decimals in percent complete (Int)
+            length      - Optional  : character length of bar (Int)
+            fill        - Optional  : bar fill character (Str)
+            printEnd    - Optional  : end character (e.g. "\r", "\r\n") (Str)
+        """
+        percent = ("{0:." + str(decimals) + "f}").format(100 * (iteration / float(total)))
+        filledLength = int(length * iteration // total)
+        bar = fill * filledLength + '-' * (length - filledLength)
+        print('\r%s |%s| %s%% %s' % (prefix, bar, percent, suffix), end = printEnd)
+        # Print New Line on Complete
+        if iteration == total: 
+            print()
+
+
+    def set_sequence_length(self, key_list, num_list):
+        assert len(key_list) == len(num_list)
+        all_parameters = ["total_cuboids","scale","phi","theta",
+                        "r", "g", "b", "a", "metallic", "smoothness",
+                        "Camera_FieldofView", "CameraRadius", "CameraTheta", "CameraPhi", "CameraVerticalOffset",
+                        "totalPointLights", "PointLightsRadius", "PointLightsPhi", "PointLightsTheta", "PointLightsIntensity", "PointLightsRange", "PointLightsColor_r", "PointLightsColor_g", "PointLightsColor_b", "PointLightsColor_a",
+                        "totalSpotLights", "SpotLightsRadius", "SpotLightsPhi", "SpotLightsTheta", "SpotLightsIntensity", "SpotLightsRange", "SpotAngle", "SpotLightsColor_r", "SpotLightsColor_g", "SpotLightsColor_b", "SpotLightsColor_a",
+                        "DirectionalLightTheta", "DirectionalLightIntensity" 
+                        ]
+        mat_key = ["r", "g", "b", "a", "metallic", "smoothness"]    
+        scal_key = ["theta", "scale"]
+        # not sure if config has to be asserted
+        for key in key_list:
+            if key in all_parameters:
+                if key in scal_key:
+                    s_k = "same_" + key
+                    assert self.config[s_k] == True
+                elif key in mat_key:
+                    assert self.config["same_material"] == True
+                elif key == "total_cuboids":
+                    assert self.config["same_scale"] == True
+                    assert self.config["same_theta"] == True
+                    assert self.config["same_material"] == True
+            else:
+                key_list.remove(key)
+                self.logger.indo(key + " is not a sequence parameter key. Check spelling. The key is removed")      
+
+        def linear_interpolation(key, num, dtype):
+            assert type(key) == str, "Key has to be a string."
+            assert type(self.config[key]) == list and len(self.config[key]) == 2, "linear interpolaltion of " + key + ", self.config[" + key + "] has to be a list with the length two. self.config[" + key + "] = " + str(self.config[key])
+            return np.linspace(start = self.config[key][0], stop= self.config[key][1], num = num, dtype=dtype).tolist()
+
+        int_keys = ["total_cuboids", "totalPointLights", "totalSpotLights"]
+        sequence_parameters = {}
+        for i in range(len(key_list)):
+            key = key_list[i]
+            d_type = int if key in int_keys else float
+            sequence_parameters[key] = linear_interpolation(key, num_list[i], d_type)
+            
+        return sequence_parameters
+        
+
+        
+
+        
+        # possible sequence parameters
+    '''
+        scale=[0.5,4], 
+            same_scale=None,
+            specify_scale=False,
+        total_cuboids=[2,5], 
+        phi=[0,360],  
+        theta=None, 
+            same_theta=None,
+             specify_theta=False,
+        r=[0,1], g=[0,1], b=[0,1], a=1, metallic=[0,1], smoothness=[0,1],
+            same_material=None, specify_material=False,  
+        Camera_FieldofView=90, CameraRadius = None, CameraTheta = [60,100], CameraPhi = [0,360], CameraVerticalOffset = None, 
+        totalPointLights=[5,12], PointLightsRadius=[5,20], PointLightsPhi=[0,360], PointLightsTheta=[0,90], PointLightsIntensity=[7,17], PointLightsRange=[5,25], 
+            same_PointLightsColor=None, PointLightsColor_r=[0,1], PointLightsColor_g=[0,1], PointLightsColor_b=[0,1], PointLightsColor_a=[0.5,1],
+        totalSpotLights=[3,7], SpotLightsRadius=[5,20], SpotLightsPhi=[0,360], SpotLightsTheta=[0,90], SpotLightsIntensity=[5,15], SpotLightsRange=[5,25], SpotAngle=[5,120],
+            same_SpotLightsColor=None, SpotLightsColor_r=[0,1], SpotLightsColor_g=[0,1], SpotLightsColor_b=[0,1], SpotLightsColor_a=[0.5,1],
+        DirectionalLightTheta = [0,90], DirectionalLightIntensity = [1.0,6.0],
+        '''    

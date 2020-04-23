@@ -238,7 +238,7 @@ class client_communicator_to_unity:
             
             if unity_resp_bytes[-8:] == bytearray([125, 99,255,255,255,255,255,255]):
                 # Check if the data contains the whole image by looking for the end tag
-                self.logger.info("Data from Unity received.")
+                self.logger.debug("Data from Unity received.")
                 self.logger.debug("End_tag detected, unity_resp_bytes[0:10]: " + str(unity_resp_bytes[0:10]))
                 break
         # Cut out bytes which are not pixels of the image and format bytes

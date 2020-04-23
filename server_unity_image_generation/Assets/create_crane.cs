@@ -83,8 +83,8 @@ public class create_crane : MonoBehaviour
             {
                 Shader shader = Shader.Find("Unlit/Color");
                 cubes[i].GetComponent<Renderer>().material.shader = shader;
-                Vector4 white_color = new Vector4(1,1,1,1);
-                cubes[i].GetComponent<Renderer>().material.color = white_color;
+                Vector4 black_color = new Vector4(0,0,0,0);
+                cubes[i].GetComponent<Renderer>().material.color = black_color;
                 cubes[i].GetComponent<Renderer>().material.SetFloat("_Metallic", 0);
                 cubes[i].GetComponent<Renderer>().material.SetFloat("_Glossiness", 0);
             }

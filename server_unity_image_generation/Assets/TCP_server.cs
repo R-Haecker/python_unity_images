@@ -20,13 +20,14 @@ public class TCP_server : MonoBehaviour
     NetworkStream stream;
     int crane_index;
     int max_crane_index;
-    [HideInInspector] public List<JsonCrane> jsonCrane_stack = new List<JsonCrane>();
-    //[HideInInspector] JsonCrane[] jsonCrane_stack;
+    //[HideInInspector] public List<JsonCrane> jsonCrane_stack = new List<JsonCrane>();
+    //[HideInInspector] JsonCrane jsonCrane_now;
     [HideInInspector] public JsonCrane jsonCrane_here;
     [HideInInspector] public bool ready_to_build = false;
     [HideInInspector] public bool image_sent = false;
     bool client_accepted = false;
     bool running_session = true;
+    bool bool_new = false;
     string file_path_data_unity;
     [HideInInspector] public float timer = 0.0f;
        
@@ -52,7 +53,7 @@ public class TCP_server : MonoBehaviour
         }
         System.IO.File.WriteAllText(file_path_data_unity + "started.txt", "1"); 
 	}
-
+/*
     IEnumerator increment_crane()
     {
         // Execute if the data for the first crane is received 
@@ -91,15 +92,23 @@ public class TCP_server : MonoBehaviour
             ready_to_build = false;    
         }
     }
+    */
 	
 	// LateUpdate is called once per frame
 	void LateUpdate() 
     {
+        /*
         if(!create_crane_object.GetComponent<create_crane>().newCrane)
         {
             StartCoroutine(increment_crane());
         }         
-
+        */
+        if(bool_new)
+        {
+            create_crane_object.GetComponent<create_crane>().newPose = false;
+            create_crane_object.GetComponent<create_crane>().newCrane = false;
+            bool_new = false;
+        }
         timer += Time.deltaTime;
         if(client_accepted == false && timer > 20.0f)
         {
@@ -131,10 +140,11 @@ public class TCP_server : MonoBehaviour
                 create_crane_object.GetComponent<create_crane>().newCrane = false;
                 Debug.Log("TCP_Server in LateUpdate: after CapturePNGasBytes:  request_pose == false --> ready_to_build==false;");
             }
-        }
+        }                    
     }
     private IEnumerator CapturePNGasBytes()
     {
+        Resources.UnloadUnusedAssets();
         yield return new WaitForEndOfFrame();
         Camera currentCamera = GetComponent<Camera>();
         Debug.Log("TCP_Server in CapturePNGasBytes: image_sent == " + image_sent + ";   import newPose == " + create_crane_object.GetComponent<create_crane>().newPose.ToString() + ";  newCrane == " + create_crane_object.GetComponent<create_crane>().newCrane.ToString() + ";");
@@ -252,11 +262,23 @@ public class TCP_server : MonoBehaviour
                         break_counter = 0;
                         jsonparameters = data.Substring(0,data.Length - 4);
                         Debug.Log("TCP_Server in ListenForMessages: jsonparameters: "+ jsonparameters);
-                        JsonCrane new_crane = new JsonCrane();
-                        new_crane = JsonUtility.FromJson<JsonCrane>(jsonparameters);
-                        jsonCrane_stack.Add(new_crane);
-                        max_crane_index += 1;
-                        new_crane = null;
+                        jsonCrane_here = JsonUtility.FromJson<JsonCrane>(jsonparameters);
+                        
+                        if(jsonCrane_here.total_cuboids!=0)
+                        {
+                            image_sent = false;
+                            ready_to_build = true;
+                            bool_new = true;
+                            Debug.Log("increment_crane: new crane found: crane_index = " + crane_index.ToString() + " --> ready_to_build == true");
+                        }
+                        else
+                        {
+                            Debug.LogError("ERROR: Loaded JsonCrane data but total_cuboids==0 aborting.");
+                        }
+                        
+                        //jsonCrane_stack.Add(new_crane);
+                        //max_crane_index += 1;
+                        //new_crane = null;
                         Debug.Log("TCP_Server in ListenForMessages: jasonparameters found, incrementing max_crane_index = " + max_crane_index.ToString());
                         break;
                     }

@@ -241,6 +241,7 @@ GameObject:
   - component: {fileID: 2004666682}
   - component: {fileID: 2004666681}
   - component: {fileID: 2004666680}
+  - component: {fileID: 2004666684}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -261,7 +262,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   create_crane_object: {fileID: 210739180}
-  jsonCrane_stack: []
   jsonCrane_here:
     request_pose: 0
     total_cuboids: 0
@@ -356,3 +356,16 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2004666684
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2004666679}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5119d3b8af0c8e4f399df877df4e7f88, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: 60
