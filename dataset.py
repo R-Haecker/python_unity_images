@@ -1524,7 +1524,7 @@ class dataset_cuboids():
 
         #TODO saving and loading parameters and images correctly        
     
-    def create_dataset(self, dataset_size, test = True, images_per_row = 10, show_index = False):
+    def create_dataset(self, dataset_size, test = True, continue_=False, images_per_row = 10, show_index = False):
         if test:
             dictionaries = []
             for i in range(dataset_size):
@@ -1532,8 +1532,15 @@ class dataset_cuboids():
                 dictionaries.append(self.get_example(save_image = True, save_para = True, return_dict = True))
             self.plot_images(dictionaries, images_per_row=images_per_row, show_index=show_index)
         else:
-            self.reset_index()
-            for i in range(dataset_size):
+            if continue_:
+                self.load_config()
+                cr_idx = self.read_index()
+                cr_idx = cr_idx - 1 
+                self.reset_index(cr_idx)                
+            else:
+                self.reset_index()
+                cr_idx = 0
+            for i in range(cr_idx, dataset_size):
                 self.printProgressBar(i, dataset_size-1, prefix = '  Index ' + str(i) + " ", suffix = 'Complete', length = 200)
                 self.get_example(save_image = True, save_para = True, return_dict = False)
         self.exit()
