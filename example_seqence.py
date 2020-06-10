@@ -1,11 +1,8 @@
 import dataset
-import time
-data = dataset.dataset_cuboids(dataset_name = "non", unique_data_folder = False, dataset_directory="/Documents/data_set/", 
-                                use_unity_build=True, debug_log=False)
-data.set_config(same_theta=True, same_scale=True, same_material=True, total_cuboids=2, branches = None, scale=1.5, theta = 45, phi=[0,360], CameraPhi=0,
-                r=[0.1,0.11],g=[0.3,0.31],b=[0.99,1], metallic=[0.7,0.71], smoothness=[0.4,0.41], totalPointLights=None,totalSpotLights=None, 
-                CameraRadius=4, DirectionalLightTheta=45, DirectionalLightIntensity=3)
-dict_ = []
-dict_ = data.create_image_sequnces(key_list = ["phi"], num_list = [6], alpha_parameter = None, return_dict = True, save_para = True, save_image = True)
+
+data = dataset.dataset_cuboids(dataset_name = "2_cuboids_var_phi_theta", unique_data_folder = False, dataset_directory="/export/home/rhaecker/documents/research-of-latent-representation/data/umap_sequences/cuboids_phi_theta/", 
+                                use_unity_build=True, debug_log=False,absolute_path=True)
+data.load_config(file_name="dataset_config.json")
+alpha_parameter = {"CameraRes_width": 512, "CameraRes_height": 512, "Camera_FieldofView": 90, "request_pose": False, "CameraRadius": -1, "CameraTheta": 90, "CameraPhi": 0, "CameraVerticalOffset": 0, "Camera_solid_background": False, "total_cuboids": 2, "scale": 2.263146611716909, "same_scale": True, "total_branches": None, "same_theta": True, "theta": [14.78424679081025], "phi": 40.92068161853398, "same_material": True, "r": 0.7481064491711191, "g": 0.13824310852085475, "b": 0.3154699184558223, "a": 1, "metallic": 0.7515915522139741, "smoothness": 0.544239120577761, "DirectionalLightTheta": 20.22172480153996, "DirectionalLightIntensity": 1.1025290226922031, "totalPointLights": 1, "PointLightsRadius": [18.46498382448214], "PointLightsPhi": [320.4751412552418], "PointLightsTheta": [4.396478461485733], "PointLightsIntensity": [12.862455757789622], "PointLightsRange": [24.892538387944086], "PointLightsColor_r": [0.2351972828247043], "PointLightsColor_g": [0.9045782131208053], "PointLightsColor_b": [0.07263268025251113], "PointLightsColor_a": [0.6066362778577725], "same_PointLightsColor": False, "totalSpotLights": 1, "SpotLightsRadius": [5.19436522346912], "SpotLightsPhi": [152.11040602349286], "SpotLightsTheta": [38.73175257841319], "SpotLightsIntensity": [9.892884204225902], "SpotLightsRange": [8.703950472805621], "SpotLightsColor_r": [0.7014198410450179], "SpotLightsColor_g": [0.6320953804289073], "SpotLightsColor_b": [0.4248671485584731], "SpotLightsColor_a": [0.6747395138467751], "same_SpotLightsColor": False, "SpotAngle": [28.777689010936133]}
+data.create_image_sequnces(key_list = ["phi","theta"], num_list = [100,100], alpha_parameter = alpha_parameter, return_dict = False, save_para = True, save_image = True)
 data.exit()
-data.plot_images(dicts=dict_, images_per_row=10,show_index=False) 

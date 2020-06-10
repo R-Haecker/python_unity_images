@@ -4,6 +4,7 @@ data/python/index.txt
 test_for_plotting_images.ipynb*
 log/*
 **.log
+*.log
 .ipynb_checkpoints*
 __pycache__
 debug_test.py
