@@ -40,6 +40,11 @@ is named y.
 
 
 ## Examples
+### Annotated Example
+![alt text](https://github.com/R-Haecker/python_unity_images/data/dataset/examples_to_show/annotated_example_cuboid.png)
+
+This annotated example shows important parameters as for instance the parameter phi which specifies the rotation of all objects around the vertical axis. The scale parameters lambda specify the height of every cuboid and the angle theta denotes the angle between two cuboids.     
+
 ### 1) Simple Example 
 The following code represents a simple example how to use this project.
 This code creates and plots eight randomly generated images. 
@@ -62,9 +67,8 @@ data.plot_images(dictionaries, save_fig = True)
 * In the first line the file dataset.py is imported.
 * The first thing you want to do is to initialize an object of the class ``dataset_cuboids()``.
     * This starts Unity and connects to it with code from ``client.py``. 
-    * make sure that the string ``dataset_name`` does not contain any white spaces.
-* After that you can use it as you desire. 
-* In this exampel we create random images with the function ``get_example()``.
+    * make sure that the string ``dataset_name`` does not contain any blank spaces.
+* In this example we create random images with the function ``get_example()``.
     * This function returns an dictionnary with the keys: ``index``, ``parameters`` and ``image``.
     * The argumets ``save_para`` and ``save_image`` are ``True``. This means that the parameters of the created scene are saved inside a unique folder for your dataset. This folder can be found in ``data/dataset/``, it is named with a time stamp and the name of your dataset specified in ``dataset_name``.
     The parameters and and images are saved separately. You can have a look at the saved data of the example above.
